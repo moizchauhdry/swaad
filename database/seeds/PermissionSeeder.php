@@ -20,9 +20,24 @@ class PermissionSeeder extends Seeder
             'created_at'=>Carbon::now(),
             'updated_at'=>Carbon::now(),
             ],
+            ['name'=>'Manage Customers',
+            'slug'=>'manage-customers',
+            'created_at'=>Carbon::now(),
+            'updated_at'=>Carbon::now(),
+            ],
+            ['name'=>'Manage Categories',
+            'slug'=>'manage-categories',
+            'created_at'=>Carbon::now(),
+            'updated_at'=>Carbon::now(),
+            ],
+            ['name'=>'Manage Products',
+            'slug'=>'manage-products',
+            'created_at'=>Carbon::now(),
+            'updated_at'=>Carbon::now(),
+            ],
         ]);
 
-        for ($i=1; $i <= 1 ; $i++) { 
+        for ($i=1; $i <= 4 ; $i++) { 
             AdminPermission::insert([
                 ['admin_id'=>'1',
                 'permission_id'=>$i,

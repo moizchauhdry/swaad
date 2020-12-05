@@ -10,8 +10,17 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a href="{{route('admin.logout')}}" class="btn btn-outline-dark btn-border btn-sm">
-                <i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+            <div class="dropdown">
+                <button class="btn btn-outline-dark btn-border btn-sm dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user mr-2"></i>{{Auth::guard('admin')->user()->email}}
+                </button>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{route('admin.logout')}}">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+                    </a>
+                </div>
+            </div>
         </li>
     </ul>
 </nav>
