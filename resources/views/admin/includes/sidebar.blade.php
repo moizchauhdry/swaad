@@ -4,20 +4,11 @@
     <a href="javascript:void(0)" class="brand-link">
         <img src="{{asset('public/admin/dist/img/AdminLTELogo.png')}}" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">{{__('App Name')}}</span>
+        <span class="brand-text font-weight-light">{{__('Swaad')}}</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="{{asset('public/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2">
-            </div>
-            <div class="info">
-                <a href="javascript:void(0)" class="d-block">{{Auth::guard('admin')->user()->name}}</a>
-            </div>
-        </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -38,7 +29,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'admins.create' || Route::currentRouteName() == 'admins.index'|| Route::currentRouteName() == 'admins.edit' ) ? 'menu-open' : ''}}">
                     <a href="#"
                         class="nav-link {{(Route::currentRouteName() == 'admins.create' || Route::currentRouteName() == 'admins.index' || Route::currentRouteName() == 'admins.edit' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-user-cog"></i>
+                        <i class="nav-icon fas fa-user-tie"></i>
                         <p>
                             Admins
                             <i class="right fas fa-angle-left"></i>
@@ -49,7 +40,7 @@
                             <a href="{{route('admins.create')}}"
                                 class="nav-link {{(Route::currentRouteName() == 'admins.create') ? 'active' : ''}}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Add Admins</p>
+                                <p>Add Admin</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -57,6 +48,96 @@
                                 class="nav-link {{(Route::currentRouteName() == 'admins.index' || Route::currentRouteName() == 'admins.edit' ) ? 'active' : ''}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Admins</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                @if (Auth::guard('admin')->user()->hasPermission('manage-customers'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'customers.index'|| Route::currentRouteName() == 'customers.edit'  || Route::currentRouteName() == 'customers.deleted') ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link  {{(Route::currentRouteName() == 'customers.index'|| Route::currentRouteName() == 'customers.edit'  || Route::currentRouteName() == 'customers.deleted') ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Customers
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('customers.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'customers.index' || Route::currentRouteName() == 'customers.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Customers</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('customers.deleted')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'customers.deleted') ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Restore Customers</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                @if (Auth::guard('admin')->user()->hasPermission('manage-categories'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'categories.create' || Route::currentRouteName() == 'categories.index'|| Route::currentRouteName() == 'categories.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'categories.create' || Route::currentRouteName() == 'categories.index' || Route::currentRouteName() == 'categories.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-list-ul"></i>
+                        <p>
+                            Categories
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('categories.create')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'categories.create') ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Category</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('categories.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'categories.index' || Route::currentRouteName() == 'categories.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Categories</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                @if (Auth::guard('admin')->user()->hasPermission('manage-products'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'products.create' || Route::currentRouteName() == 'products.index'|| Route::currentRouteName() == 'products.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'products.create' || Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-shopping-bag"></i>
+                        <p>
+                            Products
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('products.create')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'products.create') ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Product</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('products.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'products.index' || Route::currentRouteName() == 'products.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Products</p>
                             </a>
                         </li>
                     </ul>
