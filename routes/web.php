@@ -26,7 +26,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
     });
 
     Route::prefix('admin')->group(function()
-    {   
+    {
         Route::match(['get','post'],'/','AdminController@login')->name('admin.login');
 
         Route::group(['middleware' => ['adminCheckSuspend']],function()
@@ -59,7 +59,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
 
                         Route::get('/edit/address/{id}', 'CustomerController@editAddress')->name('customers.edit.address');
                         Route::post('/update/address/{id}', 'CustomerController@updateAddress')->name('customers.update.address');
-                    }); 
+                    });
                 });
 
                 Route::group(['middleware' => ['permission:manage-categories']],function(){
@@ -87,5 +87,8 @@ Route::group(['middleware' => 'prevent-back-history'], function()
     });
 });
 
-// Auth::routes();
-// Route::get('/home', 'HomeController@index')->name('home');
+/////For user reset Password routes
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/user/password/reset/', 'Auth\UserResetPasswordController@reset')->name('resetPasswordUser');
+Route::get('/user/password/reset/{token}', 'Auth\UserResetPasswordController@showResetForm')->name('userPasswordReset');

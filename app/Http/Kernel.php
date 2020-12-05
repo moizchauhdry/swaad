@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'permission' => \App\Http\Middleware\PermissionMiddleware::class,
         'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
         'customer' => \App\Http\Middleware\CustomerMiddleware::class,
+        'authVerify' => \App\Http\Middleware\AuthVerify::class,
     ];
 }
