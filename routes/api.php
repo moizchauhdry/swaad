@@ -14,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// User authentication
+Route::group(['prefix' => 'user'], function () {
+
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('/signIn', 'Api\AuthController@login');
+        Route::post('/signUp', 'Api\AuthController@signUp');
+        Route::post('/forgotPassword', 'Api\AuthController@forgotPassword');
+    });
+    Route::middleware(['jwt.auth', 'authVerify'])->group(function () {
+        Route::post('/signOut', 'Api\AuthController@logout');
+
+        //////Categories
+        Route::post('/allCategories', 'Api\CategoryController@allCategories');
+
+    });
+
 });

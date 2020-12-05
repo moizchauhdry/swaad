@@ -1,0 +1,193 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Str;
+use Validator;
+use JWTAuth;
+use Config;
+use App\User;
+use Carbon\Carbon;
+use Storage;
+use Illuminate\Http\File;
+
+class AuthController extends Controller
+{
+    private $responseConstants;
+    private $authConstants;
+    private $userConstants;
+
+    public function __construct()
+    {
+        $this->responseConstants = Config::get('constants.RESPONSE_CONSTANTS');
+        $this->authConstants = Config::get('constants.AUTH_CONSTANTS');
+        $this->userConstants = Config::get('constants.USER_CONSTANTS');
+    }
+
+    public function login(Request $request)
+    {
+        $rules = [
+            $this->authConstants['KEY_EMAIL'] => 'required|email',
+            $this->authConstants['KEY_PASSWORD'] => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => $this->responseConstants['INVALID_PARAMETERS'],
+            ]);
+        }
+
+        $credentials = $request->only($this->authConstants['KEY_EMAIL'], $this->authConstants['KEY_PASSWORD']);
+
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json([
+                    'status' => $this->responseConstants['STATUS_ERROR'],
+                    'message' => $this->responseConstants['ERROR_INVALID_CREDENTIALS'],
+                ]);
+            }
+        } catch (JWTException $e) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => 'Cant create token.',
+            ]);
+        }
+
+        $user = User::find(JWTAuth::setToken($token)->getClaim('sub'));
+        $userStatus = $user->_check();
+        if ($userStatus != null) {
+            return response()->json($userStatus);
+        }
+
+        $user->update(['last_login' => Carbon::now()->toDateTimeString()]);
+
+        if ($request->has($this->authConstants['KEY_DEVICE_TOKEN']) && !empty($request->get($this->authConstants['KEY_DEVICE_TOKEN']))) {
+            $user->update(['device_token' => $request->get($this->authConstants['KEY_DEVICE_TOKEN'])]);
+        }
+
+
+        $token = JWTAuth::fromUser($user);
+
+        $user->makeHidden(['status', 'is_approved']);
+
+        $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+        $response['access_token'] = $token;
+        $response['user'] = $user;
+        $response['message'] = $this->responseConstants['MSG_LOGGED_IN'];
+        return response()->json($response);
+    }
+
+    public function signup(Request $request)
+    {
+
+        $rules = [
+            $this->authConstants['KEY_EMAIL'] => 'required|unique:users|max:191',
+            $this->authConstants['KEY_PASSWORD'] => 'required|min:6',
+            $this->userConstants['KEY_NAME'] => 'required|string',
+            $this->userConstants['KEY_ADDRESS'] => 'required|string',
+            $this->userConstants['KEY_ZIP_CODE'] => 'required',
+            $this->userConstants['KEY_PHONE_NO'] => 'required',
+            $this->userConstants['KEY_HOME_NO'] => 'required',
+//            $this->userConstants['KEY_PROFILE_IMAGE'] => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => $this->responseConstants['INVALID_PARAMETERS'],
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        $user = User::where('email', $request->get($this->authConstants['KEY_EMAIL']))->first();
+
+        if (!empty($user)) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => $this->responseConstants['ERROR_EMAIL_EXIST'],
+            ]);
+        }
+
+        $data = [
+            'email' => $request->get($this->authConstants['KEY_EMAIL']),
+            'password' => Hash::make($request->get($this->authConstants['KEY_PASSWORD'])),
+            'name' => $request->get($this->userConstants['KEY_NAME']),
+            'zip_code' => $request->get($this->userConstants['KEY_ZIP_CODE']),
+            'address' => $request->get($this->userConstants['KEY_ADDRESS']),
+            'phone_no' => $request->get($this->userConstants['KEY_PHONE_NO']),
+            'home_no' => $request->get($this->userConstants['KEY_HOME_NO']),
+        ];
+
+        $user = User::create($data);
+        $user->update(['last_login' => Carbon::now()->toDateTimeString()]);
+        $token = JWTAuth::fromUser($user);
+
+        if ($request->has($this->authConstants['KEY_DEVICE_TOKEN']) && !empty($request->get($this->authConstants['KEY_DEVICE_TOKEN']))) {
+            $user->update(['device_token' => $request->get($this->authConstants['KEY_DEVICE_TOKEN'])]);
+        }
+
+        if ($request->hasFile($this->userConstants['KEY_PROFILE_IMAGE'])) {
+
+            $directory = 'userProfileImages';
+            if (!Storage::exists($directory)) {
+                Storage::makeDirectory($directory);
+            }
+
+            $image_url = Storage::putFile($directory, new File($request->file($this->userConstants['KEY_PROFILE_IMAGE'])));
+            $user->update(['image_url' => $image_url]);
+        }
+
+        $user->makeHidden(['is_approved', 'status']);
+        $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+        $response['user'] = $user;
+        $response['message'] = $this->responseConstants['MSG_REGISTERED_SUCCESS'];
+        return $response;
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            $this->authConstants['KEY_EMAIL'] => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => $this->responseConstants['INVALID_PARAMETERS'],
+            ]);
+        }
+
+        $response = app('App\Http\Controllers\Auth\UserForgotPasswordController')->sendResetLinkEmail($request);
+        return $response;
+    }
+
+    public function logout(Request $request)
+    {
+        $response = [];
+        $user = JWTAuth::toUser($request->token);
+
+        $userStatus = $user->_check();
+        if ($userStatus != null) {
+            return response()->json($userStatus);
+        }
+
+        $user = User::find($user->id);
+        $user->update([
+            'last_login' => Carbon::now()->toDateTimeString()
+        ]);
+
+        $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+        $response['message'] = $this->responseConstants['MSG_LOGGED_OUT'];
+        return response()->json($response);
+    }
+}
