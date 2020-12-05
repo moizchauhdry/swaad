@@ -1,8 +1,8 @@
 @extends('layouts.frontend')
 
 @section('content')
-<section class="ftco-section ftco-category ftco-no-pt">
-    <div class="container">
+<section class="ftco-category ftco-no-pt mb-4" style="margin-top:75px">
+    <div class=" container">
         <div class="row">
             <div class="col-md-8">
                 <div class="row">
@@ -10,9 +10,9 @@
                         <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex"
                             style="background-image: url({{asset('public/frontend/images/category.jpg')}});">
                             <div class="text text-center">
-                                <h2>Vegetables</h2>
+                                <h2>Our Menu</h2>
                                 <p>Protect the health of every home</p>
-                                <p><a href="#" class="btn btn-primary">Shop now</a></p>
+                                <p><a href="#" class="btn btn-primary">View All</a></p>
                             </div>
                         </div>
                     </div>
@@ -51,12 +51,11 @@
     </div>
 </section>
 
-<section class="ftco-section">
+<section style="margin-top:75px">
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading">Featured Products</span>
-                <h2 class="mb-4">Our Products</h2>
+                <h2 class="mb-2">Popular Food Items</h2>
                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
             </div>
         </div>
@@ -324,27 +323,7 @@
     </div>
 </section>
 
-<section class="ftco-section img" style="background-image: url({{asset('public/frontend/images/bg_3.jpg')}});">
-    <div class="container">
-        <div class="row justify-content-end">
-            <div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
-                <span class="subheading">Best Price For You</span>
-                <h2 class="mb-4">Deal of the day</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-                <h3><a href="#">Spinach</a></h3>
-                <span class="price">$10 <a href="#">now $5 only</a></span>
-                <div id="timer" class="d-flex mt-5">
-                    <div class="time" id="days"></div>
-                    <div class="time pl-3" id="hours"></div>
-                    <div class="time pl-3" id="minutes"></div>
-                    <div class="time pl-3" id="seconds"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="ftco-section testimony-section">
+<section class="testimony-section mt-4" style="margin-bottom: 75px">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section ftco-animate text-center">
@@ -443,32 +422,4 @@
     </div>
 </section>
 
-<hr>
-
-<section class="ftco-section ftco-partner">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="{{asset('public/frontend/images/partner-1.png')}}"
-                        class="img-fluid" alt="Colorlib Template"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="{{asset('public/frontend/images/partner-2.png')}}"
-                        class="img-fluid" alt="Colorlib Template"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="{{asset('public/frontend/images/partner-3.png')}}"
-                        class="img-fluid" alt="Colorlib Template"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="{{asset('public/frontend/images/partner-4.png')}}"
-                        class="img-fluid" alt="Colorlib Template"></a>
-            </div>
-            <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="{{asset('public/frontend/images/partner-5.png')}}"
-                        class="img-fluid" alt="Colorlib Template"></a>
-            </div>
-        </div>
-    </div>
-</section>
 @endsection

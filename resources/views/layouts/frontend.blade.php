@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}">
+
+    <link rel="stylesheet" href="{{asset('public/frontend/custom/custom.css')}}">
 </head>
 
 <body class="goto-here">
