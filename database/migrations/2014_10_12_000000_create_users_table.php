@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_approved')->default(false);
             $table->boolean('status')->default(true);
             $table->string('device_token')->nullable();
+            $table->string('access_token')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
