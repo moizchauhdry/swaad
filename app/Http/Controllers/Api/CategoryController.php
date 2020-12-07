@@ -24,11 +24,6 @@ class CategoryController extends Controller
     public function allCategories(Request $request)
     {
         $response = [];
-        $user = JWTAuth::toUser($request->token);
-        $userStatus = $user->_check();
-        if ($userStatus != null) {
-            return response()->json($userStatus);
-        }
         $categories = Category::where('status', 1)->orderBy('id', 'DESC')->get();
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['categories'] = $categories;
