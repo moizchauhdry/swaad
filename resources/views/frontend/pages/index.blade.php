@@ -17,35 +17,43 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        @foreach ($categories->slice(0,1) as $category)
                         <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
-                            style="background-image: url({{asset('public/frontend/images/category-1.jpg')}});">
+                            style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="#">Fruits</a></h2>
+                                <h2 class="mb-0"><a href="#">{{$category->title}}</a></h2>
                             </div>
                         </div>
+                        @endforeach
+                        @foreach ($categories->slice(1,1) as $category)
                         <div class="category-wrap ftco-animate img d-flex align-items-end"
-                            style="background-image: url({{asset('public/frontend/images/category-2.jpg')}});">
+                            style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="#">Vegetables</a></h2>
+                                <h2 class="mb-0"><a href="#">{{$category->title}}</a></h2>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
+                @foreach ($categories->slice(2,1) as $category)
                 <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
-                    style="background-image: url({{asset('public/frontend/images/category-3.jpg')}});">
+                    style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="#">Juices</a></h2>
+                        <h2 class="mb-0"><a href="#">{{$category->title}}</a></h2>
                     </div>
                 </div>
-                <div class="category-wrap ftco-animate img d-flex align-items-end"
-                    style="background-image: url({{asset('public/frontend/images/category-4.jpg')}});">
+                @endforeach
+                @foreach ($categories->slice(3,1) as $category)
+                <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
+                    style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="#">Dried</a></h2>
+                        <h2 class="mb-0"><a href="#">{{$category->title}}</a></h2>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
