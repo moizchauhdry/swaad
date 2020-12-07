@@ -45,38 +45,29 @@ class AuthController extends Controller
             ]);
         }
 
-        $credentials = $request->only($this->authConstants['KEY_EMAIL'], $this->authConstants['KEY_PASSWORD']);
 
-        try {
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json([
-                    'status' => $this->responseConstants['STATUS_ERROR'],
-                    'message' => $this->responseConstants['ERROR_INVALID_CREDENTIALS'],
-                ]);
-            }
-        } catch (JWTException $e) {
+        $user = User::where('email', $request->email)->first();
+        if ($user == null) {
             return response()->json([
                 'status' => $this->responseConstants['STATUS_ERROR'],
-                'message' => 'Cant create token.',
+                'message' => $this->responseConstants['ERROR_INVALID_CREDENTIALS'],
             ]);
         }
-
-        $user = User::find(JWTAuth::setToken($token)->getClaim('sub'));
         $userStatus = $user->_check();
         if ($userStatus != null) {
             return response()->json($userStatus);
         }
 
-        $user->update(['last_login' => Carbon::now()->toDateTimeString()]);
+        $token = Str::random(80) . time();
+
+        $user->update(['last_login' => Carbon::now()->toDateTimeString(), 'access_token' => $token]);
 
         if ($request->has($this->authConstants['KEY_DEVICE_TOKEN']) && !empty($request->get($this->authConstants['KEY_DEVICE_TOKEN']))) {
             $user->update(['device_token' => $request->get($this->authConstants['KEY_DEVICE_TOKEN'])]);
         }
 
 
-        $token = JWTAuth::fromUser($user);
-
-        $user->makeHidden(['status', 'is_approved']);
+        $user->makeHidden(['status', 'is_approved','access_token']);
 
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['access_token'] = $token;
@@ -117,6 +108,7 @@ class AuthController extends Controller
                 'message' => $this->responseConstants['ERROR_EMAIL_EXIST'],
             ]);
         }
+        $token = Str::random(80) . time();
 
         $data = [
             'email' => $request->get($this->authConstants['KEY_EMAIL']),
@@ -126,11 +118,12 @@ class AuthController extends Controller
             'address' => $request->get($this->userConstants['KEY_ADDRESS']),
             'phone_no' => $request->get($this->userConstants['KEY_PHONE_NO']),
             'home_no' => $request->get($this->userConstants['KEY_HOME_NO']),
+            'access_token'=>$token,
         ];
 
         $user = User::create($data);
         $user->update(['last_login' => Carbon::now()->toDateTimeString()]);
-        $token = JWTAuth::fromUser($user);
+
 
         if ($request->has($this->authConstants['KEY_DEVICE_TOKEN']) && !empty($request->get($this->authConstants['KEY_DEVICE_TOKEN']))) {
             $user->update(['device_token' => $request->get($this->authConstants['KEY_DEVICE_TOKEN'])]);
@@ -147,8 +140,9 @@ class AuthController extends Controller
             $user->update(['image_url' => $image_url]);
         }
 
-        $user->makeHidden(['is_approved', 'status']);
+        $user->makeHidden(['is_approved', 'status','access_token']);
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+        $response['access_token'] = $token;
         $response['user'] = $user;
         $response['message'] = $this->responseConstants['MSG_REGISTERED_SUCCESS'];
         return $response;
