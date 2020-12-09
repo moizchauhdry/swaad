@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->double('price')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(TRUE);
+            $table->integer('view_count')->default(0);
             $table->timestamps();
         });
     }
