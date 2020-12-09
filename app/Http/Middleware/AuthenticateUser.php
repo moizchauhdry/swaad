@@ -13,8 +13,8 @@ class AuthenticateUser
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -28,19 +28,27 @@ class AuthenticateUser
 //                'token' => 'required|string',
 //            ],$errorMessage
 //        );
-        if (!isset($request->header()['authorization'][0])){
-            return Helper::jsonResponse(0, '','','User Token is required');
+        if (!isset($request->header()['authorization'][0])) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'User Token is required'
+            ]);
         }
-        $user = User::where('access_token',$request->header()['authorization'][0])->first();
-        if ($user){
-            if(Auth::loginUsingId($user->id)){
+        $user = User::where('access_token', $request->header()['authorization'][0])->first();
+        if ($user) {
+            if (Auth::loginUsingId($user->id)) {
                 return $next($request);
+            } else {
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'Authentication Fails'
+                ]);
             }
-            else{
-                return Helper::jsonResponse(0, '','','Authentication Fails');
-            }
-        }else{
-            return Helper::jsonResponse(0, '','','Invalid User token');
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Invalid User token'
+            ]);
         }
 
     }
