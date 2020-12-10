@@ -22,7 +22,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('/signUp', 'Api\AuthController@signUp');
         Route::post('/forgotPassword', 'Api\AuthController@forgotPassword');
     });
-    Route::middleware(['jwt.auth', 'authVerify'])->group(function () {
+    Route::middleware(['authuser'])->group(function () {
         Route::post('/signOut', 'Api\AuthController@logout');
 
         //////Categories
