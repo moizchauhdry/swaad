@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
  *****************************************************************************
 */
 
-Route::get('/', 'Frontend\FrontendController@index')->name('indexPage');
+Route::get('/', 'Frontend\FrontendController@index')->name('index');
 
 
 /**
