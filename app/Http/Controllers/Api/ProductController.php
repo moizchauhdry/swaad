@@ -64,6 +64,12 @@ class ProductController extends Controller
             ->skip($offset)
             ->take($this->recordsPerPage)
             ->get();
+        if (count($categoryProducts) == 0) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => "No Product Found Against This Category",
+            ]);
+        }
 
 
         return response()->json([
