@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Illuminate\Support\Str;
-use Validator;
-use JWTAuth;
-use Config;
 use App\User;
 use Carbon\Carbon;
-use Storage;
+use Config;
 use Illuminate\Http\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use JWTAuth;
+use Storage;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -46,7 +44,7 @@ class AuthController extends Controller
         }
 
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->get($this->authConstants['KEY_EMAIL']))->first();
         if ($user == null) {
             return response()->json([
                 'status' => $this->responseConstants['STATUS_ERROR'],
@@ -58,22 +56,28 @@ class AuthController extends Controller
             return response()->json($userStatus);
         }
 
-        $token = Str::random(80) . time();
+        if (Hash::check( $request->get($this->authConstants['KEY_PASSWORD']), $user->password)) {
+            $token = Str::random(80) . time();
 
-        $user->update(['last_login' => Carbon::now()->toDateTimeString(), 'access_token' => $token]);
+            $user->update(['last_login' => Carbon::now()->toDateTimeString(), 'access_token' => $token]);
 
-        if ($request->has($this->authConstants['KEY_DEVICE_TOKEN']) && !empty($request->get($this->authConstants['KEY_DEVICE_TOKEN']))) {
-            $user->update(['device_token' => $request->get($this->authConstants['KEY_DEVICE_TOKEN'])]);
+            if ($request->has($this->authConstants['KEY_DEVICE_TOKEN']) && !empty($request->get($this->authConstants['KEY_DEVICE_TOKEN']))) {
+                $user->update(['device_token' => $request->get($this->authConstants['KEY_DEVICE_TOKEN'])]);
+            }
+
+            $user->makeHidden(['status', 'is_approved', 'access_token']);
+
+            $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+            $response['access_token'] = $token;
+            $response['user'] = $user;
+            $response['message'] = $this->responseConstants['MSG_LOGGED_IN'];
+            return response()->json($response);
+        } else {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => 'Invalid email and/or password',
+            ]);
         }
-
-
-        $user->makeHidden(['status', 'is_approved','access_token']);
-
-        $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
-        $response['access_token'] = $token;
-        $response['user'] = $user;
-        $response['message'] = $this->responseConstants['MSG_LOGGED_IN'];
-        return response()->json($response);
     }
 
     public function signup(Request $request)
@@ -118,7 +122,7 @@ class AuthController extends Controller
             'address' => $request->get($this->userConstants['KEY_ADDRESS']),
             'phone_no' => $request->get($this->userConstants['KEY_PHONE_NO']),
             'home_no' => $request->get($this->userConstants['KEY_HOME_NO']),
-            'access_token'=>$token,
+            'access_token' => $token,
         ];
 
         $user = User::create($data);
@@ -140,7 +144,7 @@ class AuthController extends Controller
             $user->update(['image_url' => $image_url]);
         }
 
-        $user->makeHidden(['is_approved', 'status','access_token']);
+        $user->makeHidden(['is_approved', 'status', 'access_token']);
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['access_token'] = $token;
         $response['user'] = $user;

@@ -28,6 +28,10 @@ Route::group(['prefix' => 'user'], function () {
         //////Categories
         Route::post('/allCategories', 'Api\CategoryController@allCategories');
 
+        //// Products
+        Route::post('/getPopularProducts', 'Api\ProductController@getPopularProducts');
+        Route::post('/getProductByCategory', 'Api\ProductController@getProductByCategory');
+
     });
 
 });

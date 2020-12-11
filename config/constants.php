@@ -36,6 +36,12 @@ return [
         'KEY_NEW_PASSWORD' => 'new_password',
 
     ],
+    'PRODUCT_CONSTANTS' => [
+        'KEY_PRODUCT_ID' => 'product_id',
+    ],
+    'GENERAL_CONSTANTS' => [
+        'KEY_COUNT' => 'count',
+    ],
     'USER_CONSTANTS' => [
         'KEY_USER_ID' => 'user_id',
         'KEY_NAME' => 'name',
