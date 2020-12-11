@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'Frontend\FrontendController@index')->name('index');
+Route::post('/addToCart', 'Frontend\FrontendController@addToCart')->name('addToCart');
+Route::get('/add-to-cart', 'Frontend\FrontendController@viewCart')->name('viewCart');
 
 
 /**

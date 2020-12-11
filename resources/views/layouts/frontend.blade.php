@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Swaad</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Swaad</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
         rel="stylesheet">
@@ -36,8 +37,8 @@
 <body class="goto-here">
 
     @include('frontend.includes.header')
-    @include('frontend.includes.slider')
 
+    @yield('slider')
     @yield('content')
 
     @include('frontend.includes.footer')
@@ -60,6 +61,8 @@
     </script>
     <script src="{{asset('public/frontend/js/google-map.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+
+    @yield('scripts')
 
 </body>
 
