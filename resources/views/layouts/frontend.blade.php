@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}">
 
     <link rel="stylesheet" href="{{asset('public/frontend/custom/custom.css')}}">
+
+    @yield('styles')
 </head>
 
 <body class="goto-here">

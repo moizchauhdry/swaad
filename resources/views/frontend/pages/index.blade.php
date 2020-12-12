@@ -1,5 +1,10 @@
 @extends('layouts.frontend')
 
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
 @section('slider')
 @include('frontend.includes.slider')
 @endsection
@@ -87,27 +92,26 @@
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price">
-                                    {{-- <span class="mr-2 price-dc">$120.00</span> --}}
-                                    <span class="price-sale"> $
-                                        {{ number_format((float)$product->price, 2, '.', '')}}
+                                    <span class="price-sale">
+                                        $ {{ number_format((float)$product->price, 2, '.', '')}}
                                     </span>
                                 </p>
                             </div>
                         </div>
                         <div class="bottom-area d-flex px-3">
                             <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="javascript:add-to-cart"
+                                {{-- <a href="#" id="cart-btn"
                                     class="buy-now d-flex justify-content-center align-items-center mx-1"
                                     onclick="addToCart('{{$product->id}}')">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
+                                <span><i class="ion-ios-cart"></i></span>
+                                </a> --}}
+                                @if (Cart::get($product->id))
+                                <button id="success_{{$product->id}}">Added</button>
+                                @else
+                                <button onclick="addToCart('{{$product->id}}')" id="add_to_cart_{{$product->id}}">
+                                    Add to cart</button>
+                                <button id="success_{{$product->id}}" class="hidden"></button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -225,13 +229,16 @@
     function addToCart(product_id) {
         $.ajax({
             method: "POST",
-            url: '{{route('addToCart')}}',
+            url: '{{route('cart.store')}}',
             data: {
             _token: $('meta[name="csrf-token"]').attr('content'),
             'product_id': product_id,
             },
             success: function (response) {
-                console.log(response)
+                // console.log(response)
+                $('#add_to_cart_'+product_id).addClass('hidden');
+                $('#success_'+product_id).removeClass('hidden');
+                $("#success_"+product_id).append('Item Added To Cart');
             }
         });
     }
