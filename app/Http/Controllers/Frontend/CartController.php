@@ -18,10 +18,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $product = Product::where('id',$request->product_id)->first();
-
         $cart = Cart::add(array('id' => $product->id,'name' => $product->title, 'quantity' => 1, 'price' => $product->price,'image' => $product->image_url));
-
-        // return redirect()->route('cart.index')->with('success_message','Item was added to your cart!');
     }
 
     public function destroy($id)
