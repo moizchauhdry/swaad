@@ -5,5 +5,5 @@
         Version 1.0 (Development Mode)
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2020 <a href="#">Swaad - Online Food Application</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2020 <a href="#">Design & Developed By Octasol</a>.</strong>
 </footer>

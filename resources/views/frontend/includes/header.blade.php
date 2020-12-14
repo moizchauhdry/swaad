@@ -11,10 +11,12 @@
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                 class="icon-paper-plane"></span></div>
-                        <span class="text">youremail@email.com</span>
+                        <span class="text">swaad@info.com</span>
                     </div>
                     <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                        <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+                        <span class="text">
+                            <b>Mon-Fri </b> (11.00 - 14.00 & 17.30 - 22.00) | <b>Sat-Sun </b> (12.00 - 12.00)
+                        </span>
                     </div>
                 </div>
             </div>
@@ -23,7 +25,7 @@
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="index.html">Vegefoods</a>
+        <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
             aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
@@ -31,23 +33,31 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item active"><a href="#" class="nav-link">Order Online</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Shop</a>
+                        aria-haspopup="true" aria-expanded="false">Menu</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="shop.html">Shop</a>
-                        <a class="dropdown-item" href="wishlist.html">Wishlist</a>
-                        <a class="dropdown-item" href="product-single.html">Single Product</a>
-                        <a class="dropdown-item" href="cart.html">Cart</a>
-                        <a class="dropdown-item" href="checkout.html">Checkout</a>
+                        @foreach (App\Category::where('status','1')->get() as $category)
+                        <a class="dropdown-item" href="#">{{$category->title}}</a>
+                        @endforeach
                     </div>
                 </li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
-                            class="icon-shopping_cart"></span>[0]</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Catering</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Reservation</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">More</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="#">Birthday</a>
+                        <a class="dropdown-item" href="#">Anniversary</a>
+                        <a class="dropdown-item" href="#">Privacy Policy</a>
+                        <a class="dropdown-item" href="#">About Us</a>
+                    </div>
+                </li>
+                <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link"><span
+                            class="icon-shopping_cart"></span>[{{Cart::getContent()->count()}}]</a></li>
 
             </ul>
         </div>

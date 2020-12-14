@@ -25,7 +25,6 @@ return [
         'MSG_PROFILE_UPDATE_SUCCESS' => 'Profile Update Successfully.',
         'MSG_ITEM_ADDED_RECORD' => 'Item Added Successfully.',
     ],
-
     'CATEGORY_CONSTANTS' => [
         'KEY_CATEGORY_ID' => 'category_id',
     ],
@@ -35,6 +34,20 @@ return [
         'KEY_DEVICE_TOKEN' => 'device_token',
         'KEY_NEW_PASSWORD' => 'new_password',
 
+    ],
+    'PRODUCT_CONSTANTS' => [
+        'KEY_PRODUCT_ID' => 'product_id',
+    ],
+    'GENERAL_CONSTANTS' => [
+        'KEY_COUNT' => 'count',
+    ],
+    'RESERVATION_CONSTANTS' => [
+        'KEY_EMAIL' => 'email',
+        'KEY_PHONE' => 'phone',
+        'KEY_NAME' => 'name',
+        'KEY_DATE' => 'date',
+        'KEY_DAYTIME' => 'time_of_day',
+        'KEY_PEOPLE' => 'people',
     ],
     'USER_CONSTANTS' => [
         'KEY_USER_ID' => 'user_id',
