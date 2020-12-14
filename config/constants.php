@@ -25,7 +25,6 @@ return [
         'MSG_PROFILE_UPDATE_SUCCESS' => 'Profile Update Successfully.',
         'MSG_ITEM_ADDED_RECORD' => 'Item Added Successfully.',
     ],
-
     'CATEGORY_CONSTANTS' => [
         'KEY_CATEGORY_ID' => 'category_id',
     ],
@@ -42,6 +41,14 @@ return [
     'GENERAL_CONSTANTS' => [
         'KEY_COUNT' => 'count',
     ],
+    'RESERVATION_CONSTANTS' => [
+        'KEY_EMAIL' => 'email',
+        'KEY_PHONE' => 'phone',
+        'KEY_NAME' => 'name',
+        'KEY_DATE' => 'date',
+        'KEY_DAYTIME' => 'time_of_day',
+        'KEY_PEOPLE' => 'people',
+    ],
     'USER_CONSTANTS' => [
         'KEY_USER_ID' => 'user_id',
         'KEY_NAME' => 'name',
@@ -54,6 +61,20 @@ return [
         'KEY_ADDRESS' => 'address',
         'KEY_ZIP_CODE' => 'zip_code',
         'KEY_PROFILE_IMAGE' => 'profile_image',
+    ],
+    'ORDER_CONSTANTS' => [
+        'KEY_ORDER_ID' => 'order_id',
+        'KEY_GROSS_TOTAL' => 'gross_total',
+        'KEY_NET_TOTAL' => 'net_total',
+        'KEY_DELIVERY_TIME' => 'delivery_time',
+        'KEY_DELIVERY_DATE' => 'delivery_date',
+        'KEY_COUPON_CODE' => 'coupon_code',
+        'KEY_COUPON_DISCOUNT_AMOUNT' => 'coupon_discount_amount',
+        'KEY_PAYMENT_METHOD' => 'payment_method',
+        'KEY_PRODUCTS' => 'products',
+        'KEY_ORDER_STATUS' => 'order_status',
+        'KEY_PRODUCT_ID' => 'product_id',
+        'KEY_PRODUCT_QUANTITY' => 'product_quantity',
     ],
 ];
 

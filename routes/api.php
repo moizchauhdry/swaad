@@ -24,6 +24,7 @@ Route::group(['prefix' => 'user'], function () {
     });
     Route::middleware(['authuser'])->group(function () {
         Route::post('/signOut', 'Api\AuthController@logout');
+        Route::post('/updateProfile', 'Api\AuthController@updateProfile');
 
         //////Categories
         Route::post('/allCategories', 'Api\CategoryController@allCategories');
@@ -31,6 +32,12 @@ Route::group(['prefix' => 'user'], function () {
         //// Products
         Route::post('/getPopularProducts', 'Api\ProductController@getPopularProducts');
         Route::post('/getProductByCategory', 'Api\ProductController@getProductByCategory');
+
+        //// Orders
+        Route::post('/placeOrder', 'Api\OrderController@placeOrder');
+
+        //////  Reservations
+        Route::post('/addReservation', 'Api\ReservationController@addReservation');
 
     });
 

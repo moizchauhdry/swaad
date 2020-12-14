@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'Frontend\FrontendController@index')->name('index');
+Route::post('/addToCart', 'Frontend\FrontendController@addToCart')->name('addToCart');
+Route::get('/add-to-cart', 'Frontend\FrontendController@viewCart')->name('viewCart');
+
+Route::get('/cart', 'Frontend\CartController@index')->name('cart.index');
+Route::post('/cart/store', 'Frontend\CartController@store')->name('cart.store');
+Route::delete('/cart/destroy/{id}','Frontend\CartController@destroy')->name('cart.destroy');
+
+Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
+
 
 
 /**

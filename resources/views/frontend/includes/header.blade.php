@@ -14,7 +14,9 @@
                         <span class="text">swaad@info.com</span>
                     </div>
                     <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                        <span class="text">20 - 40 Minutes delivery</span>
+                        <span class="text">
+                            <b>Mon-Fri </b> (11.00 - 14.00 & 17.30 - 22.00) | <b>Sat-Sun </b> (12.00 - 12.00)
+                        </span>
                     </div>
                 </div>
             </div>
@@ -54,8 +56,8 @@
                         <a class="dropdown-item" href="#">About Us</a>
                     </div>
                 </li>
-                <li class="nav-item cta cta-colored"><a href="#" class="nav-link"><span
-                            class="icon-shopping_cart"></span>[0]</a></li>
+                <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link"><span
+                            class="icon-shopping_cart"></span>[{{Cart::getContent()->count()}}]</a></li>
 
             </ul>
         </div>

@@ -12,4 +12,5 @@ class Product extends Model
     {
         return $this->belongsTo('App\Category','category_id');
     }
+
 }
