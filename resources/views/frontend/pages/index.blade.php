@@ -235,7 +235,6 @@
             'product_id': product_id,
             },
             success: function (response) {
-                // console.log(response)
                 $('#add_to_cart_'+product_id).addClass('hidden');
                 $('#success_'+product_id).removeClass('hidden');
                 $("#success_"+product_id).append('Item Added To Cart');

@@ -17,6 +17,7 @@ Route::post('/cart/store', 'Frontend\CartController@store')->name('cart.store');
 Route::delete('/cart/destroy/{id}','Frontend\CartController@destroy')->name('cart.destroy');
 
 Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
+Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
 
 
 
