@@ -23,43 +23,43 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">User Name</label>
-                                <input type="text" class="form-control" name="chk_user_name" placeholder="" value="">
+                                <input type="text" class="form-control" name="chk_user_name" placeholder=""
+                                    value="{{Auth::guard('frontend')->user()->name}}" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="firstname">Phone Number</label>
-                                <input type="text" class="form-control" name="chk_phone_no" placeholder="" value="">
+                                <label for="">Phone Number</label>
+                                <input type="text" class="form-control" name="chk_phone_no" placeholder=""
+                                    value="{{Auth::guard('frontend')->user()->phone_no}}" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="firstname">Email</label>
-                                <input type="text" class="form-control" name="chk_email" placeholder="" value="">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" name="chk_email" placeholder=""
+                                    value="{{Auth::guard('frontend')->user()->email}}" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="firstname">Password</label>
-                                <input type="text" class="form-control" name="chk_password" placeholder="" value="">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="streetaddress">Street</label>
-                                <input type="text" class="form-control" name="chk_street" placeholder="" value="">
+                                <input type="text" class="form-control" name="chk_street" placeholder=""
+                                    value="{{Auth::guard('frontend')->user()->address}}" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="streetaddress">House Number</label>
-                                <input type="text" class="form-control" name="chk_house_no" placeholder="" value="">
+                                <input type="text" class="form-control" name="chk_house_no" placeholder=""
+                                    value="{{Auth::guard('frontend')->user()->home_no}}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="streetaddress">Post Code</label>
-                                <input type="text" class="form-control" name="chk_post_code" placeholder="" value="">
+                                <input type="text" class="form-control" name="chk_post_code" placeholder=""
+                                    value="{{Auth::guard('frontend')->user()->zip_code}}">
                             </div>
                         </div>
                         <div class="col-md-12">

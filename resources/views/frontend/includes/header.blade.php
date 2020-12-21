@@ -13,9 +13,24 @@
                                 class="icon-paper-plane"></span></div>
                         <span class="text">swaad@info.com</span>
                     </div>
-                    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                        <span class="text">
-                            <b>Mon-Fri </b> (11.00 - 14.00 & 17.30 - 22.00) | <b>Sat-Sun </b> (12.00 - 12.00)
+                    <div class="col-md-6 pr-4 d-flex topper align-items-center text-lg-right">
+                        <span class="text text-center">
+                            <div class="float-left">
+                                <b>Mon-Fri </b> (11.00 - 14.00 & 17.30 - 22.00) <br>
+                            </div>
+                            <div class="float-left">
+                                <b>Sat-Sun </b> (12.00 - 12.00)
+                            </div>
+                        </span>
+                        <span class="text text-center">
+                            @if(Auth::guard('frontend')->check())
+                            <a href="#" class="text-white"> {{ Auth::guard('frontend')->user()->name }}</a> | <a
+                                href="{{route('user.logout')}}" class="text-white">Logout</a>
+                            @else
+                            <a href="#" class="text-white" data-toggle="modal" data-target="#loginModal">Login</a> |
+                            <a href="#" class="text-white" data-toggle="modal"
+                                data-target="#registerModal">Registration</a>
+                            @endif
                         </span>
                     </div>
                 </div>
@@ -43,8 +58,7 @@
                         @endforeach
                     </div>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">Catering</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Reservation</a></li>
+                <li class="nav-item"><a href="{{route('reservation')}}" class="nav-link">Reservation</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
@@ -58,9 +72,146 @@
                 </li>
                 <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link"><span
                             class="icon-shopping_cart"></span>[{{Cart::getContent()->count()}}]</a></li>
-
             </ul>
         </div>
     </div>
 </nav>
 <!-- END nav -->
+
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('user.login') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group row">
+                        <label for="email"
+                            class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="current-password">
+
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6 offset-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                    {{ old('remember') ? 'checked' : '' }}>
+
+                                <label class="form-check-label" for="remember">
+                                    {{ __('Remember Me') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Login') }}
+                            </button>
+
+                            @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- REGISTER MODAL -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Registration</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('user.register.store')}}" method="POST" enctype="multipart/form-data"> @csrf
+                    <div class=" container row">
+                        <div class="form-group col-md-6">
+                            <label for="">User Name</label>
+                            <input type="text" class="form-control" id="username" name="username" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="" placeholder=""
+                                required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Phone Number</label>
+                            <input type="text" class="form-control" id="phone_no" name="phone_no" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Street</label>
+                            <input type="text" class="form-control" id="street" name="street" value="" placeholder="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">House Number</label>
+                            <input type="text" class="form-control" id="house_no" name="house_no" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Post Code</label>
+                            <input type="text" class="form-control" id="post_code" name="post_code" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-primary float-right">Register</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

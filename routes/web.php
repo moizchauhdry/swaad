@@ -4,21 +4,31 @@ use Illuminate\Support\Facades\Route;
 
 /**
  *****************************************************************************
- ************************** FRONTEND ROUTES *******************************
+ ************************** FRONTEND ROUTES **********************************
  *****************************************************************************
 */
 
+Route::group(['prefix'=>'user'],function() {
+    Route::post('/login','Frontend\FrontendController@login')->name('user.login');
+    Route::get('/logout','Frontend\FrontendController@logout')->name('user.logout');
+    Route::post('/register','Frontend\FrontendController@register')->name('user.register.store');
+});
+
 Route::get('/', 'Frontend\FrontendController@index')->name('index');
+Route::get('/reservation', 'Frontend\FrontendController@reservation')->name('reservation');
+Route::post('/reservation/store', 'Frontend\FrontendController@storeReservation')->name('reservation.store');
+
+
 Route::post('/addToCart', 'Frontend\FrontendController@addToCart')->name('addToCart');
 Route::get('/add-to-cart', 'Frontend\FrontendController@viewCart')->name('viewCart');
-
 Route::get('/cart', 'Frontend\CartController@index')->name('cart.index');
 Route::post('/cart/store', 'Frontend\CartController@store')->name('cart.store');
 Route::delete('/cart/destroy/{id}','Frontend\CartController@destroy')->name('cart.destroy');
 
-Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
-Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
-
+Route::group(['middleware' => ['frontend']],function(){
+    Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
+    Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
+});
 
 
 /**
