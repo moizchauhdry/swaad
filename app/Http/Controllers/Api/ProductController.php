@@ -76,6 +76,7 @@ class ProductController extends Controller
             'status' => $this->responseConstants['STATUS_SUCCESS'],
             'message' => 'Success',
             'products' => $categoryProducts,
+            'product_count' => count($categoryProducts),
         ]);
 
     }

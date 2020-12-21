@@ -48,6 +48,7 @@ class OrderController extends Controller
             return response()->json([
                 'status' => $this->responseConstants['STATUS_ERROR'],
                 'message' => $this->responseConstants['INVALID_PARAMETERS'],
+                'errors' => $validator->errors()
             ]);
         }
 

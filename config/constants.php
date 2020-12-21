@@ -48,6 +48,8 @@ return [
         'KEY_DATE' => 'date',
         'KEY_DAYTIME' => 'time_of_day',
         'KEY_PEOPLE' => 'people',
+        'KEY_MESSAGE' => 'message',
+        'KEY_USER_ID' => 'user_id',
     ],
     'USER_CONSTANTS' => [
         'KEY_USER_ID' => 'user_id',
