@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Banner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Config;
+use Storage;
+use Validator;
 
 class BannerController extends Controller
 {
