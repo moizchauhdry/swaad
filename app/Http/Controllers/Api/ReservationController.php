@@ -55,7 +55,7 @@ class ReservationController extends Controller
         } else {
             $userId = null;
         }
-        if ($userId != null) {
+        if (isset($request->header()['authorization'][0])) {
             $name = $user->name;
             $email = $user->email;
             $phone = $user->phone_no;
