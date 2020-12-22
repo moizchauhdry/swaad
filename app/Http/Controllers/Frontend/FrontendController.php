@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use App\User;
+use App\Reservation;
 
 use Validator;
 use Session;
@@ -99,7 +100,65 @@ class FrontendController extends Controller
         return view ('frontend.pages.cart',compact('products'));
     }
 
+    public function categories() {
+        $categories = Category::where('status','1')->orderBy('id','DESC')->paginate(24);
+        return view ('frontend.pages.categories',compact('categories'));
+    }
+
+    public function getProductsByCategory($id) {
+        $products = Product::where('status','1')->orderBy('id','DESC')->where('category_id',$id)->paginate(24);
+        return view ('frontend.pages.getProductsByCategory',compact('products'));
+    }
+
+    public function products() {
+        $products = Product::where('status','1')->orderBy('id','DESC')->paginate(24);
+        return view ('frontend.pages.products',compact('products'));
+    }
+
+    public function productDetail($id) {
+        $product = Product::find($id);
+        $products = Product::where('status','1')->get();
+        return view ('frontend.pages.product-detail',compact('product','products'));
+    }
+
     public function reservation() {
         return view ('frontend.pages.reservation');
+    }
+
+    public function storeReservation(Request $request) {
+
+        // dd($request->all());
+
+        $rules = [
+            'rsv_name' => 'required|string|max:255',
+            'rsv_email' => 'required|string|email|max:255',
+            'rsv_phone' => 'required|numeric',
+            'rsv_people' => 'required|string|max:255',
+            'rsv_date' => 'required|string|max:255',
+            'rsv_time' => 'required|string|max:255',
+            'rsv_message' => 'required|string|max:1000',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $data = [
+            'name' => $request->input('rsv_name'),
+            'email' => $request->input('rsv_email'),
+            'phone' => $request->input('rsv_phone'),
+            'people' => $request->input('rsv_people'),
+            'date' => $request->input('rsv_date'),
+            'time_of_day' => $request->input('rsv_time'),
+            'message' => $request->input('rsv_message'),
+            'user_id' => NULL,
+        ];
+
+        $rsv = Reservation::create($data);
+
+        return redirect()->back()->with('SUCCESS','RESERVATION SUBMIT SUCCESSFULLY.');
+
     }
 }

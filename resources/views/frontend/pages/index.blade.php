@@ -21,7 +21,7 @@
                             <div class="text text-center">
                                 <h2>Our Menu</h2>
                                 <p>Protect the health of every home</p>
-                                <p><a href="#" class="btn btn-primary">View All</a></p>
+                                <p><a href="{{route('categories')}}" class="btn btn-primary">View All</a></p>
                             </div>
                         </div>
                     </div>
@@ -82,18 +82,18 @@
             @foreach ($popularProducts as $product)
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid"
+                    <a href="{{route('productDetail',$product->id)}}" class="img-prod"><img class="img-fluid"
                             src="{{asset('storage/app/public/'.$product->image_url)}}" alt="PRODUCT-IMAGE">
                         <span class="status">{{$product->category->title}}</span>
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">{{$product->title}}</a></h3>
+                        <h3><a href="{{route('productDetail',$product->id)}}">{{$product->title}}</a></h3>
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price">
                                     <span class="price-sale">
-                                        $ {{ number_format((float)$product->price, 2, '.', '')}}
+                                        € {{ number_format((float)$product->price, 2, '.', '')}}
                                     </span>
                                 </p>
                             </div>

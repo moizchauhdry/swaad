@@ -15,9 +15,6 @@ Route::group(['prefix'=>'user'],function() {
 });
 
 Route::get('/', 'Frontend\FrontendController@index')->name('index');
-Route::get('/reservation', 'Frontend\FrontendController@reservation')->name('reservation');
-Route::post('/reservation/store', 'Frontend\FrontendController@storeReservation')->name('reservation.store');
-
 
 Route::post('/addToCart', 'Frontend\FrontendController@addToCart')->name('addToCart');
 Route::get('/add-to-cart', 'Frontend\FrontendController@viewCart')->name('viewCart');
@@ -29,6 +26,15 @@ Route::group(['middleware' => ['frontend']],function(){
     Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
     Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
 });
+
+Route::get('/categories', 'Frontend\FrontendController@categories')->name('categories');
+Route::get('/getProductsByCategory/{id}', 'Frontend\FrontendController@getProductsByCategory')->name('getProductsByCategory');
+
+Route::get('/products', 'Frontend\FrontendController@products')->name('products');
+Route::get('/products/detail/{id}', 'Frontend\FrontendController@productDetail')->name('productDetail');
+
+Route::get('/reservation', 'Frontend\FrontendController@reservation')->name('reservation');
+Route::post('/reservation/store', 'Frontend\FrontendController@storeReservation')->name('reservation.store');
 
 
 /**
