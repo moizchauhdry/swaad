@@ -37,10 +37,14 @@ Route::group(['prefix' => 'user'], function () {
         //// Products
         Route::post('/getPopularProducts', 'Api\ProductController@getPopularProducts');
         Route::post('/getProductByCategory', 'Api\ProductController@getProductByCategory');
+        Route::post('/addViewCount', 'Api\ProductController@addViewCount');
 
         //// Orders
         Route::post('/placeOrder', 'Api\OrderController@placeOrder');
 
+        //////////// Banner
+        Route::post('/getHomeBanner', 'Api\BannerController@getHomeBanner');
+        Route::post('/getReservationBanner', 'Api\BannerController@getReservationBanner');
 
     });
 
