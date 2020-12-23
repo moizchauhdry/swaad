@@ -52,7 +52,10 @@ class ReservationController extends Controller
             if ($user) {
                 $userId = $user->id;
             } else {
-                $userId = null;
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'Invalid User token'
+                ]);
             }
         } else {
             $userId = null;
