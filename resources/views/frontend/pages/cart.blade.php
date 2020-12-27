@@ -49,21 +49,22 @@
                                     $ {{ $product->price * $product->quantity}}
                                 </td>
 
-                                {{-- <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td> --}}
-                                <td>
+                                <td class="product-remove"><a href="#"
+                                        onclick="removeFromCart('{{$product->id}}')"><span
+                                            class="ion-ios-close"></span></a></td>
+                                {{-- <td>
                                     <form action="{{route('cart.destroy',$product->id)}}" method="POST">
-                                        @csrf
-                                        {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">
-                                            <h6 class="text-white">X</h6>
-                                        </button>
-                                    </form>
-                                </td>
+                                @csrf
+                                {{method_field('DELETE')}}
+                                <button type="button" class="btn btn-light" style="">Light</button>
+                                </form>
+                                </td> --}}
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="6"> Your Cart is Empty !</td>
+                                <td colspan=" 6"> Your Cart is Empty !
+                                </td>
                             </tr>
                             @endif
 
@@ -100,4 +101,22 @@
     </div>
 </section>
 
+@endsection
+
+@section('scripts')
+<script>
+    function removeFromCart(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.destroy')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                location.reload();
+            }
+        });
+    }
+</script>
 @endsection

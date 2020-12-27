@@ -70,8 +70,11 @@
                         <a class="dropdown-item" href="#">About Us</a>
                     </div>
                 </li>
-                <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link"><span
-                            class="icon-shopping_cart"></span>[{{Cart::getContent()->count()}}]</a></li>
+                <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link">
+                        <span class="icon-shopping_cart"></span>[<span
+                            id="cart_items_count">{{Cart::getContent()->count()}}</span>]
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

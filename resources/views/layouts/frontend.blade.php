@@ -34,6 +34,12 @@
     <link rel="stylesheet" href="{{asset('public/frontend/custom/custom.css')}}">
 
     @yield('styles')
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="goto-here">

@@ -52,7 +52,6 @@
                             </button>
                         </span>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-md-6 d-flex mb-3">

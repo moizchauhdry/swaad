@@ -1,3 +1,4 @@
+/* THEME OVERDRING */
 .owl-carousel.home-slider .slider-item {
     background-size: cover;
     background-repeat: no-repeat;
@@ -31,4 +32,12 @@
 .ftco-section {
     padding: 5em 0;
     position: relative;
+}
+.pb-1,
+.py-1 {
+    padding-bottom: 0.6rem !important;
+}
+.pt-1,
+.py-1 {
+    padding-top: 0.6rem !important;
 }
