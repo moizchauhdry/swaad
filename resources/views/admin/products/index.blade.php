@@ -37,10 +37,12 @@
                                 <tr>
                                     <th>Sr #</th>
                                     <th>Title</th>
+                                    <th>Title (gr)</th>
                                     <th>Image</th>
                                     <th>Price</th>
                                     <th>Category</th>
                                     <th>Description</th>
+                                    <th>Description (gr)</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -51,6 +53,7 @@
                                 <tr>
                                     <td>{{$count ++}}</td>
                                     <td>{{$product->title}}</td>
+                                    <td>{{$product->title_gr}}</td>
                                     <td>
                                         @if ($product->image_url != NULL && Storage::exists($product->image_url))
                                         <img src="{{asset('storage/app/public/'.$product->image_url)}}" id="image"
@@ -64,6 +67,7 @@
 
                                     <td>{{$product->category->title}}</td>
                                     <td>{{$product->description}}</td>
+                                    <td>{{$product->description_gr}}</td>
 
                                     <td>
                                         @if ($product->status == 1)

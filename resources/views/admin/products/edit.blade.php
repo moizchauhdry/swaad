@@ -28,34 +28,36 @@
                 <!-- jquery validation -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Add Product</h3>
+                        <h3 class="card-title">Edit Product</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('products.update',$product->id)}}" method="POST"
+                        enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Title <span class="required-star">*</span></label>
                                     <input type="text" name="title" class="form-control" placeholder="Enter Title"
-                                        required>
+                                        value="{{$product->title}}" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Title (gr) <span class="required-star">*</span></label>
                                     <input type="text" name="title_gr" class="form-control"
-                                        placeholder="Enter Title (gr)" required>
+                                        placeholder="Enter Title (gr)" value="{{$product->title_gr}}" required>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label>Image <span class="required-star">*</span></label>
+                                <div class="form-group col-md-6 mb-4">
+                                    <label>Image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="image_url" id="image_url"
-                                                accept=".png, .jpg, .jpeg" required>
+                                            <input type="file" id="image_url" class="custom-file-input" name="image_url"
+                                                accept=".png, .jpg, .jpeg">
                                             <label class="custom-file-label">Choose file</label>
                                         </div>
                                     </div>
-                                    <img src="" id="image" class="hidden w-25 mt-2" />
+                                    <img src="{{ asset('storage/app/public/'.$product->image_url) }}" id="image"
+                                        class="w-25 mt-2" />
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Category <span class="required-star">*</span></label>
@@ -63,32 +65,35 @@
                                         required>
                                         <option value="" selected>Select ... </option>
                                         @foreach ($categories as $category)
-                                        <option value="{{$category->id}}" selected>{{$category->title}}</option>
+                                        <option @if ($category->id == $product->category_id) selected @endif
+                                            value="{{$category->id}}" selected>
+                                            {{$category->title}}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label>Price <span class="required-star">*</span></label>
                                     <input type="number" name="price" class="form-control" placeholder="Enter Price"
-                                        min="0" required>
+                                        min="0" value="{{$product->price}}" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Description <span class="required-star">*</span></label>
                                     <textarea name="description" id="description" cols="30" rows="5"
-                                        class="form-control" required></textarea>
+                                        class="form-control" required>{{$product->description}}</textarea>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Description (gr) <span class="required-star">*</span></label>
                                     <textarea name="description_gr" id="description" cols="30" rows="5"
-                                        class="form-control" required></textarea>
+                                        class="form-control" required>{{$product->description_gr}}</textarea>
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Save & Upload</button>
+                            <button type="submit" class="btn btn-primary">Save & Update</button>
                         </div>
                     </form>
                 </div>

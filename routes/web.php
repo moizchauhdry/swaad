@@ -28,6 +28,10 @@ Route::post('/cart/increment','Frontend\CartController@increment')->name('cart.i
 Route::group(['middleware' => ['frontend']],function(){
     Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
     Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
+
+    Route::group(['prefix'=>'user'],function() {
+        Route::get('/dashboard','Frontend\UserController@dashboard')->name('user.dashboard');
+    });
 });
 
 Route::get('/categories', 'Frontend\FrontendController@categories')->name('categories');
@@ -108,6 +112,13 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                         Route::post('/store', 'ProductController@store')->name('products.store');
                         Route::get('/edit/{id}', 'ProductController@edit')->name('products.edit');
                         Route::post('/update/{id}', 'ProductController@update')->name('products.update');
+                    });
+                });
+
+                Route::group(['middleware' => ['permission:manage-orders']],function(){
+                    Route::group(['prefix' => 'orders'],function(){
+                        Route::get('/', 'OrderController@index')->name('orders.index');
+                        Route::get('/detail{id}', 'OrderController@detail')->name('orders.detail');
                     });
                 });
 

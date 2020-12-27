@@ -7,6 +7,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
 use App\Category;
+use Image;
 
 class CategoryController extends Controller
 {
@@ -38,9 +39,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {                
         $this->validate($request, [
             'title' => 'required|string|max:70',
+            'title_gr' => 'required|string|max:70',
             'image_url'=>'required|image|mimes:jpg,jpeg,png',
         ]);
     
@@ -48,22 +50,33 @@ class CategoryController extends Controller
 
         $data = [
             'title' => $request->input('title'),
+            'title_gr' => $request->input('title_gr'),
             'slug' =>  preg_replace('/\s+/', '-', $slug),
         ];
 
         $category = Category::create($data);
 
+        // CATEGORY SINGLE IMAGE
         $categoryImagesDirectory = 'categoryImages';
-        if ($request->hasFile('image_url')) {
-            
-            if(!Storage::exists($categoryImagesDirectory)){
-                Storage::makeDirectory($categoryImagesDirectory);
+        if($request->hasFile('image_url')) 
+        {
+            if (!Storage::exists($categoryImagesDirectory . '/' . $category->id)) {
+                Storage::makeDirectory($categoryImagesDirectory . '/' . $category->id);
             }
-            
-            $imageUrl = Storage::putFile($categoryImagesDirectory , new File($request->file('image_url')));
-            $category->update(['image_url'=> $imageUrl]);
-        }
 
+            $fileNameWithExtension = $request->file('image_url')->getClientOriginalName();
+            $filename = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('image_url')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            
+            $imagePath = storage_path('app/public/'.$categoryImagesDirectory.'/'.$category->id.'/'.$fileNameToStore);
+            $imageRealPath = $categoryImagesDirectory.'/'.$category->id.'/'.$fileNameToStore;
+
+            $image = Image::make($request->file('image_url')->getRealPath())->encode('jpg', 25);
+            $image->save($imagePath, 25, 'jpg');
+            $category->update(['image_url' => $imageRealPath]);
+        }
+        
         return redirect()->route('categories.index')->with('success', 'Record added successfully.');
     }
 
@@ -86,7 +99,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit',compact('category'));
     }
 
     /**
@@ -98,7 +112,45 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:70',
+            'title_gr' => 'required|string|max:70',
+            'image_url'=>'image|mimes:jpg,jpeg,png',
+        ]);
+    
+        $slug = strtolower($request->input('title'));
+
+        $data = [
+            'title' => $request->input('title'),
+            'title_gr' => $request->input('title_gr'),
+            'slug' =>  preg_replace('/\s+/', '-', $slug),
+        ];
+
+        $category = Category::findOrFail($id);
+        $category->update($data);
+
+        // CATEGORY SINGLE IMAGE
+        $categoryImagesDirectory = 'categoryImages';
+        if($request->hasFile('image_url')) 
+        {
+            if (!Storage::exists($categoryImagesDirectory . '/' . $category->id)) {
+                Storage::makeDirectory($categoryImagesDirectory . '/' . $category->id);
+            }
+
+            $fileNameWithExtension = $request->file('image_url')->getClientOriginalName();
+            $filename = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('image_url')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            
+            $imagePath = storage_path('app/public/'.$categoryImagesDirectory.'/'.$category->id.'/'.$fileNameToStore);
+            $imageRealPath = $categoryImagesDirectory.'/'.$category->id.'/'.$fileNameToStore;
+
+            $image = Image::make($request->file('image_url')->getRealPath())->encode('jpg', 25);
+            $image->save($imagePath, 25, 'jpg');
+            $category->update(['image_url' => $imageRealPath]);
+        }
+        
+        return redirect()->route('categories.index')->with('success', 'Record Updated successfully.');
     }
 
     /**

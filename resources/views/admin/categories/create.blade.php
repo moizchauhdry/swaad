@@ -42,6 +42,11 @@
                                         placeholder="Enter Category Title" required>
                                 </div>
                                 <div class="form-group col-md-6">
+                                    <label>Title (gr)<span class="required-star">*</span></label>
+                                    <input type="text" name="title_gr" class="form-control"
+                                        placeholder="Enter Category Title (gr)" required>
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label>Image <span class="required-star">*</span></label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -94,54 +99,6 @@
     $("#image_url").change(function () {
         readURL(this);
     });
-
-    $('input[name="has_colors"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_colors').val('1');
-        } else {
-            $('input#has_colors').val('0');
-        }
-    }); 
-
-    $('input[name="has_sizes"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_sizes').val('1');
-        } else {
-            $('input#has_sizes').val('0');
-        }
-    }); 
-
-    $('input[name="has_brands"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_brands').val('1');
-        } else {
-            $('input#has_brands').val('0');
-        }
-    }); 
-
-    $('input[name="has_manufacturers"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_manufacturers').val('1');
-        } else {
-            $('input#has_manufacturers').val('0');
-        }
-    }); 
-
-    $('input[name="has_frequencies"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_frequencies').val('1');
-        } else {
-            $('input#has_frequencies').val('0');
-        }
-    }); 
-
-    $('input[name="has_lenses"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_lenses').val('1');
-        } else {
-            $('input#has_lenses').val('0');
-        }
-    }); 
 
     // Get Input File Name
     $('.custom-file input').change(function (e) {
