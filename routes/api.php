@@ -41,6 +41,8 @@ Route::group(['prefix' => 'user'], function () {
 
         //// Orders
         Route::post('/placeOrder', 'Api\OrderController@placeOrder');
+        Route::post('/getMyOrders', 'Api\OrderController@getMyOrders');
+        Route::post('/orderDetails', 'Api\OrderController@orderDetails');
 
         //////////// Banner
         Route::post('/getHomeBanner', 'Api\BannerController@getHomeBanner');
