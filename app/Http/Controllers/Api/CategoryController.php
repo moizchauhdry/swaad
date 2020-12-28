@@ -24,10 +24,23 @@ class CategoryController extends Controller
     public function allCategories(Request $request)
     {
         $response = [];
-        $categories = Category::where('status', 1)->orderBy('id', 'DESC')->get();
-        $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
-        $response['categories'] = $categories;
-        $response['message'] = 'Success';
-        return response()->json($response);
+        if ($request->lan_type == 1) {
+            $categories = Category::select('title', 'slug', 'image_url', 'status')->where('status', 1)->orderBy('id', 'DESC')->get();
+            $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+            $response['categories'] = $categories;
+            $response['message'] = 'Success';
+            return response()->json($response);
+        } elseif ($request->lan_type == 2) {
+            $categories = Category::select('title_gr', 'slug', 'image_url', 'status')->where('status', 1)->orderBy('id', 'DESC')->get();
+            $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+            $response['categories'] = $categories;
+            $response['message'] = 'Success';
+            return response()->json($response);
+        } else {
+            $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+            $response['categories'] = [];
+            $response['message'] = 'Please send Language type.';
+            return response()->json($response);
+        }
     }
 }

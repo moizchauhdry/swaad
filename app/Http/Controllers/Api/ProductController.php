@@ -28,10 +28,21 @@ class ProductController extends Controller
 
     public function getPopularProducts(Request $request)
     {
-        $popularProducts = Product::orderBy('view_count', 'DESC')
-            ->take(24)
-            ->get();
-
+        if ($request->lan_type == 1) {
+            $popularProducts = Product::select('category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count')->orderBy('view_count', 'DESC')
+                ->take(24)
+                ->get();
+        } elseif ($request->lan_type == 2) {
+            $popularProducts = Product::select('category_id', 'title_gr', 'image_url', 'price', 'description_gr', 'status', 'view_count')->orderBy('view_count', 'DESC')
+                ->take(24)
+                ->get();
+        } else {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_SUCCESS'],
+                'message' => 'Please send Language type.',
+                'products' => [],
+            ]);
+        }
         return response()->json([
             'status' => $this->responseConstants['STATUS_SUCCESS'],
             'message' => 'Success',
@@ -61,18 +72,36 @@ class ProductController extends Controller
             $offset = $request->get($this->generalConstants['KEY_COUNT']);
         }
 
-        $categoryProducts = Product::where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
-            ->skip($offset)
-            ->take($this->recordsPerPage)
-            ->get();
-        if (count($categoryProducts) == 0) {
+        if ($request->lan_type == 1) {
+            $categoryProducts = Product::select('category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count')->where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
+                ->skip($offset)
+                ->take($this->recordsPerPage)
+                ->get();
+            if (count($categoryProducts) == 0) {
+                return response()->json([
+                    'status' => $this->responseConstants['STATUS_ERROR'],
+                    'message' => "No Product Found Against This Category",
+                ]);
+            }
+        }elseif ($request->lan_type == 2){
+            $categoryProducts = Product::select('category_id', 'title_gr', 'image_url', 'price', 'description_gr', 'status', 'view_count')->where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
+                ->skip($offset)
+                ->take($this->recordsPerPage)
+                ->get();
+            if (count($categoryProducts) == 0) {
+                return response()->json([
+                    'status' => $this->responseConstants['STATUS_ERROR'],
+                    'message' => "No Product Found Against This Category",
+                ]);
+            }
+        }else{
             return response()->json([
-                'status' => $this->responseConstants['STATUS_ERROR'],
-                'message' => "No Product Found Against This Category",
+                'status' => $this->responseConstants['STATUS_SUCCESS'],
+                'message' => 'Please send Language type.',
+                'products' => [],
+                'product_count' => 0,
             ]);
         }
-
-
         return response()->json([
             'status' => $this->responseConstants['STATUS_SUCCESS'],
             'message' => 'Success',
