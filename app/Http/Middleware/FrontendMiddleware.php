@@ -17,7 +17,7 @@ class FrontendMiddleware
     public function handle($request, Closure $next)
     {   
         if (!Auth::guard('frontend')->check()) {
-            return redirect()->back();
+            return redirect()->back()->with('ERROR','Login Please!');
         }
         return $next($request);
     }

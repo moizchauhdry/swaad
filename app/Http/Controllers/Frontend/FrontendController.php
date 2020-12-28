@@ -22,21 +22,20 @@ class FrontendController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
-                return redirect()->route('index')->with('SUCCESS','LOGIN SUCESSFULLY');
+                return redirect()->route('index');
             }
             else{
-                return redirect()->back()->with('ERROR','INVALID CREDENTIALS');
+                return redirect()->back()->with('ERROR','Invalid Credentials!');
             }
         }
         if(Auth::guard('frontend')->check()){
-            return redirect()->route('index')->with('SUCCESS','LOGIN SUCESSFULLY');
+            return redirect()->route('index');
         }
     }
 
-    public function logout ()
-    {
+    public function logout () {
         Auth::guard('frontend')->logout();
-        return redirect()->back();
+        return redirect()->route('index');
     }
     
     public function register(Request $request) {
@@ -72,14 +71,14 @@ class FrontendController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
-                return redirect()->route('index')->with('SUCCESS','LOGIN SUCESSFULLY');
+                return redirect()->route('index');
             }
             else{
-                return redirect()->back()->with('ERROR','INVALID CREDENTIALS');
+                return redirect()->back()->with('ERROR','Invalid Credentials');
             }
         }
         if(Auth::guard('frontend')->check()){
-            return redirect()->route('index')->with('SUCCESS','LOGIN SUCESSFULLY');
+            return redirect()->route('index');
         }
         
     }
@@ -126,8 +125,6 @@ class FrontendController extends Controller
     }
 
     public function storeReservation(Request $request) {
-
-        // dd($request->all());
 
         $rules = [
             'rsv_name' => 'required|string|max:255',

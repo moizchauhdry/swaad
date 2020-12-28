@@ -33,6 +33,10 @@
 
     <link rel="stylesheet" href="{{asset('public/frontend/custom/custom.css')}}">
 
+    <!-- TOASTER -->
+    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr1.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr2.css')}}">
+
     @yield('styles')
 
     <style>
@@ -44,13 +48,14 @@
 
 <body class="goto-here">
 
+    {{-- @include('frontend.includes._notifications') --}}
+
     @include('frontend.includes.header')
 
     @yield('slider')
     @yield('content')
 
     @include('frontend.includes.footer')
-
 
     <script src="{{asset('public/frontend/js/jquery.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery-migrate-3.0.1.min.js')}}"></script>
@@ -69,6 +74,22 @@
     </script>
     <script src="{{asset('public/frontend/js/google-map.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+
+    <!-- TOASTER -->
+    <script src="{{asset('public/frontend/plugins/toastr/toastr.min.js')}}"></script>
+    <script src="{{asset('public/frontend/plugins/toastr/toastr.js')}}"></script>
+
+    @if(Session::has('SUCCESS'))
+    <script>
+        toastr.success('{{  Session::get('SUCCESS') }}')
+    </script>
+    @endif
+
+    @if(Session::has('ERROR'))
+    <script>
+        toastr.error('{{  Session::get('ERROR') }}')
+    </script>
+    @endif
 
     @yield('scripts')
 

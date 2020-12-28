@@ -100,15 +100,16 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="radio">
-                                            <label><input type="radio" name="optradio" class="mr-2">Stripe</label>
+                                            <label><input type="radio" name="optradio" class="mr-2">Six Payment
+                                                Method</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="" class="mr-2">
-                                                I have read and accept the terms and conditions</label>
+                                            <label><input type="checkbox" value="" class="mr-2" required>
+                                                I have read and accept the terms & conditions.</label>
                                         </div>
                                     </div>
                                 </div>

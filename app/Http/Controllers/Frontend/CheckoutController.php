@@ -12,16 +12,24 @@ use Cart;
 class CheckoutController extends Controller
 {
     public function index() {
-        return view ('frontend.pages.checkout');
+        $cart = Cart::getContent();
+
+        if ($cart->count() > 0) {
+            return view ('frontend.pages.checkout');
+        } else {
+            return redirect()->back()->with('ERROR','Cart is Empty!');
+        }
+        
     }
 
     public function store(Request $request) {
-        $grosssTotal = number_format((float)Cart::getSubTotal(), 2, '.', '');
+
+        $grossTotal = number_format((float)Cart::getSubTotal(), 2, '.', '');
         $netTotal = number_format((float)Cart::getTotal(), 2, '.', '');
         
         $orderData = [
             'user_id' => '1',
-            'gross_total' => $grosssTotal,
+            'gross_total' => $grossTotal,
             'net_total' => $netTotal,
         ];
 
@@ -36,7 +44,9 @@ class CheckoutController extends Controller
             ]);
         }
 
-        return "ORDER PLACE SUCCESSFULLY";
+        Cart::clear();
+
+        return redirect()->route('index')->with('SUCCESS','Your Order Placed Successfully!');
 
     }
 }

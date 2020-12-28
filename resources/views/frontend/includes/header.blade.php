@@ -24,7 +24,7 @@
                         </span>
                         <span class="text text-center">
                             @if(Auth::guard('frontend')->check())
-                            <a href="{{route('user.dashboard')}}" class="text-white">
+                            <a href="#" class="text-white">
                                 {{ Auth::guard('frontend')->user()->name }}</a> | <a href="{{route('user.logout')}}"
                                 class="text-white">Logout</a>
                             @else
