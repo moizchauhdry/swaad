@@ -29,13 +29,12 @@ class OrderController extends Controller
 
     public function placeOrder(Request $request)
     {
-//        dd($request->all());
         $response = [];
         $rules = [
             $this->orderConstants['KEY_GROSS_TOTAL'] => 'required',
             $this->orderConstants['KEY_NET_TOTAL'] => 'required',
-            $this->orderConstants['KEY_COUPON_CODE'] => 'nullable|string',
-            $this->orderConstants['KEY_COUPON_DISCOUNT_AMOUNT'] => 'nullable|string',
+            $this->orderConstants['KEY_COUPON_CODE'] => 'nullable',
+            $this->orderConstants['KEY_COUPON_DISCOUNT_AMOUNT'] => 'nullable',
             $this->orderConstants['KEY_DELIVERY_TIME'] => 'required',
             $this->orderConstants['KEY_DELIVERY_DATE'] => 'required',
             $this->orderConstants['KEY_PRODUCTS'] => 'required|array',
