@@ -27,17 +27,15 @@ class ReservationController extends Controller
     public function addReservation(Request $request)
     {
         $rules = [
+            $this->reservationConstants['KEY_NAME'] => 'required',
+            $this->reservationConstants['KEY_EMAIL'] => 'required|email',
+            $this->reservationConstants['KEY_PHONE'] => 'required',
             $this->reservationConstants['KEY_DATE'] => 'required',
             $this->reservationConstants['KEY_DAYTIME'] => 'required',
             $this->reservationConstants['KEY_PEOPLE'] => 'required',
             $this->reservationConstants['KEY_MESSAGE'] => 'required',
         ];
 
-        if (!isset($request->header()['authorization'][0])) {
-            $rules[$this->reservationConstants['KEY_NAME']] = 'required';
-            $rules[$this->reservationConstants['KEY_EMAIL']] = 'required|email';
-            $rules[$this->reservationConstants['KEY_PHONE']] = 'required';
-        }
 
         $validator = Validator::make($request->all(), $rules);
 
@@ -54,25 +52,20 @@ class ReservationController extends Controller
             if ($user) {
                 $userId = $user->id;
             } else {
-                $userId = null;
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'Invalid User token'
+                ]);
             }
         } else {
             $userId = null;
         }
-        if (isset($request->header()['authorization'][0])) {
-            $name = $user->name;
-            $email = $user->email;
-            $phone = $user->phone_no;
-        } else {
-            $name = $request->get($this->reservationConstants['KEY_NAME']);
-            $email = $request->get($this->reservationConstants['KEY_EMAIL']);
-            $phone = $request->get($this->reservationConstants['KEY_PHONE']);
-        }
+
         $data = [
             "user_id" => $userId,
-            "name" => $name,
-            "email" => $email,
-            "phone" => $phone,
+            "name" => $request->get($this->reservationConstants['KEY_NAME']),
+            "email" => $request->get($this->reservationConstants['KEY_EMAIL']),
+            "phone" => $request->get($this->reservationConstants['KEY_PHONE']),
             "people" => $request->get($this->reservationConstants['KEY_PEOPLE']),
             "date" => $request->get($this->reservationConstants['KEY_DATE']),
             "time_of_day" => $request->get($this->reservationConstants['KEY_DAYTIME']),
