@@ -6,11 +6,84 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
-use DB;
+use App\User;
+use App\Reservation;
+
+use Validator;
 use Session;
+use Auth;
+use Hash;
+use DB;
 
 class FrontendController extends Controller
-{
+{   
+    public function login(Request $request) {
+        
+        if($request->isMethod('post')){
+            $data = $request->all();
+            if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
+                return redirect()->route('index')->with('SUCCESS','LOGIN SUCESSFULLY');
+            }
+            else{
+                return redirect()->back()->with('ERROR','INVALID CREDENTIALS');
+            }
+        }
+        if(Auth::guard('frontend')->check()){
+            return redirect()->route('index')->with('SUCCESS','LOGIN SUCESSFULLY');
+        }
+    }
+
+    public function logout ()
+    {
+        Auth::guard('frontend')->logout();
+        return redirect()->back();
+    }
+    
+    public function register(Request $request) {
+
+        // $rules = [
+        //     'username' => 'required|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'password' => 'required|max:255',
+        //     'phone' => 'required|numeric',
+        //     'address' => 'required|max:255',
+        //     'house_no' => 'required|max:255',
+        //     'post_code' => 'required|numeric',
+        // ];
+
+        // $validator = Validator::make($request->all(), $rules);
+
+        // if ($validator->fails()) {
+        //     return Redirect()->back()->withErrors($validator)->withInput($request->all());
+        // }
+
+        $data = [
+            'name' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'phone_no' => $request->input('phone_no'),
+            'address' => $request->input('street'),
+            'home_no' => $request->input('house_no'),
+            'post_code' => $request->input('post_code'),
+        ];
+
+        $user = User::create($data);
+
+        if($request->isMethod('post')){
+            $data = $request->all();
+            if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
+                return redirect()->route('index')->with('SUCCESS','LOGIN SUCESSFULLY');
+            }
+            else{
+                return redirect()->back()->with('ERROR','INVALID CREDENTIALS');
+            }
+        }
+        if(Auth::guard('frontend')->check()){
+            return redirect()->route('index')->with('SUCCESS','LOGIN SUCESSFULLY');
+        }
+        
+    }
+
     public function index() {   
         $categories = Category::where('status','1')->inRandomOrder()->get();
         $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->get();
@@ -25,5 +98,67 @@ class FrontendController extends Controller
     public function viewCart() {
         $products = Session::get('product');
         return view ('frontend.pages.cart',compact('products'));
+    }
+
+    public function categories() {
+        $categories = Category::where('status','1')->orderBy('id','DESC')->paginate(24);
+        return view ('frontend.pages.categories',compact('categories'));
+    }
+
+    public function getProductsByCategory($id) {
+        $products = Product::where('status','1')->orderBy('id','DESC')->where('category_id',$id)->paginate(24);
+        return view ('frontend.pages.getProductsByCategory',compact('products'));
+    }
+
+    public function products() {
+        $products = Product::where('status','1')->orderBy('id','DESC')->paginate(24);
+        return view ('frontend.pages.products',compact('products'));
+    }
+
+    public function productDetail($id) {
+        $product = Product::find($id);
+        $products = Product::where('status','1')->get();
+        return view ('frontend.pages.product-detail',compact('product','products'));
+    }
+
+    public function reservation() {
+        return view ('frontend.pages.reservation');
+    }
+
+    public function storeReservation(Request $request) {
+
+        // dd($request->all());
+
+        $rules = [
+            'rsv_name' => 'required|string|max:255',
+            'rsv_email' => 'required|string|email|max:255',
+            'rsv_phone' => 'required|numeric',
+            'rsv_people' => 'required|string|max:255',
+            'rsv_date' => 'required|string|max:255',
+            'rsv_time' => 'required|string|max:255',
+            'rsv_message' => 'required|string|max:1000',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $data = [
+            'name' => $request->input('rsv_name'),
+            'email' => $request->input('rsv_email'),
+            'phone' => $request->input('rsv_phone'),
+            'people' => $request->input('rsv_people'),
+            'date' => $request->input('rsv_date'),
+            'time_of_day' => $request->input('rsv_time'),
+            'message' => $request->input('rsv_message'),
+            'user_id' => NULL,
+        ];
+
+        $rsv = Reservation::create($data);
+
+        return redirect()->back()->with('SUCCESS','RESERVATION SUBMIT SUCCESSFULLY.');
+
     }
 }

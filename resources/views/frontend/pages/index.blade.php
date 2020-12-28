@@ -1,10 +1,5 @@
 @extends('layouts.frontend')
 
-<style>
-    .hidden {
-        display: none;
-    }
-</style>
 @section('slider')
 @include('frontend.includes.slider')
 @endsection
@@ -21,7 +16,7 @@
                             <div class="text text-center">
                                 <h2>Our Menu</h2>
                                 <p>Protect the health of every home</p>
-                                <p><a href="#" class="btn btn-primary">View All</a></p>
+                                <p><a href="{{route('categories')}}" class="btn btn-primary">View All</a></p>
                             </div>
                         </div>
                     </div>
@@ -82,35 +77,48 @@
             @foreach ($popularProducts as $product)
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid"
+                    <a href="{{route('productDetail',$product->id)}}" class="img-prod"><img class="img-fluid"
                             src="{{asset('storage/app/public/'.$product->image_url)}}" alt="PRODUCT-IMAGE">
                         <span class="status">{{$product->category->title}}</span>
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">{{$product->title}}</a></h3>
+                        <h3><a href="{{route('productDetail',$product->id)}}">{{$product->title}}</a></h3>
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price">
                                     <span class="price-sale">
-                                        $ {{ number_format((float)$product->price, 2, '.', '')}}
+                                        € {{ number_format((float)$product->price, 2, '.', '')}}
                                     </span>
                                 </p>
                             </div>
                         </div>
                         <div class="bottom-area d-flex px-3">
                             <div class="m-auto d-flex">
-                                {{-- <a href="#" id="cart-btn"
-                                    class="buy-now d-flex justify-content-center align-items-center mx-1"
-                                    onclick="addToCart('{{$product->id}}')">
-                                <span><i class="ion-ios-cart"></i></span>
-                                </a> --}}
                                 @if (Cart::get($product->id))
-                                <button id="success_{{$product->id}}">Added</button>
+                                <div class="btn-group" role="group" aria-label="Basic example"
+                                    id="success_{{$product->id}}">
+                                    <button type="button" class="btn btn-primary btn-sm" id="btn-decrement"
+                                        onclick="cartDecrement('{{$product->id}}')">-</button>
+                                    <button type="button" class="btn btn-primary btn-sm" id="qty_{{$product->id}}">
+                                        {{Cart::get($product->id)->quantity}}
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" id="btn-increment"
+                                        onclick="cartIncrement('{{$product->id}}')">+</button>
+                                </div>
                                 @else
-                                <button onclick="addToCart('{{$product->id}}')" id="add_to_cart_{{$product->id}}">
+                                <button onclick="addToCart('{{$product->id}}')" id="add_to_cart_{{$product->id}}"
+                                    class="btn btn-primary btn-sm">
                                     Add to cart</button>
-                                <button id="success_{{$product->id}}" class="hidden"></button>
+                                <div class="btn-group hidden" role="group" aria-label="Basic example"
+                                    id="success_{{$product->id}}">
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                        onclick="cartDecrement('{{$product->id}}')">-</button>
+                                    <button type="button" class="btn btn-primary btn-sm" id="qty_{{$product->id}}">
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                        onclick="cartIncrement('{{$product->id}}')">+</button>
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -235,10 +243,41 @@
             'product_id': product_id,
             },
             success: function (response) {
-                // console.log(response)
                 $('#add_to_cart_'+product_id).addClass('hidden');
                 $('#success_'+product_id).removeClass('hidden');
-                $("#success_"+product_id).append('Item Added To Cart');
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(1);
+                $("#cart_items_count").html(response);
+            }
+        });
+    }
+
+    function cartIncrement(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.increment')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(response);
+            }
+        });
+    }
+
+    function cartDecrement(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.decrement')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(response);
             }
         });
     }

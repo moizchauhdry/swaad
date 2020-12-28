@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'customer' => \App\Http\Middleware\CustomerMiddleware::class,
         'authVerify' => \App\Http\Middleware\AuthVerify::class,
         'authuser' => \App\Http\Middleware\AuthenticateUser::class,
+        'frontend' => \App\Http\Middleware\FrontendMiddleware::class,
 
     ];
 }

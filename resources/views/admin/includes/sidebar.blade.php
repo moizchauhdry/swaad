@@ -114,6 +114,29 @@
                 </li>
                 @endif
 
+                @if (Auth::guard('admin')->user()->hasPermission('manage-orders'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'orders.create' || Route::currentRouteName() == 'orders.index'|| Route::currentRouteName() == 'orders.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'orders.create' || Route::currentRouteName() == 'orders.index' || Route::currentRouteName() == 'orders.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-shopping-bag"></i>
+                        <p>
+                            Orders
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('orders.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'orders.index' || Route::currentRouteName() == 'orders.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Orders</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

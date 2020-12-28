@@ -51,11 +51,15 @@ class ReservationController extends Controller
 
         if (isset($request->header()['authorization'][0])) {
             $user = User::where('access_token', $request->header()['authorization'][0])->first();
-            $userId = $user->id;
+            if ($user) {
+                $userId = $user->id;
+            } else {
+                $userId = null;
+            }
         } else {
             $userId = null;
         }
-        if ($userId != null) {
+        if (isset($request->header()['authorization'][0])) {
             $name = $user->name;
             $email = $user->email;
             $phone = $user->phone_no;

@@ -42,6 +42,11 @@
                                         required>
                                 </div>
                                 <div class="form-group col-md-6">
+                                    <label>Title (gr) <span class="required-star">*</span></label>
+                                    <input type="text" name="title_gr" class="form-control"
+                                        placeholder="Enter Title (gr)" required>
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label>Image <span class="required-star">*</span></label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -52,12 +57,7 @@
                                     </div>
                                     <img src="" id="image" class="hidden w-25 mt-2" />
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label>Price <span class="required-star">*</span></label>
-                                    <input type="number" name="price" class="form-control" placeholder="Enter Price"
-                                        min="0" required>
-                                </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label>Category <span class="required-star">*</span></label>
                                     <select name="category_id" id="category_id" class="form-control custom-select"
                                         required>
@@ -67,9 +67,21 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-2">
+                                    <label>Price <span class="required-star">*</span></label>
+                                    <input type="number" name="price" class="form-control" placeholder="Enter Price"
+                                        min="0" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
                                     <label>Description <span class="required-star">*</span></label>
                                     <textarea name="description" id="description" cols="30" rows="5"
+                                        class="form-control" required></textarea>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Description (gr) <span class="required-star">*</span></label>
+                                    <textarea name="description_gr" id="description" cols="30" rows="5"
                                         class="form-control" required></textarea>
                                 </div>
                             </div>
@@ -114,54 +126,6 @@
     $("#image_url").change(function () {
         readURL(this);
     });
-
-    $('input[name="has_colors"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_colors').val('1');
-        } else {
-            $('input#has_colors').val('0');
-        }
-    }); 
-
-    $('input[name="has_sizes"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_sizes').val('1');
-        } else {
-            $('input#has_sizes').val('0');
-        }
-    }); 
-
-    $('input[name="has_brands"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_brands').val('1');
-        } else {
-            $('input#has_brands').val('0');
-        }
-    }); 
-
-    $('input[name="has_manufacturers"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_manufacturers').val('1');
-        } else {
-            $('input#has_manufacturers').val('0');
-        }
-    }); 
-
-    $('input[name="has_frequencies"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_frequencies').val('1');
-        } else {
-            $('input#has_frequencies').val('0');
-        }
-    }); 
-
-    $('input[name="has_lenses"]').change(function () {
-        if ($(this).is(":checked")) {
-            $('input#has_lenses').val('1');
-        } else {
-            $('input#has_lenses').val('0');
-        }
-    }); 
 
     // Get Input File Name
     $('.custom-file input').change(function (e) {

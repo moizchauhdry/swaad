@@ -10,6 +10,7 @@ use App\Product;
 use App\Category;
 
 use Validator;
+use Image;
 
 class ProductController extends Controller
 {
@@ -45,34 +46,51 @@ class ProductController extends Controller
     {
         $rules = [
             'title' => 'required|string|max:255',
+            'title_gr' => 'required|string|max:255',
             'image_url' => 'required|image|mimes:jpeg,jpg,png',
             'category_id' => 'required',
             'price' => 'required|numeric|gt:0',
             'description' => 'required|string|max:5000',
+            'description_gr' => 'required|string|max:5000',
         ];
 
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput($request->all());
+            return Redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
         $data = [
             'title' => $request->input('title'),
+            'title_gr' => $request->input('title_gr'),
             'category_id' => $request->input('category_id'),
             'price' => $request->input('price'),
             'description' => $request->input('description'),
+            'description_gr' => $request->input('description_gr'),
         ];
 
         $product = Product::create($data);
 
-        $productImagesDirectory = 'productImages';
-        if ($request->hasFile('image_url')) {
-            if(!Storage::exists($productImagesDirectory)){
-                Storage::makeDirectory($productImagesDirectory);
+        $productImageDirectory = 'productImages';
+
+        // PRODUCT SINGLE IMAGE
+        if($request->hasFile('image_url')) 
+        {
+            if (!Storage::exists($productImageDirectory . '/' . $product->id)) {
+                Storage::makeDirectory($productImageDirectory . '/' . $product->id);
             }
-            $imageUrl = Storage::putFile($productImagesDirectory , new File($request->file('image_url')));
-            $product->update(['image_url'=> $imageUrl]);
+
+            $fileNameWithExtension = $request->file('image_url')->getClientOriginalName();
+            $filename = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('image_url')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            
+            $imagePath = storage_path('app/public/'.$productImageDirectory.'/'.$product->id.'/'.$fileNameToStore);
+            $imageRealPath = $productImageDirectory.'/'.$product->id.'/'.$fileNameToStore;
+
+            $image = Image::make($request->file('image_url')->getRealPath())->encode('jpg', 50);
+            $image->save($imagePath, 50, 'jpg');
+            $product->update(['image_url' => $imageRealPath]);
         }
     
         return redirect()->route('products.index')->with('success', 'Record Added Successfully.');
@@ -96,8 +114,10 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $product = Product::findOrFail($id);
+        $categories = Category::where('status', '1')->orderBy('title','DESC')->get();
+        return view('admin.products.edit',compact('product','categories'));
     }
 
     /**
@@ -109,7 +129,56 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'title' => 'required|string|max:255',
+            'title_gr' => 'required|string|max:255',
+            'image_url' => 'image|mimes:jpeg,jpg,png',
+            'category_id' => 'required',
+            'price' => 'required|numeric|gt:0',
+            'description' => 'required|string|max:5000',
+            'description_gr' => 'required|string|max:5000',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $data = [
+            'title' => $request->input('title'),
+            'title_gr' => $request->input('title_gr'),
+            'category_id' => $request->input('category_id'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'description_gr' => $request->input('description_gr'),
+        ];
+        $product = Product::findOrFail($id);
+        $product->update($data);
+
+        $productImageDirectory = 'productImages';
+
+        // PRODUCT SINGLE IMAGE
+        if($request->hasFile('image_url')) 
+        {
+            if (!Storage::exists($productImageDirectory . '/' . $product->id)) {
+                Storage::makeDirectory($productImageDirectory . '/' . $product->id);
+            }
+
+            $fileNameWithExtension = $request->file('image_url')->getClientOriginalName();
+            $filename = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('image_url')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            
+            $imagePath = storage_path('app/public/'.$productImageDirectory.'/'.$product->id.'/'.$fileNameToStore);
+            $imageRealPath = $productImageDirectory.'/'.$product->id.'/'.$fileNameToStore;
+
+            $image = Image::make($request->file('image_url')->getRealPath())->encode('jpg', 50);
+            $image->save($imagePath, 50, 'jpg');
+            $product->update(['image_url' => $imageRealPath]);
+        }
+    
+        return redirect()->route('products.index')->with('success', 'Record Updated Successfully.');
     }
 
     /**

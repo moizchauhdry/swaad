@@ -49,21 +49,22 @@
                                     $ {{ $product->price * $product->quantity}}
                                 </td>
 
-                                {{-- <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td> --}}
-                                <td>
+                                <td class="product-remove"><a href="#"
+                                        onclick="removeFromCart('{{$product->id}}')"><span
+                                            class="ion-ios-close"></span></a></td>
+                                {{-- <td>
                                     <form action="{{route('cart.destroy',$product->id)}}" method="POST">
-                                        @csrf
-                                        {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">
-                                            <h6 class="text-white">X</h6>
-                                        </button>
-                                    </form>
-                                </td>
+                                @csrf
+                                {{method_field('DELETE')}}
+                                <button type="button" class="btn btn-light" style="">Light</button>
+                                </form>
+                                </td> --}}
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="6"> Your Cart is Empty !</td>
+                                <td colspan=" 6"> Your Cart is Empty !
+                                </td>
                             </tr>
                             @endif
 
@@ -75,57 +76,23 @@
         <div class="row justify-content-end">
             <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                 <div class="cart-total mb-3">
-                    <h3>Coupon Code</h3>
-                    <p>Enter your coupon code if you have one</p>
-                    <form action="#" class="info">
-                        <div class="form-group">
-                            <label for="">Coupon code</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                    </form>
-                </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
-            </div>
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Estimate shipping and tax</h3>
-                    <p>Enter your destination to get a shipping estimate</p>
-                    <form action="#" class="info">
-                        <div class="form-group">
-                            <label for="">Country</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">State/Province</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Zip/Postal Code</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                    </form>
-                </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
-            </div>
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span>$20.60</span>
+                        <span> € {{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
                     </p>
                     <p class="d-flex">
                         <span>Delivery</span>
-                        <span>$0.00</span>
+                        <span>€ 0.00</span>
                     </p>
                     <p class="d-flex">
                         <span>Discount</span>
-                        <span>$3.00</span>
+                        <span>€ 0.00</span>
                     </p>
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span>$17.60</span>
+                        <span>€ {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
                     </p>
                 </div>
                 <p><a href="{{route('checkout')}}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
@@ -134,4 +101,22 @@
     </div>
 </section>
 
+@endsection
+
+@section('scripts')
+<script>
+    function removeFromCart(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.destroy')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                location.reload();
+            }
+        });
+    }
+</script>
 @endsection

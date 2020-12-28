@@ -17,9 +17,11 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('title')->nullable();
+            $table->string('title_gr')->nullable();
             $table->string('image_url')->nullable();
             $table->double('price')->nullable();
             $table->text('description')->nullable();
+            $table->text('description_gr')->nullable();
             $table->boolean('status')->default(TRUE);
             $table->integer('view_count')->default(0);
             $table->timestamps();

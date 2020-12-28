@@ -28,7 +28,7 @@ class ProductController extends Controller
 
     public function getPopularProducts(Request $request)
     {
-        $popularProducts = Product::orderBy('view_count','DESC')
+        $popularProducts = Product::orderBy('view_count', 'DESC')
             ->take(24)
             ->get();
 
@@ -52,6 +52,7 @@ class ProductController extends Controller
             return response()->json([
                 'status' => $this->responseConstants['STATUS_ERROR'],
                 'message' => $this->responseConstants['INVALID_PARAMETERS'],
+                'error' => $validator->errors()
             ]);
         }
 
@@ -60,7 +61,7 @@ class ProductController extends Controller
             $offset = $request->get($this->generalConstants['KEY_COUNT']);
         }
 
-        $categoryProducts = Product::where('category_id',$request->get($this->categoryConstants['KEY_CATEGORY_ID']))
+        $categoryProducts = Product::where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
             ->skip($offset)
             ->take($this->recordsPerPage)
             ->get();
@@ -79,5 +80,38 @@ class ProductController extends Controller
             'product_count' => count($categoryProducts),
         ]);
 
+    }
+
+    public function addViewCount(Request $request)
+    {
+        $rules = [
+            $this->productConstants['KEY_PRODUCT_ID'] => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => $this->responseConstants['INVALID_PARAMETERS'],
+                'error' => $validator->errors()
+            ]);
+        }
+
+        $product = Product::find($request->get($this->productConstants['KEY_PRODUCT_ID']));
+
+        if ($product == null) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => "No Product Found",
+            ]);
+        }
+        $product->increment('view_count');
+
+        return response()->json([
+            'status' => $this->responseConstants['STATUS_SUCCESS'],
+            'message' => 'Success',
+            'products' => $product,
+        ]);
     }
 }

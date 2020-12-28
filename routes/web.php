@@ -4,20 +4,44 @@ use Illuminate\Support\Facades\Route;
 
 /**
  *****************************************************************************
- ************************** FRONTEND ROUTES *******************************
+ ************************** FRONTEND ROUTES **********************************
  *****************************************************************************
 */
 
+Route::group(['prefix'=>'user'],function() {
+    Route::post('/login','Frontend\FrontendController@login')->name('user.login');
+    Route::get('/logout','Frontend\FrontendController@logout')->name('user.logout');
+    Route::post('/register','Frontend\FrontendController@register')->name('user.register.store');
+});
+
 Route::get('/', 'Frontend\FrontendController@index')->name('index');
+
 Route::post('/addToCart', 'Frontend\FrontendController@addToCart')->name('addToCart');
 Route::get('/add-to-cart', 'Frontend\FrontendController@viewCart')->name('viewCart');
-
 Route::get('/cart', 'Frontend\CartController@index')->name('cart.index');
 Route::post('/cart/store', 'Frontend\CartController@store')->name('cart.store');
-Route::delete('/cart/destroy/{id}','Frontend\CartController@destroy')->name('cart.destroy');
+// Route::delete('/cart/destroy/{id}','Frontend\CartController@destroy')->name('cart.destroy');
+Route::post('/cart/destroy','Frontend\CartController@destroy')->name('cart.destroy');
+Route::post('/cart/decrement','Frontend\CartController@decrement')->name('cart.decrement');
+Route::post('/cart/increment','Frontend\CartController@increment')->name('cart.increment');
 
-Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
+Route::group(['middleware' => ['frontend']],function(){
+    Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
+    Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
 
+    Route::group(['prefix'=>'user'],function() {
+        Route::get('/dashboard','Frontend\UserController@dashboard')->name('user.dashboard');
+    });
+});
+
+Route::get('/categories', 'Frontend\FrontendController@categories')->name('categories');
+Route::get('/getProductsByCategory/{id}', 'Frontend\FrontendController@getProductsByCategory')->name('getProductsByCategory');
+
+Route::get('/products', 'Frontend\FrontendController@products')->name('products');
+Route::get('/products/detail/{id}', 'Frontend\FrontendController@productDetail')->name('productDetail');
+
+Route::get('/reservation', 'Frontend\FrontendController@reservation')->name('reservation');
+Route::post('/reservation/store', 'Frontend\FrontendController@storeReservation')->name('reservation.store');
 
 
 /**
@@ -88,6 +112,13 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                         Route::post('/store', 'ProductController@store')->name('products.store');
                         Route::get('/edit/{id}', 'ProductController@edit')->name('products.edit');
                         Route::post('/update/{id}', 'ProductController@update')->name('products.update');
+                    });
+                });
+
+                Route::group(['middleware' => ['permission:manage-orders']],function(){
+                    Route::group(['prefix' => 'orders'],function(){
+                        Route::get('/', 'OrderController@index')->name('orders.index');
+                        Route::get('/detail{id}', 'OrderController@detail')->name('orders.detail');
                     });
                 });
 

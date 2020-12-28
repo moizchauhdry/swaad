@@ -37,6 +37,7 @@
                                 <tr>
                                     <th>Sr #</th>
                                     <th>Title</th>
+                                    <th>Title (gr)</th>
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -48,6 +49,7 @@
                                 <tr>
                                     <td>{{$count ++}}</td>
                                     <td>{{$category->title}}</td>
+                                    <td>{{$category->title_gr}}</td>
                                     <td>
                                         @if ($category->image_url != NULL && Storage::exists($category->image_url))
                                         <img src="{{asset('storage/app/public/'.$category->image_url)}}" id="image"
