@@ -33,7 +33,7 @@ class ProductController extends Controller
                 ->take(24)
                 ->get();
         } elseif ($request->lan_type == 2) {
-            $popularProducts = Product::select('category_id', 'title_gr', 'image_url', 'price', 'description_gr', 'status', 'view_count')->orderBy('view_count', 'DESC')
+            $popularProducts = Product::select('category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count')->orderBy('view_count', 'DESC')
                 ->take(24)
                 ->get();
         } else {
@@ -84,7 +84,7 @@ class ProductController extends Controller
                 ]);
             }
         }elseif ($request->lan_type == 2){
-            $categoryProducts = Product::select('category_id', 'title_gr', 'image_url', 'price', 'description_gr', 'status', 'view_count')->where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
+            $categoryProducts = Product::select('category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count')->where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
                 ->skip($offset)
                 ->take($this->recordsPerPage)
                 ->get();
