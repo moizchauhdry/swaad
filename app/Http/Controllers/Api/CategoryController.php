@@ -31,7 +31,7 @@ class CategoryController extends Controller
             $response['message'] = 'Success';
             return response()->json($response);
         } elseif ($request->lan_type == 2) {
-            $categories = Category::select('title_gr', 'slug', 'image_url', 'status')->where('status', 1)->orderBy('id', 'DESC')->get();
+            $categories = Category::select('title_gr as title', 'slug', 'image_url', 'status')->where('status', 1)->orderBy('id', 'DESC')->get();
             $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
             $response['categories'] = $categories;
             $response['message'] = 'Success';

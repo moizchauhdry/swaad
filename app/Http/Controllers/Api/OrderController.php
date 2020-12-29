@@ -167,6 +167,7 @@ class OrderController extends Controller
         $response['orders'] = $orders;
         return response()->json($response);
     }
+
     public function orderDetails(Request $request)
     {
         $response = [];
