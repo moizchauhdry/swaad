@@ -160,8 +160,20 @@ class OrderController extends Controller
     public function getMyOrders(Request $request)
     {
         $response = [];
+        $rules = [
+            $this->orderConstants['KEY_STATUS'] => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => $this->responseConstants['STATUS_ERROR'],
+                'message' => $this->responseConstants['INVALID_PARAMETERS'],
+                'errors' => $validator->errors()
+            ]);
+        }
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
-        $orders = Order::where('user_id', $user->id)->get();
+        $orders = Order::where(['user_id'=> $user->id,'order_status'=> $request->get($this->orderConstants['KEY_STATUS'])])->get();
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['message'] = 'Success';
         $response['orders'] = $orders;
