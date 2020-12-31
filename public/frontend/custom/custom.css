@@ -41,3 +41,9 @@
 .py-1 {
     padding-top: 0.6rem !important;
 }
+
+.status {
+    width: 100% !important;
+    text-align: center;
+    opacity: 0.8;
+}

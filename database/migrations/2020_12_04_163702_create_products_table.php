@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->text('description_gr')->nullable();
             $table->boolean('status')->default(TRUE);
             $table->integer('view_count')->default(0);
+            $table->integer('spice_level')->default(0);
             $table->timestamps();
         });
     }

@@ -20,7 +20,6 @@ Route::post('/addToCart', 'Frontend\FrontendController@addToCart')->name('addToC
 Route::get('/add-to-cart', 'Frontend\FrontendController@viewCart')->name('viewCart');
 Route::get('/cart', 'Frontend\CartController@index')->name('cart.index');
 Route::post('/cart/store', 'Frontend\CartController@store')->name('cart.store');
-// Route::delete('/cart/destroy/{id}','Frontend\CartController@destroy')->name('cart.destroy');
 Route::post('/cart/destroy','Frontend\CartController@destroy')->name('cart.destroy');
 Route::post('/cart/decrement','Frontend\CartController@decrement')->name('cart.decrement');
 Route::post('/cart/increment','Frontend\CartController@increment')->name('cart.increment');
@@ -42,6 +41,9 @@ Route::get('/products/detail/{id}', 'Frontend\FrontendController@productDetail')
 
 Route::get('/reservation', 'Frontend\FrontendController@reservation')->name('reservation');
 Route::post('/reservation/store', 'Frontend\FrontendController@storeReservation')->name('reservation.store');
+
+Route::get('/contact', 'Frontend\FrontendController@contact')->name('contact');
+Route::post('/contact/store', 'Frontend\FrontendController@storeContact')->name('contact.store');
 
 
 /**

@@ -47,7 +47,7 @@
                                     <input type="text" name="title_gr" class="form-control"
                                         placeholder="Enter Title (gr)" value="{{$product->title_gr}}" required>
                                 </div>
-                                <div class="form-group col-md-6 mb-4">
+                                <div class="form-group col-md-4 mb-4">
                                     <label>Image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <img src="{{ asset('storage/app/public/'.$product->image_url) }}" id="image"
-                                        class="w-25 mt-2" />
+                                        class="w-50 mt-2" />
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Category <span class="required-star">*</span></label>
@@ -76,6 +76,16 @@
                                     <label>Price <span class="required-star">*</span></label>
                                     <input type="number" name="price" class="form-control" placeholder="Enter Price"
                                         min="0" value="{{$product->price}}" required>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Spice Level <span class="required-star">*</span></label>
+                                    <select name="spice_level" id="spice_level" class="form-control custom-select"
+                                        required>
+                                        <option {{ ($product->spice_level == "0"? "selected":"") }} value="0">0</option>
+                                        <option {{ ($product->spice_level == "1"? "selected":"") }} value="1">1</option>
+                                        <option {{ ($product->spice_level == "2"? "selected":"") }} value="2">2</option>
+                                        <option {{ ($product->spice_level == "3"? "selected":"") }} value="3">3</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">

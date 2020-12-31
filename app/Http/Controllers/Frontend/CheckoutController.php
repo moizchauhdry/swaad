@@ -17,7 +17,7 @@ class CheckoutController extends Controller
         if ($cart->count() > 0) {
             return view ('frontend.pages.checkout');
         } else {
-            return redirect()->back()->with('ERROR','Cart is Empty!');
+            return back();
         }
         
     }

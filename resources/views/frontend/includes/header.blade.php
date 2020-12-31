@@ -55,18 +55,17 @@
                         aria-haspopup="true" aria-expanded="false">Menu</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         @foreach (App\Category::where('status','1')->get() as $category)
-                        <a class="dropdown-item" href="#">{{$category->title}}</a>
+                        <a class="dropdown-item"
+                            href="{{route('getProductsByCategory',$category->id)}}">{{$category->title}}</a>
                         @endforeach
                     </div>
                 </li>
-                <li class="nav-item"><a href="{{route('reservation')}}" class="nav-link">Reservation</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Contact</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">More</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="#">Birthday</a>
-                        <a class="dropdown-item" href="#">Anniversary</a>
+                        <a class="dropdown-item" href="{{route('reservation')}}">Reservation</a>
                         <a class="dropdown-item" href="#">Privacy Policy</a>
                         <a class="dropdown-item" href="#">About Us</a>
                     </div>

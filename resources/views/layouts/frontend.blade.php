@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr1.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr2.css')}}">
 
+    <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
+
     @yield('styles')
 
     <style>
@@ -57,7 +59,8 @@
 
     @include('frontend.includes.footer')
 
-    <script src="{{asset('public/frontend/js/jquery.min.js')}}"></script>
+    <script src=" {{asset('public/frontend/js/jquery.min.js')}}">
+    </script>
     <script src="{{asset('public/frontend/js/jquery-migrate-3.0.1.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/popper.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>

@@ -50,6 +50,7 @@ class ProductController extends Controller
             'image_url' => 'required|image|mimes:jpeg,jpg,png',
             'category_id' => 'required',
             'price' => 'required|numeric|gt:0',
+            'spice_level' => 'required|numeric',
             'description' => 'required|string|max:5000',
             'description_gr' => 'required|string|max:5000',
         ];
@@ -65,6 +66,7 @@ class ProductController extends Controller
             'title_gr' => $request->input('title_gr'),
             'category_id' => $request->input('category_id'),
             'price' => $request->input('price'),
+            'spice_level' => $request->input('spice_level'),
             'description' => $request->input('description'),
             'description_gr' => $request->input('description_gr'),
         ];
@@ -135,6 +137,7 @@ class ProductController extends Controller
             'image_url' => 'image|mimes:jpeg,jpg,png',
             'category_id' => 'required',
             'price' => 'required|numeric|gt:0',
+            'spice_level' => 'required|numeric',
             'description' => 'required|string|max:5000',
             'description_gr' => 'required|string|max:5000',
         ];
@@ -150,6 +153,7 @@ class ProductController extends Controller
             'title_gr' => $request->input('title_gr'),
             'category_id' => $request->input('category_id'),
             'price' => $request->input('price'),
+            'spice_level' => $request->input('spice_level'),
             'description' => $request->input('description'),
             'description_gr' => $request->input('description_gr'),
         ];

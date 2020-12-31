@@ -8,6 +8,7 @@ use App\Category;
 use App\Product;
 use App\User;
 use App\Reservation;
+use App\Contact;
 
 use Validator;
 use Session;
@@ -22,14 +23,14 @@ class FrontendController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
-                return redirect()->route('index');
+                return redirect()->route('checkout');
             }
             else{
                 return redirect()->back()->with('ERROR','Invalid Credentials!');
             }
         }
         if(Auth::guard('frontend')->check()){
-            return redirect()->route('index');
+            return redirect()->route('checkout');
         }
     }
 
@@ -155,7 +156,39 @@ class FrontendController extends Controller
 
         $rsv = Reservation::create($data);
 
-        return redirect()->back()->with('SUCCESS','RESERVATION SUBMIT SUCCESSFULLY.');
+        return redirect()->back()->with('SUCCESS','Reservation Submitted Successfully.');
+
+    }
+
+    public function contact() {
+        return view ('frontend.pages.contact');
+    }
+
+    public function storeContact(Request $request) {
+        
+        $rules = [
+            'ct_name' => 'required|max:255',
+            'ct_email' => 'required|email|max:255',
+            'ct_subject' => 'required|max:255',
+            'ct_message' => 'required|max:255',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $data = [
+            'name' => $request->input('ct_name'),
+            'email' => $request->input('ct_email'),
+            'subject' => $request->input('ct_subject'),
+            'message' => $request->input('ct_message'),
+        ];
+
+        $contact = Contact::create($data);
+                
+        return redirect()->back()->with('SUCCESS','Thankyou for getting in touch!');
 
     }
 }

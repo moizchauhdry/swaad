@@ -25,7 +25,9 @@
                         <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
                             style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="#">{{$category->title}}</a></h2>
+                                <h2 class="mb-0"><a
+                                        href="{{route('getProductsByCategory',$category->id)}}">{{$category->title}}</a>
+                                </h2>
                             </div>
                         </div>
                         @endforeach
@@ -33,7 +35,9 @@
                         <div class="category-wrap ftco-animate img d-flex align-items-end"
                             style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="#">{{$category->title}}</a></h2>
+                                <h2 class="mb-0"><a
+                                        href="{{route('getProductsByCategory',$category->id)}}">{{$category->title}}</a>
+                                </h2>
                             </div>
                         </div>
                         @endforeach
@@ -84,6 +88,7 @@
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
                         <h3><a href="{{route('productDetail',$product->id)}}">{{$product->title}}</a></h3>
+                        @include('frontend.pages.partials._spice')
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price">
@@ -95,31 +100,7 @@
                         </div>
                         <div class="bottom-area d-flex px-3">
                             <div class="m-auto d-flex">
-                                @if (Cart::get($product->id))
-                                <div class="btn-group" role="group" aria-label="Basic example"
-                                    id="success_{{$product->id}}">
-                                    <button type="button" class="btn btn-primary btn-sm" id="btn-decrement"
-                                        onclick="cartDecrement('{{$product->id}}')">-</button>
-                                    <button type="button" class="btn btn-primary btn-sm" id="qty_{{$product->id}}">
-                                        {{Cart::get($product->id)->quantity}}
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-sm" id="btn-increment"
-                                        onclick="cartIncrement('{{$product->id}}')">+</button>
-                                </div>
-                                @else
-                                <button onclick="addToCart('{{$product->id}}')" id="add_to_cart_{{$product->id}}"
-                                    class="btn btn-primary btn-sm">
-                                    Add to cart</button>
-                                <div class="btn-group hidden" role="group" aria-label="Basic example"
-                                    id="success_{{$product->id}}">
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                        onclick="cartDecrement('{{$product->id}}')">-</button>
-                                    <button type="button" class="btn btn-primary btn-sm" id="qty_{{$product->id}}">
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                        onclick="cartIncrement('{{$product->id}}')">+</button>
-                                </div>
-                                @endif
+                                @include('frontend.pages.partials._addToCart')
                             </div>
                         </div>
                     </div>

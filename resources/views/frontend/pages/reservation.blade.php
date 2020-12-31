@@ -13,15 +13,6 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 offset-md-2 mt-4 text-center">
-            @if(session()->has('SUCCESS'))
-            <div class="alert alert-success">
-                {{ session()->get('SUCCESS') }}
-            </div>
-            @endif
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-8 offset-md-2 mt-4 mb-4">
             <form action="{{route('reservation.store')}}" method="POST" enctype="multipart/form-data"> @csrf
                 <div class="row">

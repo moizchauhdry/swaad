@@ -46,7 +46,7 @@
                                     <input type="text" name="title_gr" class="form-control"
                                         placeholder="Enter Title (gr)" required>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label>Image <span class="required-star">*</span></label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -55,7 +55,7 @@
                                             <label class="custom-file-label">Choose file</label>
                                         </div>
                                     </div>
-                                    <img src="" id="image" class="hidden w-25 mt-2" />
+                                    <img src="" id="image" class="hidden w-50 mt-2" />
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Category <span class="required-star">*</span></label>
@@ -71,6 +71,16 @@
                                     <label>Price <span class="required-star">*</span></label>
                                     <input type="number" name="price" class="form-control" placeholder="Enter Price"
                                         min="0" required>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Spice Level <span class="required-star">*</span></label>
+                                    <select name="spice_level" id="spice_level" class="form-control custom-select"
+                                        required>
+                                        <option value="0" selected>0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
