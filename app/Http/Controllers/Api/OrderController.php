@@ -167,6 +167,7 @@ class OrderController extends Controller
         $response['orders'] = $orders;
         return response()->json($response);
     }
+
     public function orderDetails(Request $request)
     {
         $response = [];
@@ -183,7 +184,7 @@ class OrderController extends Controller
             ]);
         }
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
-        $orderDetails = Order::where(['id'=> $request->get($this->orderConstants['KEY_ORDER_ID']),'user_id'=>$user->id])->with('orderDetails','user')->first();
+        $orderDetails = Order::where(['id' => $request->get($this->orderConstants['KEY_ORDER_ID']), 'user_id' => $user->id])->with('orderDetails', 'user')->first();
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['message'] = 'Success';
         $response['orderDetails'] = $orderDetails;
