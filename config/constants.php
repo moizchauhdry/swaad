@@ -66,6 +66,7 @@ return [
     ],
     'ORDER_CONSTANTS' => [
         'KEY_ORDER_ID' => 'order_id',
+        'KEY_STATUS' => 'status',
         'KEY_GROSS_TOTAL' => 'gross_total',
         'KEY_NET_TOTAL' => 'net_total',
         'KEY_DELIVERY_TIME' => 'delivery_time',
