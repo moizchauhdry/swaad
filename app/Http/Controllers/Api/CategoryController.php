@@ -24,13 +24,13 @@ class CategoryController extends Controller
     public function allCategories(Request $request)
     {
         $response = [];
-        if ($request->lan_type == 1) {
+        if ($request->lan_type == 0) {
             $categories = Category::select('id','title', 'slug', 'image_url', 'status')->where('status', 1)->orderBy('id', 'DESC')->get();
             $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
             $response['categories'] = $categories;
             $response['message'] = 'Success';
             return response()->json($response);
-        } elseif ($request->lan_type == 2) {
+        } elseif ($request->lan_type == 1) {
             $categories = Category::select('id','title_gr as title', 'slug', 'image_url', 'status')->where('status', 1)->orderBy('id', 'DESC')->get();
             $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
             $response['categories'] = $categories;
