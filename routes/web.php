@@ -34,7 +34,9 @@ Route::group(['middleware' => ['frontend']],function(){
     Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
 
     Route::group(['prefix'=>'user'],function() {
-        Route::get('/dashboard','Frontend\UserController@dashboard')->name('user.dashboard');
+        Route::get('/profile','Frontend\UserController@profile')->name('user.profile');
+        Route::get('/orders','Frontend\UserController@orders')->name('user.orders');
+        Route::post('/getOrdersByStatus','Frontend\UserController@getOrdersByStatus')->name('getOrdersByStatus');
     });
 });
 

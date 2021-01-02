@@ -45,12 +45,9 @@ class CheckoutController extends Controller
         }
 
         Cart::clear();
+       
+        // SIX PAYMENT METHOD
 
-        return redirect()->route('index')->with('SUCCESS','Your Order Placed Successfully!');
-
-    }
-
-    public function sixPayment() {
         $username = 'API_255842_89186473';
         $password = 'Swaad_001Swaad_001';
         // $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
@@ -155,16 +152,22 @@ class CheckoutController extends Controller
             //Close connection!
             curl_close($curl);
             //$response, again, is a multi-dimensional Array, containing the status-code ($response["status"]) and the API-response (if available) itself ($response["body"])
-            return $response;
+            dd($response);
+        $body = $response['body'];
+        $Redirect = $body['Redirect'];
+        $RedirectUrl = $Redirect['RedirectUrl'];
 
-        dd('FINAL STEP');
+        return redirect($RedirectUrl);
+
+        // return redirect()->route('index')->with('SUCCESS','Your Order Placed Successfully!');
+
     }
 
     public function success(Request $request) {
-        dd('success',$request);
+        dd('PAYMENT SUCCESS');
     }
 
     public function fail(Request $request) {
-        dd($request->all());
+        dd('PAYMENT FAIL. PLEASE TRY AGAIN LATER');
     }
 }
