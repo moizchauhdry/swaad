@@ -48,6 +48,15 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('/getHomeBanner', 'Api\BannerController@getHomeBanner');
         Route::post('/getReservationBanner', 'Api\BannerController@getReservationBanner');
 
+
+        //// Review
+        Route::post('/addReview', 'Api\ReviewController@addReview');
+        Route::post('/userReviewsOnPrducts', 'Api\ReviewController@userReviewsOnPrducts');
+        Route::post('/userGivenReviewsOnPrducts', 'Api\ReviewController@userGivenReviewsOnPrducts');
+
+        ///PostCode
+        Route::post('/checkPostalCode', 'Api\PostalCodeController@checkPostalCode');
+
     });
 
 });

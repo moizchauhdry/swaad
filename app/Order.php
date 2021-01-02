@@ -2,13 +2,15 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $appends =['created_at_format'];
     protected $fillable = [
         'user_id',
-        'tracking_id', 
+        'tracking_id',
         'gross_total',
         'order_tip',
         'delivery_time',
@@ -30,5 +32,9 @@ class Order extends Model
     public function orderDetails()
     {
         return $this->hasMany('App\OrderDetail');
+    }
+
+    public function getCreatedAtFormatAttribute(){
+        return Carbon::parse($this->created_at)->format('d F,Y H:i:s');
     }
 }

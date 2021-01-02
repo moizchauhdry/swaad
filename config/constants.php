@@ -78,6 +78,17 @@ return [
         'KEY_ORDER_STATUS' => 'order_status',
         'KEY_PRODUCT_ID' => 'product_id',
         'KEY_PRODUCT_QUANTITY' => 'product_quantity',
+        'KEY_IP_ADDRESS' => 'ip_address',
+        'KEY_ORDER_NOTES' => 'order_notes',
+    ],
+    'REVIEW_CONSTANTS' => [
+        'KEY_PRODUCT_ID' => 'product_id',
+        'KEY_ORDER_ID' => 'order_id',
+        'KEY_RATING' => 'rating',
+        'KEY_COMMENT' => 'comment',
+    ],
+    'POSTCODE_CONSTANTS' => [
+        'KEY_POST_CODE' => 'postal_code',
     ],
 ];
 

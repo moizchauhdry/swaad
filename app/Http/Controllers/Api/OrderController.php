@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Banner;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\OrderDetail;
 use App\Product;
 use App\User;
 use Config;
+use Egulias\EmailValidator\EmailLexer;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
@@ -37,6 +39,9 @@ class OrderController extends Controller
             $this->orderConstants['KEY_COUPON_DISCOUNT_AMOUNT'] => 'nullable',
             $this->orderConstants['KEY_DELIVERY_TIME'] => 'required',
             $this->orderConstants['KEY_DELIVERY_DATE'] => 'required',
+            $this->orderConstants['KEY_PAYMENT_METHOD'] => 'required',
+            $this->orderConstants['KEY_ORDER_NOTES'] => 'nullable',
+            $this->orderConstants['KEY_IP_ADDRESS'] => 'required',
             $this->orderConstants['KEY_PRODUCTS'] => 'required|array',
             $this->orderConstants['KEY_PRODUCTS'] . '.*.' . $this->orderConstants['KEY_PRODUCT_ID'] => 'required',
             $this->orderConstants['KEY_PRODUCTS'] . '.*.' . $this->orderConstants['KEY_PRODUCT_QUANTITY'] => 'required',
@@ -78,6 +83,7 @@ class OrderController extends Controller
             'gross_total' => $request->get($this->orderConstants['KEY_GROSS_TOTAL']),
             'delivery_time' => $request->get($this->orderConstants['KEY_DELIVERY_TIME']),
             'delivery_date' => $request->get($this->orderConstants['KEY_DELIVERY_DATE']),
+            'order_notes' => $request->get($this->orderConstants['KEY_ORDER_NOTES']),
         ];
 
         $orderData["user_id"] = $user->id;
@@ -166,7 +172,7 @@ class OrderController extends Controller
                 )
             ),
             'TerminalId' => env('PAYMENT_TERMINAL_ID'),
-            'PaymentMethods' => array("DIRECTDEBIT", "VISA"),
+            'PaymentMethods' => array("DIRECTDEBIT", "VISA", "MASTERCARD", "DINERS", "MAESTRO"),
             'Payment' => array(
                 'Amount' => array(
                     'Value' => (int)$order->net_total * 100,
@@ -174,11 +180,10 @@ class OrderController extends Controller
                 ),
                 'OrderId' => $order->id,
                 'PayerNote' => "A Note",
-                'Description' => "This order is submitted by order id : " . $order->id . "."
+                'Description' => $request->get($this->orderConstants['KEY_ORDER_NOTES'])
             ),
             'Payer' => array(
-//                'IpAddress' => $request->ip(),
-                'IpAddress' => "192.168.178.1",
+                'IpAddress' => $request->get($this->orderConstants['KEY_IP_ADDRESS']),
                 'LanguageCode' => "en"
             ),
             'ReturnUrls' => array(
@@ -195,73 +200,46 @@ class OrderController extends Controller
                 'MandatoryFields' => array("CITY", "COMPANY", "COUNTRY", "EMAIL", "FIRSTNAME", "LASTNAME", "PHONE", "SALUTATION", "STATE", "STREET", "ZIP")
             )
         );
-        //$username and $password for the http-Basic Authentication
-        //$url is the SaferpayURL eg. https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize
-        //$payload is a multidimensional array, that assembles the JSON structure. Example see above
 
-        //Set Options for CURL
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_HEADER, false);
-        //Return Response to Application
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        //Set Content-Headers to JSON
         curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json", "Accept: application/json; charset=utf-8"));
-        //Execute call via http-POST
         curl_setopt($curl, CURLOPT_POST, true);
-        //Set POST-Body
-        //convert DATA-Array into a JSON-Object
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
-        //WARNING!!!!!
-        //This option should NOT be "false", otherwise the connection is not secured
-        //You can turn it of if you're working on the test-system with no vital data
-        //PLEASE NOTE:
-        //Under Windows (using WAMP or XAMP) it is necessary to manually download and save the necessary SSL-Root certificates!
-        //To do so, please visit: http://curl.haxx.se/docs/caextract.html and Download the .pem-file
-        //Then save it to a folder where PHP has write privileges (e.g. the WAMP/XAMP-Folder itself)
-        //and then put the following line into your php.ini:
-        //curl.cainfo=c:\path\to\file\cacert.pem
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-        //HTTP-Basic Authentication for the Saferpay JSON-API.
-        //This will set the authentication header and encode the password & username in Base64 for you
-        curl_setopt($curl, CURLOPT_USERPWD, "".env('PAYMENT_USERNAME').":".env('PAYMENT_PASSWORD')."");
-        //CURL-Execute & catch response
+        curl_setopt($curl, CURLOPT_USERPWD, "" . env('PAYMENT_USERNAME') . ":" . env('PAYMENT_PASSWORD') . "");
         $jsonResponse = curl_exec($curl);
-        //Get HTTP-Status
-        //Abort if Status != 200
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($status != 200) {
-            //IF ERROR
-            //Get http-Body (if aplicable) from CURL-response
             $body = json_decode(curl_multi_getcontent($curl), true);
-            //Build array, containing the body (Response data, like Error-messages etc.) and the http-status-code
             $response = array(
                 "status" => $status . " <|> " . curl_error($curl),
                 "body" => $body
             );
         } else {
-            //IF OK
-            //Convert response into an Array
             $body = json_decode($jsonResponse, true);
-            //Build array, containing the body (Response-data) and the http-status-code
             $response1 = array(
                 "status" => $status,
                 "body" => $body
             );
         }
-        //IMPORTANT!!!
-        //Close connection!
         curl_close($curl);
-        //$response, again, is a multi-dimensional Array, containing the status-code ($response["status"]) and the API-response (if available) itself ($response["body"])
-
         $body = $response1['body'];
-        $Redirect = $body['Redirect'];
-        $RedirectUrl = $Redirect['RedirectUrl'];
+//        $Redirect = $body['Redirect'];
+        $RedirectUrl = $body['RedirectUrl'];
 
-        $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
-        $response['message'] = 'Order placed successfully.';
-        $response['RedirectUrl'] = $RedirectUrl;
-        return response()->json($response);
+        if ($request->get($this->orderConstants['KEY_PAYMENT_METHOD']) == 1) {
+            $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+            $response['message'] = 'Order placed successfully.';
+            $response['RedirectUrl'] = $RedirectUrl;
+            return response()->json($response);
+        } else {
+            $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+            $response['message'] = 'Order placed successfully.';
+            return response()->json($response);
+        }
     }
 
     public function getMyOrders(Request $request)
@@ -303,10 +281,12 @@ class OrderController extends Controller
             ]);
         }
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
-        $orderDetails = Order::where(['id' => $request->get($this->orderConstants['KEY_ORDER_ID']), 'user_id' => $user->id])->with('orderDetails', 'user')->first();
+        $orderDetails = Order::where(['id' => $request->get($this->orderConstants['KEY_ORDER_ID']), 'user_id' => $user->id])->with('orderDetails', 'orderDetails.product', 'user')->first();
+        $bannerImage = $banners = Banner::where(['status' => 1, 'type' => 1])->inRandomOrder()->pluck('image_url')->first();
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['message'] = 'Success';
         $response['orderDetails'] = $orderDetails;
+        $response['bannerImage'] = $bannerImage;
         return response()->json($response);
     }
 }
