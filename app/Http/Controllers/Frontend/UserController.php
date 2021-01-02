@@ -5,11 +5,19 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
+use App\OrderDetail;
+use Auth;
 
 class UserController extends Controller
 {
     public function profile() {
-        return view ('frontend.users.profile');
+        $user = Auth::guard('frontend')->user();
+        return view ('frontend.users.profile',compact('user'));
+    }
+    public function updateProfile() {
+        $user = Auth::guard('frontend')->user();
+
+        return redirect()->back();
     }
     
     public function orders() {
@@ -19,13 +27,7 @@ class UserController extends Controller
     
     public function getOrdersByStatus(Request $request) {
 
-        $query = Order::orderBy('id','DESC');
-
-        if ($request->has('order_status') && !empty($request->order_status)) {
-            $query->where('order_status',$request->order_status);
-        }
-
-        $orders = $query->get();
+        $orders = Order::orderBy('id','DESC')->where('order_status',$request->order_status)->get();
 
         if (count($orders) > 0) {
             return view ('frontend.users._orders',compact('orders'));
@@ -40,6 +42,12 @@ class UserController extends Controller
 
     }
 
+    public function orderDetail($id) {
+        $order = Order::findOrFail($id);
+        $orderItems = OrderDetail::where('order_id', $id)->get();
+        $orderProductsCount = OrderDetail::where('order_id', $id)->get()->count();        
+        return view('frontend.users.orderDetail',compact('order','orderItems','orderProductsCount'));
+    }
 
     public function myReviews() {
         return view ('frontend.users.myReviews');

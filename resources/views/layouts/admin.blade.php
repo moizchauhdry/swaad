@@ -24,6 +24,7 @@
     <link rel="stylesheet"
         href="{{asset('public/dashboard/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('public/dashboard/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet"
@@ -90,8 +91,9 @@
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.colVis.min.js"></script>
 
     <!-- Select2 -->
-    <script src="{{asset('public/admin/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('public/dashboard/plugins/select2/js/select2.full.min.js')}}"></script>
 
+    <!-- Toggle -->
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
     <script>

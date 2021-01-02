@@ -119,7 +119,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'orders.create' || Route::currentRouteName() == 'orders.index'|| Route::currentRouteName() == 'orders.edit' ) ? 'menu-open' : ''}}">
                     <a href="#"
                         class="nav-link {{(Route::currentRouteName() == 'orders.create' || Route::currentRouteName() == 'orders.index' || Route::currentRouteName() == 'orders.edit' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-shopping-bag"></i>
+                        <i class="nav-icon fas fa-clipboard"></i>
                         <p>
                             Orders
                             <i class="right fas fa-angle-left"></i>
@@ -136,6 +136,68 @@
                     </ul>
                 </li>
                 @endif
+
+
+                @if (Auth::guard('admin')->user()->hasPermission('manage-banners'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'banners.create' || Route::currentRouteName() == 'banners.index'|| Route::currentRouteName() == 'banners.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'banners.create' || Route::currentRouteName() == 'banners.index' || Route::currentRouteName() == 'banners.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-image"></i>
+                        <p>
+                            Banners
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('banners.create')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'banners.create') ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Banner</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('banners.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'banners.index' || Route::currentRouteName() == 'banners.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Banners</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                @if (Auth::guard('admin')->user()->hasPermission('manage-codes'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'codes.create' || Route::currentRouteName() == 'codes.index'|| Route::currentRouteName() == 'codes.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'codes.create' || Route::currentRouteName() == 'codes.index' || Route::currentRouteName() == 'codes.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-image"></i>
+                        <p>
+                            Postal Codes
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('codes.create')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'codes.create') ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Postal Code</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('codes.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'codes.index' || Route::currentRouteName() == 'codes.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Postal Code</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
 
             </ul>
         </nav>

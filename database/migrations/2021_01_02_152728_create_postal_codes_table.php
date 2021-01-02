@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBannersTable extends Migration
+class CreatePostalCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBannersTable extends Migration
      */
     public function up()
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('postal_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('image_url')->nullable();
-            $table->string('type')->default(1); // 1 => Home || 2 => Reservation
-            $table->string('status')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->double('net_total')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateBannersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('postal_codes');
     }
 }

@@ -35,8 +35,10 @@ Route::group(['middleware' => ['frontend']],function(){
 
     Route::group(['prefix'=>'user'],function() {
         Route::get('/profile','Frontend\UserController@profile')->name('user.profile');
+        Route::post('/profile/update','Frontend\UserController@updateProfile')->name('updateProfile');
         Route::get('/orders','Frontend\UserController@orders')->name('user.orders');
         Route::post('/getOrdersByStatus','Frontend\UserController@getOrdersByStatus')->name('getOrdersByStatus');
+        Route::get('/order-detail/{id}','Frontend\UserController@orderDetail')->name('orderDetail');
     });
 });
 
@@ -128,6 +130,28 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     Route::group(['prefix' => 'orders'],function(){
                         Route::get('/', 'OrderController@index')->name('orders.index');
                         Route::get('/detail{id}', 'OrderController@detail')->name('orders.detail');
+                    });
+                });
+
+                Route::group(['middleware' => ['permission:manage-banners']], function () {
+                    Route::group(['prefix' => 'banner'], function () {
+                        Route::get('/', 'BannerController@index')->name('banners.index');
+                        Route::get('/create', 'BannerController@create')->name('banners.create');
+                        Route::post('/store', 'BannerController@store')->name('banners.store');
+                        Route::get('/edit/{id}', 'BannerController@edit')->name('banners.edit');
+                        Route::post('/update/{id}', 'BannerController@update')->name('banners.update');
+                        Route::post('/delete', 'BannerController@destroy')->name('banners.delete');
+                    });
+                });
+
+                Route::group(['middleware' => ['permission:manage-codes']], function () {
+                    Route::group(['prefix' => 'postal-code'], function () {
+                        Route::get('/', 'PostalCodeController@index')->name('codes.index');
+                        Route::get('/create', 'PostalCodeController@create')->name('codes.create');
+                        Route::post('/store', 'PostalCodeController@store')->name('codes.store');
+                        Route::get('/edit/{id}', 'PostalCodeController@edit')->name('codes.edit');
+                        Route::post('/update/{id}', 'PostalCodeController@update')->name('codes.update');
+                        Route::get('/delete', 'PostalCodeController@destroy')->name('codes.delete');
                     });
                 });
 

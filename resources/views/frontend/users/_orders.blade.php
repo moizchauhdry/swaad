@@ -1,22 +1,18 @@
-<table id="orderTable" class="table table-bordered table-striped">
-    <thead>
+<table id="orderTable" class="table table-bordered table-stripped">
+    <thead class="bg-primary text-white">
         <tr>
-            <th>#</th>
-            <th>Order Id</th>
-            <th>User Name</th>
+            <th>Order #</th>
+            <th>Customer Name</th>
             <th>Order Date</th>
             <th>Order Status</th>
             <th>Net Total</th>
-            <th>Payment Method</th>
             <th>Payment Status</th>
-            <th>Action</th>
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
-        <?php $count = 1; ?>
         @foreach ($orders as $order)
         <tr>
-            <td>{{$count ++}}</td>
             <td> {{str_pad($order->id, 3, '0', STR_PAD_LEFT)}}</td>
             <td>{{$order->user->name}}</td>
             <td>{{date('d-m-Y', strtotime($order->created_at))}}</td>
@@ -30,7 +26,6 @@
                 @endif
             </td>
             <td>€ {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
-            <td>{{isset($order->payment_method) ? $order->payment_method : 'Unknown'}}</td>
             <td>
                 @if ($order->payment_status == 0) Pending
                 @elseif ($order->payment_status == 1) Completed
@@ -38,7 +33,7 @@
                 @endif
             </td>
             <td>
-                <a href="{{route('orders.detail',$order->id)}}" class="btn btn-primary btn-sm">
+                <a href="{{route('orderDetail',$order->id)}}" class="btn btn-primary btn-sm">
                     <i class="fas fa-eye mr-1" aria-hidden="true"></i> View
                 </a>
             </td>
