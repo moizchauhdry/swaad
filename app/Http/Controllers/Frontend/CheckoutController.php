@@ -50,14 +50,14 @@ class CheckoutController extends Controller
 
         $username = 'API_255842_89186473';
         $password = 'Swaad_001Swaad_001';
-        // $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
-        $url = 'https://test.saferpay.com/api/Payment/v1/Transaction/Initialize';
+        $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
+        // $url = 'https://test.saferpay.com/api/Payment/v1/Transaction/Initialize';
 
         //This is an EXAMPLE of the payload-Array.
         $payload = array(
             'RequestHeader' => array(
             'SpecVersion' => "1.7",
-            'CustomerId' => "255842",
+            'CustomerId' => "293302",
             'RequestId' => "ABC",
             'RetryIndicator' => 0,
             'ClientInfo' => array(
@@ -65,11 +65,11 @@ class CheckoutController extends Controller
             'OsInfo' => "Windows Server 2013"
             )
             ),
-            'TerminalId' => "17729405",
+            'TerminalId' => "17731689",
             'PaymentMethods' => array("DIRECTDEBIT","VISA"),
             'Payment' => array(
             'Amount' => array(
-            'Value' => (int) "100",
+            'Value' => (int) "1",
             'CurrencyCode' => "CHF"
             ),
             'OrderId' => "123test",
@@ -123,7 +123,9 @@ class CheckoutController extends Controller
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
             //HTTP-Basic Authentication for the Saferpay JSON-API.
             //This will set the authentication header and encode the password & username in Base64 for you
-            curl_setopt($curl, CURLOPT_USERPWD, 'API_255842_89186473:JsonApiPwd1_AFwhe2bq');
+            // curl_setopt($curl, CURLOPT_USERPWD, 'API_293302_04579351:Swaad_001Swaad_001');
+            curl_setopt($curl, CURLOPT_USERPWD, "".env('PAYMENT_USERNAME').":".env('PAYMENT_PASSWORD')."");
+
             //CURL-Execute & catch response
             $jsonResponse = curl_exec($curl);
             //Get HTTP-Status
@@ -152,12 +154,15 @@ class CheckoutController extends Controller
             //Close connection!
             curl_close($curl);
             //$response, again, is a multi-dimensional Array, containing the status-code ($response["status"]) and the API-response (if available) itself ($response["body"])
+            // dd($response);
 
-        $body = $response['body'];
-        $Redirect = $body['Redirect'];
-        $RedirectUrl = $Redirect['RedirectUrl'];
+            // dd($response);
+            
+            $body = $response['body'];
+            $Redirect = $body['RedirectUrl'];
+            // $RedirectUrl = $Redirect['RedirectUrl'];
 
-        return redirect($RedirectUrl);
+            return redirect($Redirect);
 
         // return redirect()->route('index')->with('SUCCESS','Your Order Placed Successfully!');
 
