@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Route;
  *****************************************************************************
 */
 
+Route::get('/six-payment', 'Frontend\CheckoutController@sixPayment');
+Route::get('/success', 'Frontend\CheckoutController@success');
+Route::get('/fail', 'Frontend\CheckoutController@fail');
+
+
 Route::group(['prefix'=>'user'],function() {
     Route::post('/login','Frontend\FrontendController@login')->name('user.login');
     Route::get('/logout','Frontend\FrontendController@logout')->name('user.logout');
