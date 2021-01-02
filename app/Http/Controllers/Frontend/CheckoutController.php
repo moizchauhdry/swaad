@@ -47,7 +47,6 @@ class CheckoutController extends Controller
         Cart::clear();
        
         // SIX PAYMENT METHOD
-
         $username = 'API_255842_89186473';
         $password = 'Swaad_001Swaad_001';
         $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
@@ -66,7 +65,7 @@ class CheckoutController extends Controller
             )
             ),
             'TerminalId' => "17731689",
-            'PaymentMethods' => array("DIRECTDEBIT","VISA"),
+            'PaymentMethods' => array("DIRECTDEBIT","VISA","MASTERCARD","DINERS","MAESTRO"),
             'Payment' => array(
             'Amount' => array(
             'Value' => (int) "1",
@@ -89,10 +88,10 @@ class CheckoutController extends Controller
             'MerchantEmail' => "fawad@gmail.com",
             'NotifyUrl' => "https://myshop/callback"
             ),
-            'DeliveryAddressForm' => array(
-            'Display' => true,
-            'MandatoryFields' => array("CITY","COMPANY","COUNTRY","EMAIL","FIRSTNAME","LASTNAME","PHONE","SALUTATION","STATE","STREET","ZIP")
-            )
+            // 'DeliveryAddressForm' => array(
+            // 'Display' => true,
+            // // 'MandatoryFields' => array("CITY","COMPANY","COUNTRY","EMAIL","FIRSTNAME","LASTNAME","PHONE","SALUTATION","STATE","STREET","ZIP")
+            // )
             );
             //$username and $password for the http-Basic Authentication
             //$url is the SaferpayURL eg. https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize
