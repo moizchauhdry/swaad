@@ -152,7 +152,7 @@ class CheckoutController extends Controller
             //Close connection!
             curl_close($curl);
             //$response, again, is a multi-dimensional Array, containing the status-code ($response["status"]) and the API-response (if available) itself ($response["body"])
-            dd($response);
+
         $body = $response['body'];
         $Redirect = $body['Redirect'];
         $RedirectUrl = $Redirect['RedirectUrl'];
