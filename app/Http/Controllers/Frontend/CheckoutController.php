@@ -53,8 +53,8 @@ class CheckoutController extends Controller
         *****************************************************************************
         */
 
-        // $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
-        $url = 'https://test.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
+        $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
+        // $url = 'https://test.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
 
         $payload = array(
                 'RequestHeader' => array(

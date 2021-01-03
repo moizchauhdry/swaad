@@ -85,7 +85,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('orders.detail',$order->id)}}" class="btn btn-primary btn-sm">
+                                        <a href="{{route('orders.detail',$order->id)}}" class="btn btn-primary btn-xs">
                                             <i class="fas fa-eye mr-1" aria-hidden="true"></i> View
                                         </a>
                                     </td>
