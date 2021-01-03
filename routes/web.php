@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Route;
  *****************************************************************************
 */
 
-Route::get('/six-payment', 'Frontend\CheckoutController@sixPayment');
-Route::get('/success', 'Frontend\CheckoutController@success');
-Route::get('/fail', 'Frontend\CheckoutController@fail');
-
-
 Route::group(['prefix'=>'user'],function() {
     Route::post('/login','Frontend\FrontendController@login')->name('user.login');
     Route::get('/logout','Frontend\FrontendController@logout')->name('user.logout');
@@ -39,6 +34,8 @@ Route::group(['middleware' => ['frontend']],function(){
         Route::get('/orders','Frontend\UserController@orders')->name('user.orders');
         Route::post('/getOrdersByStatus','Frontend\UserController@getOrdersByStatus')->name('getOrdersByStatus');
         Route::get('/order-detail/{id}','Frontend\UserController@orderDetail')->name('orderDetail');
+        Route::get('/to-reviews','Frontend\UserController@toReviews')->name('toReviews');
+        Route::get('/my-reviews','Frontend\UserController@myReviews')->name('myReviews');
     });
 });
 
@@ -54,6 +51,14 @@ Route::post('/reservation/store', 'Frontend\FrontendController@storeReservation'
 Route::get('/contact', 'Frontend\FrontendController@contact')->name('contact');
 Route::post('/contact/store', 'Frontend\FrontendController@storeContact')->name('contact.store');
 
+Route::get('/about', 'Frontend\FrontendController@about')->name('about');
+Route::get('/serve', 'Frontend\FrontendController@serve')->name('serve');
+
+
+// SIX PAYMENT METHOD
+Route::get('/six-payment', 'Frontend\CheckoutController@sixPayment');
+Route::get('/payment-success', 'Frontend\CheckoutController@paymentSuccess');
+Route::get('/payment-fail', 'Frontend\CheckoutController@paymentFail');
 
 /**
  *****************************************************************************

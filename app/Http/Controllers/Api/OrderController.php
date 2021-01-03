@@ -40,7 +40,7 @@ class OrderController extends Controller
             $this->orderConstants['KEY_DELIVERY_TIME'] => 'required',
             $this->orderConstants['KEY_DELIVERY_DATE'] => 'required',
             $this->orderConstants['KEY_PAYMENT_METHOD'] => 'required',
-            $this->orderConstants['KEY_ORDER_NOTES'] => 'nullable',
+            $this->orderConstants['KEY_ORDER_NOTES'] => 'required',
             $this->orderConstants['KEY_IP_ADDRESS'] => 'required',
             $this->orderConstants['KEY_PRODUCTS'] => 'required|array',
             $this->orderConstants['KEY_PRODUCTS'] . '.*.' . $this->orderConstants['KEY_PRODUCT_ID'] => 'required',
@@ -84,6 +84,7 @@ class OrderController extends Controller
             'delivery_time' => $request->get($this->orderConstants['KEY_DELIVERY_TIME']),
             'delivery_date' => $request->get($this->orderConstants['KEY_DELIVERY_DATE']),
             'order_notes' => $request->get($this->orderConstants['KEY_ORDER_NOTES']),
+            'payment_method' => $request->get($this->orderConstants['KEY_PAYMENT_METHOD']),
         ];
 
         $orderData["user_id"] = $user->id;
@@ -158,7 +159,7 @@ class OrderController extends Controller
             }
         }
 
-        $url = env('PAYMENT_URL');
+        $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
 
         $payload = array(
             'RequestHeader' => array(
@@ -195,10 +196,10 @@ class OrderController extends Controller
                 'MerchantEmail' => env('PAYMENT_MERCHANT_EMAIL'),
                 'NotifyUrl' => "https://myshop/callback"
             ),
-            'DeliveryAddressForm' => array(
-                'Display' => true,
-                'MandatoryFields' => array("CITY", "COMPANY", "COUNTRY", "EMAIL", "FIRSTNAME", "LASTNAME", "PHONE", "SALUTATION", "STATE", "STREET", "ZIP")
-            )
+            // 'DeliveryAddressForm' => array(
+            //     'Display' => true,
+            //     'MandatoryFields' => array("CITY", "COMPANY", "COUNTRY", "EMAIL", "FIRSTNAME", "LASTNAME", "PHONE", "SALUTATION", "STATE", "STREET", "ZIP")
+            // )
         );
 
         $curl = curl_init($url);
@@ -214,7 +215,7 @@ class OrderController extends Controller
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($status != 200) {
             $body = json_decode(curl_multi_getcontent($curl), true);
-            $response = array(
+            $response1 = array(
                 "status" => $status . " <|> " . curl_error($curl),
                 "body" => $body
             );
@@ -227,7 +228,6 @@ class OrderController extends Controller
         }
         curl_close($curl);
         $body = $response1['body'];
-//        $Redirect = $body['Redirect'];
         $RedirectUrl = $body['RedirectUrl'];
 
         if ($request->get($this->orderConstants['KEY_PAYMENT_METHOD']) == 1) {

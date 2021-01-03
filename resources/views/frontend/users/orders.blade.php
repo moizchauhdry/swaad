@@ -34,7 +34,17 @@
     </div>
 
     <div id="orders_data">
+        @if ($orders->count() > 0)
         @include('frontend.users._orders')
+        @else
+        <div class="col-md-8 offset-md-2">
+            <div class="text-dark text-center mb-5">
+                <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
+                <p>There are no orders placed yet.</p>
+                <a href="{{route('products')}}" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 @endsection

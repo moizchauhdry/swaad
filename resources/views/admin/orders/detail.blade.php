@@ -72,7 +72,7 @@
                                     </tr>
                                     <tr>
                                         <th>Net Total</th>
-                                        <td>€ {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
+                                        <td>CHS {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
                                     </tr>
                                     <tr class="bg-light">
                                         <th colspan="2" class="text-center">Paymemt Information</th>
@@ -151,9 +151,9 @@
                                 <tr>
                                     <td>{{ $count++ }}</td>
                                     <td>{{ $item->product->title }}</td>
-                                    <td> € {{$item->product->price}} </td>
+                                    <td> CHS {{$item->product->price}} </td>
                                     <td> x {{$item->quantity}}</td>
-                                    <td>€ {{$item->product->price * $item->quantity}}</td>
+                                    <td>CHS {{$item->product->price * $item->quantity}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

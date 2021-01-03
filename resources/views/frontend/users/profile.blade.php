@@ -33,13 +33,13 @@
             <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
                 <div class="card-body text-dark">
                     <h5 class="card-title text-center"><i class="far fa-star" style="font-size: 80px"></i></h5>
-                    <p class="card-text text-center"><a href="#">My Reviews</a></p>
+                    <p class="card-text text-center"><a href="{{route('myReviews')}}">My Reviews</a></p>
                 </div>
             </div>
             <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
                 <div class="card-body text-dark">
                     <h5 class="card-title text-center"><i class="far fa-comment-dots" style="font-size: 80px"></i></h5>
-                    <p class="card-text text-center"><a href="#">To Reviews</a></p>
+                    <p class="card-text text-center"><a href="{{route('toReviews')}}">To Reviews</a></p>
                 </div>
             </div>
         </div>
