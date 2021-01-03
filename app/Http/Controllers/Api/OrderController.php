@@ -158,79 +158,79 @@ class OrderController extends Controller
             }
         }
 
-        $url = env('PAYMENT_URL');
 
-        $payload = array(
-            'RequestHeader' => array(
-                'SpecVersion' => "1.7",
-                'CustomerId' => env('PAYMENT_CUSTOMER_ID'),
-                'RequestId' => "ABC",
-                'RetryIndicator' => 0,
-                'ClientInfo' => array(
-                    'ShopInfo' => env('APP_NAME'),
-                    'OsInfo' => "Windows Server 2013"
-                )
-            ),
-            'TerminalId' => env('PAYMENT_TERMINAL_ID'),
-            'PaymentMethods' => array("DIRECTDEBIT", "VISA", "MASTERCARD", "DINERS", "MAESTRO"),
-            'Payment' => array(
-                'Amount' => array(
-                    'Value' => (int)$order->net_total * 100,
-                    'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
-                ),
-                'OrderId' => $order->id,
-                'PayerNote' => "A Note",
-                'Description' => $request->get($this->orderConstants['KEY_ORDER_NOTES'])
-            ),
-            'Payer' => array(
-                'IpAddress' => $request->get($this->orderConstants['KEY_IP_ADDRESS']),
-                'LanguageCode' => "en"
-            ),
-            'ReturnUrls' => array(
-                'Success' => url('/success'),
-                'Fail' => url('/fail')
-            ),
-            'Notification' => array(
-                'PayerEmail' => $user->email,
-                'MerchantEmail' => env('PAYMENT_MERCHANT_EMAIL'),
-                'NotifyUrl' => "https://myshop/callback"
-            ),
-            'DeliveryAddressForm' => array(
-                'Display' => true,
-                'MandatoryFields' => array("CITY", "COMPANY", "COUNTRY", "EMAIL", "FIRSTNAME", "LASTNAME", "PHONE", "SALUTATION", "STATE", "STREET", "ZIP")
-            )
-        );
-
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json", "Accept: application/json; charset=utf-8"));
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curl, CURLOPT_USERPWD, "" . env('PAYMENT_USERNAME') . ":" . env('PAYMENT_PASSWORD') . "");
-        $jsonResponse = curl_exec($curl);
-        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        if ($status != 200) {
-            $body = json_decode(curl_multi_getcontent($curl), true);
-            $response = array(
-                "status" => $status . " <|> " . curl_error($curl),
-                "body" => $body
-            );
-        } else {
-            $body = json_decode($jsonResponse, true);
-            $response1 = array(
-                "status" => $status,
-                "body" => $body
-            );
-        }
-        curl_close($curl);
-        $body = $response1['body'];
-//        $Redirect = $body['Redirect'];
-        $RedirectUrl = $body['RedirectUrl'];
 
         if ($request->get($this->orderConstants['KEY_PAYMENT_METHOD']) == 1) {
+            $url = env('PAYMENT_URL');
+
+            $payload = array(
+                'RequestHeader' => array(
+                    'SpecVersion' => "1.7",
+                    'CustomerId' => env('PAYMENT_CUSTOMER_ID'),
+                    'RequestId' => "ABC",
+                    'RetryIndicator' => 0,
+                    'ClientInfo' => array(
+                        'ShopInfo' => env('APP_NAME'),
+                        'OsInfo' => "Windows Server 2013"
+                    )
+                ),
+                'TerminalId' => env('PAYMENT_TERMINAL_ID'),
+                'PaymentMethods' => array("DIRECTDEBIT", "VISA", "MASTERCARD", "DINERS", "MAESTRO"),
+                'Payment' => array(
+                    'Amount' => array(
+                        'Value' => (int)$order->net_total * 100,
+                        'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
+                    ),
+                    'OrderId' => $order->id,
+                    'PayerNote' => "A Note",
+                    'Description' => $request->get($this->orderConstants['KEY_ORDER_NOTES'])
+                ),
+                'Payer' => array(
+                    'IpAddress' => $request->get($this->orderConstants['KEY_IP_ADDRESS']),
+                    'LanguageCode' => "en"
+                ),
+                'ReturnUrls' => array(
+                    'Success' => url('/success'),
+                    'Fail' => url('/fail')
+                ),
+                'Notification' => array(
+                    'PayerEmail' => $user->email,
+                    'MerchantEmail' => env('PAYMENT_MERCHANT_EMAIL'),
+                    'NotifyUrl' => "https://myshop/callback"
+                ),
+                'DeliveryAddressForm' => array(
+                    'Display' => true,
+                    'MandatoryFields' => array("CITY", "COMPANY", "COUNTRY", "EMAIL", "FIRSTNAME", "LASTNAME", "PHONE", "SALUTATION", "STATE", "STREET", "ZIP")
+                )
+            );
+
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json", "Accept: application/json; charset=utf-8"));
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+            curl_setopt($curl, CURLOPT_USERPWD, "" . env('PAYMENT_USERNAME') . ":" . env('PAYMENT_PASSWORD') . "");
+            $jsonResponse = curl_exec($curl);
+            $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            if ($status != 200) {
+                $body = json_decode(curl_multi_getcontent($curl), true);
+                $response1 = array(
+                    "status" => $status . " <|> " . curl_error($curl),
+                    "body" => $body
+                );
+            } else {
+                $body = json_decode($jsonResponse, true);
+                $response1 = array(
+                    "status" => $status,
+                    "body" => $body
+                );
+            }
+            curl_close($curl);
+            $body = $response1['body'];
+            $RedirectUrl = $body['RedirectUrl'];
             $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
             $response['message'] = 'Order placed successfully.';
             $response['RedirectUrl'] = $RedirectUrl;
