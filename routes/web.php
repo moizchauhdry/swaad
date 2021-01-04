@@ -165,7 +165,13 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                 Route::group(['middleware' => ['permission:manage-rsv']],function(){
                     Route::group(['prefix' => 'rsv'],function(){
                         Route::get('/', 'ReservationController@index')->name('rsv.index');
-                        Route::get('/detail/{id}', 'ReservationController@detail')->name('rsv.detail');
+                    });
+                });
+
+                Route::group(['middleware' => ['permission:manage-reviews']],function(){
+                    Route::group(['prefix' => 'reviews'],function(){
+                        Route::get('/', 'ReviewController@index')->name('reviews.index');
+                        Route::post('/approve/{id}', 'ReviewController@approveReview')->name('approveReview');
                     });
                 });
 

@@ -173,7 +173,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'codes.create' || Route::currentRouteName() == 'codes.index'|| Route::currentRouteName() == 'codes.edit' ) ? 'menu-open' : ''}}">
                     <a href="#"
                         class="nav-link {{(Route::currentRouteName() == 'codes.create' || Route::currentRouteName() == 'codes.index' || Route::currentRouteName() == 'codes.edit' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-image"></i>
+                        <i class="nav-icon fas fa-map-marked-alt"></i>
                         <p>
                             Postal Codes
                             <i class="right fas fa-angle-left"></i>
@@ -215,6 +215,29 @@
                                 class="nav-link {{(Route::currentRouteName() == 'rsv.index' || Route::currentRouteName() == 'rsv.edit' ) ? 'active' : ''}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Reservations</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                @if (Auth::guard('admin')->user()->hasPermission('manage-reviews'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'reviews.create' || Route::currentRouteName() == 'reviews.index'|| Route::currentRouteName() == 'reviews.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'reviews.create' || Route::currentRouteName() == 'reviews.index' || Route::currentRouteName() == 'reviews.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-clipboard"></i>
+                        <p>
+                            Reviews
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('reviews.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'reviews.index' || Route::currentRouteName() == 'reviews.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Reviews</p>
                             </a>
                         </li>
                     </ul>

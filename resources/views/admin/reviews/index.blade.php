@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Reservations</h1>
+                <h1>Reviews</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Reservations List
+                            Reviews List
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -39,26 +39,39 @@
                             <thead>
                                 <tr>
                                     <th>Sr #</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>People</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Message</th>
+                                    <th>Product</th>
+                                    <th>User</th>
+                                    <th>Rating</th>
+                                    <th>Coment</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($reservations as $rsv)
+                                @foreach ($reviews as $review)
                                 <tr>
-                                    <td>{{$rsv->id}}</td>
-                                    <td>{{$rsv->date}}</td>
-                                    <td>{{$rsv->time_of_day}}</td>
-                                    <td>{{$rsv->people}}</td>
-                                    <td>{{$rsv->name}}</td>
-                                    <td>{{$rsv->email}}</td>
-                                    <td>{{$rsv->phone}}</td>
-                                    <td>{{$rsv->message}}</td>
+                                    <td>{{$review->id}}</td>
+                                    <td>{{$review->product->title}}</td>
+                                    <td>{{$review->user->name}}</td>
+                                    <td>{{$review->rating}}</td>
+                                    <td>{{$review->comment}}</td>
+                                    @if ($review->is_approved == 0)
+
+                                    <td>
+                                        <form action="{{route('approveReview',$review->id)}}" method="POST"> @csrf
+                                            <button type="submit" class="btn btn-primary btn-xs"
+                                                onclick="alert('Are You Sure ?')">CLICK TO
+                                                APPROVE</button>
+                                        </form>
+                                    </td>
+                                    @else
+                                    <td>
+                                        @if ($review->is_approved == 1)
+                                        <span class="badge badge-success">Approved</span>
+                                        @else
+                                        <span class="badge badge-danger">Not Approved</span>
+                                        @endif
+                                    </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
