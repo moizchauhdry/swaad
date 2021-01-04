@@ -24,7 +24,7 @@ class PostalCodeController extends Controller
         $this->generalConstants = Config::get('constants.GENERAL_CONSTANTS');
     }
 
-    public function checkPostalCode(Request $request){
+    public function authorizeA(Request $request){
         $response = [];
         $rules = [
             $this->postCodeConstants['KEY_POSTCODE_ID'] => 'required',

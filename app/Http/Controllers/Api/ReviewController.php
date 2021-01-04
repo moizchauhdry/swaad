@@ -62,12 +62,20 @@ class ReviewController extends Controller
         return response()->json($response);
     }
 
-    public function userReviewsOnPrducts(Request $request)
+    public function getMyReviews(Request $request)
     {
         $response = [];
 
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
-        $reviews = Review::where('user_id', $user->id)->with('product')->get();
+        if ($request->lan_type == 0) {
+        $reviews = Review::where('user_id', $user->id)->with(['product' => function ($query) {
+            $query->select('id','category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count','spice_level');
+        }])->get();
+        } elseif ($request->lan_type == 1) {
+            $reviews = Review::where('user_id', $user->id)->with(['product' => function ($query) {
+                $query->select('id','category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count','spice_level');
+            }])->get();
+        }
 
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['reviews'] = $reviews;
@@ -76,14 +84,19 @@ class ReviewController extends Controller
     }
 
 
-    public function userGivenReviewsOnPrducts(Request $request)
+    public function getToReviews(Request $request)
     {
         $response = [];
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
         $reviewIds = Review::where('user_id', $user->id)->pluck('product_id')->toArray();
         $orderIds = Order::where('user_id', $user->id)->pluck('id')->toArray();
+
         $orderDetailsIds = OrderDetail::whereIn('order_id', $orderIds)->pluck('product_id')->toArray();
-        $reviewProducts = Product::whereIn('id', $orderDetailsIds)->whereNotIn('id', $reviewIds)->get();
+        if ($request->lan_type == 0) {
+            $reviewProducts = Product::select('id', 'category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count', 'spice_level')->whereIn('id', $orderDetailsIds)->whereNotIn('id', $reviewIds)->get();
+        } elseif ($request->lan_type == 1) {
+            $reviewProducts = Product::select('id', 'category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count', 'spice_level')->whereIn('id', $orderDetailsIds)->whereNotIn('id', $reviewIds)->get();
+        }
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['reviewProducts'] = $reviewProducts;
         $response['message'] = 'Success.';
