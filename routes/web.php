@@ -54,6 +54,7 @@ Route::post('/contact/store', 'Frontend\FrontendController@storeContact')->name(
 
 Route::get('/about', 'Frontend\FrontendController@about')->name('about');
 Route::get('/serve', 'Frontend\FrontendController@serve')->name('serve');
+Route::get('/privacy', 'Frontend\FrontendController@privacy')->name('privacy');
 
 
 // SIX PAYMENT METHOD

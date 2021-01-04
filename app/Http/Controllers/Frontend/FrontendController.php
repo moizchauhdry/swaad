@@ -203,4 +203,8 @@ class FrontendController extends Controller
     public function serve() {
         return view ('frontend.pages.serve');
     }
+
+    public function privacy() {
+        return view ('frontend.pages.privacy');
+    }
 }

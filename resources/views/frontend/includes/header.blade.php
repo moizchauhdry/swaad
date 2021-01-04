@@ -6,12 +6,12 @@
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                 class="icon-phone2"></span></div>
-                        <span class="text">+ 1235 2355 98</span>
+                        <span class="text">+ 031 558 33 88</span>
                     </div>
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                 class="icon-paper-plane"></span></div>
-                        <span class="text">swaad@info.com</span>
+                        <span class="text">hello@swaadbern.ch</span>
                     </div>
                     <div class="col-md-6 pr-4 d-flex topper align-items-center text-lg-right">
                         <span class="text text-center">
@@ -68,7 +68,7 @@
                         aria-haspopup="true" aria-expanded="false">More</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="{{route('reservation')}}">Reservation</a>
-                        <a class="dropdown-item" href="#">Privacy Policy</a>
+                        <a class="dropdown-item" href="{{route('privacy')}}">Privacy Policy</a>
                         <a class="dropdown-item" href="{{route('about')}}">About Us</a>
                     </div>
                 </li>

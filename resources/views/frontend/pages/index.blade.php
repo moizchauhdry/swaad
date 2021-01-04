@@ -93,7 +93,7 @@
                             <div class="pricing">
                                 <p class="price">
                                     <span class="price-sale">
-                                        CHS {{ number_format((float)$product->price, 2, '.', '')}}
+                                        CHF {{ number_format((float)$product->price, 2, '.', '')}}
                                     </span>
                                 </p>
                             </div>

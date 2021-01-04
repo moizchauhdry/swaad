@@ -111,7 +111,7 @@
                                 <h3 class="billing-heading mb-4">Cart Total</h3>
                                 <p class="d-flex">
                                     <span>Subtotal</span>
-                                    <span>CHS {{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
+                                    <span>CHF {{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
                                 </p>
                                 <p class="d-flex">
                                     <span>Delivery</span>
@@ -124,7 +124,7 @@
                                 <hr>
                                 <p class="d-flex total-price">
                                     <span>Total</span>
-                                    <span>CHS {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
+                                    <span>CHF {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
                                 </p>
                             </div>
                         </div>
