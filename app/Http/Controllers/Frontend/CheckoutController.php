@@ -54,6 +54,7 @@ class CheckoutController extends Controller
         */
 
         $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
+        // $url = 'https://test.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
 
         $payload = array(
                 'RequestHeader' => array(
@@ -136,10 +137,18 @@ class CheckoutController extends Controller
     }
 
     public function paymentSuccess(Request $request) {
-        return redirect()->route('index')->with('SUCCESSS','Successfull Transaction.');
+
+        $user = Auth::guard('frontend')->user();
+        $order = Order::where('user_id',$user->id)->first();
+        $order->update(['payment_method'=> 1,'payment_status'=> 1]);
+        
+        dd('Successfull Transaction.');
+        // return redirect()->route('index')->with('SUCCESS','Successfull Transaction.');
     }
 
     public function paymentFail(Request $request) {
-        return redirect()->route('index')->with('ERROR','Transaction cancel or fail. Please try again later.');
+        dd('Transaction cancel or fail. Please try again later.');
+
+        // return redirect()->route('index')->with('ERROR','Transaction cancel or fail. Please try again later.');
     }
 }

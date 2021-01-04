@@ -22,4 +22,16 @@ class OrderController extends Controller
 
         return view ('admin.orders.detail',compact('order','orderItems','orderProductsCount'));
     }
+
+    public function updateOrderStatus(Request $request, $id) {
+        
+        $order = Order::findOrFail($id);
+        $data = [
+            'order_status' => $request->order_status,
+            'payment_status' => $request->payment_status,
+        ];
+        $order->update($data);
+
+        return redirect()->back()->with('success','Status Updated Successfully');
+    }
 }

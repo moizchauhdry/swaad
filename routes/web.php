@@ -134,7 +134,8 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                 Route::group(['middleware' => ['permission:manage-orders']],function(){
                     Route::group(['prefix' => 'orders'],function(){
                         Route::get('/', 'OrderController@index')->name('orders.index');
-                        Route::get('/detail{id}', 'OrderController@detail')->name('orders.detail');
+                        Route::get('/detail/{id}', 'OrderController@detail')->name('orders.detail');
+                        Route::post('/updateOrderStatus/{id}', 'OrderController@updateOrderStatus')->name('updateOrderStatus');
                     });
                 });
 

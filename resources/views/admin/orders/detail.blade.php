@@ -79,14 +79,24 @@
                                     </tr>
                                     <tr>
                                         <th>Payment Method</th>
-                                        <td>{{isset($order->payment_method) ? $order->payment_method : 'Unknown'}}</td>
+                                        <td>
+                                            @if ($order->payment_method == 0)
+                                            <span class="badge badge-primary">CASH ON DELIVERY</span>
+                                            @elseif ($order->payment_method == 1)
+                                            <span class="badge badge-primary">PAYMENT WITH CARD</span>
+                                            @else <span class="badge badge-danger">FAIL</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Payment Status</th>
                                         <td>
-                                            @if ($order->payment_status == 0) Pending
-                                            @elseif ($order->payment_status == 1) Completed
-                                            @else Failed
+                                            @if ($order->payment_status == 0)
+                                            <span class="badge badge-warning">PENDING</span>
+                                            @elseif ($order->payment_status == 1)
+                                            <span class="badge badge-success">COMPLETE</span>
+                                            @else
+                                            <span class="badge badge-danger">FAIL</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -176,7 +186,7 @@
 <div class="modal fade" id="editOrderDetailModal" tabindex="-1" aria-labelledby="editOrderDetailModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
-        <form action="">
+        <form action="{{route('updateOrderStatus',$order->id)}}" method="POST"> @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editOrderDetailModalLabel">Order Detail</h5>
@@ -188,23 +198,23 @@
                     <div class="col-md-12 form-group">
                         <label for="">Order Status <span class="text-danger">*</span></label>
                         <select name="order_status" id="order_status" class="form-control" required>
-                            <option value="0">Pending</option>
-                            <option value="1">Processing</option>
-                            <option value="2">Shipped</option>
-                            <option value="3">Delivered</option>
-                            <option value="4">Cancelled</option>
+                            <option {{ ($order->order_status == "0"? "selected":"") }} value="0">Pending</option>
+                            <option {{ ($order->order_status == "1"? "selected":"") }} value="1">Processing</option>
+                            <option {{ ($order->order_status == "2"? "selected":"") }} value="2">Shipped</option>
+                            <option {{ ($order->order_status == "3"? "selected":"") }} value="3">Delivered</option>
+                            <option {{ ($order->order_status == "4"? "selected":"") }} value="4">Cancelled</option>
                         </select>
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="">Payment Status <span class="text-danger">*</span></label>
                         <select name="payment_status" id="payment_status" class="form-control" required>
-                            <option value="0">Pending</option>
-                            <option value="1">Complete</option>
+                            <option {{ ($order->payment_status == "0"? "selected":"") }} value="0">Pending</option>
+                            <option {{ ($order->payment_status == "1"? "selected":"") }} value="1">Complete</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-sm">Save & Update</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Save & Update</button>
                 </div>
             </div>
         </form>

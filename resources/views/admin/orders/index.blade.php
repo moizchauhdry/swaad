@@ -67,15 +67,25 @@
                                         @endif
                                     </td>
                                     <td>CHS {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
-                                    <td>{{isset($order->payment_method) ? $order->payment_method : 'Unknown'}}</td>
                                     <td>
-                                        @if ($order->payment_status == 0) Pending
-                                        @elseif ($order->payment_status == 1) Completed
-                                        @else Failed
+                                        @if ($order->payment_method == 0)
+                                        <span class="badge badge-primary">CASH ON DELIVERY</span>
+                                        @elseif ($order->payment_method == 1)
+                                        <span class="badge badge-primary">PAYMENT WITH CARD</span>
+                                        @else <span class="badge badge-danger">FAIL</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('orders.detail',$order->id)}}" class="btn btn-primary btn-sm">
+                                        @if ($order->payment_status == 0)
+                                        <span class="badge badge-warning">PENDING</span>
+                                        @elseif ($order->payment_status == 1)
+                                        <span class="badge badge-success">COMPLETE</span>
+                                        @else
+                                        <span class="badge badge-danger">FAIL</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{route('orders.detail',$order->id)}}" class="btn btn-primary btn-xs">
                                             <i class="fas fa-eye mr-1" aria-hidden="true"></i> View
                                         </a>
                                     </td>

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $appends =['created_at_format'];
+    
     protected $fillable = [
         'user_id',
         'tracking_id',
