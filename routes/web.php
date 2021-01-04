@@ -34,8 +34,9 @@ Route::group(['middleware' => ['frontend']],function(){
         Route::get('/orders','Frontend\UserController@orders')->name('user.orders');
         Route::post('/getOrdersByStatus','Frontend\UserController@getOrdersByStatus')->name('getOrdersByStatus');
         Route::get('/order-detail/{id}','Frontend\UserController@orderDetail')->name('orderDetail');
-        Route::get('/to-reviews','Frontend\UserController@toReviews')->name('toReviews');
         Route::get('/my-reviews','Frontend\UserController@myReviews')->name('myReviews');
+        Route::get('/to-reviews','Frontend\UserController@toReviews')->name('toReviews');
+        Route::post('/to-reviews/store','Frontend\UserController@storeToReviews')->name('storeToReviews');
     });
 });
 

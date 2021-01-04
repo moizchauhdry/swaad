@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\OrderDetail;
 use App\User;
+use App\Review;
+use App\Product;
+
 use Auth;
 
 class UserController extends Controller
@@ -51,11 +54,39 @@ class UserController extends Controller
         return view('frontend.users.orderDetail',compact('order','orderItems','orderProductsCount'));
     }
 
-    public function myReviews() {
+    public function myReviews() {      
         return view ('frontend.users.myReviews');
     }
    
     public function toReviews() {
-        return view ('frontend.users.toReviews');
+        $user = User::where('id', Auth::guard('frontend')->user()->id)->first();
+        $reviewIds = Review::where('user_id', $user->id)->pluck('product_id')->toArray();
+        $orderIds = Order::where('user_id', $user->id)->pluck('id')->toArray();
+        $orderDetailsIds = OrderDetail::whereIn('order_id', $orderIds)->pluck('product_id')->toArray();
+        $products = Product::whereIn('id', $orderDetailsIds)->whereNotIn('id', $reviewIds)->get();
+        return view ('frontend.users.toReviews',compact('products'));
+    }
+
+    public function storeToReviews(Request $request) {
+        
+        $rules = [
+            'rating' => 'required',
+            'product_id' => 'required',
+            'comment' => 'required|max:255',
+        ];
+
+        $data = [
+            'user_id' => Auth::guard('frontend')->user()->id,
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+            'product_id' => $request->product_id,
+        ];
+
+        if ($data['rating'] == NULL) {
+            return redirect()->back()->with('ERROR', 'Rating is Required');
+        }
+
+        Review::create($data);
+        return redirect()->back()->with('SUCCESS', 'Successfully submitted review, Wait for approval.');
     }
 }
