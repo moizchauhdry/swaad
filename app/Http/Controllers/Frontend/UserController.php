@@ -55,7 +55,14 @@ class UserController extends Controller
     }
 
     public function myReviews() {      
-        return view ('frontend.users.myReviews');
+
+        $user = User::where('id', Auth::guard('frontend')->user()->id)->first();
+        $reviews = Review::where('user_id', $user->id)->with(['product' => function ($query) {
+            $query->select('id','category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count','spice_level');
+        }])->get();
+        
+
+        return view ('frontend.users.myReviews',compact('reviews'));
     }
    
     public function toReviews() {

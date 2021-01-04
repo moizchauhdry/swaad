@@ -12,40 +12,46 @@
     </div>
 </div>
 
-<div class="container">
-    <div style="padding: 35px">
+<section class="ftco-section">
+    <div class="container">
         <div class="card-deck">
-            <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
+            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
                 <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-user" style="font-size: 80px"></i></h5>
+                    <h5 class="card-title text-center"><i class="far fa-user"
+                            style="font-size: 50px; color:#f45318; color:#f45318"></i>
+                    </h5>
                     <p class="card-text text-center">
                         <a data-target="#profileModal" data-toggle="modal" class="MainNavText" id="MainNavHelp"
                             href="#profileModal">Profile</a>
                     </p>
                 </div>
             </div>
-            <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
+            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
                 <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="fas fa-list-ul" style="font-size: 80px"></i></h5>
+                    <h5 class="card-title text-center"><i class="fas fa-list-ul"
+                            style="font-size: 50px; color:#f45318"></i>
+                    </h5>
                     <p class="card-text text-center"><a href="{{route('user.orders')}}">My Orders</a></p>
                 </div>
             </div>
-            <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
+            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
                 <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-star" style="font-size: 80px"></i></h5>
+                    <h5 class="card-title text-center"><i class="far fa-star"
+                            style="font-size: 50px; color:#f45318"></i>
+                    </h5>
                     <p class="card-text text-center"><a href="{{route('myReviews')}}">My Reviews</a></p>
                 </div>
             </div>
-            <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
+            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
                 <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-comment-dots" style="font-size: 80px"></i></h5>
+                    <h5 class="card-title text-center"><i class="far fa-comment-dots"
+                            style="font-size: 50px; color:#f45318"></i></h5>
                     <p class="card-text text-center"><a href="{{route('toReviews')}}">To Reviews</a></p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+</section>
 
 <!-- Modal -->
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">

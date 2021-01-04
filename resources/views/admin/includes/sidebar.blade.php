@@ -198,6 +198,28 @@
                 </li>
                 @endif
 
+                @if (Auth::guard('admin')->user()->hasPermission('manage-rsv'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'rsv.create' || Route::currentRouteName() == 'rsv.index'|| Route::currentRouteName() == 'rsv.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'rsv.create' || Route::currentRouteName() == 'rsv.index' || Route::currentRouteName() == 'rsv.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-clipboard"></i>
+                        <p>
+                            Reservations
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('rsv.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'rsv.index' || Route::currentRouteName() == 'rsv.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Reservations</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
 
             </ul>
         </nav>

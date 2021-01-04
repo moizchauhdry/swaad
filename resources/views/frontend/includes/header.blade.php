@@ -34,6 +34,7 @@
                             @endif
                         </span>
                     </div>
+                    <div id="google_translate_element"></div>
                 </div>
             </div>
         </div>
@@ -78,6 +79,7 @@
                 </li>
             </ul>
         </div>
+
     </div>
 </nav>
 
