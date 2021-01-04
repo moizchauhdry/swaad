@@ -65,18 +65,16 @@ class ReviewController extends Controller
     public function getMyReviews(Request $request)
     {
         $response = [];
-
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
         if ($request->lan_type == 0) {
-        $reviews = Review::where('user_id', $user->id)->with(['product' => function ($query) {
-            $query->select('id','category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count','spice_level');
-        }])->get();
+            $reviews = Review::where('user_id', $user->id)->with(['product' => function ($query) {
+                $query->select('id', 'category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count', 'spice_level');
+            }])->get();
         } elseif ($request->lan_type == 1) {
             $reviews = Review::where('user_id', $user->id)->with(['product' => function ($query) {
-                $query->select('id','category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count','spice_level');
+                $query->select('id', 'category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count', 'spice_level');
             }])->get();
         }
-
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['reviews'] = $reviews;
         $response['message'] = 'Success.';
@@ -89,7 +87,7 @@ class ReviewController extends Controller
         $response = [];
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
         $reviewIds = Review::where('user_id', $user->id)->pluck('product_id')->toArray();
-        $orderIds = Order::where('user_id', $user->id)->pluck('id')->toArray();
+        $orderIds = Order::where(['user_id' => $user->id, 'order_status' => 3])->pluck('id')->toArray();
 
         $orderDetailsIds = OrderDetail::whereIn('order_id', $orderIds)->pluck('product_id')->toArray();
         if ($request->lan_type == 0) {

@@ -38,6 +38,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('/getPopularProducts', 'Api\ProductController@getPopularProducts');
         Route::post('/getProductByCategory', 'Api\ProductController@getProductByCategory');
         Route::post('/addViewCount', 'Api\ProductController@addViewCount');
+        Route::post('/productDetails', 'Api\ProductController@productDetails');
 
         //// Orders
         Route::post('/placeOrder', 'Api\OrderController@placeOrder');
