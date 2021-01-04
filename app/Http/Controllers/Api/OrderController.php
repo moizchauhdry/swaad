@@ -297,4 +297,5 @@ class OrderController extends Controller
         $response['bannerImage'] = $bannerImage;
         return response()->json($response);
     }
+
 }
