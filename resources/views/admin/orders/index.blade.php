@@ -66,7 +66,7 @@
                                         @else Failed
                                         @endif
                                     </td>
-                                    <td>€ {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
+                                    <td>CHS {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
                                     <td>{{isset($order->payment_method) ? $order->payment_method : 'Unknown'}}</td>
                                     <td>
                                         @if ($order->payment_status == 0) Pending

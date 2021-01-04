@@ -40,7 +40,7 @@ class OrderController extends Controller
             $this->orderConstants['KEY_DELIVERY_TIME'] => 'required',
             $this->orderConstants['KEY_DELIVERY_DATE'] => 'required',
             $this->orderConstants['KEY_PAYMENT_METHOD'] => 'required',
-            $this->orderConstants['KEY_ORDER_NOTES'] => 'nullable',
+            $this->orderConstants['KEY_ORDER_NOTES'] => 'required',
             $this->orderConstants['KEY_IP_ADDRESS'] => 'required',
             $this->orderConstants['KEY_PRODUCTS'] => 'required|array',
             $this->orderConstants['KEY_PRODUCTS'] . '.*.' . $this->orderConstants['KEY_PRODUCT_ID'] => 'required',
@@ -84,6 +84,7 @@ class OrderController extends Controller
             'delivery_time' => $request->get($this->orderConstants['KEY_DELIVERY_TIME']),
             'delivery_date' => $request->get($this->orderConstants['KEY_DELIVERY_DATE']),
             'order_notes' => $request->get($this->orderConstants['KEY_ORDER_NOTES']),
+            'payment_method' => $request->get($this->orderConstants['KEY_PAYMENT_METHOD']),
         ];
 
         $orderData["user_id"] = $user->id;
@@ -158,8 +159,6 @@ class OrderController extends Controller
             }
         }
 
-
-
         if ($request->get($this->orderConstants['KEY_PAYMENT_METHOD']) == 1) {
             $url = env('PAYMENT_URL');
 
@@ -203,6 +202,7 @@ class OrderController extends Controller
                     'MandatoryFields' => array("CITY", "COMPANY", "COUNTRY", "EMAIL", "FIRSTNAME", "LASTNAME", "PHONE", "SALUTATION", "STATE", "STREET", "ZIP")
                 )
             );
+
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_HEADER, false);
@@ -281,7 +281,15 @@ class OrderController extends Controller
             ]);
         }
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
-        $orderDetails = Order::where(['id' => $request->get($this->orderConstants['KEY_ORDER_ID']), 'user_id' => $user->id])->with('orderDetails', 'orderDetails.product', 'user')->first();
+        if ($request->lan_type == 0) {
+            $orderDetails = Order::where(['id' => $request->get($this->orderConstants['KEY_ORDER_ID']), 'user_id' => $user->id])->with(['orderDetails.product' => function ($query) {
+                $query->select('id','category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count','spice_level');
+            }, 'user'])->first();
+        } elseif ($request->lan_type == 1) {
+            $orderDetails = Order::where(['id' => $request->get($this->orderConstants['KEY_ORDER_ID']), 'user_id' => $user->id])->with(['orderDetails.product' => function ($query) {
+                $query->select('id','category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count','spice_level');
+            }, 'user'])->first();
+        }
         $bannerImage = $banners = Banner::where(['status' => 1, 'type' => 1])->inRandomOrder()->pluck('image_url')->first();
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['message'] = 'Success';

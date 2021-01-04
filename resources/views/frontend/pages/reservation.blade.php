@@ -11,9 +11,24 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="col-md-12 p-4">
+        <h3 class="text-primary">Catering</h3>
+        <p class="text-justify">
+            We can also come to you with our catering service! We would be happy to advise you personally and
+            individually on special requests for catering up to 200 people at your events. For your vacation, whether as
+            a business lunch in your company or for private occasions, we deliver food and drinks from our standard
+            range. On request, we will be happy to put together an individual menu for you. Service personnel can also
+            be provided by us. <br>
+            We are happy to advise you personally and individually on special requests.
+        </p>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-8 offset-md-2 mt-4 mb-4">
+        <div class="col-md-8 offset-md-2 p-4">
             <form action="{{route('reservation.store')}}" method="POST" enctype="multipart/form-data"> @csrf
                 <div class="row">
                     <div class="form-group col-md-6">

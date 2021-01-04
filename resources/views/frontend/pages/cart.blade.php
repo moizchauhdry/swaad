@@ -6,7 +6,6 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span></p>
                 <h1 class="mb-0 bread">My Cart</h1>
             </div>
         </div>
@@ -15,13 +14,14 @@
 
 <section class="ftco-section ftco-cart">
     <div class="container">
+        @if (Cart::getContent()->count() > 0)
         <div class="row">
             <div class="col-md-12 ftco-animate">
-                <div class="cart-list">
+                <div class="table-responsive">
                     <table class="table">
                         <thead class="thead-primary">
                             <tr class="text-center">
-                                <th>Product Title</th>
+                                <th>Product</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
@@ -29,8 +29,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @if (Cart::getContent()->count()>0)
                             @foreach (Cart::getContent() as $product)
                             <tr class="text-center">
 
@@ -39,35 +37,21 @@
                                     <p>{{$product->description}}</p>
                                 </td>
 
-                                <td class="price"> $ {{ number_format((float)$product->price, 2, '.', '')}}</td>
+                                <td class="price"> CHF {{ number_format((float)$product->price, 2, '.', '')}}</td>
 
                                 <td class="quantity">
                                     x {{$product->quantity}}
                                 </td>
 
                                 <td class="total">
-                                    $ {{ $product->price * $product->quantity}}
+                                    CHF {{ $product->price * $product->quantity}}
                                 </td>
 
                                 <td class="product-remove"><a href="#"
                                         onclick="removeFromCart('{{$product->id}}')"><span
                                             class="ion-ios-close"></span></a></td>
-                                {{-- <td>
-                                    <form action="{{route('cart.destroy',$product->id)}}" method="POST">
-                                @csrf
-                                {{method_field('DELETE')}}
-                                <button type="button" class="btn btn-light" style="">Light</button>
-                                </form>
-                                </td> --}}
                             </tr>
                             @endforeach
-                            @else
-                            <tr>
-                                <td colspan=" 6"> Your Cart is Empty !
-                                </td>
-                            </tr>
-                            @endif
-
                         </tbody>
                     </table>
                 </div>
@@ -79,25 +63,34 @@
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span> € {{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
+                        <span> CHS {{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
                     </p>
                     <p class="d-flex">
                         <span>Delivery</span>
-                        <span>€ 0.00</span>
+                        <span>CHS 0.00</span>
                     </p>
                     <p class="d-flex">
                         <span>Discount</span>
-                        <span>€ 0.00</span>
+                        <span>CHS 0.00</span>
                     </p>
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span>€ {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
+                        <span>CHS {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
                     </p>
                 </div>
                 <p><a href="{{route('checkout')}}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
             </div>
         </div>
+        @else
+        <div class="col-md-8 offset-md-2">
+            <div class="text-dark text-center">
+                <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
+                <p>There are no items in this cart.</p>
+                <a href="{{route('products')}}" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+        @endif
     </div>
 </section>
 

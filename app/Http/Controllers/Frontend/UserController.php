@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
 use App\OrderDetail;
+use App\User;
 use Auth;
 
 class UserController extends Controller
@@ -14,28 +15,29 @@ class UserController extends Controller
         $user = Auth::guard('frontend')->user();
         return view ('frontend.users.profile',compact('user'));
     }
+
     public function updateProfile() {
         $user = Auth::guard('frontend')->user();
-
         return redirect()->back();
     }
     
     public function orders() {
-        $orders = Order::orderBy('id','DESC')->get();
+        $user = Auth::guard('frontend')->user();
+        $orders = Order::orderBy('id','DESC')->where('user_id',$user->id)->get();
         return view ('frontend.users.orders',compact('orders'));
     }
     
     public function getOrdersByStatus(Request $request) {
-
-        $orders = Order::orderBy('id','DESC')->where('order_status',$request->order_status)->get();
+        $user = Auth::guard('frontend')->user();
+        $orders = Order::orderBy('id','DESC')->where('order_status',$request->order_status)->where('user_id',$user->id)->get();
 
         if (count($orders) > 0) {
             return view ('frontend.users._orders',compact('orders'));
         }
         else {
-            return ' <div class="col-md-12 mt-4">
-                        <div class="alert alert-danger text-center">
-                            No Result(s) Found !
+            return ' <div class="col-md-8 offset-md-2 p-4">
+                        <div class="text-dark text-center">
+                        <p>There are no orders placed yet.</p>
                         </div>
                     </div>'; 
         }

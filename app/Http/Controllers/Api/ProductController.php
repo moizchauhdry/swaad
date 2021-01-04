@@ -29,11 +29,11 @@ class ProductController extends Controller
     public function getPopularProducts(Request $request)
     {
         if ($request->lan_type == 0) {
-            $popularProducts = Product::select('id','category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count')->orderBy('view_count', 'DESC')
+            $popularProducts = Product::select('id','category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count','spice_level')->orderBy('view_count', 'DESC')
                 ->take(24)
                 ->get();
         } elseif ($request->lan_type == 1) {
-            $popularProducts = Product::select('id','category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count')->orderBy('view_count', 'DESC')
+            $popularProducts = Product::select('id','category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count','spice_level')->orderBy('view_count', 'DESC')
                 ->take(24)
                 ->get();
         } else {
@@ -73,7 +73,7 @@ class ProductController extends Controller
         }
 
         if ($request->lan_type == 0) {
-            $categoryProducts = Product::select('id','category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count')->where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
+            $categoryProducts = Product::select('id','category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count','spice_level')->where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
                 ->skip($offset)
                 ->take($this->recordsPerPage)
                 ->get();
@@ -84,7 +84,7 @@ class ProductController extends Controller
                 ]);
             }
         }elseif ($request->lan_type == 1){
-            $categoryProducts = Product::select('id','category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count')->where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
+            $categoryProducts = Product::select('id','category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count','spice_level')->where('category_id', $request->get($this->categoryConstants['KEY_CATEGORY_ID']))
                 ->skip($offset)
                 ->take($this->recordsPerPage)
                 ->get();

@@ -29,6 +29,9 @@ class CreateUsersTable extends Migration
             $table->string('device_token')->nullable();
             $table->string('access_token')->nullable();
             $table->timestamp('last_login')->nullable();
+            $table->string('shp_address')->nullable();
+            $table->string('shp_phone_no')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

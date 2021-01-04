@@ -39,6 +39,7 @@
         </div>
     </div>
 </div>
+
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
         <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
@@ -67,7 +68,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="{{route('reservation')}}">Reservation</a>
                         <a class="dropdown-item" href="#">Privacy Policy</a>
-                        <a class="dropdown-item" href="#">About Us</a>
+                        <a class="dropdown-item" href="{{route('about')}}">About Us</a>
                     </div>
                 </li>
                 <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link">
@@ -79,8 +80,6 @@
         </div>
     </div>
 </nav>
-<!-- END nav -->
-
 
 <!-- LOGIN MODAL -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"

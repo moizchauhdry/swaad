@@ -191,4 +191,16 @@ class FrontendController extends Controller
         return redirect()->back()->with('SUCCESS','Thankyou for getting in touch!');
 
     }
+
+    public function about() {
+        return view ('frontend.pages.about');
+    }
+
+    public function mission() {
+        return view ('frontend.pages.mission');
+    }
+
+    public function serve() {
+        return view ('frontend.pages.serve');
+    }
 }
