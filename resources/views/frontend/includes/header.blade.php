@@ -51,8 +51,10 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="{{route('products')}}" class="nav-link">Order Online</a></li>
-                <li class="nav-item dropdown">
+                <li class="nav-item {{(Route::currentRouteName() == 'products') ? 'active' : ''}}">
+                    <a href="{{route('products')}}" class="nav-link">Order Online</a></li>
+                <li
+                    class="nav-item dropdown {{(Route::currentRouteName() == 'getProductsByCategory') ? 'active' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Menu</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -62,8 +64,10 @@
                         @endforeach
                     </div>
                 </li>
-                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Contact</a></li>
-                <li class="nav-item dropdown">
+                <li class="nav-item {{(Route::currentRouteName() == 'contact') ? 'active' : ''}}"><a
+                        href="{{route('contact')}}" class="nav-link">Contact</a></li>
+                <li
+                    class="nav-item dropdown {{(Route::currentRouteName() == 'reservation' || Route::currentRouteName() == 'privacy' || Route::currentRouteName() == 'about') ? 'active' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">More</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">

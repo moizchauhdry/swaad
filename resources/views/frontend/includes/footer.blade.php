@@ -30,7 +30,10 @@
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">SWAAD</h2>
                     <p> Swaad is our passion and we passionately welcome you in our restaurant with unmatched taste and
-                        variety.
+                        variety. We use fresh vegetables from the region, our meat comes from Berns oldest butscher shop
+                        (Spahni AG), herbs and spices from Pakistan and India, tea from Himalaya region and long grain
+                        basmati rice from the fields of Punjab and pink Himalaya Salt from the world’s biggest salt mine
+                        in Pothohar range of Pakistan.
                     </p>
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                         <li class="ftco-animate"><a href="https://fb.me/swaadbern" target="_blank"><span

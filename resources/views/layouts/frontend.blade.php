@@ -39,6 +39,9 @@
 
     <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
 
+    <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
+
+
     @yield('styles')
 
     <style>
@@ -49,8 +52,6 @@
 </head>
 
 <body class="goto-here">
-
-    {{-- @include('frontend.includes._notifications') --}}
 
     @include('frontend.includes.header')
 
