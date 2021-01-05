@@ -68,8 +68,6 @@ class OrderController extends Controller
 
         foreach ($request->get($this->orderConstants['KEY_PRODUCTS']) as $orderItem) {
             $product = Product::find($orderItem[$this->orderConstants['KEY_PRODUCT_ID']]);
-
-
             if (empty($orderItem[$this->orderConstants['KEY_PRODUCT_QUANTITY']])) {
                 return response()->json([
                     'status' => $this->responseConstants['STATUS_ERROR'],
