@@ -86,7 +86,7 @@ class FrontendController extends Controller
 
     public function index() {   
         $categories = Category::where('status','1')->inRandomOrder()->get();
-        $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->get();
+        $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->take(12)->get();
         return view ('frontend.pages.index',compact('categories','popularProducts'));
     }
 
@@ -118,7 +118,8 @@ class FrontendController extends Controller
     public function productDetail($id) {
         $product = Product::find($id);
         $products = Product::where('status','1')->get();
-        return view ('frontend.pages.product-detail',compact('product','products'));
+        $relatedProducts = Product::where('status','1')->where('category_id',$product->category->id)->where('id','!=',$product->id)->take(8)->inRandomOrder()->get();
+        return view ('frontend.pages.product-detail',compact('product','products','relatedProducts'));
     }
 
     public function reservation() {

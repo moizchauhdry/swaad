@@ -94,6 +94,7 @@
     </div>
 </section>
 
+@if ($relatedProducts->count() > 0)
 <section class=" ftco-section">
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
@@ -103,9 +104,10 @@
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="row">
-            @foreach ($products as $product)
+            @foreach ($relatedProducts as $product)
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
                     <a href="{{route('productDetail',$product->id)}}" class="img-prod"><img class="img-fluid"
@@ -136,6 +138,8 @@
         </div>
     </div>
 </section>
+@endif
+
 @endsection
 
 @section('scripts')
