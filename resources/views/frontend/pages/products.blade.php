@@ -56,7 +56,6 @@
 @endsection
 
 @section('scripts')
-
 <script>
     function addToCart(product_id) {
         $.ajax({
@@ -106,5 +105,4 @@
         });
     }
 </script>
-
 @endsection

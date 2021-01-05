@@ -16,8 +16,7 @@
         <div class="row">
             <div class="col-lg-6 mb-5 ftco-animate">
                 <a href="{{asset('storage/app/public/'.$product->image_url)}}" class="image-popup"><img
-                        src="{{asset('storage/app/public/'.$product->image_url)}}" class="img-fluid"
-                        alt="Colorlib Template"></a>
+                        src="{{asset('storage/app/public/'.$product->image_url)}}" class="img-fluid" alt="IMAGE"></a>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                 <h3>{{$product->title}}</h3>
@@ -40,17 +39,41 @@
                 <p>
                     @include('frontend.pages.partials._spice')
                 </p>
-                <div class="row mt-4">
+
+                @if (Cart::get($product->id))
+                <div class="row mt-4" id="success_detail_{{$product->id}}">
                     <div class="input-group col-md-6 d-flex mb-3">
                         <span class="input-group-btn mr-2">
-                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field=""
+                                onclick="cartDecrementDetail('{{$product->id}}')">
                                 <i class="ion-ios-remove"></i>
                             </button>
                         </span>
-                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1"
-                            min="1" max="100">
+                        <input type="text" id="qty_detail_{{$product->id}}" name="quantity"
+                            class="form-control input-number" value="{{Cart::get($product->id)->quantity}}" min="1"
+                            max="100">
                         <span class="input-group-btn ml-2">
-                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field=""
+                                onclick="cartIncrementDetail('{{$product->id}}')">
+                                <i class="ion-ios-add"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                @else
+                <div class="row mt-4 hidden" id="success_detail_{{$product->id}}">
+                    <div class="input-group col-md-6 d-flex mb-3">
+                        <span class="input-group-btn mr-2">
+                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field=""
+                                onclick="cartDecrementDetail('{{$product->id}}')">
+                                <i class="ion-ios-remove"></i>
+                            </button>
+                        </span>
+                        <input type="text" id="qty_detail_{{$product->id}}" name="quantity"
+                            class="form-control input-number" value="1" min="1" max="100">
+                        <span class="input-group-btn ml-2">
+                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field=""
+                                onclick="cartIncrementDetail('{{$product->id}}')">
                                 <i class="ion-ios-add"></i>
                             </button>
                         </span>
@@ -58,11 +81,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 d-flex mb-3">
-                        <button onclick="addToCart('{{$product->id}}')" class="btn btn-primary btn-lg" style="color: white;
-                            background-color: #f45318 !important; width:100%">Add to
-                            Cart</button>
+                        <button onclick="addToCartDetail('{{$product->id}}')" class="btn btn-primary btn-lg" style="color: white;
+                            background-color: #f45318 !important; width:100%"
+                            id="add_to_cart_detail_{{$product->id}}">Add to Cart</button>
                     </div>
                 </div>
+                @endif
 
 
             </div>
@@ -76,8 +100,6 @@
             <div class="col-md-12 heading-section text-center ftco-animate">
                 <span class="subheading">Products</span>
                 <h2 class="mb-4">Related Products</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                    Consonantia</p>
             </div>
         </div>
     </div>
@@ -97,7 +119,9 @@
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price">
-                                    <span class="price-sale">$80.00</span></p>
+                                    <span class="price-sale"> CHF {{ number_format((float)$product->price, 2, '.', '')}}
+                                    </span>
+                                </p>
                             </div>
                         </div>
                         <div class="bottom-area d-flex px-3">
@@ -115,7 +139,6 @@
 @endsection
 
 @section('scripts')
-
 <script>
     function addToCart(product_id) {
         $.ajax({
@@ -128,10 +151,90 @@
             success: function (response) {
                 $('#add_to_cart_'+product_id).addClass('hidden');
                 $('#success_'+product_id).removeClass('hidden');
-                $("#success_"+product_id).append('Item Added To Cart');
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(1);
+                $("#cart_items_count").html(response);
+            }
+        });
+    }
+
+    function cartIncrement(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.increment')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(response);
+            }
+        });
+    }
+
+    function cartDecrement(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.decrement')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(response);
             }
         });
     }
 </script>
+<script>
+    function addToCartDetail(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.store')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $('#add_to_cart_detail_'+product_id).addClass('hidden');
+                $('#success_detail_'+product_id).removeClass('hidden');
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(1);
+                $("#cart_items_count").html(response);
+            }
+        });
+    }
 
+    function cartIncrementDetail(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.increment')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_detail_"+product_id).empty();
+                $("#qty_detail_"+product_id).val(response);
+            }
+        });
+    }
+
+    function cartDecrementDetail(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.decrement')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_detail_"+product_id).empty();
+                $("#qty_detail_"+product_id).val(response);
+            }
+        });
+    }
+</script>
 @endsection

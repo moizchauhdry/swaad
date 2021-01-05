@@ -47,7 +47,7 @@ class ProductController extends Controller
         $rules = [
             'title' => 'required|string|max:255',
             'title_gr' => 'required|string|max:255',
-            'image_url' => 'required|image|mimes:jpeg,jpg,png',
+            'image_url' => 'required|image|mimes:jpeg,jpg,png|max:1024',
             'category_id' => 'required',
             'price' => 'required|numeric|gt:0',
             'spice_level' => 'required|numeric',

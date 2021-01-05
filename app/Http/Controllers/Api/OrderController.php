@@ -160,7 +160,9 @@ class OrderController extends Controller
         }
 
         if ($request->get($this->orderConstants['KEY_PAYMENT_METHOD']) == 1) {
-            $url = env('PAYMENT_URL');
+
+            $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
+            // $url = 'https://test.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
 
             $payload = array(
                 'RequestHeader' => array(
@@ -198,7 +200,7 @@ class OrderController extends Controller
                     'NotifyUrl' => "https://myshop/callback"
                 ),
                 'DeliveryAddressForm' => array(
-                    'Display' => true,
+                    'Display' => false,
                     'MandatoryFields' => array("CITY", "COMPANY", "COUNTRY", "EMAIL", "FIRSTNAME", "LASTNAME", "PHONE", "SALUTATION", "STATE", "STREET", "ZIP")
                 )
             );

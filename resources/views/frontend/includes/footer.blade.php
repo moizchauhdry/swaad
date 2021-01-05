@@ -50,7 +50,8 @@
                         <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
                             <li><a href="{{route('about')}}" class="py-2 d-block">About us</a></li>
                             <li><a href="{{route('serve')}}" class="py-2 d-block">What We Serve</a></li>
-                            <li><a href="{{route('privacy')}}" class="py-2 d-block">Terms &amp; Conditions</a></li>
+                            <li><a href="{{route('termsCondition')}}" class="py-2 d-block">Terms &amp; Conditions</a>
+                            </li>
                             <li><a href="{{route('privacy')}}" class="py-2 d-block">Privacy Policy</a></li>
                         </ul>
                     </div>
