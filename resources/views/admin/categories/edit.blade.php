@@ -43,9 +43,9 @@
                                         placeholder="Enter Category Title" value="{{$category->title}}" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Title (gr)<span class="required-star">*</span></label>
+                                    <label>Title [de]<span class="required-star">*</span></label>
                                     <input type="text" name="title_gr" class="form-control"
-                                        placeholder="Enter Category Title (gr)" value="{{$category->title_gr}}"
+                                        placeholder="Enter Category Title [de]" value="{{$category->title_gr}}"
                                         required>
                                 </div>
                                 <div class="form-group col-md-6 mb-4">

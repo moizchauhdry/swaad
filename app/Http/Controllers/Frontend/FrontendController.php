@@ -41,45 +41,39 @@ class FrontendController extends Controller
     
     public function register(Request $request) {
 
-        // $rules = [
-        //     'username' => 'required|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|max:255',
-        //     'phone' => 'required|numeric',
-        //     'address' => 'required|max:255',
-        //     'house_no' => 'required|max:255',
-        //     'post_code' => 'required|numeric',
-        // ];
-
-        // $validator = Validator::make($request->all(), $rules);
-
-        // if ($validator->fails()) {
-        //     return Redirect()->back()->withErrors($validator)->withInput($request->all());
-        // }
+        $this->validate($request, [
+            'username' => 'required|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|max:255',
+            'phone' => 'required|max:20',
+            'address' => 'required|max:255',
+            'house_no' => 'required|numeric',
+            'post_code' => 'required|numeric',       
+        ]);
 
         $data = [
             'name' => $request->input('username'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'phone_no' => $request->input('phone_no'),
+            'phone_no' => $request->input('phone'),
             'address' => $request->input('street'),
             'home_no' => $request->input('house_no'),
             'post_code' => $request->input('post_code'),
         ];
 
         $user = User::create($data);
-
+        
         if($request->isMethod('post')){
             $data = $request->all();
             if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
-                return redirect()->route('index');
+                return TRUE;
             }
             else{
-                return redirect()->back()->with('ERROR','Invalid Credentials');
+                return FALSE;
             }
         }
         if(Auth::guard('frontend')->check()){
-            return redirect()->route('index');
+            return TRUE;
         }
         
     }

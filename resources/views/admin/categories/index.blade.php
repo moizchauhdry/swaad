@@ -37,7 +37,7 @@
                                 <tr>
                                     <th>Sr #</th>
                                     <th>Title</th>
-                                    <th>Title (gr)</th>
+                                    <th>Title [de]</th>
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>

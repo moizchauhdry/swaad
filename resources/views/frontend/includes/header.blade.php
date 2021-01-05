@@ -6,23 +6,32 @@
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                 class="icon-phone2"></span></div>
-                        <span class="text">+ 031 558 33 88</span>
+                        <span class="text header-phone">+ 031 558 33 88</span>
                     </div>
                     <div class="col-md pr-4 d-flex topper align-items-center">
                         <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
                                 class="icon-paper-plane"></span></div>
-                        <span class="text">hello@swaadbern.ch</span>
+                        <span class="text header-email">hello@swaadbern.ch</span>
                     </div>
-                    <div class="col-md-6 pr-4 d-flex topper align-items-center text-lg-right">
+                    <div class="col-md-7 pr-4 d-flex topper align-items-center text-lg-right">
                         <span class="text text-center">
                             <div class="float-left">
-                                <b>Mon-Fri </b> (11.00 - 14.00 & 17.30 - 22.00) <br>
+                                <b>Tuesday-Friday </b> (10:00 - 22:30) <br>
                             </div>
                             <div class="float-left">
-                                <b>Sat-Sun </b> (12.00 - 12.00)
+                                <b>Monday </b> (10:00 - 14:00) <br>
+                            </div>
+                            <div class="float-left">
+                                <b>Saturday </b> (17:00 - 22:30) <br>
+                            </div>
+                            <div class="float-left">
+                                <b>Sunday Closed</b>
                             </div>
                         </span>
                         <span class="text text-center">
+                            <div id="google_translate_element"></div>
+                        </span>
+                        <span class="text text-center registration">
                             @if(Auth::guard('frontend')->check())
                             <a href="{{route('user.profile')}}" class="text-white">
                                 {{ Auth::guard('frontend')->user()->name }}</a> | <a href="{{route('user.logout')}}"
@@ -34,7 +43,6 @@
                             @endif
                         </span>
                     </div>
-                    <div id="google_translate_element"></div>
                 </div>
             </div>
         </div>
@@ -178,48 +186,89 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('user.register.store')}}" method="POST" enctype="multipart/form-data"> @csrf
-                    <div class=" container row">
-                        <div class="form-group col-md-6">
-                            <label for="">User Name</label>
-                            <input type="text" class="form-control" id="username" name="username" value=""
-                                placeholder="" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="" placeholder=""
-                                required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" value=""
-                                placeholder="" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="">Phone Number</label>
-                            <input type="text" class="form-control" id="phone_no" name="phone_no" value=""
-                                placeholder="" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="">Street</label>
-                            <input type="text" class="form-control" id="street" name="street" value="" placeholder="">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="">House Number</label>
-                            <input type="text" class="form-control" id="house_no" name="house_no" value=""
-                                placeholder="" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="">Post Code</label>
-                            <input type="text" class="form-control" id="post_code" name="post_code" value=""
-                                placeholder="" required>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <button type="submit" class="btn btn-primary float-right">Register</button>
-                        </div>
+                <div class=" container row">
+                    <div class="form-group col-md-6">
+                        <label for="">User Name</label>
+                        <input type="text" class="form-control" id="reg_username" name="username" value=""
+                            placeholder="" required>
                     </div>
-                </form>
+                    <div class="form-group col-md-6">
+                        <label for="">Email</label>
+                        <input type="email" class="form-control" id="reg_email" name="email" value="" placeholder=""
+                            required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control" id="reg_password" name="password" value=""
+                            placeholder="" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Phone Number</label>
+                        <input type="text" class="form-control" id="reg_phone" name="phone" value="" placeholder=""
+                            required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Street</label>
+                        <input type="text" class="form-control" id="reg_address" name="address" value="" placeholder="">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">House Number</label>
+                        <input type="number" class="form-control" id="reg_house_no" name="house_no" value=""
+                            placeholder="" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Post Code</label>
+                        <input type="number" class="form-control" id="reg_post_code" name="post_code" value=""
+                            placeholder="" required>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button type="button" class="btn btn-primary float-right" onclick="registerUser()"
+                            id="registerButton">Register</button>
+                        <button class="btn btn-primary float-right hidden" id="loadingRegisterButton" type="button"
+                            disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function registerUser() {
+        var username = $('#reg_username').val();
+        var email = $('#reg_email').val();
+        var password = $('#reg_password').val();
+        var phone = $('#reg_phone').val();
+        var address = $('#reg_address').val();
+        var house_no = $('#reg_house_no').val();
+        var post_code = $('#reg_post_code').val();
+
+        $.ajax({
+            method: "POST",
+            url: '{{route('user.register.store')}}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                'username': username,
+                'email': email,
+                'password': password,
+                'phone': phone,
+                'address': address,
+                'house_no': house_no,
+                'post_code': post_code,
+            },
+            success: function (response) {
+                if (response == 1) {
+                    setInterval('location.reload()', 1000);
+                    $("#registerButton").addClass("hidden");
+                    $("#loadingRegisterButton").removeClass("hidden");
+                }            
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown)
+            }
+        });
+    }
+</script>

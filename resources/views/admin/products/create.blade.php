@@ -42,9 +42,9 @@
                                         required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Title (gr) <span class="required-star">*</span></label>
+                                    <label>Title [de] <span class="required-star">*</span></label>
                                     <input type="text" name="title_gr" class="form-control"
-                                        placeholder="Enter Title (gr)" required>
+                                        placeholder="Enter Title [de]" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Image <span class="required-star">*</span></label>
@@ -70,9 +70,9 @@
                                 <div class="form-group col-md-2">
                                     <label>Price <span class="required-star">*</span></label>
                                     <input type="number" name="price" class="form-control" placeholder="Enter Price"
-                                        min="0" required>
+                                        min="0" step="0.01" required>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class=" form-group col-md-2">
                                     <label>Spice Level <span class="required-star">*</span></label>
                                     <select name="spice_level" id="spice_level" class="form-control custom-select"
                                         required>
@@ -90,7 +90,7 @@
                                         class="form-control" required></textarea>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Description (gr) <span class="required-star">*</span></label>
+                                    <label>Description [de] <span class="required-star">*</span></label>
                                     <textarea name="description_gr" id="description" cols="30" rows="5"
                                         class="form-control" required></textarea>
                                 </div>

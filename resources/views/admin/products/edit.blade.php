@@ -43,9 +43,9 @@
                                         value="{{$product->title}}" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Title (gr) <span class="required-star">*</span></label>
+                                    <label>Title [de] <span class="required-star">*</span></label>
                                     <input type="text" name="title_gr" class="form-control"
-                                        placeholder="Enter Title (gr)" value="{{$product->title_gr}}" required>
+                                        placeholder="Enter Title [de]" value="{{$product->title_gr}}" required>
                                 </div>
                                 <div class="form-group col-md-4 mb-4">
                                     <label>Image</label>
@@ -95,7 +95,7 @@
                                         class="form-control" required>{{$product->description}}</textarea>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Description (gr) <span class="required-star">*</span></label>
+                                    <label>Description [de] <span class="required-star">*</span></label>
                                     <textarea name="description_gr" id="description" cols="30" rows="5"
                                         class="form-control" required>{{$product->description_gr}}</textarea>
                                 </div>
