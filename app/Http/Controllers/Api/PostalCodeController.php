@@ -24,10 +24,11 @@ class PostalCodeController extends Controller
         $this->generalConstants = Config::get('constants.GENERAL_CONSTANTS');
     }
 
-    public function authorizeA(Request $request){
+    public function checkPostalCode(Request $request)
+    {
         $response = [];
         $rules = [
-            $this->postCodeConstants['KEY_POSTCODE_ID'] => 'required',
+            $this->postCodeConstants['KEY_POST_CODE'] => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -39,9 +40,16 @@ class PostalCodeController extends Controller
             ]);
         }
         $postcode = PostalCode::where('postal_code', $request->get($this->postCodeConstants['KEY_POST_CODE']))->first();
-        $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
-        $response['postcode'] = $postcode;
-        $response['message'] = 'Success.';
-        return response()->json($response);
+
+        if ($postcode) {
+            $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
+            $response['amount'] = $postcode->net_total;
+            $response['message'] = 'Success.';
+            return response()->json($response);
+        } else {
+            $response['status'] = $this->responseConstants['STATUS_OTHER_ERROR'];
+            $response['message'] = 'No Amount Found Against This Postal Code.';
+            return response()->json($response);
+        }
     }
 }

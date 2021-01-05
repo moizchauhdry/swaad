@@ -56,7 +56,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('/getToReviews', 'Api\ReviewController@getToReviews');
 
         ///PostCode
-        Route::post('/checkPostalCode', 'Api\PostalCodeController@checkPostalCode');
+        Route::post('Api\PostalCodeController@checkPostalCode', '/checkPostalCode');
 
     });
 
