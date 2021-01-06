@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $appends =['created_at_format'];
-    
+
     protected $fillable = [
         'user_id',
         'tracking_id',
@@ -23,6 +23,7 @@ class Order extends Model
         'order_notes',
         'payment_status',
         'payment_method',
+        'created_at'
     ];
 
     public function user()
