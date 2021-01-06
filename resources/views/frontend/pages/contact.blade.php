@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-3 d-flex">
                 <div class="info bg-white p-4">
-                    <p><span>Phone:</span> <a href="tel://1234567920">+ 031 558 33 88</a></p>
+                    <p><span>Phone:</span> <a href="tel://1234567920">031 558 33 88</a></p>
                 </div>
             </div>
             <div class="col-md-3 d-flex">

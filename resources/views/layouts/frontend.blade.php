@@ -31,16 +31,11 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}">
 
+    <!-- MY CUSTOMS -->
     <link rel="stylesheet" href="{{asset('public/frontend/custom/custom.css')}}">
-
-    <!-- TOASTER -->
-    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr1.css')}}">
-    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr2.css')}}">
-
     <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
-
     <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
     @yield('styles')
 
@@ -79,23 +74,7 @@
     <script src="{{asset('public/frontend/js/google-map.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
 
-    <!-- TOASTER -->
-    <script src="{{asset('public/frontend/plugins/toastr/toastr.min.js')}}"></script>
-    <script src="{{asset('public/frontend/plugins/toastr/toastr.js')}}"></script>
-
-    @if(Session::has('SUCCESS'))
-    <script>
-        toastr.success('{{  Session::get('SUCCESS') }}')
-    </script>
-    @endif
-
-    @if(Session::has('ERROR'))
-    <script>
-        toastr.error('{{  Session::get('ERROR') }}')
-    </script>
-    @endif
-
-    @yield('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -105,6 +84,12 @@
 
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
+
+    {{-- <script>
+        sweetAlert("title", "description", "error")
+    </script> --}}
+
+    @yield('scripts')
 
 </body>
 

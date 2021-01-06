@@ -154,13 +154,14 @@ class CheckoutController extends Controller
         $order = Order::where('user_id',$user->id)->first();
         $order->update(['payment_status'=> 1]);
         
-        dd('Successfull Transaction.');
-        // return redirect()->route('index')->with('SUCCESS','Successfull Transaction.');
+        $paymentStatus = 1 ;
+        // $paymentStatus = "Successfull Transaction" ;
+        return view('frontend.pages.payment',compact('paymentStatus'));
     }
 
     public function paymentFail(Request $request) {
-        dd('Transaction cancel or fail. Please try again later.');
-
-        // return redirect()->route('index')->with('ERROR','Transaction cancel or fail. Please try again later.');
+        $paymentStatus = 0 ;
+        // $paymentStatus = "Transaction cancel or fail. Please try again later." ;
+        return view('frontend.pages.payment',compact('paymentStatus'));
     }
 }

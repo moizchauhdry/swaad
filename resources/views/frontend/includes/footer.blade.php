@@ -64,7 +64,7 @@
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text"> Bernstrasse 95,
                                     Ostermundigen, Switzerland</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+ 031 558 33
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">031 558 33
                                         88</span></a></li>
                             <li><a href="#"><span class="icon icon-envelope"></span><span
                                         class="text">hello@swaadbern.ch</span></a></li>

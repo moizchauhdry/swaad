@@ -60,7 +60,7 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item {{(Route::currentRouteName() == 'products') ? 'active' : ''}}">
-                    <a href="{{route('products')}}" class="nav-link">Order Online</a></li>
+                    <a href="{{route('categories')}}" class="nav-link">Order Online</a></li>
                 <li
                     class="nav-item dropdown {{(Route::currentRouteName() == 'getProductsByCategory') ? 'active' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
@@ -161,8 +161,7 @@
                             </button>
 
                             @if (Route::has('password.request'))
-                            {{-- {{ route('password.request') }} --}}
-                            <a class="btn btn-link" href="#">
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                             @endif

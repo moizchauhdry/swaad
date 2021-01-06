@@ -56,9 +56,9 @@ class FrontendController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'phone_no' => $request->input('phone'),
-            'address' => $request->input('address'),
+            'address' => $request->input('street'),
             'home_no' => $request->input('house_no'),
-            'zip_code' => $request->input('post_code'),
+            'post_code' => $request->input('post_code'),
         ];
 
         $user = User::create($data);
@@ -78,7 +78,7 @@ class FrontendController extends Controller
         
     }
 
-    public function index() {   
+    public function index() {
         $categories = Category::where('status','1')->inRandomOrder()->get();
         $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->take(12)->get();
         return view ('frontend.pages.index',compact('categories','popularProducts'));

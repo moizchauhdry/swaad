@@ -189,8 +189,8 @@ class OrderController extends Controller
                     'LanguageCode' => "en"
                 ),
                 'ReturnUrls' => array(
-                    'Success' => url('/success'),
-                    'Fail' => url('/fail')
+                    'Success' => url('/payment-success'),
+                    'Fail' => url('/payment-fail')
                 ),
                 'Notification' => array(
                     'PayerEmail' => $user->email,
