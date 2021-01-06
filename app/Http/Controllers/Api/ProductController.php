@@ -174,13 +174,13 @@ class ProductController extends Controller
         }
         if ($request->lan_type == 0) {
             $productDetails = Product::select('id', 'category_id', 'title', 'image_url', 'price', 'description', 'status', 'view_count', 'spice_level')->with(['reviews' => function ($query) use($offset) {
-                $query->select(['id', 'user_id', 'product_id', 'rating', 'comment','is_approved'])->where('is_approved',1)->skip($offset)->take($this->recordsPerPage);
+                $query->select(['id', 'user_id', 'product_id', 'rating', 'comment','is_approved','created_at'])->where('is_approved',1)->skip($offset)->take($this->recordsPerPage);
             },'reviews.user'=> function($query){
                 $query->select(['id', 'name','image_url']);
             }])->where('id', $request->get($this->productConstants['KEY_PRODUCT_ID']))->first();
         } elseif ($request->lan_type == 1) {
             $productDetails = Product::select('id', 'category_id', 'title_gr as title', 'image_url', 'price', 'description_gr as description', 'status', 'view_count', 'spice_level')->with(['reviews' => function ($query) use($offset) {
-                $query->select(['id', 'user_id', 'product_id', 'rating', 'comment','is_approved'])->where('is_approved',1)->skip($offset)->take($this->recordsPerPage);
+                $query->select(['id', 'user_id', 'product_id', 'rating', 'comment','is_approved','created_at'])->where('is_approved',1)->skip($offset)->take($this->recordsPerPage);
             },'reviews.user'=> function($query){
                 $query->select(['id', 'name','image_url']);
             }])->where('id', $request->get($this->productConstants['KEY_PRODUCT_ID']))->first();
@@ -191,4 +191,5 @@ class ProductController extends Controller
             'productDetails' => $productDetails,
         ]);
     }
+
 }
