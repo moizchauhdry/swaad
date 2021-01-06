@@ -24,15 +24,27 @@ class CheckoutController extends Controller
     }
 
     public function store(Request $request) {
-        
+
         $user = Auth::guard('frontend')->user();
         $grossTotal = number_format((float)Cart::getSubTotal(), 2, '.', '');
         $netTotal = number_format((float)Cart::getTotal(), 2, '.', '');
+        
+        if ($request->comments == NULL) {
+            $orderNotes = "-";
+        } else {
+            $orderNotes = $request->comments;
+        }
         
         $orderData = [
             'user_id' => $user->id,
             'gross_total' => $grossTotal,
             'net_total' => $netTotal,
+            'delivery_date' => $request->dlv_date,
+            'delivery_time' => $request->dlv_time,
+            'delivery_address' => $request->dlv_address,
+            'delivery_phone' => $request->dlv_phone,
+            'order_notes' => $orderNotes,
+            'payment_method' => $request->chk_payment_method,
         ];
 
         $order = Order::create($orderData);
@@ -140,7 +152,7 @@ class CheckoutController extends Controller
 
         $user = Auth::guard('frontend')->user();
         $order = Order::where('user_id',$user->id)->first();
-        $order->update(['payment_method'=> 1,'payment_status'=> 1]);
+        $order->update(['payment_status'=> 1]);
         
         dd('Successfull Transaction.');
         // return redirect()->route('index')->with('SUCCESS','Successfull Transaction.');

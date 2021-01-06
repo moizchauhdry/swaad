@@ -63,7 +63,7 @@
                                             style="width:150px" />
                                         @endif
                                     </td>
-                                    <td>{{$product->price}}</td>
+                                    <td>CHF {{ number_format((float) $product->price, 2, '.', '')}}</td>
 
                                     <td>{{$product->category->title}}</td>
                                     <td>{{$product->description}}</td>

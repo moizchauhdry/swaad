@@ -56,9 +56,9 @@ class FrontendController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'phone_no' => $request->input('phone'),
-            'address' => $request->input('street'),
+            'address' => $request->input('address'),
             'home_no' => $request->input('house_no'),
-            'post_code' => $request->input('post_code'),
+            'zip_code' => $request->input('post_code'),
         ];
 
         $user = User::create($data);

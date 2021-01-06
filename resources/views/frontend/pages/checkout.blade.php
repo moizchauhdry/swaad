@@ -115,11 +115,11 @@
                                 </p>
                                 <p class="d-flex">
                                     <span>Delivery</span>
-                                    <span>CHS 0.00</span>
+                                    <span>CHF 0.00</span>
                                 </p>
                                 <p class="d-flex">
                                     <span>Discount</span>
-                                    <span>CHS 0.00</span>
+                                    <span>CHF 0.00</span>
                                 </p>
                                 <hr>
                                 <p class="d-flex total-price">
