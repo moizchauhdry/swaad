@@ -9,6 +9,7 @@ use App\Product;
 use App\User;
 use App\Reservation;
 use App\Contact;
+use App\Banner;
 
 use Validator;
 use Session;
@@ -56,9 +57,9 @@ class FrontendController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'phone_no' => $request->input('phone'),
-            'address' => $request->input('street'),
+            'address' => $request->input('address'),
             'home_no' => $request->input('house_no'),
-            'post_code' => $request->input('post_code'),
+            'zip_code' => $request->input('post_code'),
         ];
 
         $user = User::create($data);
@@ -81,7 +82,8 @@ class FrontendController extends Controller
     public function index() {
         $categories = Category::where('status','1')->inRandomOrder()->get();
         $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->take(12)->get();
-        return view ('frontend.pages.index',compact('categories','popularProducts'));
+        $banners = Banner::where('status','1')->where('status','1')->take(3)->get();
+        return view ('frontend.pages.index',compact('categories','popularProducts','banners'));
     }
 
     public function addToCart(Request $request) {

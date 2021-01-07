@@ -75,7 +75,7 @@
                                 <div class="form-group col-md-2">
                                     <label>Price <span class="required-star">*</span></label>
                                     <input type="number" name="price" class="form-control" placeholder="Enter Price"
-                                        min="0" value="{{$product->price}}" required>
+                                        min="0" step="0.01" value="{{$product->price}}" required>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label>Spice Level <span class="required-star">*</span></label>

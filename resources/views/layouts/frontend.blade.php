@@ -36,14 +36,17 @@
     <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
     <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-
-    @yield('styles')
+    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr1.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr2.css')}}">
 
     <style>
         .hidden {
             display: none;
         }
     </style>
+
+    @yield('styles')
+
 </head>
 
 <body class="goto-here">
@@ -89,7 +92,23 @@
         sweetAlert("title", "description", "error")
     </script> --}}
 
+    <script src="{{asset('public/frontend/plugins/toastr/toastr.min.js')}}"></script>
+    <script src="{{asset('public/frontend/plugins/toastr/toastr.js')}}"></script>
+
+    @if(Session::has('SUCCESS'))
+    <script>
+        toastr.success('{{  Session::get('SUCCESS') }}')
+    </script>
+    @endif
+
+    @if(Session::has('ERROR'))
+    <script>
+        toastr.error('{{  Session::get('ERROR') }}')
+    </script>
+    @endif
+
     @yield('scripts')
+
 
 </body>
 

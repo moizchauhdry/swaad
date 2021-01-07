@@ -19,9 +19,31 @@ class UserController extends Controller
         return view ('frontend.users.profile',compact('user'));
     }
 
-    public function updateProfile() {
+    public function updateProfile(Request $request) {
+
         $user = Auth::guard('frontend')->user();
-        return redirect()->back();
+
+        $this->validate($request, [
+            'username' => 'required|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'phone' => 'required|max:20',
+            'address' => 'required|max:255',
+            'house_no' => 'required|numeric',
+            'post_code' => 'required|numeric',       
+        ]);
+
+        $data = [
+            'name' => $request->input('username'),
+            'email' => $request->input('email'),
+            'phone_no' => $request->input('phone'),
+            'address' => $request->input('address'),
+            'home_no' => $request->input('house_no'),
+            'zip_code' => $request->input('post_code'),
+        ];
+
+        $user->update($data);
+        
+        return redirect()->back()->with('SUCCESS','Profile Updated Sucessfully');
     }
     
     public function orders() {

@@ -69,32 +69,32 @@
                         <div class="form-group col-md-6">
                             <label for="">User Name</label>
                             <input type="text" class="form-control" id="username" name="username"
-                                value="{{$user->name}}" placeholder="" required>
+                                value="{{$user->name}}" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Email</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}"
-                                placeholder="" required>
+                                required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Phone Number</label>
-                            <input type="text" class="form-control" id="phone_no" name="phone_no"
-                                value="{{$user->phone_no}}" placeholder="" required>
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{$user->phone_no}}"
+                                required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Street</label>
-                            <input type="text" class="form-control" id="street" name="street" value="{{$user->address}}"
-                                placeholder="">
+                            <input type="text" class="form-control" id="address" name="address"
+                                value="{{$user->address}}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">House Number</label>
                             <input type="text" class="form-control" id="house_no" name="house_no"
-                                value="{{$user->home_no}}" placeholder="" required>
+                                value="{{$user->home_no}}" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Post Code</label>
                             <input type="text" class="form-control" id="post_code" name="post_code"
-                                value="{{$user->zip_code}}" placeholder="" required>
+                                value="{{$user->zip_code}}" required>
                         </div>
                     </div>
                     <div class="modal-footer">

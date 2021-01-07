@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\OrderDetail;
 use App\User;
+use App\PostalCode;
 use Cart;
 use Auth;
 
@@ -16,10 +17,23 @@ class CheckoutController extends Controller
     public function index() {
         $cart = Cart::getContent();
 
+        $user = User::where('id',Auth::guard('frontend')->user()->id)->first();
+        $postcode = PostalCode::where('postal_code', $user->zip_code)->first();
+
+        $cartTotal = floatval(Cart::getSubTotal());
+
         if ($cart->count() > 0) {
-            return view ('frontend.pages.checkout');
+            if ($postcode == NULL) {
+                return back()->with('ERROR','Sorry we not delivered in your area.');
+            } else {
+                if ($postcode->net_total > $cartTotal ) {
+                    return back()->with('ERROR','Your cart total is not enough. Minimum cart total of CHF '.$postcode->net_total.' require to place this order.');
+                } else {
+                    return view ('frontend.pages.checkout');
+                }
+            }
         } else {
-            return back();
+            return back()->with('ERROR','Your cart is empty.');
         }
     }
 

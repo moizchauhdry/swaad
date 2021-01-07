@@ -30,7 +30,7 @@ Route::group(['middleware' => ['frontend']],function(){
 
     Route::group(['prefix'=>'user'],function() {
         Route::get('/profile','Frontend\UserController@profile')->name('user.profile');
-        Route::post('/profile/update','Frontend\UserController@updateProfile')->name('updateProfile');
+        Route::post('/profile/update/{id}','Frontend\UserController@updateProfile')->name('updateProfile');
         Route::get('/orders','Frontend\UserController@orders')->name('user.orders');
         Route::post('/getOrdersByStatus','Frontend\UserController@getOrdersByStatus')->name('getOrdersByStatus');
         Route::get('/order-detail/{id}','Frontend\UserController@orderDetail')->name('orderDetail');
