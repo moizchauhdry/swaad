@@ -36,8 +36,6 @@
     <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
     <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr1.css')}}">
-    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr2.css')}}">
 
     <style>
         .hidden {
@@ -88,22 +86,15 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
 
-    {{-- <script>
-        sweetAlert("title", "description", "error")
-    </script> --}}
-
-    <script src="{{asset('public/frontend/plugins/toastr/toastr.min.js')}}"></script>
-    <script src="{{asset('public/frontend/plugins/toastr/toastr.js')}}"></script>
-
-    @if(Session::has('SUCCESS'))
+    @if(Session::has('ERROR'))
     <script>
-        toastr.success('{{  Session::get('SUCCESS') }}')
+        sweetAlert("Oops...", '{{  Session::get('ERROR') }}', "error")
     </script>
     @endif
 
-    @if(Session::has('ERROR'))
+    @if(Session::has('WARNING'))
     <script>
-        toastr.error('{{  Session::get('ERROR') }}')
+        sweetAlert("Oops...", '{{  Session::get('WARNING') }}', "warning")
     </script>
     @endif
 

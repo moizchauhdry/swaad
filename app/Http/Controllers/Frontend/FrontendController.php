@@ -27,7 +27,7 @@ class FrontendController extends Controller
                 return redirect()->route('checkout');
             }
             else{
-                return redirect()->back()->with('ERROR','Invalid Credentials!');
+                return redirect()->back()->with('ERROR','The username or password you entered is incorrect.');
             }
         }
         if(Auth::guard('frontend')->check()){

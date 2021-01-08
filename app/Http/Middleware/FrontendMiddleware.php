@@ -17,7 +17,7 @@ class FrontendMiddleware
     public function handle($request, Closure $next)
     {   
         if (!Auth::guard('frontend')->check()) {
-            return redirect()->back()->with('ERROR','Login Please!');
+            return redirect()->back()->with('WARNING','You must be logged into your account.');
         }
         return $next($request);
     }
