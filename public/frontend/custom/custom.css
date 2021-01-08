@@ -98,3 +98,9 @@
 .registration {
     font-size: 14px;
 }
+
+.product img.img-fluid {
+    height: 175px;
+    object-fit: cover;
+    width: 100%;
+}

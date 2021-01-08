@@ -86,11 +86,11 @@ class CheckoutController extends Controller
                 'RequestHeader' => array(
                     'SpecVersion' => "1.7",
                     'CustomerId' => env('PAYMENT_CUSTOMER_ID'),
-                    'RequestId' => "TEST",
+                    'RequestId' => "SWAAD",
                     'RetryIndicator' => 0,
                     'ClientInfo' => array(
-                        'ShopInfo' => "TEST",
-                        'OsInfo' => "TEST"
+                        'ShopInfo' => "SWAAD",
+                        'OsInfo' => "SWAAD"
                     )
                 ),
                 'TerminalId' => env('PAYMENT_TERMINAL_ID'),
@@ -101,8 +101,8 @@ class CheckoutController extends Controller
                     'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
                 ),
                 'OrderId' => $order->id,
-                'PayerNote' => "TEST",
-                'Description' => "TEST"
+                'PayerNote' => "ONLINE FOOD ORDER",
+                'Description' => $orderNotes
                 ),
                 'Payer' => array(
                     'IpAddress' => "192.168.178.1",

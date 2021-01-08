@@ -170,7 +170,7 @@ class OrderController extends Controller
                     'RetryIndicator' => 0,
                     'ClientInfo' => array(
                         'ShopInfo' => env('APP_NAME'),
-                        'OsInfo' => "Windows Server 2013"
+                        'OsInfo' => "SWAAD"
                     )
                 ),
                 'TerminalId' => env('PAYMENT_TERMINAL_ID'),
@@ -181,7 +181,7 @@ class OrderController extends Controller
                         'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
                     ),
                     'OrderId' => $order->id,
-                    'PayerNote' => "A Note",
+                    'PayerNote' => "ONLINE FOOD ORDER",
                     'Description' => $request->get($this->orderConstants['KEY_ORDER_NOTES'])
                 ),
                 'Payer' => array(
