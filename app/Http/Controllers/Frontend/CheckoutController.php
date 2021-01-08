@@ -24,16 +24,16 @@ class CheckoutController extends Controller
 
         if ($cart->count() > 0) {
             if ($postcode == NULL) {
-                return back()->with('ERROR','Sorry we not delivered in your area.');
+                return back()->with('WARNING','Sorry we not delivered in your area.');
             } else {
                 if ($postcode->net_total > $cartTotal ) {
-                    return back()->with('ERROR','Your cart total is not enough. Minimum cart total of CHF '.$postcode->net_total.' require to place this order.');
+                    return back()->with('WARNING','Your cart total is not enough. Minimum cart total of CHF '.$postcode->net_total.' require to place this order.');
                 } else {
                     return view ('frontend.pages.checkout');
                 }
             }
         } else {
-            return back()->with('ERROR','Your cart is empty.');
+            return back()->with('WARNING','Your cart is empty.');
         }
     }
 
