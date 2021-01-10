@@ -54,6 +54,29 @@
                 </li>
                 @endif
 
+                @if (Auth::guard('admin')->user()->hasPermission('manage-customers'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'customers.create' || Route::currentRouteName() == 'customers.index'|| Route::currentRouteName() == 'customers.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'customers.create' || Route::currentRouteName() == 'customers.index' || Route::currentRouteName() == 'customers.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Customers
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('customers.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'customers.index' || Route::currentRouteName() == 'customers.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Customers</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
                 @if (Auth::guard('admin')->user()->hasPermission('manage-categories'))
                 <li
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'categories.create' || Route::currentRouteName() == 'categories.index'|| Route::currentRouteName() == 'categories.edit' ) ? 'menu-open' : ''}}">

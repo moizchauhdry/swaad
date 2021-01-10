@@ -100,16 +100,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                 Route::group(['middleware' => ['permission:manage-customers']],function(){
                     Route::group(['prefix' => 'customers'],function(){
                         Route::get('/', 'CustomerController@index')->name('customers.index');
-                        Route::post('/store', 'CustomerController@store')->name('customers.store');
-                        Route::get('/edit/{id}', 'CustomerController@edit')->name('customers.edit');
-                        Route::post('/update/{id}', 'CustomerController@update')->name('customers.update');
-                        Route::post('/deactivate', 'CustomerController@destroy')->name('customers.delete');
-                        Route::get('/deleted', 'CustomerController@deleted')->name('customers.deleted');
-                        Route::post('/activate', 'CustomerController@activate')->name('customers.activate');
-                        Route::post('/search', 'CustomerController@search')->name('customers.search');
-
-                        Route::get('/edit/address/{id}', 'CustomerController@editAddress')->name('customers.edit.address');
-                        Route::post('/update/address/{id}', 'CustomerController@updateAddress')->name('customers.update.address');
+                        Route::post('/suspend-account', 'CustomerController@customerSuspendAccount')->name('customerSuspendAccount');
                     });
                 });
 

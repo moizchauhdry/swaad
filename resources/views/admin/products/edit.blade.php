@@ -87,6 +87,14 @@
                                         <option {{ ($product->spice_level == "3"? "selected":"") }} value="3">3</option>
                                     </select>
                                 </div>
+                                <div class="form-group col-md-3">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="deactivate_product"
+                                            id="customSwitch1" @if ($product->status == 0) checked @endif>
+                                        <label class="custom-control-label" for="customSwitch1">Deactivate
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">

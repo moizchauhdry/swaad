@@ -10,13 +10,20 @@ use Hash;
 use Validator;
 
 use App\Admin;
-
+use App\User;
+use App\Category;
+use App\Product;
+use App\Order;
 
 class AdminController extends Controller
 {
     public function dashboard()
-    {
-        return view ('admin.dashboard');
+    {   
+        $users = User::all();
+        $categories = Category::all();
+        $products = Product::all();
+        $orders = Order::all();
+        return view ('admin.dashboard',compact('users','categories','products','orders'));
     }
 
     public function login(Request $request)

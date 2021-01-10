@@ -39,7 +39,7 @@
                     <div class="form-group col-md-6">
                         <label for="">Time</label>
                         <input type="time" class="form-control" name="rsv_time" id="rsv_time" placeholder=""
-                            value="{{date("h:i",strtotime('+5 hours'))}}" required>
+                            value="{{date("h:i")}}" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">People <span class="text-danger">*</span></label>

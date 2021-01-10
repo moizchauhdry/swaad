@@ -177,7 +177,7 @@ class OrderController extends Controller
                 'PaymentMethods' => array("DIRECTDEBIT", "VISA", "MASTERCARD", "DINERS", "MAESTRO"),
                 'Payment' => array(
                     'Amount' => array(
-                        'Value' => (int)$order->net_total * 100,
+                        'Value' => (float)$order->net_total * 100,
                         'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
                     ),
                     'OrderId' => $order->id,

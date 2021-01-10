@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('status','1')->orderBy('id','DESC')->get();
+        $products = Product::orderBy('id','DESC')->get();
         return view ('admin.products.index',compact('products'));
     }
 
@@ -130,7 +130,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $product = Product::findOrFail($id);
+
         $rules = [
             'title' => 'required|string|max:255',
             'title_gr' => 'required|string|max:255',
@@ -148,6 +150,12 @@ class ProductController extends Controller
             return Redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
+        if ($request->has('deactivate_product')) {
+            $status = 0;
+        } else {
+            $status = 1;
+        }
+
         $data = [
             'title' => $request->input('title'),
             'title_gr' => $request->input('title_gr'),
@@ -156,13 +164,12 @@ class ProductController extends Controller
             'spice_level' => $request->input('spice_level'),
             'description' => $request->input('description'),
             'description_gr' => $request->input('description_gr'),
+            'status' => $status,
         ];
-        $product = Product::findOrFail($id);
+
         $product->update($data);
 
         $productImageDirectory = 'productImages';
-
-        // PRODUCT SINGLE IMAGE
         if($request->hasFile('image_url')) 
         {
             if (!Storage::exists($productImageDirectory . '/' . $product->id)) {
