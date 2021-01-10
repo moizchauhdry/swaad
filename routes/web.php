@@ -167,6 +167,11 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     });
                 });
 
+                Route::group(['prefix' => 'site-configuration'], function () {
+                    Route::get('/', 'SiteConfigurationController@index')->name('site-configuration.index');
+                    Route::post('/update', 'SiteConfigurationController@update')->name('site-configuration.update');
+                });
+
             });
         });
     });

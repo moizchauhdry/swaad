@@ -267,6 +267,16 @@
                 </li>
                 @endif
 
+                <li class="nav-item">
+                    <a href="{{route('site-configuration.index')}}"
+                        class="nav-link {{(Route::currentRouteName() == 'site-configuration.index') ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            Site Configuration
+                        </p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

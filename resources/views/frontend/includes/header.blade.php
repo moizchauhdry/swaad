@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-7 pr-4 d-flex topper align-items-center text-lg-right">
                         <span class="text text-center">
-                            <div class="float-left">
+                            {{-- <div class="float-left">
                                 <b>Tuesday-Friday </b> (10:00 - 22:30) <br>
                             </div>
                             <div class="float-left">
@@ -26,6 +26,12 @@
                             </div>
                             <div class="float-left">
                                 <b>Sunday Closed</b>
+                            </div> --}}
+                            <div style="text-align:left">
+                                <?php 
+                                    $site = App\SiteConfiguration::first();
+                                ?>
+                                {!! $site->store_timing !!}
                             </div>
                         </span>
                         <span class="text text-center">

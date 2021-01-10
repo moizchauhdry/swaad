@@ -104,3 +104,8 @@
     object-fit: cover;
     width: 100%;
 }
+
+/* Banner */
+.owl-carousel.home-slider .slider-item {
+    background-size: contain;
+}
