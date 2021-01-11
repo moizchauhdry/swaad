@@ -100,7 +100,7 @@
 
     @if(Session::has('SUCCESS'))
     <script>
-        sweetAlert("Oops...", '{{  Session::get('SUCCESS') }}', "success")
+        sweetAlert("Success", '{{  Session::get('SUCCESS') }}', "success")
     </script>
     @endif
 

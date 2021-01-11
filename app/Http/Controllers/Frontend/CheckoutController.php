@@ -158,7 +158,7 @@ class CheckoutController extends Controller
                     return redirect()->route('index')->with('ERROR','Something Went Wrong. Please Try Again Later.');
                 }
             } else {
-                return redirect()->route('index')->with('SUCCESS','Thankyou! Your order placed successfully.');
+                return redirect()->route('index')->with('SUCCESS','Thankyou! Your order has been placed successfully.');
             }
     }
 
