@@ -90,7 +90,7 @@ class UserController extends Controller
     public function toReviews() {
         $user = User::where('id', Auth::guard('frontend')->user()->id)->first();
         $reviewIds = Review::where('user_id', $user->id)->pluck('product_id')->toArray();
-        $orderIds = Order::where('user_id', $user->id)->pluck('id')->toArray();
+        $orderIds = Order::where(['user_id' => $user->id, 'order_status' => 3])->pluck('id')->toArray();
         $orderDetailsIds = OrderDetail::whereIn('order_id', $orderIds)->pluck('product_id')->toArray();
         $products = Product::whereIn('id', $orderDetailsIds)->whereNotIn('id', $reviewIds)->get();
         return view ('frontend.users.toReviews',compact('products'));

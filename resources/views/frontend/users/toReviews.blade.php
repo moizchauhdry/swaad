@@ -89,7 +89,7 @@
     <div class="col-md-8 offset-md-2">
         <div class="text-dark text-center mb-3">
             <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
-            <p>There are no reviews product added yet.</p>
+            <p>There are no review products added yet.</p>
             <a href="{{route('products')}}" class="btn btn-primary">Continue Shopping</a>
         </div>
     </div>
