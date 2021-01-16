@@ -27,27 +27,29 @@ Route::group(['prefix' => 'user'], function () {
     //////  Reservations
     Route::post('/addReservation', 'Api\ReservationController@addReservation');
 
+    //////Categories
+    Route::post('/allCategories', 'Api\CategoryController@allCategories');
+
+    //// Products
+    Route::post('/getPopularProducts', 'Api\ProductController@getPopularProducts');
+    Route::post('/getProductByCategory', 'Api\ProductController@getProductByCategory');
+    Route::post('/addViewCount', 'Api\ProductController@addViewCount');
+    Route::post('/productDetails', 'Api\ProductController@productDetails');
+
+    //////////// Banner
+    Route::post('/getHomeBanner', 'Api\BannerController@getHomeBanner');
+    Route::post('/getReservationBanner', 'Api\BannerController@getReservationBanner');
+
+
     Route::middleware(['authuser'])->group(function () {
         Route::post('/signOut', 'Api\AuthController@logout');
         Route::post('/updateProfile', 'Api\AuthController@updateProfile');
 
-        //////Categories
-        Route::post('/allCategories', 'Api\CategoryController@allCategories');
-
-        //// Products
-        Route::post('/getPopularProducts', 'Api\ProductController@getPopularProducts');
-        Route::post('/getProductByCategory', 'Api\ProductController@getProductByCategory');
-        Route::post('/addViewCount', 'Api\ProductController@addViewCount');
-        Route::post('/productDetails', 'Api\ProductController@productDetails');
 
         //// Orders
         Route::post('/placeOrder', 'Api\OrderController@placeOrder');
         Route::post('/getMyOrders', 'Api\OrderController@getMyOrders');
         Route::post('/orderDetails', 'Api\OrderController@orderDetails');
-
-        //////////// Banner
-        Route::post('/getHomeBanner', 'Api\BannerController@getHomeBanner');
-        Route::post('/getReservationBanner', 'Api\BannerController@getReservationBanner');
 
 
         //// Review
