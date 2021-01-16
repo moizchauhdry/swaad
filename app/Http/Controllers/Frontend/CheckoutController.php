@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\OrderDetail;
 use App\User;
+use App\PostalCode;
 use Cart;
 use Auth;
 
@@ -16,23 +17,48 @@ class CheckoutController extends Controller
     public function index() {
         $cart = Cart::getContent();
 
+        $user = User::where('id',Auth::guard('frontend')->user()->id)->first();
+        $postcode = PostalCode::where('postal_code', $user->zip_code)->first();
+
+        $cartTotal = floatval(Cart::getSubTotal());
+
         if ($cart->count() > 0) {
-            return view ('frontend.pages.checkout');
+            if ($postcode == NULL) {
+                return back()->with('WARNING','Sorry we not delivered in your area.');
+            } else {
+                if ($postcode->net_total > $cartTotal ) {
+                    return back()->with('WARNING','Your cart total is not enough. Minimum cart total of CHF '.$postcode->net_total.' require to place this order.');
+                } else {
+                    return view ('frontend.pages.checkout');
+                }
+            }
         } else {
             return back();
         }
     }
 
     public function store(Request $request) {
-        
+
         $user = Auth::guard('frontend')->user();
         $grossTotal = number_format((float)Cart::getSubTotal(), 2, '.', '');
         $netTotal = number_format((float)Cart::getTotal(), 2, '.', '');
+        
+        if ($request->comments == NULL) {
+            $orderNotes = "-";
+        } else {
+            $orderNotes = $request->comments;
+        }
         
         $orderData = [
             'user_id' => $user->id,
             'gross_total' => $grossTotal,
             'net_total' => $netTotal,
+            'delivery_date' => $request->dlv_date,
+            'delivery_time' => $request->dlv_time,
+            'delivery_address' => $request->dlv_address,
+            'delivery_phone' => $request->dlv_phone,
+            'order_notes' => $orderNotes,
+            'payment_method' => $request->chk_payment_method,
         ];
 
         $order = Order::create($orderData);
@@ -60,23 +86,23 @@ class CheckoutController extends Controller
                 'RequestHeader' => array(
                     'SpecVersion' => "1.7",
                     'CustomerId' => env('PAYMENT_CUSTOMER_ID'),
-                    'RequestId' => "TEST",
+                    'RequestId' => "SWAAD",
                     'RetryIndicator' => 0,
                     'ClientInfo' => array(
-                        'ShopInfo' => "TEST",
-                        'OsInfo' => "TEST"
+                        'ShopInfo' => "SWAAD",
+                        'OsInfo' => "SWAAD"
                     )
                 ),
                 'TerminalId' => env('PAYMENT_TERMINAL_ID'),
                 'PaymentMethods' => array("DIRECTDEBIT","VISA","MASTERCARD","DINERS","MAESTRO"),
                 'Payment' => array(
                 'Amount' => array(
-                    'Value' => (int)$order->net_total * 100,
+                    'Value' => (float)$order->net_total * 100,
                     'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
                 ),
                 'OrderId' => $order->id,
-                'PayerNote' => "TEST",
-                'Description' => "TEST"
+                'PayerNote' => "ONLINE FOOD ORDER",
+                'Description' => $orderNotes
                 ),
                 'Payer' => array(
                     'IpAddress' => "192.168.178.1",
@@ -132,7 +158,7 @@ class CheckoutController extends Controller
                     return redirect()->route('index')->with('ERROR','Something Went Wrong. Please Try Again Later.');
                 }
             } else {
-                return redirect()->route('index')->with('SUCCESS','Thankyou! Your order placed successfully.');
+                return redirect()->route('index')->with('SUCCESS','Thankyou! Your order has been placed successfully.');
             }
     }
 
@@ -140,15 +166,16 @@ class CheckoutController extends Controller
 
         $user = Auth::guard('frontend')->user();
         $order = Order::where('user_id',$user->id)->first();
-        $order->update(['payment_method'=> 1,'payment_status'=> 1]);
+        $order->update(['payment_status'=> 1]);
         
-        dd('Successfull Transaction.');
-        // return redirect()->route('index')->with('SUCCESS','Successfull Transaction.');
+        $paymentStatus = 1 ;
+        // $paymentStatus = "Successfull Transaction" ;
+        return view('frontend.pages.payment',compact('paymentStatus'));
     }
 
     public function paymentFail(Request $request) {
-        dd('Transaction cancel or fail. Please try again later.');
-
-        // return redirect()->route('index')->with('ERROR','Transaction cancel or fail. Please try again later.');
+        $paymentStatus = 0 ;
+        // $paymentStatus = "Transaction cancel or fail. Please try again later." ;
+        return view('frontend.pages.payment',compact('paymentStatus'));
     }
 }

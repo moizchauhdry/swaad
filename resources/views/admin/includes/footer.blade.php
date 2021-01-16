@@ -2,8 +2,10 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-        Version 1.0 (Development Mode)
+        <div>
+            <div id="google_translate_element"></div>
+        </div>
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2020 <a href="#">Design & Developed By Octasol</a>.</strong>
+    <strong>Copyright &copy; 2020 <a href="#">Design & Developed By Smartdev</a>.</strong>
 </footer>

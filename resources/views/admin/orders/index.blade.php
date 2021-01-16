@@ -66,7 +66,7 @@
                                         @else Failed
                                         @endif
                                     </td>
-                                    <td>CHS {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
+                                    <td>CHF {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
                                     <td>
                                         @if ($order->payment_method == 0)
                                         <span class="badge badge-primary">CASH ON DELIVERY</span>

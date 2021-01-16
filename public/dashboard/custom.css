@@ -10,3 +10,14 @@
 select[disabled] {
     cursor: not-allowed !important;
 }
+
+/* Gooogle Language */
+.goog-te-gadget {
+    font-family: arial;
+    font-size: 11px;
+    color: #fff !important;
+    white-space: nowrap;
+}
+#google_translate_element span {
+    display: none;
+}

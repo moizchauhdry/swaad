@@ -42,9 +42,9 @@
                                         placeholder="Enter Category Title" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Title (gr)<span class="required-star">*</span></label>
+                                    <label>Title [de]<span class="required-star">*</span></label>
                                     <input type="text" name="title_gr" class="form-control"
-                                        placeholder="Enter Category Title (gr)" required>
+                                        placeholder="Enter Category Title [de]" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Image <span class="required-star">*</span></label>

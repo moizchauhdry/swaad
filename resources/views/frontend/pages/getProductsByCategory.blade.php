@@ -29,7 +29,7 @@
                             <div class="pricing">
                                 <p class="price">
                                     <span class="price-sale">
-                                        CHS {{ number_format((float)$product->price, 2, '.', '')}}
+                                        CHF {{ number_format((float)$product->price, 2, '.', '')}}
                                     </span>
                                 </p>
                             </div>
@@ -53,4 +53,56 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script>
+    function addToCart(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.store')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $('#add_to_cart_'+product_id).addClass('hidden');
+                $('#success_'+product_id).removeClass('hidden');
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(1);
+                $("#cart_items_count").html(response);
+            }
+        });
+    }
+
+    function cartIncrement(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.increment')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(response);
+            }
+        });
+    }
+
+    function cartDecrement(product_id) {
+        $.ajax({
+            method: "POST",
+            url: '{{route('cart.decrement')}}',
+            data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            'product_id': product_id,
+            },
+            success: function (response) {
+                $("#qty_"+product_id).empty();
+                $("#qty_"+product_id).append(response);
+            }
+        });
+    }
+</script>
 @endsection

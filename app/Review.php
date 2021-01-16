@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
-{
+{   
     protected $appends =['created_at_format'];
     protected $fillable = ['user_id', 'product_id', 'order_id', 'rating', 'comment','is_approved','created_at'];
 

@@ -30,12 +30,13 @@ Route::group(['middleware' => ['frontend']],function(){
 
     Route::group(['prefix'=>'user'],function() {
         Route::get('/profile','Frontend\UserController@profile')->name('user.profile');
-        Route::post('/profile/update','Frontend\UserController@updateProfile')->name('updateProfile');
+        Route::post('/profile/update/{id}','Frontend\UserController@updateProfile')->name('updateProfile');
         Route::get('/orders','Frontend\UserController@orders')->name('user.orders');
         Route::post('/getOrdersByStatus','Frontend\UserController@getOrdersByStatus')->name('getOrdersByStatus');
         Route::get('/order-detail/{id}','Frontend\UserController@orderDetail')->name('orderDetail');
-        Route::get('/to-reviews','Frontend\UserController@toReviews')->name('toReviews');
         Route::get('/my-reviews','Frontend\UserController@myReviews')->name('myReviews');
+        Route::get('/to-reviews','Frontend\UserController@toReviews')->name('toReviews');
+        Route::post('/to-reviews/store','Frontend\UserController@storeToReviews')->name('storeToReviews');
     });
 });
 
@@ -53,7 +54,8 @@ Route::post('/contact/store', 'Frontend\FrontendController@storeContact')->name(
 
 Route::get('/about', 'Frontend\FrontendController@about')->name('about');
 Route::get('/serve', 'Frontend\FrontendController@serve')->name('serve');
-
+Route::get('/privacy', 'Frontend\FrontendController@privacy')->name('privacy');
+Route::get('/termsCondition', 'Frontend\FrontendController@termsCondition')->name('termsCondition');
 
 // SIX PAYMENT METHOD
 Route::get('/six-payment', 'Frontend\CheckoutController@sixPayment');
@@ -98,16 +100,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                 Route::group(['middleware' => ['permission:manage-customers']],function(){
                     Route::group(['prefix' => 'customers'],function(){
                         Route::get('/', 'CustomerController@index')->name('customers.index');
-                        Route::post('/store', 'CustomerController@store')->name('customers.store');
-                        Route::get('/edit/{id}', 'CustomerController@edit')->name('customers.edit');
-                        Route::post('/update/{id}', 'CustomerController@update')->name('customers.update');
-                        Route::post('/deactivate', 'CustomerController@destroy')->name('customers.delete');
-                        Route::get('/deleted', 'CustomerController@deleted')->name('customers.deleted');
-                        Route::post('/activate', 'CustomerController@activate')->name('customers.activate');
-                        Route::post('/search', 'CustomerController@search')->name('customers.search');
-
-                        Route::get('/edit/address/{id}', 'CustomerController@editAddress')->name('customers.edit.address');
-                        Route::post('/update/address/{id}', 'CustomerController@updateAddress')->name('customers.update.address');
+                        Route::post('/suspend-account', 'CustomerController@customerSuspendAccount')->name('customerSuspendAccount');
                     });
                 });
 
@@ -159,6 +152,24 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                         Route::post('/update/{id}', 'PostalCodeController@update')->name('codes.update');
                         Route::get('/delete', 'PostalCodeController@destroy')->name('codes.delete');
                     });
+                });
+
+                Route::group(['middleware' => ['permission:manage-rsv']],function(){
+                    Route::group(['prefix' => 'rsv'],function(){
+                        Route::get('/', 'ReservationController@index')->name('rsv.index');
+                    });
+                });
+
+                Route::group(['middleware' => ['permission:manage-reviews']],function(){
+                    Route::group(['prefix' => 'reviews'],function(){
+                        Route::get('/', 'ReviewController@index')->name('reviews.index');
+                        Route::post('/approve/{id}', 'ReviewController@approveReview')->name('approveReview');
+                    });
+                });
+
+                Route::group(['prefix' => 'site-configuration'], function () {
+                    Route::get('/', 'SiteConfigurationController@index')->name('site-configuration.index');
+                    Route::post('/update', 'SiteConfigurationController@update')->name('site-configuration.update');
                 });
 
             });

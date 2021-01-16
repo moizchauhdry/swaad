@@ -20,6 +20,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedBigInteger('order_id')->nullable();
             $table->double('rating')->nullable();
             $table->text('comment')->nullable();
+            $table->boolean('is_approved')->default(0);
             $table->timestamps();
         });
     }

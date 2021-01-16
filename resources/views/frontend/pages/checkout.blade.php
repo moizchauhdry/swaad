@@ -78,7 +78,7 @@
                                 <div class="form-group">
                                     <label for="">Delivery Time <span class="text-danger">*</span></label>
                                     <input type="time" class="form-control" name="dlv_time" id="dlv_time" placeholder=""
-                                        value="{{date("h:i",strtotime('+5 hours'))}}" required>
+                                        value="{{date("h:i")}}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -111,20 +111,20 @@
                                 <h3 class="billing-heading mb-4">Cart Total</h3>
                                 <p class="d-flex">
                                     <span>Subtotal</span>
-                                    <span>CHS {{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
+                                    <span>CHF {{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
                                 </p>
                                 <p class="d-flex">
                                     <span>Delivery</span>
-                                    <span>CHS 0.00</span>
+                                    <span>CHF 0.00</span>
                                 </p>
                                 <p class="d-flex">
                                     <span>Discount</span>
-                                    <span>CHS 0.00</span>
+                                    <span>CHF 0.00</span>
                                 </p>
                                 <hr>
                                 <p class="d-flex total-price">
                                     <span>Total</span>
-                                    <span>CHS {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
+                                    <span>CHF {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
                                 </p>
                             </div>
                         </div>

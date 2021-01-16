@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{asset('public/dashboard/dist/css/adminlte.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
+
 </head>
 
 <body class="hold-transition login-page">

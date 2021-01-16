@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">Categories</h1>
+                <h1 class="mb-0 bread">Menu</h1>
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
             @foreach ($categories as $category)
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid"
+                    <a href="{{route('getProductsByCategory',$category->id)}}" class="img-prod"><img class="img-fluid"
                             src="{{asset('storage/app/public/'.$category->image_url)}}" alt="Colorlib Template">
                         <div class="overlay"></div>
                     </a>

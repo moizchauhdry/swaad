@@ -9,7 +9,8 @@ class Product extends Model
     protected $appends = [
         'average_rating', 'reviews_count'
     ];
-    protected $fillable = ['category_id', 'title', 'title_gr', 'image_url', 'price', 'description', 'description_gr', 'status', 'view_count', 'spice_level'];
+    
+    protected $fillable = ['category_id', 'title', 'title_gr', 'image_url', 'price', 'description', 'description_gr', 'status', 'view_count', 'spice_level','status'];
 
     public function category()
     {

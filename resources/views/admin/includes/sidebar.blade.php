@@ -54,6 +54,29 @@
                 </li>
                 @endif
 
+                @if (Auth::guard('admin')->user()->hasPermission('manage-customers'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'customers.create' || Route::currentRouteName() == 'customers.index'|| Route::currentRouteName() == 'customers.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'customers.create' || Route::currentRouteName() == 'customers.index' || Route::currentRouteName() == 'customers.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Customers
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('customers.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'customers.index' || Route::currentRouteName() == 'customers.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Customers</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
                 @if (Auth::guard('admin')->user()->hasPermission('manage-categories'))
                 <li
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'categories.create' || Route::currentRouteName() == 'categories.index'|| Route::currentRouteName() == 'categories.edit' ) ? 'menu-open' : ''}}">
@@ -173,7 +196,7 @@
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'codes.create' || Route::currentRouteName() == 'codes.index'|| Route::currentRouteName() == 'codes.edit' ) ? 'menu-open' : ''}}">
                     <a href="#"
                         class="nav-link {{(Route::currentRouteName() == 'codes.create' || Route::currentRouteName() == 'codes.index' || Route::currentRouteName() == 'codes.edit' ) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-image"></i>
+                        <i class="nav-icon fas fa-map-marked-alt"></i>
                         <p>
                             Postal Codes
                             <i class="right fas fa-angle-left"></i>
@@ -198,6 +221,61 @@
                 </li>
                 @endif
 
+                @if (Auth::guard('admin')->user()->hasPermission('manage-rsv'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'rsv.create' || Route::currentRouteName() == 'rsv.index'|| Route::currentRouteName() == 'rsv.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'rsv.create' || Route::currentRouteName() == 'rsv.index' || Route::currentRouteName() == 'rsv.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-clipboard"></i>
+                        <p>
+                            Reservations
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('rsv.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'rsv.index' || Route::currentRouteName() == 'rsv.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Reservations</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                @if (Auth::guard('admin')->user()->hasPermission('manage-reviews'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'reviews.create' || Route::currentRouteName() == 'reviews.index'|| Route::currentRouteName() == 'reviews.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'reviews.create' || Route::currentRouteName() == 'reviews.index' || Route::currentRouteName() == 'reviews.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-clipboard"></i>
+                        <p>
+                            Reviews
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('reviews.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'reviews.index' || Route::currentRouteName() == 'reviews.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Reviews</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+                <li class="nav-item">
+                    <a href="{{route('site-configuration.index')}}"
+                        class="nav-link {{(Route::currentRouteName() == 'site-configuration.index') ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            Site Configuration
+                        </p>
+                    </a>
+                </li>
 
             </ul>
         </nav>

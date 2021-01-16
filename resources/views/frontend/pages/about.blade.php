@@ -51,12 +51,12 @@
                     <h5 class="text-primary">Zafar Khan</h5>
                     <p class="text-justify">
                         Zafar Khan is Manager at Swaad, having 16 years of extensive experience in hospitality
-                        management. He is specialized on South Asian Geo¬¬-Political and Socio-cultural issues and
+                        management. He is specialized on South Asian Geo-Political and Socio-cultural issues and
                         intercultural conflict management. He will be there to explain the nutrition value of our food,
                         historical background and use of different vegetables, herbs spices and their significance in
                         verity of Indian sub continental cuisine and cultures.
                     </p>
-                    <img src="{{asset('public/dashboard/images/admin.png')}}" alt="IMAGE" class="img-thumbnail">
+                    <img src="{{asset('public/frontend/images/ZafarKhan.jpg')}}" alt="IMAGE" class="img-thumbnail w-50">
                 </div>
                 <div class="col-md-6">
                     <h5 class="text-primary">Tariq Masih</h5>
@@ -67,7 +67,8 @@
                         catering firms in Pakistan to one of the successful restaurants in the city of Bern.
                     </p>
                     <br>
-                    <img src="{{asset('public/dashboard/images/admin.png')}}" alt="IMAGE" class="img-thumbnail">
+                    <img src="{{asset('public/frontend/images/TariqMasih.jpeg')}}" alt="IMAGE"
+                        class="img-thumbnail w-50">
                 </div>
             </div>
         </section>

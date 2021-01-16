@@ -37,12 +37,12 @@
                                 <tr>
                                     <th>Sr #</th>
                                     <th>Title</th>
-                                    <th>Title (gr)</th>
+                                    <th>Title [de]</th>
                                     <th>Image</th>
                                     <th>Price</th>
                                     <th>Category</th>
                                     <th>Description</th>
-                                    <th>Description (gr)</th>
+                                    <th>Description [de]</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -63,7 +63,7 @@
                                             style="width:150px" />
                                         @endif
                                     </td>
-                                    <td>{{$product->price}}</td>
+                                    <td>CHF {{ number_format((float) $product->price, 2, '.', '')}}</td>
 
                                     <td>{{$product->category->title}}</td>
                                     <td>{{$product->description}}</td>

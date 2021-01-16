@@ -9,6 +9,7 @@ use App\Product;
 use App\User;
 use App\Reservation;
 use App\Contact;
+use App\Banner;
 
 use Validator;
 use Session;
@@ -19,14 +20,20 @@ use DB;
 class FrontendController extends Controller
 {   
     public function login(Request $request) {
-        
+            
         if($request->isMethod('post')){
             $data = $request->all();
-            if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
-                return redirect()->route('checkout');
+            if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])) {
+
+                if (Auth::guard('frontend')->user()->status == 0) {
+                    Auth::guard('frontend')->logout();
+                    return redirect()->back()->with('WARNING','Your account is suspended. Please contact with Swaad for futher information.');
+                } else {
+                    return redirect()->route('checkout');
+                }
             }
             else{
-                return redirect()->back()->with('ERROR','Invalid Credentials!');
+                return redirect()->back()->with('WARNING','The email or password you entered is incorrect.');
             }
         }
         if(Auth::guard('frontend')->check()){
@@ -41,53 +48,48 @@ class FrontendController extends Controller
     
     public function register(Request $request) {
 
-        // $rules = [
-        //     'username' => 'required|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|max:255',
-        //     'phone' => 'required|numeric',
-        //     'address' => 'required|max:255',
-        //     'house_no' => 'required|max:255',
-        //     'post_code' => 'required|numeric',
-        // ];
-
-        // $validator = Validator::make($request->all(), $rules);
-
-        // if ($validator->fails()) {
-        //     return Redirect()->back()->withErrors($validator)->withInput($request->all());
-        // }
+        $this->validate($request, [
+            'username' => 'required|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|max:255',
+            'phone' => 'required|max:20',
+            'address' => 'required|max:255',
+            'house_no' => 'required|numeric',
+            'post_code' => 'required|numeric',       
+        ]);
 
         $data = [
             'name' => $request->input('username'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'phone_no' => $request->input('phone_no'),
-            'address' => $request->input('street'),
+            'phone_no' => $request->input('phone'),
+            'address' => $request->input('address'),
             'home_no' => $request->input('house_no'),
-            'post_code' => $request->input('post_code'),
+            'zip_code' => $request->input('post_code'),
         ];
 
         $user = User::create($data);
-
+        
         if($request->isMethod('post')){
             $data = $request->all();
             if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
-                return redirect()->route('index');
+                return TRUE;
             }
             else{
-                return redirect()->back()->with('ERROR','Invalid Credentials');
+                return FALSE;
             }
         }
         if(Auth::guard('frontend')->check()){
-            return redirect()->route('index');
+            return TRUE;
         }
         
     }
 
-    public function index() {   
+    public function index() {
         $categories = Category::where('status','1')->inRandomOrder()->get();
-        $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->get();
-        return view ('frontend.pages.index',compact('categories','popularProducts'));
+        $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->take(12)->get();
+        $banners = Banner::where('status','1')->where('status','1')->take(3)->get();
+        return view ('frontend.pages.index',compact('categories','popularProducts','banners'));
     }
 
     public function addToCart(Request $request) {
@@ -118,7 +120,8 @@ class FrontendController extends Controller
     public function productDetail($id) {
         $product = Product::find($id);
         $products = Product::where('status','1')->get();
-        return view ('frontend.pages.product-detail',compact('product','products'));
+        $relatedProducts = Product::where('status','1')->where('category_id',$product->category->id)->where('id','!=',$product->id)->take(8)->inRandomOrder()->get();
+        return view ('frontend.pages.product-detail',compact('product','products','relatedProducts'));
     }
 
     public function reservation() {
@@ -202,5 +205,13 @@ class FrontendController extends Controller
 
     public function serve() {
         return view ('frontend.pages.serve');
+    }
+
+    public function privacy() {
+        return view ('frontend.pages.privacy');
+    }
+
+    public function termsCondition() {
+        return view ('frontend.pages.termsCondition');
     }
 }

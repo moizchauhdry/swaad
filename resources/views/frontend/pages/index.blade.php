@@ -72,7 +72,6 @@
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-12 heading-section text-center ftco-animate">
                 <h2 class="mb-2">Popular Food Items</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
             </div>
         </div>
     </div>
@@ -93,7 +92,7 @@
                             <div class="pricing">
                                 <p class="price">
                                     <span class="price-sale">
-                                        CHS {{ number_format((float)$product->price, 2, '.', '')}}
+                                        CHF {{ number_format((float)$product->price, 2, '.', '')}}
                                     </span>
                                 </p>
                             </div>
@@ -117,8 +116,6 @@
             <div class="col-md-7 heading-section ftco-animate text-center">
                 <span class="subheading">Testimony</span>
                 <h2 class="mb-4">Our satisfied customer says</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                    live the blind texts. Separated they live in</p>
             </div>
         </div>
         <div class="row ftco-animate">

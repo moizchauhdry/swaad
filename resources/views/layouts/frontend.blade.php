@@ -31,26 +31,23 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}">
 
+    <!-- MY CUSTOMS -->
     <link rel="stylesheet" href="{{asset('public/frontend/custom/custom.css')}}">
-
-    <!-- TOASTER -->
-    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr1.css')}}">
-    <link rel="stylesheet" href="{{asset('public/frontend/plugins/toastr/toastr2.css')}}">
-
     <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
-
-    @yield('styles')
+    <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
     <style>
         .hidden {
             display: none;
         }
     </style>
+
+    @yield('styles')
+
 </head>
 
 <body class="goto-here">
-
-    {{-- @include('frontend.includes._notifications') --}}
 
     @include('frontend.includes.header')
 
@@ -78,23 +75,37 @@
     <script src="{{asset('public/frontend/js/google-map.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
 
-    <!-- TOASTER -->
-    <script src="{{asset('public/frontend/plugins/toastr/toastr.min.js')}}"></script>
-    <script src="{{asset('public/frontend/plugins/toastr/toastr.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
-    @if(Session::has('SUCCESS'))
-    <script>
-        toastr.success('{{  Session::get('SUCCESS') }}')
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
     </script>
-    @endif
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
 
     @if(Session::has('ERROR'))
     <script>
-        toastr.error('{{  Session::get('ERROR') }}')
+        sweetAlert("Oops...", '{{  Session::get('ERROR') }}', "error")
+    </script>
+    @endif
+
+    @if(Session::has('WARNING'))
+    <script>
+        sweetAlert("Oops...", '{{  Session::get('WARNING') }}', "warning")
+    </script>
+    @endif
+
+    @if(Session::has('SUCCESS'))
+    <script>
+        sweetAlert("Success", '{{  Session::get('SUCCESS') }}', "success")
     </script>
     @endif
 
     @yield('scripts')
+
 
 </body>
 

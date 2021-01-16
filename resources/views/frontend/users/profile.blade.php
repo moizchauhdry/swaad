@@ -12,40 +12,46 @@
     </div>
 </div>
 
-<div class="container">
-    <div style="padding: 35px">
+<section class="ftco-section">
+    <div class="container">
         <div class="card-deck">
-            <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
+            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
                 <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-user" style="font-size: 80px"></i></h5>
+                    <h5 class="card-title text-center"><i class="far fa-user"
+                            style="font-size: 50px; color:#f45318; color:#f45318"></i>
+                    </h5>
                     <p class="card-text text-center">
                         <a data-target="#profileModal" data-toggle="modal" class="MainNavText" id="MainNavHelp"
                             href="#profileModal">Profile</a>
                     </p>
                 </div>
             </div>
-            <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
+            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
                 <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="fas fa-list-ul" style="font-size: 80px"></i></h5>
+                    <h5 class="card-title text-center"><i class="fas fa-list-ul"
+                            style="font-size: 50px; color:#f45318"></i>
+                    </h5>
                     <p class="card-text text-center"><a href="{{route('user.orders')}}">My Orders</a></p>
                 </div>
             </div>
-            <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
+            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
                 <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-star" style="font-size: 80px"></i></h5>
+                    <h5 class="card-title text-center"><i class="far fa-star"
+                            style="font-size: 50px; color:#f45318"></i>
+                    </h5>
                     <p class="card-text text-center"><a href="{{route('myReviews')}}">My Reviews</a></p>
                 </div>
             </div>
-            <div class="card border-dark mb-3" style="max-width: 18rem; height:170px">
+            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
                 <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-comment-dots" style="font-size: 80px"></i></h5>
+                    <h5 class="card-title text-center"><i class="far fa-comment-dots"
+                            style="font-size: 50px; color:#f45318"></i></h5>
                     <p class="card-text text-center"><a href="{{route('toReviews')}}">To Reviews</a></p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+</section>
 
 <!-- Modal -->
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
@@ -63,32 +69,32 @@
                         <div class="form-group col-md-6">
                             <label for="">User Name</label>
                             <input type="text" class="form-control" id="username" name="username"
-                                value="{{$user->name}}" placeholder="" required>
+                                value="{{$user->name}}" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Email</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}"
-                                placeholder="" required>
+                                required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Phone Number</label>
-                            <input type="text" class="form-control" id="phone_no" name="phone_no"
-                                value="{{$user->phone_no}}" placeholder="" required>
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{$user->phone_no}}"
+                                required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Street</label>
-                            <input type="text" class="form-control" id="street" name="street" value="{{$user->address}}"
-                                placeholder="">
+                            <input type="text" class="form-control" id="address" name="address"
+                                value="{{$user->address}}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">House Number</label>
                             <input type="text" class="form-control" id="house_no" name="house_no"
-                                value="{{$user->home_no}}" placeholder="" required>
+                                value="{{$user->home_no}}" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Post Code</label>
                             <input type="text" class="form-control" id="post_code" name="post_code"
-                                value="{{$user->zip_code}}" placeholder="" required>
+                                value="{{$user->zip_code}}" required>
                         </div>
                     </div>
                     <div class="modal-footer">

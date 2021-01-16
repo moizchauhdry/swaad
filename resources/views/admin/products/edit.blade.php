@@ -43,9 +43,9 @@
                                         value="{{$product->title}}" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Title (gr) <span class="required-star">*</span></label>
+                                    <label>Title [de] <span class="required-star">*</span></label>
                                     <input type="text" name="title_gr" class="form-control"
-                                        placeholder="Enter Title (gr)" value="{{$product->title_gr}}" required>
+                                        placeholder="Enter Title [de]" value="{{$product->title_gr}}" required>
                                 </div>
                                 <div class="form-group col-md-4 mb-4">
                                     <label>Image</label>
@@ -75,7 +75,7 @@
                                 <div class="form-group col-md-2">
                                     <label>Price <span class="required-star">*</span></label>
                                     <input type="number" name="price" class="form-control" placeholder="Enter Price"
-                                        min="0" value="{{$product->price}}" required>
+                                        min="0" step="0.01" value="{{$product->price}}" required>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label>Spice Level <span class="required-star">*</span></label>
@@ -87,6 +87,14 @@
                                         <option {{ ($product->spice_level == "3"? "selected":"") }} value="3">3</option>
                                     </select>
                                 </div>
+                                <div class="form-group col-md-3">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="deactivate_product"
+                                            id="customSwitch1" @if ($product->status == 0) checked @endif>
+                                        <label class="custom-control-label" for="customSwitch1">Deactivate
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
@@ -95,7 +103,7 @@
                                         class="form-control" required>{{$product->description}}</textarea>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Description (gr) <span class="required-star">*</span></label>
+                                    <label>Description [de] <span class="required-star">*</span></label>
                                     <textarea name="description_gr" id="description" cols="30" rows="5"
                                         class="form-control" required>{{$product->description_gr}}</textarea>
                                 </div>

@@ -72,34 +72,37 @@
                                     </tr>
                                     <tr>
                                         <th>Net Total</th>
-                                        <td>CHS {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
+                                        <td>CHF {{ number_format((float) $order->net_total, 2, '.', '')}}</td>
                                     </tr>
-                                    <tr class="bg-light">
-                                        <th colspan="2" class="text-center">Paymemt Information</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Payment Method</th>
-                                        <td>
-                                            @if ($order->payment_method == 0)
-                                            <span class="badge badge-primary">CASH ON DELIVERY</span>
-                                            @elseif ($order->payment_method == 1)
-                                            <span class="badge badge-primary">PAYMENT WITH CARD</span>
-                                            @else <span class="badge badge-danger">FAIL</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Payment Status</th>
-                                        <td>
-                                            @if ($order->payment_status == 0)
-                                            <span class="badge badge-warning">PENDING</span>
-                                            @elseif ($order->payment_status == 1)
-                                            <span class="badge badge-success">COMPLETE</span>
-                                            @else
-                                            <span class="badge badge-danger">FAIL</span>
-                                            @endif
-                                        </td>
-                                    </tr>
+                                    <section>
+                                        <tr class="bg-light">
+                                            <th colspan="2" class="text-center">Delivery Information</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Delivery Date</th>
+                                            <td>
+                                                {{date('M d, Y - l', strtotime($order->delivery_date))}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Delivery Time</th>
+                                            <td>
+                                                {{date('h:i:s A', strtotime($order->delivery_time))}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Delivery Address</th>
+                                            <td>
+                                                {{isset($order->delivery_address) ? $order->delivery_address : "-"}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Delivery Phone</th>
+                                            <td>
+                                                {{isset($order->delivery_phone) ? $order->delivery_phone : "-"}}
+                                            </td>
+                                        </tr>
+                                    </section>
                                 </tbody>
                             </table>
                             <table class="table table-bordered col-md-6">
@@ -128,9 +131,42 @@
                                         <td>{{$order->user->address}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Postal/Zipcode</th>
+                                        <th>Post code</th>
                                         <td>{{$order->user->zip_code}}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Order Notes</th>
+                                        <td>{{$order->order_notes}}</td>
+                                    </tr>
+
+                                    <section>
+                                        <tr class="bg-light">
+                                            <th colspan="2" class="text-center">Paymemt Information</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Payment Method</th>
+                                            <td>
+                                                @if ($order->payment_method == 0)
+                                                <span class="badge badge-primary">CASH ON DELIVERY</span>
+                                                @elseif ($order->payment_method == 1)
+                                                <span class="badge badge-primary">PAYMENT WITH CARD</span>
+                                                @else <span class="badge badge-danger">FAIL</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Payment Status</th>
+                                            <td>
+                                                @if ($order->payment_status == 0)
+                                                <span class="badge badge-warning">PENDING</span>
+                                                @elseif ($order->payment_status == 1)
+                                                <span class="badge badge-success">COMPLETE</span>
+                                                @else
+                                                <span class="badge badge-danger">FAIL</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </section>
                                 </tbody>
                             </table>
                         </div>
@@ -161,9 +197,9 @@
                                 <tr>
                                     <td>{{ $count++ }}</td>
                                     <td>{{ $item->product->title }}</td>
-                                    <td> CHS {{$item->product->price}} </td>
+                                    <td> CHF {{$item->product->price}} </td>
                                     <td> x {{$item->quantity}}</td>
-                                    <td>CHS {{$item->product->price * $item->quantity}}</td>
+                                    <td>CHF {{$item->product->price * $item->quantity}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
