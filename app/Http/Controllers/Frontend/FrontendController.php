@@ -90,7 +90,7 @@ class FrontendController extends Controller
         $categories = Category::where('status','1')->inRandomOrder()->get();
         $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->take(12)->get();
         $banners = Banner::where('status','1')->where('status','1')->take(3)->get();
-        $reviews = Review::where('rating','5')->whereRaw('LENGTH(comment) > 75')->get()->take(6);
+        $reviews = Review::where('rating','5')->whereRaw('LENGTH(comment) > 25')->get()->take(6);
         return view ('frontend.pages.index',compact('categories','popularProducts','banners','reviews'));
     }
 
@@ -105,7 +105,7 @@ class FrontendController extends Controller
     }
 
     public function categories() {
-        $categories = Category::where('status','1')->orderBy('id','DESC')->paginate(24);
+        $categories = Category::where('status','1')->paginate(24);
         return view ('frontend.pages.categories',compact('categories'));
     }
 

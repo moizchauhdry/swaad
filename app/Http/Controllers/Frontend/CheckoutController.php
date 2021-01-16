@@ -9,8 +9,10 @@ use App\Order;
 use App\OrderDetail;
 use App\User;
 use App\PostalCode;
+
 use Cart;
 use Auth;
+use Validator;
 
 class CheckoutController extends Controller
 {
@@ -48,7 +50,23 @@ class CheckoutController extends Controller
         } else {
             $orderNotes = $request->comments;
         }
-        
+
+        $timestamp = strtotime(date("h:i")) + 60*40;
+        $time = date('H:i', $timestamp);
+        $currentDate = date("Y-m-d");
+
+        if ($request->dlv_date == $currentDate) {
+            if ($request->dlv_time >= $time) {
+            } else {
+                return redirect()->back()->with('WARNING','Please select time with a gap of 40 minutes');
+            }
+        } else { 
+            if ($request->dlv_date >= $currentDate) {
+            } else {
+                return redirect()->back()->with('WARNING','Please select correct date');
+            }
+        }
+
         $orderData = [
             'user_id' => $user->id,
             'gross_total' => $grossTotal,

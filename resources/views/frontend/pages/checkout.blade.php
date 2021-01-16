@@ -75,10 +75,14 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <?php
+                                    $timestamp = strtotime(date("h:i")) + 60*40;
+                                    $time = date("h:i", $timestamp);
+                                ?>
                                 <div class="form-group">
                                     <label for="">Delivery Time <span class="text-danger">*</span></label>
                                     <input type="time" class="form-control" name="dlv_time" id="dlv_time" placeholder=""
-                                        value="{{date("h:i")}}" required>
+                                        value="{{$time}}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
