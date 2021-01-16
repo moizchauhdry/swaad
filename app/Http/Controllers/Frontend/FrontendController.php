@@ -10,6 +10,7 @@ use App\User;
 use App\Reservation;
 use App\Contact;
 use App\Banner;
+use App\Review;
 
 use Validator;
 use Session;
@@ -89,7 +90,8 @@ class FrontendController extends Controller
         $categories = Category::where('status','1')->inRandomOrder()->get();
         $popularProducts = Product::where('status','1')->orderBy('view_count','DESC')->take(12)->get();
         $banners = Banner::where('status','1')->where('status','1')->take(3)->get();
-        return view ('frontend.pages.index',compact('categories','popularProducts','banners'));
+        $reviews = Review::where('rating','5')->whereRaw('LENGTH(comment) > 75')->get()->take(6);
+        return view ('frontend.pages.index',compact('categories','popularProducts','banners','reviews'));
     }
 
     public function addToCart(Request $request) {
@@ -121,7 +123,11 @@ class FrontendController extends Controller
         $product = Product::find($id);
         $products = Product::where('status','1')->get();
         $relatedProducts = Product::where('status','1')->where('category_id',$product->category->id)->where('id','!=',$product->id)->take(8)->inRandomOrder()->get();
-        return view ('frontend.pages.product-detail',compact('product','products','relatedProducts'));
+        $reviews = Review::orderBy('created_at','DESC')->where('product_id',$product->id)->get();
+
+        $reviewStarCount = Review::where('product_id',$product->id)->get();
+        
+        return view ('frontend.pages.product-detail',compact('product','products','relatedProducts','reviews','reviewStarCount'));
     }
 
     public function reservation() {

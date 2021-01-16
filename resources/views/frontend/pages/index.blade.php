@@ -110,6 +110,7 @@
     </div>
 </section>
 
+@if ($reviews->count() > 0)
 <section class="testimony-section mt-4" style="margin-bottom: 75px">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
@@ -121,91 +122,45 @@
         <div class="row ftco-animate">
             <div class="col-md-12">
                 <div class="carousel-testimony owl-carousel">
+                    @foreach ($reviews as $review)
                     <div class="item">
                         <div class="testimony-wrap p-4 pb-5">
                             <div class="user-img mb-5"
-                                style="background-image: url({{asset('public/frontend/images/person_1.jpg')}})">
+                                style="background-image: url({{asset('public/frontend/images/testimonial.png')}})">
                                 <span class="quote d-flex align-items-center justify-content-center">
                                     <i class="icon-quote-left"></i>
                                 </span>
                             </div>
                             <div class="text text-center">
-                                <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Garreth Smith</p>
-                                <span class="position">Marketing Manager</span>
+                                @if ($review->comment != NULL)
+                                <p class="mb-5 pl-4 line">
+                                    {{ Str::limit($review->comment, 250) }}
+                                </p>
+                                @endif
+                                <p class="name">
+                                    <span class="star">
+                                        <span class="star">
+                                            @for ($i = 1; $i <= 5; $i++) @if($i <=$review['rating']) <i
+                                                class="fa fa-star text-warning">
+                                                </i>
+                                                @else
+                                                <span class="fa fa-star"></span>
+                                                @endif
+                                                @endfor
+                                        </span>
+                                    </span>
+                                </p>
+                                <span class="position">{{$review->user->name}}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5"
-                                style="background-image: url({{asset('public/frontend/images/person_1.jpg')}})">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Garreth Smith</p>
-                                <span class="position">Interface Designer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5"
-                                style="background-image: url({{asset('public/frontend/images/person_1.jpg')}})">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Garreth Smith</p>
-                                <span class="position">UI Designer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5"
-                                style="background-image: url({{asset('public/frontend/images/person_1.jpg')}})">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Garreth Smith</p>
-                                <span class="position">Web Developer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5"
-                                style="background-image: url({{asset('public/frontend/images/person_1.jpg')}})">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the
-                                    countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Garreth Smith</p>
-                                <span class="position">System Analyst</span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endif
 
 @endsection
 
