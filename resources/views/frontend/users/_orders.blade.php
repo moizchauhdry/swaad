@@ -1,4 +1,4 @@
-<table id="orderTable" class="table table-bordered table-stripped">
+<table id="orderTable" class="table-sm table-bordered order-table mb-4 text-center" style="width: 100%">
     <thead class="bg-primary text-white">
         <tr>
             <th>Order #</th>
@@ -33,7 +33,7 @@
                 @endif
             </td>
             <td>
-                <a href="{{route('orderDetail',$order->id)}}" class="btn btn-primary btn-sm">
+                <a href="{{route('orderDetail',$order->id)}}" class="btn btn-primary btn-sm rounded">
                     <i class="fas fa-eye mr-1" aria-hidden="true"></i> View
                 </a>
             </td>

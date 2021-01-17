@@ -48,7 +48,7 @@ class UserController extends Controller
     
     public function orders() {
         $user = Auth::guard('frontend')->user();
-        $orders = Order::orderBy('id','DESC')->where('user_id',$user->id)->get();
+        $orders = Order::orderBy('id','DESC')->where('user_id',$user->id)->where('order_status',0)->get();
         return view ('frontend.users.orders',compact('orders'));
     }
     
@@ -56,13 +56,27 @@ class UserController extends Controller
         $user = Auth::guard('frontend')->user();
         $orders = Order::orderBy('id','DESC')->where('order_status',$request->order_status)->where('user_id',$user->id)->get();
 
+        if ($request->order_status == 0) {
+            $orderStatus = 'pending';
+        } elseif($request->order_status == 1) {
+            $orderStatus = 'processing';
+        } elseif($request->order_status == 2) {
+            $orderStatus = 'shipped';
+        } elseif($request->order_status == 3) {
+            $orderStatus = 'delivered';
+        } elseif($request->order_status == 4) {
+            $orderStatus = 'cancelled';
+        } else {
+            $orderStatus = '';
+        }
+        
         if (count($orders) > 0) {
             return view ('frontend.users._orders',compact('orders'));
         }
         else {
             return ' <div class="col-md-8 offset-md-2 p-4">
                         <div class="text-dark text-center">
-                        <p>There are no orders placed yet.</p>
+                        <p>There are no '.$orderStatus.' orders.</p>
                         </div>
                     </div>'; 
         }

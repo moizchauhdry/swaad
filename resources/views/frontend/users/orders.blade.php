@@ -16,19 +16,24 @@
     <div style="margin-top: 30px;margin-bottom: 20px;">
         <ul class=" nav nav-pills nav-fill" style="padding: 10px">
             <li class="nav-item">
-                <button class="btn btn-light order_status" id="order_status_0" data-id="0">Pending</button>
+                <button class="btn btn-primary btn-secondary order_status shadow rounded" id="order_status_0"
+                    data-id="0">Pending</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-light order_status" id="order_status_1" data-id="1">Processing</button>
+                <button class="btn btn-secondary order_status shadow rounded" id="order_status_1"
+                    data-id="1">Processing</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-light order_status" id="order_status_2" data-id="2">Shipped</button>
+                <button class="btn btn-secondary order_status shadow rounded" id="order_status_2"
+                    data-id="2">Shipped</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-light order_status" id="order_status_3" data-id="3">Delivered</button>
+                <button class="btn btn-secondary order_status shadow rounded" id="order_status_3"
+                    data-id="3">Delivered</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-light order_status" id="order_status_4" data-id="4">Cancelled</button>
+                <button class="btn btn-secondary order_status shadow rounded" id="order_status_4"
+                    data-id="4">Cancelled</button>
             </li>
         </ul>
     </div>

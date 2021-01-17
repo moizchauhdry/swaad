@@ -109,3 +109,11 @@
 .owl-carousel.home-slider .slider-item {
     background-size: contain;
 }
+/* Footer mouse button */
+.mouse {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -30px;
+    z-index: inherit;
+}
