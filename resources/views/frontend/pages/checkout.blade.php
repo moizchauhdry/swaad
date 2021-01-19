@@ -76,8 +76,8 @@
                             </div>
                             <div class="col-md-6">
                                 <?php
-                                    $timestamp = strtotime(date("h:i")) + 60*40;
-                                    $time = date("h:i", $timestamp);
+                                    $timestamp = strtotime(date("H:i")) + 60*40;
+                                    $time = date("H:i", $timestamp);
                                 ?>
                                 <div class="form-group">
                                     <label for="">Delivery Time <span class="text-danger">*</span></label>
@@ -89,20 +89,21 @@
                                 <div class="form-group">
                                     <label for="">Delivery Address <small>(optional)</small></label>
                                     <input type="text" class="form-control" name="dlv_address" id="dlv_address"
-                                        placeholder="">
+                                        placeholder="" value="{{old('dlv_address')}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Delivery Phone <small>(optional)</small></label>
                                     <input type="text" class="form-control" name="dlv_phone" id="dlv_phone"
-                                        placeholder="">
+                                        placeholder="" value="{{old('dlv_phone')}}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="streetaddress">Order Notes <small>(optional)</small></label>
-                                    <textarea name="comments" id="" cols="30" rows="8" class="form-control"></textarea>
+                                    <textarea name="comments" id="" cols="30" rows="8"
+                                        class="form-control">{{old('comments')}}</textarea>
                                 </div>
                             </div>
                         </div>

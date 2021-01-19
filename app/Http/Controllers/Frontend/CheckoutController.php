@@ -58,12 +58,12 @@ class CheckoutController extends Controller
         if ($request->dlv_date == $currentDate) {
             if ($request->dlv_time >= $time) {
             } else {
-                return redirect()->back()->with('WARNING','Please select time with a gap of 40 minutes');
+                return redirect()->back()->withInput($request->input())->with('WARNING','Please select time with a gap of 40 minutes');
             }
         } else { 
             if ($request->dlv_date >= $currentDate) {
             } else {
-                return redirect()->back()->with('WARNING','Please select correct date');
+                return redirect()->back()->withInput($request->input())->with('WARNING','Please select correct date');
             }
         }
 
