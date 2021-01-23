@@ -15,37 +15,37 @@
                     </div>
                     <div class="col-md-7 pr-4 d-flex topper align-items-center text-lg-right">
                         <span class="text text-center">
-                            {{-- <div class="float-left">
-                                <b>Tuesday-Friday </b> (10:00 - 22:30) <br>
-                            </div>
-                            <div class="float-left">
-                                <b>Monday </b> (10:00 - 14:00) <br>
-                            </div>
-                            <div class="float-left">
-                                <b>Saturday </b> (17:00 - 22:30) <br>
-                            </div>
-                            <div class="float-left">
-                                <b>Sunday Closed</b>
-                            </div> --}}
                             <div style="text-align:left">
-                                <?php 
-                                    $site = App\SiteConfiguration::first();
-                                ?>
-                                {!! $site->store_timing !!}
+                                <?php  $site = App\SiteConfiguration::first(); ?> {!! $site->store_timing !!}
                             </div>
                         </span>
-                        <span class="text text-center">
-                            <div id="google_translate_element"></div>
+                        <span>
+                            <div>
+                                <form action="{{route('changeLanguage')}}" method="get" id="changeLanguageForm">
+                                    @if (session('lan') == 'en')
+                                    <select name="language" id="language">
+                                        <option value="de">German</option>
+                                        <option value="en" selected>English</option>
+                                    </select>
+                                    @else
+                                    <select name="language" id="language">
+                                        <option value="de" selected>German</option>
+                                        <option value="en">English</option>
+                                    </select>
+                                    @endif
+                                </form>
+                            </div>
                         </span>
                         <span class="text text-center registration">
                             @if(Auth::guard('frontend')->check())
                             <a href="{{route('user.profile')}}" class="text-white">
                                 {{ Auth::guard('frontend')->user()->name }}</a> | <a href="{{route('user.logout')}}"
-                                class="text-white">Logout</a>
+                                class="text-white">{{session('lan') == 'en' ? 'Logout' : 'Ausloggen'}}</a>
                             @else
-                            <a href="#" class="text-white" data-toggle="modal" data-target="#loginModal">Login</a> |
                             <a href="#" class="text-white" data-toggle="modal"
-                                data-target="#registerModal">Registration</a>
+                                data-target="#loginModal">{{session('lan') == 'en' ? 'Login' : 'Anmeldung'}}</a> |
+                            <a href="#" class="text-white" data-toggle="modal"
+                                data-target="#registerModal">{{session('lan') == 'en' ? 'Register' : 'registrieren'}}</a>
                             @endif
                         </span>
                     </div>
@@ -60,34 +60,44 @@
         <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
             aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu"></span> Menu
+            <span class="oi oi-menu"></span> {{session('lan') == 'en' ? 'Menu' : 'Speisekarte'}}
         </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item {{(Route::currentRouteName() == 'products') ? 'active' : ''}}">
-                    <a href="{{route('categories')}}" class="nav-link">Order Online</a></li>
+                    <a href="{{route('categories')}}"
+                        class="nav-link">{{session('lan') == 'en' ? 'Order Online' : 'Online bestellen'}}</a></li>
                 <li
                     class="nav-item dropdown {{(Route::currentRouteName() == 'getProductsByCategory') ? 'active' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Menu</a>
+                        aria-haspopup="true"
+                        aria-expanded="false">{{session('lan') == 'en' ? 'Menu' : 'Speisekarte'}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         @foreach (App\Category::where('status','1')->get() as $category)
-                        <a class="dropdown-item"
-                            href="{{route('getProductsByCategory',$category->id)}}">{{$category->title}}</a>
+                        <a class="dropdown-item" href="{{route('getProductsByCategory',$category->id)}}">
+                            @if(session('lan') == 'en')
+                            {{$category->title}}
+                            @else
+                            {{$category->title_gr}}
+                            @endif</a>
                         @endforeach
                     </div>
                 </li>
                 <li class="nav-item {{(Route::currentRouteName() == 'contact') ? 'active' : ''}}"><a
-                        href="{{route('contact')}}" class="nav-link">Contact</a></li>
+                        href="{{route('contact')}}"
+                        class="nav-link">{{session('lan') == 'en' ? 'Contact' : 'Kontakt'}}</a></li>
                 <li
                     class="nav-item dropdown {{(Route::currentRouteName() == 'reservation' || Route::currentRouteName() == 'privacy' || Route::currentRouteName() == 'about') ? 'active' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">More</a>
+                        aria-haspopup="true" aria-expanded="false">{{session('lan') == 'en' ? 'More' : 'Mehr'}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="{{route('reservation')}}">Reservation</a>
-                        <a class="dropdown-item" href="{{route('privacy')}}">Privacy Policy</a>
-                        <a class="dropdown-item" href="{{route('about')}}">About Us</a>
+                        <a class="dropdown-item"
+                            href="{{route('reservation')}}">{{session('lan') == 'en' ? 'Reservation' : 'Reservierung'}}</a>
+                        <a class="dropdown-item"
+                            href="{{route('privacy')}}">{{session('lan') == 'en' ? 'Privacy Policy' : 'Datenschutz-Bestimmungen'}}</a>
+                        <a class="dropdown-item"
+                            href="{{route('about')}}">{{session('lan') == 'en' ? 'About us' : 'Über uns'}}</a>
                     </div>
                 </li>
                 <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link">
@@ -107,7 +117,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <h5 class="modal-title" id="loginModalLabel">{{session('lan') == 'en' ? 'Login' : 'Anmeldung'}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -116,13 +126,11 @@
                 <form action="{{ route('user.login') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
-                        <label for="email"
-                            class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{session('lan') == 'en' ? 'E-Mail Address
+                            ' : 'E-Mail-Addresse'}}</label>
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                 name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -130,15 +138,13 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
+                        <label for="password"
+                            class="col-md-4 col-form-label text-md-right">{{session('lan') == 'en' ? 'Password' : 'Passwort'}}</label>
                         <div class="col-md-6">
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" required
                                 autocomplete="current-password">
-
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -146,29 +152,24 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <div class="col-md-6 offset-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                     {{ old('remember') ? 'checked' : '' }}>
-
                                 <label class="form-check-label" for="remember">
-                                    {{ __('Remember Me') }}
+                                    {{session('lan') == 'en' ? 'Remember Me' : 'Behalte mich in Erinnerung'}}
                                 </label>
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Login') }}
-                            </button>
-
+                                {{session('lan') == 'en' ? 'Login' : 'Anmeldung'}} </button>
                             @if (Route::has('password.request'))
                             <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
+                                {{session('lan') == 'en' ? 'Forgot Your Password' : 'Haben Sie Ihr Passwort vergessen'}}
                             </a>
                             @endif
                         </div>
@@ -185,7 +186,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="registerModalLabel">Registration</h5>
+                <h5 class="modal-title" id="registerModalLabel">
+                    {{session('lan') == 'en' ? 'Registration' : 'Registrieren'}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -193,46 +195,46 @@
             <div class="modal-body">
                 <div class=" container row">
                     <div class="form-group col-md-6">
-                        <label for="">User Name</label>
+                        <label for="">{{session('lan') == 'en' ? 'Username' : 'Nutzername'}}</label>
                         <input type="text" class="form-control" id="reg_username" name="username" value=""
                             placeholder="" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="">Email</label>
+                        <label for="">{{session('lan') == 'en' ? 'Email' : 'Email'}}</label>
                         <input type="email" class="form-control" id="reg_email" name="email" value="" placeholder=""
                             required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="">Password</label>
+                        <label for="">{{session('lan') == 'en' ? 'Password' : 'Passwort'}}</label>
                         <input type="password" class="form-control" id="reg_password" name="password" value=""
                             placeholder="" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="">Phone Number</label>
+                        <label for="">{{session('lan') == 'en' ? 'Phone' : 'Telefon'}}</label>
                         <input type="text" class="form-control" id="reg_phone" name="phone" value="" placeholder=""
                             required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="">Street</label>
+                        <label for="">{{session('lan') == 'en' ? 'Street' : 'Straße'}}</label>
                         <input type="text" class="form-control" id="reg_address" name="address" value="" placeholder="">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="">House Number</label>
+                        <label for="">{{session('lan') == 'en' ? 'House #' : 'Haus #'}}</label>
                         <input type="number" class="form-control" id="reg_house_no" name="house_no" value=""
                             placeholder="" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="">Post Code</label>
+                        <label for="">{{session('lan') == 'en' ? 'Post code' : 'Postleitzahl'}}</label>
                         <input type="number" class="form-control" id="reg_post_code" name="post_code" value=""
                             placeholder="" required>
                     </div>
                     <div class="form-group col-md-12">
                         <button type="button" class="btn btn-primary float-right" onclick="registerUser()"
-                            id="registerButton">Register</button>
+                            id="registerButton">{{session('lan') == 'en' ? 'Register' : 'Registrieren'}}</button>
                         <button class="btn btn-primary float-right hidden" id="loadingRegisterButton" type="button"
                             disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Loading...
+                            {{session('lan') == 'en' ? 'Loading ... ' : 'Postleitzahl'}}
                         </button>
                     </div>
                 </div>

@@ -3,19 +3,17 @@
 use Illuminate\Support\Facades\Route;
 
 /**
- *****************************************************************************
- ************************** FRONTEND ROUTES **********************************
- *****************************************************************************
+ *******************************************************************
+ ************************** FRONTEND ROUTES ************************
+ *******************************************************************
 */
 
+Route::get('/', 'Frontend\FrontendController@index')->name('index');
 Route::group(['prefix'=>'user'],function() {
     Route::post('/login','Frontend\FrontendController@login')->name('user.login');
     Route::get('/logout','Frontend\FrontendController@logout')->name('user.logout');
     Route::post('/register','Frontend\FrontendController@register')->name('user.register.store');
 });
-
-Route::get('/', 'Frontend\FrontendController@index')->name('index');
-
 Route::post('/addToCart', 'Frontend\FrontendController@addToCart')->name('addToCart');
 Route::get('/add-to-cart', 'Frontend\FrontendController@viewCart')->name('viewCart');
 Route::get('/cart', 'Frontend\CartController@index')->name('cart.index');
@@ -23,11 +21,9 @@ Route::post('/cart/store', 'Frontend\CartController@store')->name('cart.store');
 Route::post('/cart/destroy','Frontend\CartController@destroy')->name('cart.destroy');
 Route::post('/cart/decrement','Frontend\CartController@decrement')->name('cart.decrement');
 Route::post('/cart/increment','Frontend\CartController@increment')->name('cart.increment');
-
 Route::group(['middleware' => ['frontend']],function(){
     Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
     Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
-
     Route::group(['prefix'=>'user'],function() {
         Route::get('/profile','Frontend\UserController@profile')->name('user.profile');
         Route::post('/profile/update/{id}','Frontend\UserController@updateProfile')->name('updateProfile');
@@ -39,28 +35,25 @@ Route::group(['middleware' => ['frontend']],function(){
         Route::post('/to-reviews/store','Frontend\UserController@storeToReviews')->name('storeToReviews');
     });
 });
-
 Route::get('/categories', 'Frontend\FrontendController@categories')->name('categories');
 Route::get('/getProductsByCategory/{id}', 'Frontend\FrontendController@getProductsByCategory')->name('getProductsByCategory');
-
 Route::get('/products', 'Frontend\FrontendController@products')->name('products');
 Route::get('/products/detail/{id}', 'Frontend\FrontendController@productDetail')->name('productDetail');
-
 Route::get('/reservation', 'Frontend\FrontendController@reservation')->name('reservation');
 Route::post('/reservation/store', 'Frontend\FrontendController@storeReservation')->name('reservation.store');
-
 Route::get('/contact', 'Frontend\FrontendController@contact')->name('contact');
 Route::post('/contact/store', 'Frontend\FrontendController@storeContact')->name('contact.store');
-
 Route::get('/about', 'Frontend\FrontendController@about')->name('about');
 Route::get('/serve', 'Frontend\FrontendController@serve')->name('serve');
 Route::get('/privacy', 'Frontend\FrontendController@privacy')->name('privacy');
 Route::get('/termsCondition', 'Frontend\FrontendController@termsCondition')->name('termsCondition');
-
 // SIX PAYMENT METHOD
 Route::get('/six-payment', 'Frontend\CheckoutController@sixPayment');
 Route::get('/payment-success', 'Frontend\CheckoutController@paymentSuccess');
 Route::get('/payment-fail', 'Frontend\CheckoutController@paymentFail');
+// CHANGE LANGUAGE
+Route::get('/change-language', 'Frontend\FrontendController@changeLanguage')->name('changeLanguage');
+
 
 /**
  *****************************************************************************

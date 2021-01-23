@@ -220,4 +220,11 @@ class FrontendController extends Controller
     public function termsCondition() {
         return view ('frontend.pages.termsCondition');
     }
+
+    public function changeLanguage(Request $request) {
+        $lan = $request->language;
+        session(['lan' => $lan]);
+        $sessionLan = session('lan');
+        return redirect()->back();
+    }
 }

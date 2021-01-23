@@ -14,9 +14,12 @@
                         <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex"
                             style="background-image: url({{asset('public/frontend/images/category.jpg')}});">
                             <div class="text text-center">
-                                <h2>Our Menu</h2>
-                                <p>Protect the health of every home</p>
-                                <p><a href="{{route('categories')}}" class="btn btn-primary">View All</a></p>
+                                <h2>{{session('lan') == 'en' ? 'Our Menu' : 'Unser Menü'}}</h2>
+                                <p>{{session('lan') == 'en' ? 'Protect the health of every home' : 'Schützen Sie die Gesundheit jedes Hauses'}}
+                                </p>
+                                <p><a href="{{route('categories')}}"
+                                        class="btn btn-primary">{{session('lan') == 'en' ? 'View All' : 'Alle ansehen'}}</a>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -25,8 +28,13 @@
                         <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
                             style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a
-                                        href="{{route('getProductsByCategory',$category->id)}}">{{$category->title}}</a>
+                                <h2 class="mb-0"><a href="{{route('getProductsByCategory',$category->id)}}">
+                                        @if (session('lan') == 'en')
+                                        {{$category->title}}
+                                        @else
+                                        {{$category->title_gr}}
+                                        @endif
+                                    </a>
                                 </h2>
                             </div>
                         </div>
@@ -35,8 +43,13 @@
                         <div class="category-wrap ftco-animate img d-flex align-items-end"
                             style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a
-                                        href="{{route('getProductsByCategory',$category->id)}}">{{$category->title}}</a>
+                                <h2 class="mb-0"><a href="{{route('getProductsByCategory',$category->id)}}">
+                                        @if (session('lan') == 'en')
+                                        {{$category->title}}
+                                        @else
+                                        {{$category->title_gr}}
+                                        @endif
+                                    </a>
                                 </h2>
                             </div>
                         </div>
@@ -50,7 +63,13 @@
                 <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
                     style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="#">{{$category->title}}</a></h2>
+                        <h2 class="mb-0"><a href="#">@if (session('lan') == 'en')
+                                {{$category->title}}
+                                @else
+                                {{$category->title_gr}}
+                                @endif
+                            </a>
+                        </h2>
                     </div>
                 </div>
                 @endforeach
@@ -58,7 +77,13 @@
                 <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
                     style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="#">{{$category->title}}</a></h2>
+                        <h2 class="mb-0"><a href="#">@if (session('lan') == 'en')
+                                {{$category->title}}
+                                @else
+                                {{$category->title_gr}}
+                                @endif
+                            </a>
+                        </h2>
                     </div>
                 </div>
                 @endforeach
@@ -71,7 +96,7 @@
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-2">Popular Food Items</h2>
+                <h2 class="mb-2">{{session('lan') == 'en' ? 'Popular Food Items' : 'Beliebte Lebensmittel'}}</h2>
             </div>
         </div>
     </div>
@@ -82,11 +107,22 @@
                 <div class="product">
                     <a href="{{route('productDetail',$product->id)}}" class="img-prod"><img class="img-fluid"
                             src="{{asset('storage/app/public/'.$product->image_url)}}" alt="PRODUCT-IMAGE">
-                        <span class="status">{{$product->category->title}}</span>
+                        <span class="status">@if (session('lan') == 'en')
+                            {{$product->category->title}}
+                            @else
+                            {{$product->category->title_gr}}
+                            @endif
+                        </span>
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="{{route('productDetail',$product->id)}}">{{$product->title}}</a></h3>
+                        <h3><a href="{{route('productDetail',$product->id)}}">@if (session('lan') == 'en')
+                                {{$product->title}}
+                                @else
+                                {{$product->title_gr}}
+                                @endif
+                            </a>
+                        </h3>
                         @include('frontend.pages.partials._spice')
                         <div class="d-flex">
                             <div class="pricing">

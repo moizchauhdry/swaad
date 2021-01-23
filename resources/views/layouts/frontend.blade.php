@@ -104,8 +104,15 @@
     </script>
     @endif
 
-    @yield('scripts')
+    <script>
+        $("#language").change(function (e) { 
+        e.preventDefault();
+        var lan = $("#language").val();
+        $( "#changeLanguageForm" ).submit();
+    });
+    </script>
 
+    @yield('scripts')
 
 </body>
 
