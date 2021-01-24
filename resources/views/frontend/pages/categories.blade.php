@@ -22,7 +22,13 @@
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="{{route('getProductsByCategory',$category->id)}}">{{$category->title}}</a></h3>
+                        <h3><a href="{{route('getProductsByCategory',$category->id)}}">@if (session('lan') == 'en')
+                                {{$category->title}}
+                                @else
+                                {{$category->title_gr}}
+                                @endif
+                            </a>
+                        </h3>
                     </div>
                 </div>
             </div>

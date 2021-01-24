@@ -36,8 +36,6 @@ if ($reviews_count != 0) {
     $average_star = 0;
 }
 $unchecked_star = 5 - $average_star;
-// $res = (float)($average_star);
-// $res = ($res - (int)$res)*$reviews_count;
 ?>
 
 @section('content')
@@ -45,7 +43,7 @@ $unchecked_star = 5 - $average_star;
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">Product Detail</h1>
+                <h1 class="mb-0 bread">{{session('lan') == 'en' ? 'Product Detail' : 'Produktdetail'}}</h1>
             </div>
         </div>
     </div>
@@ -59,7 +57,12 @@ $unchecked_star = 5 - $average_star;
                         src="{{asset('storage/app/public/'.$product->image_url)}}" class="img-fluid" alt="IMAGE"></a>
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-                <h3>{{$product->title}}</h3>
+                <h3>@if (session('lan') == 'en')
+                    {{$product->title}}
+                    @else
+                    {{$product->title_gr}}
+                    @endif
+                </h3>
                 <div class="rating d-flex">
                     <p class="text-left mr-4">
                         <a href="#" class="mr-2">{{$average}}</a>
@@ -72,7 +75,11 @@ $unchecked_star = 5 - $average_star;
                     <span> CHF {{ number_format((float)$product->price, 2, '.', '')}}</span>
                 </p>
                 <p>
+                    @if (session('lan') == 'en')
                     {{$product->description}}
+                    @else
+                    {{$product->description_gr}}
+                    @endif
                 </p>
                 <p>
                     @include('frontend.pages.partials._spice')
@@ -126,7 +133,6 @@ $unchecked_star = 5 - $average_star;
                 </div>
                 @endif
 
-
             </div>
         </div>
     </div>
@@ -137,8 +143,8 @@ $unchecked_star = 5 - $average_star;
     <div class="container">
         <div class="row justify-content-center mb-3 pb-3">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading">Products</span>
-                <h2 class="mb-4">Related Products</h2>
+                <span class="subheading">{{session('lan') == 'en' ? 'Products' : 'Produkte'}}</span>
+                <h2 class="mb-4">{{session('lan') == 'en' ? 'Related Products' : 'Verwandte Produkte'}}</h2>
             </div>
         </div>
     </div>
@@ -150,11 +156,22 @@ $unchecked_star = 5 - $average_star;
                 <div class="product">
                     <a href="{{route('productDetail',$product->id)}}" class="img-prod"><img class="img-fluid"
                             src="{{asset('storage/app/public/'.$product->image_url)}}" alt="product-image">
-                        <span class="status">{{$product->category->title}}</span>
+                        <span class="status">@if (session('lan') == 'en')
+                            {{$product->category->title}}
+                            @else
+                            {{$product->category->title_gr}}
+                            @endif
+                        </span>
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="{{route('productDetail',$product->id)}}">{{$product->title}}</a></h3>
+                        <h3><a href="{{route('productDetail',$product->id)}}">@if (session('lan') == 'en')
+                                {{$product->title}}
+                                @else
+                                {{$product->title_gr}}
+                                @endif
+                            </a>
+                        </h3>
                         @include('frontend.pages.partials._spice')
                         <div class="d-flex">
                             <div class="pricing">
@@ -184,7 +201,9 @@ $unchecked_star = 5 - $average_star;
         <div class="row">
             <div class="col-lg-12 ftco-animate">
                 <div>
-                    <h4 class="text-center text-primary bg-light p-2">Rating & Reviews of {{$product->title}}</h4>
+                    <h4 class="text-center text-primary bg-light p-2">
+                        {{session('lan') == 'en' ? 'Rating & Reviews of' : 'Bewertung & Bewertungen von'}}
+                        {{$product->title}}</h4>
                     <div class="well well-sm p-4">
                         <div class="row p-3">
                             <div class="col-md-3">
@@ -198,7 +217,8 @@ $unchecked_star = 5 - $average_star;
                                     </span>
                                 </span>
                                 <div>
-                                    <span class="glyphicon glyphicon-user"></span>{{$reviews->count()}} Ratings
+                                    <span class="glyphicon glyphicon-user"></span>{{$reviews->count()}}
+                                    {{session('lan') == 'en' ? 'Ratings' : 'Bewertungen'}}
                                 </div>
                             </div>
                             <div class="col-md-6">
