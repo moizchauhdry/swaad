@@ -167,7 +167,7 @@ class AuthController extends Controller
             ]);
         }
 
-        $response = app('App\Http\Controllers\Auth\UserForgotPasswordController')->sendResetLinkEmail($request);
+        $response = app('App\Http\Controllers\Auth\ApiUserForgotPasswordController')->sendResetLinkEmail($request);
         return $response;
     }
 
