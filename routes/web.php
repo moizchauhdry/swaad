@@ -170,8 +170,10 @@ Route::group(['middleware' => 'prevent-back-history'], function()
     });
 });
 
-/////For user reset Password routes
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/user/password/reset/', 'Auth\UserResetPasswordController@reset')->name('resetPasswordUser');
+// USER RESET PASSWORD ROUTES
+// Auth::routes();
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('user/password/request','Auth\UserForgotPasswordController@showLinkRequestForm')->name('userPasswordRequest');
+Route::post('user/password/email','Auth\UserForgotPasswordController@sendResetLinkEmail')->name('userPasswordEmail');
 Route::get('/user/password/reset/{token}', 'Auth\UserResetPasswordController@showResetForm')->name('userPasswordReset');
+Route::post('/user/password/reset/', 'Auth\UserResetPasswordController@reset')->name('resetPasswordUser');

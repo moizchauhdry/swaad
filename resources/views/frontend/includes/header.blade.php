@@ -167,8 +167,8 @@
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
                                 {{session('lan') == 'en' ? 'Login' : 'Anmeldung'}} </button>
-                            @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                            @if (Route::has('userPasswordRequest'))
+                            <a class="btn btn-link" href="{{ route('userPasswordRequest') }}">
                                 {{session('lan') == 'en' ? 'Forgot Your Password' : 'Haben Sie Ihr Passwort vergessen'}}
                             </a>
                             @endif
