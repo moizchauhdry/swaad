@@ -34,4 +34,20 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success','Status Updated Successfully');
     }
+
+    public function check(Request $request) {
+        $indexList = $request->indexList;
+
+        $orders =  Order::orderBy('id','DESC')->get();
+        if(count($orders) > $indexList)
+        {
+
+            $returnHTML = view('admin.orders._index',compact('orders'))->render();
+            return response()->json(['status' => 1,'count' => count($orders), 'html'=> $returnHTML]);
+        }
+        else
+        {
+            return response()->json(['status' => 0]);
+        }
+    }
 }

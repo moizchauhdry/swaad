@@ -122,6 +122,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                         Route::get('/', 'OrderController@index')->name('orders.index');
                         Route::get('/detail/{id}', 'OrderController@detail')->name('orders.detail');
                         Route::post('/updateOrderStatus/{id}', 'OrderController@updateOrderStatus')->name('updateOrderStatus');
+                        Route::get('/check', 'OrderController@check')->name('orders.check');
                     });
                 });
 
