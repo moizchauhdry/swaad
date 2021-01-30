@@ -219,6 +219,11 @@ class FrontendController extends Controller
 
     public function termsCondition() {
         return view ('frontend.pages.termsCondition');
+    
+    }
+
+    public function catering() {
+        return view ('frontend.pages.catering');
     }
 
     public function changeLanguage(Request $request) {

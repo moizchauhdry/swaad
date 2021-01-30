@@ -5,16 +5,17 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">What We Serve</h1>
+                <h1 class="mb-0 bread">{{session('lan') == 'en' ? 'What We Serve' : 'Über unser Essen'}}</h1>
             </div>
         </div>
     </div>
 </div>
 
+@if (session('lan') == 'en')
 <div class="container">
     <div class="col-md-12 p-5">
         <h4 class="text-primary text-center">We really care what you eat in our restaurant!</h4>
-        <h5 class="text-primary">Himalaya Salt</h5>
+        <h4 class="text-primary">Himalaya Salt</h4>
         <p class="text-justify">
             At Swaad we cook with Himalaya salt which makes the taste unmatched. Pink Himalayan salt comes from seabed
             and although commonly referred to as a spice, this product is actually a mineral. It is a natural, very
@@ -110,5 +111,130 @@
         </p>
     </div>
 </div>
+@else
+<div class="container">
+    <div class="col-md-12 p-5">
+        <h4 class="text-primary text-center">Gesunde und köstliche Zutaten sind der Schlüssel zum Geschmack!
+        </h4>
+        <h4 class="text-primary">Himalaya Salz
+        </h4>
+        <p class="text-justify">
+            Für den unvergleichlichen Geschmack kochen wir ausschliesslich mit rosa
+            Steinsalz aus dem Himalaya.
+            Himalaya-Salz ist ein Naturprodukt und sehr reich an Mineralien. Es enthält
+            unter anderem Kalzium, Magnesium, Zink, Kupfer und Mangan - und sogar
+            Spuren von Gold!
+            Dieses Salz ist eine wunderbare, gesunde Zutat und zeichnet sich durch einen
+            unerreichten sanften Geschmack aus.
+        </p>
+        <h4 class="text-primary">Basmati Reis
+        </h4>
+        <p class="text-justify">
+            «Basmati» bedeuted Duft auf Hindi. Der langkörnige Basmati-Reis wird weltweit
+            verwendet und für seinen exquisiten Geschmack geliebt. Es bedarf einiger
+            Erfahrung, um dem Reis sein bestes, leicht nussiges Aroma zu entlocken.
+        </p>
+        <p class="text-justify">
+            Wir importieren den Basmati-Reis aus dem besten Anbau-Gebiet in Pakistan. Er
+            wächst am Fusse des Himalayas im Kaschmir und im Tal der fünf Flüsse.
+        </p>
+        <p class="text-justify"> 100 g ungekochter Basmati enthält folgende Nährstoffe:
+            <ul>
+                <li> Energiewert: 354 kcal or 1482 kJ</li>
+                <li>Fett: 0.9 g, davon 0.3 g gesättigte Fettsäuren</li>
+                <li>Kohlenhydrate: 78 g, davon bloss 0.3 g Zucker</li>
+                <li>Eiweiss: 9 g</li>
+                <li> Ballaststoffe: 2.2</li>
+            </ul>
+        </p>
+        <h4 class="text-primary">Gewürze</h4>
+        <p class="text-justify">
+            Wir verwenden authentische Gewürze und Gewürzmischungen, welche wir
+            direkt aus Pakistan und Indien importieren oder im Haus selber zusammen
+            stellen. Bei der Komposition der Gewürze achten wir nicht nur auf einen
+            harmonischen Geschmack, sondern auch dass die einzelnen Zutaten der
+            Gesundheit förderlich sind.
+        </p>
+        <p class="text-justify">
+            Im «Swaad» beginnt der Genuss des Essens bereits mit dem Geruch der
+            Gewürze, die für den köstlichen Geschmack sorgen.
+        </p>
+        <h4 class="text-primary">Kurkuma</h4>
+        <p class="text-justify">
+            Kurkuma ist ein wahres Superfood: Äusserst gesund wegen seiner
+            entzündungshemmenden Eigenschaften, sehr geschmacksvoll und auch als
+            natürlicher Farbgeber sehr geschätzt.
+        </p>
+        <p class="text-justify">
+            Kurkuma ist ein Wurzelrhizom, welches zu einem leuchtend gelb-orangen
+            Gewürz verarbeitet wird. Der Geschmack von Kurkuma ist erdig, leicht bitter
+            und scharf zugleich. Ohne diese unverzichtbare Zutat fehlt vielen indischen
+            Gerichten, der typische Geschmack oder auch die typische Farbe. In Indien ist es
+            unter dem Namen «Haldi» bekannt.
+        </p>
+        <p class="text-justify">
+            Ob herzhaft oder süss, ob Hauptmahlzeit oder Dessert, ob Milchshake, Pickles
+            oder Fleischware: Kaum eine Zutat ist so vielfältig einsetzbar, wie Kurkuma!
+        </p>
+        <p class="text-justify">
+            Zudem erhält Kurkuma die Gesundheit. Es wirkt entgiftend,
+            entzündungshemmend und stärkt das Immunsystem. Ein Bad in Kurkuma
+            pflegt die Haut.
+        </p>
+        <h4 class="text-primary">Phool Makhana (Lotus Samen)
+        </h4>
+        <p class="text-justify">
+            Im «Swaad» benutzen wir Lotus Samen hauptsächlich für Raita, Curry und Brot.
+            Aber auch für Vorspeisen oder Snacks.
+        </p>
+        <p class="text-justify">
+            Ebenso vielfältig sind die gesundheitlichen Vorteile von Lotus Samen: Sie
+            enthalten wertvolle Proteine, Vitamine, Antioxidantien, sowie Mineralien und
+            Ballaststoffe. Sie haben einen positiven Einfluss auf den Schlafzyklus und
+            wirken beruhigend. Sie können den Alterungsprozess verlangsamen und bei
+            Diabetes helfen. Lotus Samen sind ein Superfood für Körper und Geist.
+        </p>
+        <h4 class="text-primary">Tofu </h4>
+        <p class="text-justify">
+            Tofu ist ein weiches, käse-ähnliches, fermentiertes Soya-Produkt. Es ist eine
+            wunderbare kalziumreiche Protein-Quelle und enthält fast keine Fette und
+            Kohlenhydrate. Tofu ist die erste Wahl für viele Vegetarier und Veganer, die sich
+            gesund ernähren wollen.
+        </p>
+        <h4 class="text-primary">Fleisch </h4>
+        <p class="text-justify">
+            Unsere Fleischprodukte sind allerbester Qualität. Wir werden von Spahni AG
+            beliefert, dem ältesten Metzgerei-Geschäft Berns, gegründet 1863 in
+            Ostermundigen
+        </p>
+        <p class="text-justify">
+            Die Metzgerei Spahni ist ein Familienbetrieb und setzt alles daran, dass die
+            Fleisch-Produkte hygienisch einwandfrei und mit tadelloser Qualität hergestellt
+            werden. Der Betrieb arbeitet nach einer Vielzahl von ethischen Grundsätzen.
+            Die natur-und artgerechte Tierhaltung ist seit Generationen eine
+            Selbstverständlichkeit. Die Schonung der Ressourcen, das Vermeiden von
+            Umweltverschmutzung und der sparsame Umgang mit Energie ist Teil der
+            Planung und des Tagesgeschäfts.
+        </p>
+        <h4 class="text-primary">Frische Getränke ( Leemo Panni, Ingwer Tee, Ice Tea und Lassi)
+        </h4>
+        <p class="text-justify">
+            Wir stellen viele verschiedene Getränke im «Swaad» täglich frisch her. So
+            vermeiden wir künstliche Zusätze und können gesunde und köstliche Getränke
+            anbieten.
+        </p>
+        <p>
+            Leemo Pani besteht aus frischem Lime-Saft, Minze, Soda-Wasser und einer Prise
+            Salz.
+            Für den Ingwer Tee verwenden wir frischen Ingwer, sowie Zitrone und Honig.
+            Ingwer stärk und erfrischt, hilft gegen Erkältungen und Entzündungen. Perfekt
+            für Winter und Sommer.
+            Lassi ist ein Getränk auf Basis von Natur-Yoghurt und wird nach einem alten
+            Familien-Rezept hergestellt. Lassi ist ein erfrischendes Kaltgetränk und wird
+            direkt nach der Bestellung frisch zubereitet.
+        </p>
+    </div>
+</div>
+@endif
 
 @endsection

@@ -15,8 +15,6 @@
                             style="background-image: url({{asset('public/frontend/images/category.jpg')}});">
                             <div class="text text-center">
                                 <h2>{{session('lan') == 'en' ? 'Our Menu' : 'Unser Menü'}}</h2>
-                                <p>{{session('lan') == 'en' ? 'Protect the health of every home' : 'Schützen Sie die Gesundheit jedes Hauses'}}
-                                </p>
                                 <p><a href="{{route('categories')}}"
                                         class="btn btn-primary">{{session('lan') == 'en' ? 'View All' : 'Alle ansehen'}}</a>
                                 </p>
@@ -63,7 +61,8 @@
                 <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
                     style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="#">@if (session('lan') == 'en')
+                        <h2 class="mb-0"><a href="{{route('getProductsByCategory',$category->id)}}">@if (session('lan')
+                                == 'en')
                                 {{$category->title}}
                                 @else
                                 {{$category->title_gr}}
@@ -77,7 +76,8 @@
                 <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
                     style="background-image: url({{asset('storage/app/public/'.$category->image_url)}});">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="#">@if (session('lan') == 'en')
+                        <h2 class="mb-0"><a href="{{route('getProductsByCategory',$category->id)}}">@if (session('lan')
+                                == 'en')
                                 {{$category->title}}
                                 @else
                                 {{$category->title_gr}}

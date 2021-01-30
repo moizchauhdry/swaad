@@ -152,7 +152,8 @@
                                     <div class="col-md-12">
                                         <div class="checkbox">
                                             <label><input type="checkbox" value="" class="mr-2" required>
-                                                I have read and accept the <a href="#">terms & conditions.</a></label>
+                                                I have read and accept the <a href="{{route('termsCondition')}}"
+                                                    target="_blank">Terms & conditions.</a></label>
                                         </div>
                                     </div>
                                 </div>

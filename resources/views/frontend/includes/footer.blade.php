@@ -71,12 +71,12 @@
                     </h2>
                     <div class="block-23 mb-3">
                         <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">Bernstrasse 95,
-                                    Ostermundigen, Switzerland</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">031 558 33
-                                        88</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span
-                                        class="text">hello@swaadbern.ch</span></a></li>
+                            <li class="mb-2"><span class="icon icon-map-marker"></span><span class="text">Swaad Foods
+                                    Gmbh <br> 3072 Ostermundigen</span></li>
+                            <li class="mb-2"><span class="icon icon-phone"></span><span class="text">031 558 33
+                                    88</span></li>
+                            <li><span class="icon icon-envelope"></span><span class="text">hello@swaadbern.ch</span>
+                            </li>
                         </ul>
                     </div>
                 </div>

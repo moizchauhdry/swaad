@@ -5,12 +5,13 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">Privacy Policy</h1>
+                <h1 class="mb-0 bread">{{session('lan') == 'en' ? 'Privacy Policy' : 'Datenschutz-Bestimmungen'}}</h1>
             </div>
         </div>
     </div>
 </div>
 
+@if (session('lan') == 'en')
 <div class="container">
     <div class="col-md-12 p-5">
         <h5 class="text-primary">Privacy Note</h5>
@@ -42,6 +43,11 @@
             This privacy notice applies to all information collected through our Services (which, as described above,
             includes
             our Website and App), as well as, any related services, sales, marketing or events.
+        </p>
+        <p class="text-justify">
+            Please read this privacy notice carefully as it will help you understand what we do with the information
+            that we
+            collect.
         </p>
         <h5 class="text-primary">TABLE OF CONTENTS</h5>
         <ol>
@@ -463,5 +469,455 @@
             30 days.</p>
     </div>
 </div>
+@else
+<div class="container">
+    <div class="col-md-12 p-5">
+        <h5 class="text-primary">Datenschutzerklärung</h5>
+        <p class="text-justify">
+            Vielen Dank, dass Sie sich entschieden haben, Teil unserer Community bei der Swaad Foods GmbH zu sein
+            ("Unternehmen", "wir", "uns", "unsere"). Wir verpflichten uns, Ihre personenbezogenen Daten und Ihr Recht
+            auf
+            Privatsphäre zu schützen. Wenn Sie Fragen oder Bedenken zu dieser Datenschutzerklärung oder unseren
+            Praktiken
+            in Bezug auf Ihre personenbezogenen Daten haben, kontaktieren Sie uns bitte unter admin@swaadbern.ch.
+        </p>
+        <p class="text-justify">
+            Wenn Sie unsere Website http://www.swaadbern.ch (die "Website") besuchen, nutzen Sie unsere mobile
+            Anwendung, wie der Fall sein kann (die "App") und im Allgemeinen, nutzen Sie unsere Dienste (die "Dienste",
+            die
+            die Website und die App umfassen), wir schätzen, dass Sie uns mit Ihren persönlichen Daten vertrauen. Wir
+            nehmen Ihre Privatsphäre sehr ernst. In dieser Datenschutzerklärung möchten wir Ihnen auf die klarste Art
+            und
+            Weise erklären, welche Informationen wir sammeln, wie wir sie verwenden und welche Rechte Sie in Bezug
+            darauf
+            haben. Wir hoffen, dass Sie sich etwas Zeit nehmen, um es sorgfältig durchzulesen, da es wichtig ist. Wenn
+            diese
+            Datenschutzerklärung irgendwelche Bedingungen hat, mit denen Sie nicht einverstanden sind, stellen Sie bitte
+            die
+            Nutzung unserer Dienste sofort ein.
+
+        </p>
+        <p class="text-justify">
+            Diese Datenschutzerklärung gilt für alle Informationen, die über unsere Dienste erfasst werden (die, wie
+            oben
+            beschrieben, unsere Website und App umfasst), sowie für alle damit verbundenen Dienstleistungen, Verkäufe,
+            Marketing oder Veranstaltungen.
+        </p>
+        <h5 class="text-primary">INHALTSVERZEICHNIS</h5>
+        <ol>
+            <li>WELCHE INFORMATIONEN SAMMELN WIR?</li>
+            <li>WIE VERWENDEN WIR IHRE DATEN?</li>
+            <li>WERDEN IHRE INFORMATIONEN MIT JEMANDEM GETEILT?</li>
+            <li>VERWENDEN WIR COOKIES UND ANDERE TRACKING-TECHNOLOGIEN?</li>
+            <li>VERWENDEN WIR GOOGLE MAPS PLATFORM APIS?</li>
+            <li>WIE BEHANDELN WIR IHRE SOZIALEN LOGINS?</li>
+            <li>WIE LANGE BEWAHREN WIR IHRE DATEN AUF?</li>
+            <li>WIE SCHÜTZEN WIR IHRE DATEN?</li>
+            <li>WAS SIND IHRE DATENSCHUTZRECHTE?</li>
+            <li>STEUERUNGEN FÜR DO-NOT-TRACK-FUNKTIONEN</li>
+            <li>HABEN EINWOHNER KALIFORNIENS SPEZIFISCHE DATENSCHUTZRECHTE? </li>
+            <li>AKTUALISIEREN WIR DIESE MITTEILUNG?</li>
+            <li>WIE KÖNNEN SIE UNS ÜBER DIESE MITTEILUNG KONTAKTIEREN?</li>
+            <li>WIE KÖNNEN SIE DIE DATEN, DIE WIR VON IHNEN ERFASSEN, ÜBERPRÜFEN, AKTUALISIEREN ODER LÖSCHEN?</li>
+        </ol>
+        <h5 class="text-primary">1. WELCHE INFORMATIONEN SAMMELN WIR?</h5>
+        <b class="text-primary">Persönliche Daten, die Sie uns mitteilen</b>
+        <p>Kurzgesagt: Wir erfassen personenbezogene Daten, die Sie uns zur Verfügung stellen. </p>
+        <p>Wir erfassen personenbezogene Daten, die Sie uns freiwillig zur Verfügung stellen, wenn Sie sich bei den
+            Diensten
+            registrieren, möchten Interesse daran haben, Informationen über uns oder unsere Produkte und
+            Dienstleistungen
+            zu erhalten, wenn Sie an Aktivitäten auf den Diensten teilnehmen oder anderweitig, wenn Sie uns
+            kontaktieren.
+            Die personenbezogenen Daten, die wir erfassen, hängen vom Kontext Ihrer Interaktionen mit uns und den
+            Diensten, den von Ihnen getroffenen Entscheidungen und den von Ihnen genutzten Produkten und Funktionen ab.
+            Die von uns erfassten personenbezogenen Daten können Folgendes umfassen:
+        </p>
+        <p><b class="text-primary">Persönliche Daten, die von Ihnen bereitgestellt werden.</b> Wir sammeln Namen;
+            Telefonnummern; E-MailAdressen; Postanschriften; Kennwörter; Benutzernamen; Rechnungsadressen;
+            Debit-/Kreditkartennummern; und
+            andere ähnliche Informationen.</p>
+        <p>
+            <b class="text-primary">Zahlungsdaten. </b>Wir können Daten sammeln, die für die Verarbeitung Ihrer Zahlung
+            erforderlich sind, wenn Sie
+            Einkäufe tätigen, z. B. Ihre Zahlungsmittelnummer (z. B. eine Kreditkartennummer) und den Sicherheitscode,
+            der
+            mit Ihrem Zahlungsinstrument verknüpft ist. Alle Zahlungsdaten werden von 6 Payment Gateway gespeichert. Die
+            Datenschutzhinweise finden Sie hier: https://www.siX-payment-
+            services.com/en/services/legal/privacystatement.html.
+        </p>
+        <p><b class="text-primary">Social-Media-Login-Daten.</b> Wir können Ihnen die Möglichkeit geben, sich mit Ihren
+            vorhandenen Social-MediaKontodaten wie Ihrem Facebook, Twitter oder einem anderen Social-Media-Konto bei uns
+            zu registrieren. Wenn
+            Sie sich auf diese Weise registrieren, erfassen wir die Informationen, die im Abschnitt "WIE WIR BEHANDELN
+            IHRE
+            SOZIALEN LOGINS" unten beschrieben sind.
+        </p>
+        <p>Alle von Ihnen zur Verfügung stellenden personenbezogenen Daten müssen wahr, vollständig und genau sein,
+            und Sie müssen uns über Änderungen dieser personenbezogenen Daten informieren.
+        </p>
+        <p><b class="text-primary">Automatisch erfasste Informationen</b></p>
+        <p>
+            Kurzgesagt: Einige Informationen – wie Ihre IP-Adresse (Internet Protocol) und/oder Browser- und
+            Geräteeigenschaften - werden automatisch erfasst, wenn Sie unsere Dienste besuchen.
+        </p>
+        <p>Wir erfassen automatisch bestimmte Informationen, wenn Sie die Dienste besuchen, nutzen oder navigieren.
+            Diese Informationen geben nicht Ihre spezifische Identität (wie Ihren Namen oder Ihre Kontaktinformationen)
+            an,
+            sondern können Geräte- und Nutzungsinformationen wie Ihre IP-Adresse, Browser- und Geräteeigenschaften,
+            Betriebssystem, Spracheinstellungen, verweisende URLS, Gerätename, Land, Standort, Informationen darüber,
+            wie
+            und wann Sie unsere Dienste nutzen, und andere technische Informationen umfassen. Diese Informationen
+            werden in erster Linie benötigt, um Informationen über Cookies und ähnliche Technologien zu verwalten.</p>
+        <p><b class="text-primary">Über unsere App gesammelte Informationen </b></p>
+        <p>
+            Kurzgesagt: Wir sammeln Informationen über Ihren Geostandort, Push-Benachrichtigungen, wenn Sie unsere App
+            nutzen.
+        </p>
+        <p>Wenn Sie unsere App nutzen, erfassen wir auch die folgenden Informationen: </p>
+        <p>
+            <ul>
+                <li>Geo-Location-Informationen. Wir können zugriff oder die Erlaubnis zu standortbasierten Informationen
+                    von Ihrem mobilen Gerät verlangen und diese nachverfolgen, entweder kontinuierlich oder während Sie
+                    unsere App nutzen, um bestimmte standortbasierte Dienste bereitzustellen. Wenn Sie unseren Zugriff
+                    oder unsere Berechtigungen ändern möchten, können Sie dies in den Einstellungen Ihres Geräts tun.
+                </li>
+                <li>
+                    Push-Benachrichtigungen. Wir können Sie bitten, Ihnen Push-Benachrichtigungen über Ihr Konto oder
+                    bestimmte Funktionen der App zu senden. Wenn Sie den Empfang dieser Art von Kommunikation
+                    abbestellen möchten, können Sie diese in den Einstellungen Ihres Geräts deaktivieren.
+                </li>
+            </ul>
+        </p>
+        <p>
+            Diese Informationen werden in erster Linie zur Aufrechterhaltung der Sicherheit und des Betriebs unserer
+            App, zur
+            Fehlerbehebung und zu internen Analyse- und Berichtszwecken benötigt.
+        </p>
+
+        <h5 class="text-primary">2. WIE VERWENDEN WIR IHRE DATEN?
+        </h5>
+        <p>Kurzgesagt: Wir verarbeiten Ihre Daten für Zwecke, die auf legitimen Geschäftsinteressen, der Erfüllung
+            unseres
+            Vertrags mit Ihnen, der Einhaltung unserer gesetzlichen Verpflichtungen und/oder Ihrer Zustimmung basieren.
+        </p>
+        <p>Wir verwenden personenbezogene Daten, die über unsere Dienste erfasst werden, für eine Vielzahl von
+            Geschäftszwecken, die unten beschrieben werden. Wir verarbeiten Ihre personenbezogenen Daten für diese
+            Zwecke unter Berufung auf unsere legitimen Geschäftsinteressen, um mit Ihrer Zustimmung einen Vertrag mit
+            Ihnen abzuschließen oder auszuführen und/oder um unseren gesetzlichen Verpflichtungen nachzukommen. Wir
+            geben die spezifischen Verarbeitungsgründe an, auf die wir uns neben jedem unten aufgeführten Zweck
+            verlassen.</p>
+        <p>Wir verwenden die Informationen, die wir sammeln oder erhalten:
+        </p>
+        <p>
+            <ul>
+                <li>So erleichtern Sie den Erstellungs- und Anmeldeprozessvon Konten . Wenn Sie sich dafür entscheiden,
+                    Ihr
+                    Konto mit uns mit einem Drittanbieterkonto (z. B. Ihrem Google- oder Facebook-Konto) zu verknüpfen,
+                    verwenden wir die Informationen, die Sie uns von diesen Dritten zur Verfügung stellen, um die
+                    Kontoerstellung und den Anmeldeprozess für die Vertragserfüllung zu erleichtern. Weitere
+                    Informationen
+                    finden Sie im folgenden Abschnitt mit dem Titel "HOW DO WE HANDLE YOUR SOCIAL LOGINS".</li>
+                <li>Um Testimonials zuposten. Wir veröffentlichen Zeugnisse über unsere Dienste, die personenbezogene
+                    Daten enthalten können. Vor der Veröffentlichung eines Testimonials werden wir Ihre Zustimmung zur
+                    Verwendung Ihres Namens und des Inhalts des Testimonials einholen. Wenn Sie Ihr Testimonial
+                    aktualisieren oder löschen möchten, kontaktieren Sie uns bitte unter admin@swaadbern.ch und geben
+                    Sie Ihren Namen, Ihren Testimonial-Standort und Ihre Kontaktinformationen an.</li>
+                <li>Feedback anfordern. Wir können Ihre Daten verwenden, um Feedback anzufordern und Sie über Ihre
+                    Nutzung unserer Dienste zu kontaktieren.</li>
+                <li>So aktivieren Sie die Benutzer-zu-Benutzer-Kommunikation. Wir können Ihre Daten verwenden, um die
+                    Kommunikation zwischen Benutzer und Benutzer mit Zustimmung jedes Benutzers zu ermöglichen.</li>
+                <li>So verwalten Sie Benutzerkonten. Wir können Ihre Daten für die Verwaltung unseres Kontos und deren
+                    Betriebsführung verwenden.
+                </li>
+                <li>So senden Sie Administrative Informationen an Sie. Wir können Ihre personenbezogenen Daten
+                    verwenden, um Ihnen Produkt-, Service- und neue Feature-Informationen und/oder Informationen über
+                    Änderungen unserer Geschäftsbedingungen und Richtlinien zu zusenden. </li>
+                <li>
+                    Um unsere Dienstleistungen zu schützen. Wir können Ihre Daten als Teil unserer Bemühungen verwenden,
+                    um unsere Dienste sicher und sicher zu halten (z. B. zur Betrugsüberwachung und -prävention).
+                </li>
+                <li>Zur Durchsetzung unserer Geschäftsbedingungen und Richtlinien, zur Einhaltung gesetzlicher und
+                    regulatorischer Anforderungen oder im Zusammenhang mit unserem Vertrag.</li>
+                <li>Auf rechtliche Anfragen reagieren und Schaden verhindern. Wenn wir eine Vorladung oder eine andere
+                    rechtliche Anfrage erhalten, müssen wir möglicherweise die Daten, die wir halten, überprüfen, um zu
+                    bestimmen, wie zu reagieren ist.</li>
+                <li>Erfüllen und verwalten Sie Ihre Aufträge. Wir können Ihre Daten verwenden, um Ihre Bestellungen,
+                    Zahlungen, Rücksendungen und Umtausch über die Dienste zu erfüllen und zu verwalten. </li>
+                <li>Verwalten Sie Verlosungen und Wettbewerbe. Wir können Ihre Daten verwenden, um Verlosungen und
+                    Wettbewerbe zu verwalten, wenn Sie sich für die Teilnahme an unseren Wettbewerben entscheiden.</li>
+                <li>Bereitstellung und Erleichterung der Bereitstellung von Dienstleistungen an den Benutzer. Wir können
+                    Ihre
+                    Daten verwenden, um Ihnen den gewünschten Service zur Verfügung zu stellen.</li>
+                <li>Um auf Benutzeranfragen zu antworten/Den Benutzern Support anzubieten. Wir können Ihre Daten
+                    verwenden, um auf Ihre Anfragen zu antworten und mögliche Probleme zu lösen, die Sie mit der Nutzung
+                    unserer Dienste haben könnten.
+                </li>
+                <li>Für andere geschäftliche Zwecke. Wir können Ihre Daten für andere geschäftliche Zwecke verwenden,
+                    wie
+                    z. B. Datenanalyse, Identifizierung von Nutzungstrends, Bestimmung der Wirksamkeit unserer
+                    Werbekampagnen und Bewertung und Verbesserung unserer Dienstleistungen, Produkte, Marketing und
+                    Ihre Erfahrung. Wir können diese Informationen in aggregierter und anonymisierter Form verwenden und
+                    speichern, so dass sie nicht mit einzelnen Endnutzern in Verbindung gebracht werden und keine
+                    personenbezogenen Daten enthalten. Wir verwenden keine identifizierbaren personenbezogenen Daten
+                    ohne Ihre Zustimmung.</li>
+            </ul>
+        </p>
+        <h5 class="text-primary">3. WERDEN IHRE INFORMATIONEN MIT JEMANDEM GETEILT?
+        </h5>
+        <p>Kurzgesagt: Wir geben Informationen nur mit Ihrer Zustimmung weiter, um Gesetze einzuhalten, Um Ihnen
+            Dienstleistungen zu erbringen, Um Ihre Rechte zu schützen oder um Geschäftspflichten zu erfüllen.
+        </p>
+        <p>Wir können Ihre Daten, die wir auf der Grundlage der folgenden Rechtsgrundlage halten, verarbeiten oder
+            weitergeben:
+        </p>
+        <p>
+            <ul>
+                <li>Zustimmung: Wir können Ihre Daten verarbeiten, wenn Sie uns ausdrücklich zugestimmt haben, Ihre
+                    personenbezogenen Daten für einen bestimmten Zweck zu verwenden. </li>
+                <li>Legitime Interessen: Wir können Ihre Daten verarbeiten, wenn dies vernünftigerweise erforderlich
+                    ist, um
+                    unsere legitimen Geschäftsinteressen zu erreichen.
+                </li>
+                <li>Erfüllung eines Vertrages: Wenn wir einen Vertrag mit Ihnen abgeschlossen haben, können wir Ihre
+                    personenbezogenen Daten verarbeiten, um die Bedingungen unseres Vertrags zu erfüllen.</li>
+                <li>Rechtliche Verpflichtungen: Wir können Ihre Daten offenlegen, wenn wir gesetzlich dazu verpflichtet
+                    sind,
+                    um geltendes Recht, behördliche Anfragen, ein Gerichtsverfahren, Gerichtsverfahren oder
+                    Gerichtsverfahren zu erfüllen, z. B. als Reaktion auf einen Gerichtsbeschluss oder eine Unterlage
+                    (einschließlich der Beantwortung von Behörden, um die nationalen Sicherheits- oder
+                    Strafverfolgungsanforderungen zu erfüllen).</li>
+                <li>Vitale Interessen: Wir können Ihre Daten offenlegen, wenn wir es für notwendig halten, mögliche
+                    Verstöße gegen unsere Richtlinien, mutmaßlichen Betrug, Situationen mit potenziellen Bedrohungen für
+                    die Sicherheit einer Person und illegale Aktivitäten oder als Beweisin in Rechtsstreitigkeiten, an
+                    denen wir
+                    beteiligt sind, zu untersuchen, zu verhindern oder zu handeln.</li>
+            </ul>
+        </p>
+        <p>Insbesondere müssen wir Ihre Daten möglicherweise verarbeiten oder Ihre personenbezogenen Daten in den
+            folgenden Situationen weitergeben:
+        </p>
+        <ul>
+            <li>Unternehmensübertragungen. Wir können Ihre Daten im Zusammenhang mit oder während der
+                Verhandlungen über eine Fusion, den Verkauf von Unternehmensvermögen, die Finanzierung oder den
+                Erwerb unseres gesamten oder eines Teils unseres Geschäfts an ein anderes Unternehmen weitergeben
+                oder übertragen.
+            </li>
+        </ul>
+        <h5 class="text-primary">4. VERWENDEN WIR COOKIES UND ANDERE TRACKING-TECHNOLOGIEN?</h5>
+        <p>Kurzgesagt: Wir können Cookies und andere Tracking-Technologien verwenden, um Ihre Daten zu sammeln und zu
+            speichern. </p>
+        <p>Wir können Cookies und ähnliche Tracking-Technologien (wie Web-Beacons und Pixel) verwenden, um auf
+            Informationen zuzugreifen oder diese zu speichern. Spezifische Informationen darüber, wie wir solche
+            Technologien verwenden und wie Sie bestimmte Cookies ablehnen können, sind in unserer Cookie-Mitteilung
+            enthalten. </p>
+        <h5 class="text-primary">5. VERWENDEN WIR GOOGLE MAPS PLATFORM APIS?
+        </h5>
+        <p>Kurzgesagt: Ja, wir verwenden Google Maps Platform APIS, um einen besseren Service zu bieten.
+        </p>
+        <p>Diese Website oder App verwendet Google Maps Platform APIS, die den Nutzungsbedingungen von Google
+            unterliegen. Die Nutzungsbedingungen der Google Maps Platform finden Sie hier. Weitere Informationen zu den
+            Datenschutzbestimmungen von Google finden Sie unter diesem Link.</p>
+        <p>Wir verwenden bestimmte Google Maps Platform APIS, um bestimmte Informationen abzurufen, wenn Sie
+            standortspezifische Anforderungen stellen. Dazu gehören:</p>
+        <p>Eine vollständige Liste dessen, wofür wir Informationen verwenden, finden Sie im vorherigen Abschnitt "WIE
+            VERWENDEN WIR IHRE INFORMATIONEN?" und "WILL YOUR INFORMATION BE SHARED WITH ANYONE?". Wir
+            beziehen und speichern auf Ihrem Gerät ('Cache') Ihren Standort. Sie können Ihre Einwilligung jederzeit
+            widerrufen, indem Sie uns unter den am Ende dieses Dokuments angegebenen Kontaktdaten kontaktieren.</p>
+        <p>Die Google Maps Platform APIS, die wir verwenden, speichert und greift auf Cookies und andere Informationen
+            auf
+            Ihren Geräten zu. Wenn Sie derzeit im Europäischen Wirtschaftsraum (EU-Länder, Island, Liechtenstein und
+            Norwegen) ein Benutzer sind, werfen Sie bitte einen Blick auf unsere Cookie-Mitteilung.</p>
+        <h5 class="text-primary">6. WIE BEHANDELN WIR IHRE SOZIALEN LOGINS?</h5>
+        <p>Kurzgesagt: Wenn Sie sich über ein Social-Media-Konto registrieren oder bei unseren Diensten anmelden
+            möchten,
+            haben wir möglicherweise Zugriff auf bestimmte Informationen über Sie. </p>
+        <p>Unsere Dienste bieten Ihnen die Möglichkeit, sich mit Ihren Social-Media-Kontodaten von Drittanbietern (wie
+            Ihren
+            Facebook- oder Twitter-Logins) zu registrieren und anzumelden. Wo Sie sich dafür entscheiden, erhalten wir
+            bestimmte Profilinformationen über Sie von Ihrem Social-Media-Anbieter. Die Profilinformationen, die wir
+            erhalten, können je nach Social-Media-Anbieter variieren, enthalten aber häufig Ihren Namen, Ihre
+            E-Mail-Adresse,
+            Ihre Freundesliste, Ihr Profilbild sowie andere Informationen, die Sie auf einer solchen
+            Social-Media-Plattform
+            veröffentlichen möchten.</p>
+        <p>Wir verwenden die Informationen, die wir erhalten, nur für die Zwecke, die in dieser Datenschutzerklärung
+            beschrieben sind oder die Ihnen anderweitig auf den entsprechenden Diensten klar gemacht werden. Bitte
+            beachten Sie, dass wir andere Verwendungen Ihrer personenbezogenen Daten durch Ihren Drittanbieter in
+            sozialen Medien nicht kontrollieren und nicht dafür verantwortlich sind. Wir empfehlen Ihnen, deren
+            Datenschutzhinweise zu überprüfen, um zu verstehen, wie sie Ihre personenbezogenen Daten sammeln,
+            verwenden und teilen und wie Sie Ihre Datenschutzeinstellungen auf ihren Websites und Apps festlegen können.
+        </p>
+        <h5 class="text-primary">7. WIE LANGE BEWAHREN WIR IHRE DATEN AUF?
+        </h5>
+        <p>Kurzgesagt: Wir bewahren Ihre Daten so lange auf, wie dies zur Erfüllung der in dieser Datenschutzerklärung
+            beschriebenen Zwecke erforderlich ist, es sei denn, dies ist gesetzlichvorgeschrieben.</p>
+        <p>Wir werden Ihre personenbezogenen Daten nur so lange aufbewahren, wie dies für die in dieser
+            Datenschutzerklärung dargelegten Zwecke erforderlich ist, es sei denn, eine längere Aufbewahrungsfrist ist
+            gesetzlich vorgeschrieben oder zulässig (z. B. Steuern, Buchhaltung oder andere gesetzliche Anforderungen).
+            Kein
+            Zweck in dieser Mitteilung erfordert uns Ihre persönlichen Daten foder länger als der Zeitraum, in dem der
+            Benutzer Konto bei uns hat.
+        </p>
+        <p>Wenn wir keine weiterhin berechtigte Geschäftsnotwendigkeit haben, Ihre personenbezogenen Daten zu
+            verarbeiten, werden wir diese Informationen entweder löschen oder anonymisieren, oder, wenn dies nicht
+            möglich ist (z. B. weil Ihre personenbezogenen Daten in Backup-Archiven gespeichert wurden), werden wir Ihre
+            personenbezogenen Daten sicher speichern und von jeder weiteren Verarbeitung isolieren, bis eine Löschung
+            möglich ist. </p>
+        <h5 class="text-primary">8. WIE SCHÜTZEN WIR IHRE DATEN?
+        </h5>
+        <p>Kurzgesagt: Wir wollen Ihre personenbezogenen Daten durch ein System organisatorischer und technischer
+            Sicherheitsmaßnahmen schützen.
+        </p>
+        <p>Wir haben geeignete technische und organisatorische Sicherheitsmaßnahmen implementiert, um die Sicherheit
+            aller von uns verarbeiteten personenbezogenen Daten zu schützen. Trotz unserer Sicherheitsvorkehrungen und
+            Bemühungen, Ihre Daten zu sichern, kann jedoch keine elektronische Übertragung über das Internet oder
+            Informationsspeichertechnologie garantiert werden, um 100% sicher zu sein, so dass wir nicht versprechen
+            oder
+            garantieren können, dass Hacker, Cyberkriminelle oder andere nicht autorisierte Dritte nicht in der Lage
+            sein
+            werden, unsere Sicherheit zu besiegen und Ihre Daten nicht ordnungsgemäß zu sammeln, darauf zuzugreifen, zu
+            stehlen oder zu ändern. Obwohl wir unser Bestes tun werden, um Ihre personenbezogenen Daten zu schützen,
+            erfolgt die Übermittlung personenbezogener Daten an und von unseren Diensten auf eigene Gefahr. Sie sollten
+            nur
+            in einer sicheren Umgebung auf die Dienste zugreifen. </p>
+        <h5 class="text-primary">9. WAS SIND IHRE DATENSCHUTZRECHTE?
+        </h5>
+        <p>Kurzgesagt: In einigen Regionen, wie dem Europäischen Wirtschaftsraum, haben Sie Rechte, die Ihnen einen
+            besseren Zugriff auf und die Kontrolle über Ihre personenbezogenen Daten ermöglichen. Sie können Ihr Konto
+            jederzeit überprüfen, ändern oder kündigen.
+
+        </p>
+        <p>In einigen Regionen (wie dem Europäischen Wirtschaftsraum) haben Sie bestimmte Rechte nach den geltenden
+            Datenschutzgesetzen. Dazu gehören das Recht (i) Zugang zu verlangen und eine Kopie Ihrer personenbezogenen
+            Daten zu erhalten, (ii) Nachbesserung oder Löschung zu verlangen; (ii) die Verarbeitung Ihrer
+            personenbezogenen
+            Daten einzuschränken; und (iv) gegebenenfalls auf die Datenübertragbarkeit. Unter bestimmten Umständen
+            können Sie auch das Recht haben, der Verarbeitung Ihrer personenbezogenen Daten zu widersprechen. Um eine
+            solche Anfrage zu stellen, verwenden Sie bitte die unten angegebenen Kontaktdaten. Wir werden jede Anfrage
+            in
+            Übereinstimmung mit den geltenden Datenschutzgesetzen prüfen und bearbeiten.
+        </p>
+        <p>Wenn wir uns auf Ihre Einwilligung zur Verarbeitung Ihrer personenbezogenen Daten verlassen, haben Sie das
+            Recht, Ihre Einwilligung jederzeit zu widerrufen. Bitte beachten Sie jedoch, dass dies weder die
+            Rechtmäßigkeit der
+            Verarbeitung vor dem Widerruf noch die Verarbeitung Ihrer personenbezogenen Daten beeinträchtigt, die unter
+            Berufung auf rechtmäßige Verarbeitungsgründe, die nicht die Zustimmung sind, durchgeführt wird.
+        </p>
+        <p>Wenn Sie ihren Wohnsitz im Europäischen Wirtschaftsraum haben und glauben, dass wir Ihre personenbezogenen
+            Daten unrechtmäßig verarbeiten, haben Sie auch das Recht, sich bei Ihrer lokalen Datenschutzaufsichtsbehörde
+            zu
+            beschweren. Die Kontaktdaten finden Sie hier:
+            http://ec.europa.eu/justice/dataprotection/bodies/authorities/index_en.htm.
+        </p>
+        <p>Wenn Sie ihren Wohnsitz in der Schweiz haben, finden Sie die Kontaktdaten der Datenschutzbehörden unter:
+            https://www.edoeb.admin.ch/edoeb/en/home.html.
+        </p>
+        <p>Wenn Sie Fragen oder Kommentare zu Ihren Datenschutzrechten haben, können Sie uns eine E-Mail an
+            admin@swaadbern.ch senden.
+        </p>
+        <p><b class="text-primary">Kontoinformationen</b></p>
+        <p>Wenn Sie die Informationen in Ihrem Konto jederzeit überprüfen oder ändern oder Ihr Konto kündigen möchten,
+            können Sie:
+        </p>
+        <ul>
+            <li>Melden Sie sich bei Ihren Kontoeinstellungen an und aktualisieren Sie Ihr Benutzerkonto.
+            </li>
+        </ul>
+        <p>
+            Auf Ihre Anfrage, Ihr Konto zu kündigen, werden wir Ihr Konto und Ihre Informationen aus unseren aktiven
+            Datenbanken deaktivieren oder löschen. Wir können jedoch einige Informationen in unseren Dateien
+            aufbewahren, um Betrug zu verhindern, Probleme zu beheben, bei Ermittlungen zu helfen, unsere
+            Nutzungsbedingungen durchzusetzen und/oder die geltenden gesetzlichen Anforderungen einzuhalten.
+
+        </p>
+        <p><b class="text-primary">Abmelden von E-Mail-Marketing:</b> Sie können sich jederzeit von unserer
+            Marketing-E-Mail-Liste abmelden, indem
+            Sie auf den Abmeldelink in den eisernen E-Mails klicken oder uns mit den unten angegebenen Details
+            kontaktieren.
+            Sie werden dann aus der Marketing-E-Mail-Liste entfernt, wir können jedoch weiterhin mit Ihnen
+            kommunizieren,
+            z. B. um Ihnen servicebezogene E-Mails zu senden, die für die Verwaltung und Nutzung Ihres Kontos, für die
+            Beantwortung von Serviceanfragen oder für andere Nicht-Marketing-Zwecke erforderlich sind. Um sich
+            anderweitig abzumelden, können Sie: </p>
+        <ul>
+            <li>Ich greife auf Ihre Kontoeinstellungen zu und aktualisiere Ihre Einstellungen.
+            </li>
+        </ul>
+        <h5 class="text-primary">10. STEUERUNGEN FÜR DO-NOT-TRACK-FUNKTIONEN
+
+        </h5>
+        <p>Die meisten Webbrowser und einige mobile Betriebssysteme und mobile Anwendungen enthalten eine
+            Do-NotTrack-Funktion ("DNT") oder Einstellung, die Sie aktivieren können, um Ihre Datenschutzeinstellungen
+            zu
+            signalisieren, dass keine Daten über Ihre Online-Browsing-Aktivitäten überwacht und gesammelt werden. Zum
+            jetzigen Zeitpunkt ist noch kein einheitlicher Technologiestandard für die Erkennung und Implementierung von
+            DNT-Signalen fertiggestellt. Daher reagieren wir derzeit nicht auf DNT-Browsersignale oder andere
+            Mechanismen,
+            die Ihre Wahl automatisch kommunizieren, um nicht online verfolgt zu werden. Wenn ein Standard für
+            OnlineTracking angenommen wird, den wir in Zukunft befolgen müssen, werden wir Sie in einer überarbeiteten
+            Version
+            dieser Datenschutzerklärung über diese Praxis informieren. </p>
+        <h5 class="text-primary">11. HABEN EINWOHNER KALIFORNIENS SPEZIFISCHE DATENSCHUTZRECHTE?
+
+        </h5>
+        <p>Kurzgesagt: Ja, wenn Sie in Kalifornien ansässig sind, erhalten Sie besondere Rechte in Bezug auf den Zugriff
+            auf
+            Ihre personenbezogenen Daten. California Civil Code Section 1798.83, auch bekannt als das "Shine The Light"-
+            Gesetz, erlaubt es unseren Nutzern, die in Kalifornien leben, einmal im Jahr und kostenlos Informationen
+            über
+            Kategorien personenbezogener Daten (falls vorhanden) an Dritte für Direktmarketingzwecke und die Namen und
+            Adressen aller Dritten, mit denen wir personenbezogene Daten im unmittelbar vorangehenden Kalenderjahr
+            geteilt haben, anzufordern und zu erhalten. Wenn Sie in Kalifornien ansässig sind und eine solche Anfrage
+            stellen
+            möchten, senden Sie uns bitte Ihre Anfrage schriftlich unter Verwendung der unten angegebenen
+            Kontaktinformationen.</p>
+        <p>Wenn Sie unter 18 Jahre alt sind, in Kalifornien wohnen und ein registriertes Konto bei einem Dienst haben,
+            haben
+            Sie das Recht, die Entfernung unerwünschter Daten zu verlangen, die Sie öffentlich auf den Diensten
+            veröffentlichen. Um die Entfernung dieser Daten zu beantragen, kontaktieren Sie uns bitte über die unten
+            angegebenen Kontaktinformationen und geben Sie die E-Mail-Adresse an, die mit Ihrem Konto verknüpft ist,
+            sowie
+            eine Erklärung, die Sie in Kalifornien wohnen. Wir stellen sicher, dass die Daten nicht öffentlich auf den
+            Diensten
+            angezeigt werden, aber bitte beachten Sie, dass die Daten möglicherweise nicht vollständig oder umfassend
+            von
+            allen unseren Systemen (z. B. Backups usw.) entfernt werden.</p>
+        <h5 class="text-primary">12. AKTUALISIEREN WIR DIESE MITTEILUNG?
+        </h5>
+        <p>Kurzgesagt: Ja, wir werden diese Mitteilung bei Bedarf aktualisieren, um die einschlägigen Gesetze
+            einzuhalten.
+        </p>
+        <p>Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Die aktualisierte Version wird durch
+            ein
+            aktualisiertes "Überarbeitetes" Datum angegeben, und die aktualisierte Version wird wirksam, sobald sie
+            zugänglich ist. Wenn wir wesentliche Änderungen an dieser Datenschutzerklärung vornehmen, können wir Sie
+            entweder durch eine prominente Veröffentlichung einer Benachrichtigung über solche Änderungen oder durch
+            direkte Zusendung einer Benachrichtigung benachrichtigen. Wir empfehlen Ihnen, diese Datenschutzerklärung
+            regelmäßig zu lesen, um darüber informiert zu werden, wie wir Ihre Daten schützen.</p>
+        <h5 class="text-primary">13. WIE KÖNNEN SIE UNS ÜBER DIESE MITTEILUNG KONTAKTIEREN?
+        </h5>
+        <p>Wenn Sie Fragen oder Kommentare zu dieser Mitteilung haben, können Sie uns eine E-Mail an
+            admin@swaadbern.ch oder per Post an:
+        </p>
+        <p>Swaad Foods GmbH
+        </p>
+        <p>Berstrasse 95 Ostermundien Bern,
+        </p>
+        <p>Schweiz 3072 Schweiz
+        </p>
+        <h5 class="text-primary">14. WIE KÖNNEN SIE DIE DATEN, DIE WIR VON IHNEN ERFASSEN, ÜBERPRÜFEN,
+            AKTUALISIEREN ODER LÖSCHEN?
+
+        </h5>
+        <p>Basierend auf den geltenden Gesetzen Ihres Landes haben Sie möglicherweise das Recht, Zugriff auf die von
+            Ihnen
+            von Ihnen erfassten personenbezogenen Daten zu verlangen, diese Informationen zu ändern oder unter
+            bestimmten Umständen zu löschen. Um Ihre personenbezogenen Daten zu überprüfen, zu aktualisieren oder zu
+            löschen, besuchen Sie bitte: http://www.swaadbern.ch. Wir werden Ihre Anfrage innerhalb von 30 Tagen
+            beantworten.</p>
+    </div>
+</div>
+@endif
 
 @endsection

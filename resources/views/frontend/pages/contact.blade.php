@@ -20,13 +20,13 @@
             <div class="col-md-3 d-flex">
                 <div class="info bg-white p-4">
                     <p><span> {{session('lan') == 'en' ? 'Address:' : 'Adresse:'}}
-                        </span> Bernstrasse 95, Ostermundigen, Switzerland</p>
+                        </span> <br> Swaad Foods Gmbh <br> 3072 Ostermundigen</p>
                 </div>
             </div>
             <div class="col-md-3 d-flex">
                 <div class="info bg-white p-4">
                     <p><span>{{session('lan') == 'en' ? 'Phone:' : 'Telefon:'}}</span> <a href="tel://0315583388">
-                            031-558-33-88</a></p>
+                            031 558 33 88</a></p>
                 </div>
             </div>
             <div class="col-md-3 d-flex">
@@ -47,16 +47,14 @@
                 <form action="{{route('contact.store')}}" method="POST" class="bg-white p-5 contact-form"> @csrf
                     <div class="form-group">
                         <input type="text" class="form-control"
-                            placeholder="{{session('lan') == 'en' ? 'Your Name' : 'Dein Name'}}" name="ct_name"
-                            required>
+                            placeholder="{{session('lan') == 'en' ? 'Name' : 'Name'}}" name="ct_name" required>
                         @error('ct_name')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control"
-                            placeholder="{{session('lan') == 'en' ? 'Your Email' : 'Deine E-Mail'}}" name="ct_email"
-                            required>
+                            placeholder="{{session('lan') == 'en' ? 'Email' : 'E-Mail'}}" name="ct_email" required>
                         @error('ct_email')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror

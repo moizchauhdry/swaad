@@ -5,16 +5,18 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">About Us</h1>
+                <h1 class="mb-0 bread">{{session('lan') == 'en' ? 'About Us' : 'Über uns'}}</h1>
             </div>
         </div>
     </div>
 </div>
 
+@if (session('lan') == 'en')
 <div class="container">
     <div class="col-md-12 p-5">
-        <h5 class="text-primary">Swaad is a word of Punjabi and Hindi Language, which literally means
-            “Taste”</h5>
+        <h5 class="text-primary">“Swaad” bedeutet “Geschmack”
+            - und schmackhaftes Essen ist unsere Passion!
+        </h5>
         <p class="text-justify">
             Swaad is our passion and we passionately welcome you in our restaurant with unmatched taste and variety. We
             use fresh vegetables from the region, our meat comes from Berns oldest butscher shop (Spahni AG), herbs and
@@ -74,5 +76,96 @@
         </section>
     </div>
 </div>
+@else
+<div class="container">
+    <div class="col-md-12 p-5">
+        <h5 class="text-primary">Swaad is a word of Punjabi and Hindi Language, which literally means
+            “Taste”</h5>
+        <p class="text-justify">
+            “Swaad” ist unsere Leidenschaft und wir heissen Sie herzlich Willkommen in
+            unserem Restaurant. Wir servieren eine grosse Auswahl an pakistanischen und
+            indischen Speisen mit unvergleichlichem Geschmack.
+        </p>
+        <p class="text-justify">
+            Der Schlüssel zum Geschmack liegt in den Zutaten. Das Gemüse kommt stets
+            frisch von lokalen Produzenten und das Fleisch beziehen wir von der Metzgerei
+            Spahni, dem ältesten Metzgerei-Geschäft Berns. Der lang-körnige Basmati-Reis
+            kommt von den fruchtbaren Feldern des Punjabs. Kräuter und Gewürze
+            importieren wir direkt aus Pakistan und Indien. Das rosa Himalaya-Steinsalz
+            kommt aus der weltgrössten Salzmine in Pothohar, Pakistan. Der Tee von
+            unterschiedlichen Plantagen in der Himalya-Region.
+        </p>
+        <h5 class="text-primary">Indische Küche
+        </h5>
+        <p class="text-justify">
+            Es gibt nicht die eine indische Küche. Der indische Subkontinent bietet eine
+            unendliche Vielfalt an regional und traditionell unterschiedlichen Küchen. Diese
+            Küchen-Vielfalt korrespondiert mit den Unterschieden in Klima und Boden, aber
+            auch der diversen Kulturen und Ethnien. Die lokal vorhandenen Gewürze,
+            Früchte, sowie Gewürze und Kräuter beeinflussen die regionalen Küchen. Eine
+            Schlüsselrolle kommt auch der religiösen Tradition zu. Durch die Jahrhunderte
+            lange Herrschaft der islamischen Mughals wurden zum Beispiel Gerichte wie
+            Samosa oder Pilaf eingeführt.
+        </p>
+        <p class="text-justify">
+            Die Bezeichnung «India» kommt von «Sindhu», also dem Fluss Indu, dem
+            längsten Strom des Subkontinentes. Zum ersten Mal wird der Name beim
+            Griechen Herodot im 4. Jahundert vor Christus benutzt. Gemeint war die IndusTal-Zivilisation, aber auch alle
+            Gebiete jenseits des Flusses.
+        </p>
+        <p class="text-justify">
+            Wenn wir von Indischer Küche sprechen, meinen wir die gesamte kulinarische
+            Vielfalt des Subkontinents, von Pakistan und Kaschmir, über Punjab und
+            Mughalai, bis nach Süd-Indien.
+        </p>
+        <p class="text-justify">
+            Ein unglaublicher Reichtum an Gerichten und Geschmack!
+        </p>
+        <h3 class="text-primary text-center p-2">Our Mission</h3>
+        <p class="text-justify">
+            Im «Swaad» servieren wir sehr gesundes Essen in der Tradition des indischen
+            Subkontinents.
+        </p>
+        <p class="text-justify">
+            Speziellen Wert legen wir auf unsere hausgemachten, frisch zubereiteten
+            Gewürzmischungen. Wir kennen unsere lokalen Produzenten in Pakistan und
+            Indien. Wir unterstützen sie darin naturnah und nachhaltig zu produzieren, weil
+            dies der beste Weg ist, hochwertige Gewürze mit köstlichem Geschmack zu
+            erhalten.
+        </p>
+        <p class="text-justify">
+            Es ist unsere Mission den ländlichen Gegenden im Punjab etwas zurück zu
+            geben. Wir sind überzeugt, dass die Bildung der jungen Generation der beste
+            Weg aus der Armut ist. Hilfe zur Selbsthilfe. Deshalb spenden wir 5% unseres
+            Profits an Kinderhilfs-Projekte im pakistanischen Punjab.
+        </p>
+        <section>
+            <div class="row p-2">
+                <div class="col-md-6">
+                    <h5 class="text-primary">Zafar Khan</h5>
+                    <p class="text-justify">
+                        Zafar Khan ist der Manager. Er sorgt nicht nur dafür, dass sich alle Gäste im
+                        «Swaad» wohlfühlen. Als studierter Spezialist für Pakistan und Indien ist er
+                        auch der richtige Ansprechpartner für alle Fragen zu Kultur und Historie der
+                        indischen Küche.
+                    </p>
+                    <img src="{{asset('public/frontend/images/ZafarKhan.jpg')}}" alt="IMAGE" class="img-thumbnail w-50">
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-primary">Tariq Masih</h5>
+                    <p class="text-justify">
+                        Tariq Masih ist der Chefkoch im «Swaad» und somit auch verantwortlich für den
+                        unvergleichlichen Geschmack! Er wurde in Pakistan zum Koch ausgebildet und
+                        arbeitet seit 20 Jahren in hochklassigen Küchen in verschiedenen Ländern von
+                        Pakistan bis in die Schweiz.
+                    </p>
+                    <img src="{{asset('public/frontend/images/TariqMasih.jpeg')}}" alt="IMAGE"
+                        class="img-thumbnail w-50">
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+@endif
 
 @endsection

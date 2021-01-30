@@ -95,13 +95,14 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">{{session('lan') == 'en' ? 'More' : 'Mehr'}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        {{-- <a class="dropdown-item"
-                            href="{{route('reservation')}}">{{session('lan') == 'en' ? 'Reservation' : 'Reservierung'}}</a>
-                        --}}
+                        <a class="dropdown-item"
+                            href="{{route('catering')}}">{{session('lan') == 'en' ? 'Catering' : 'Gastronomie'}}</a>
+                        <a class="dropdown-item"
+                            href="{{route('about')}}">{{session('lan') == 'en' ? 'About us' : 'Über uns'}}</a>
                         <a class="dropdown-item"
                             href="{{route('privacy')}}">{{session('lan') == 'en' ? 'Privacy Policy' : 'Datenschutz-Bestimmungen'}}</a>
                         <a class="dropdown-item"
-                            href="{{route('about')}}">{{session('lan') == 'en' ? 'About us' : 'Über uns'}}</a>
+                            href="{{route('serve')}}">{{session('lan') == 'en' ? 'What We Serve' : 'Was wir servieren'}}</a>
                     </div>
                 </li>
                 <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link">
@@ -199,7 +200,7 @@
             <div class="modal-body">
                 <div class=" container row">
                     <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Username' : 'Nutzername'}}</label>
+                        <label for="">{{session('lan') == 'en' ? 'Full Name' : 'Vollständiger Name'}}</label>
                         <input type="text" class="form-control" id="reg_username" name="username" value=""
                             placeholder="" required>
                     </div>

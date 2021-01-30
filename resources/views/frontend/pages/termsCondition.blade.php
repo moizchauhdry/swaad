@@ -5,21 +5,16 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">Terms & Condition</h1>
+                <h1 class="mb-0 bread">{{session('lan') == 'en' ? 'Terms & Condition' : 'Geschäftsbedingung'}}</h1>
             </div>
         </div>
     </div>
 </div>
-
+@if (session('lan') == 'en')
 <div class="container">
     <div class="col-md-12 p-5">
         <h5 class="text-primary">AGREEMENT OF TERMS
         </h5>
-        <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic rem accusamus fugit aliquam, inventore unde
-            dolorem repellendus nesciunt reprehenderit, debitis officiis, quam voluptatem necessitatibus nostrum! Hic
-            distinctio perferendis culpa placeat.
-        </p>
         <p>These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf
             of
             an entity ("you") and ("Company", "we", "us", or website as well as any other "our"), concerning your access
@@ -424,5 +419,424 @@
         <p>Email: admin@swaadbern.ch</p>
     </div>
 </div>
+@else
+<div class="container">
+    <div class="col-md-12 p-5">
+        <h5 class="text-primary">VEREINBARUNG DER BEDINGUNGEN
+        </h5>
+        <p>Diese Nutzungsbedingungen stellen eine rechtsverbindliche Vereinbarung dar, die zwischen Ihnen persönlich
+            oder
+            im Namen eines Unternehmens ("Sie") und ("Unternehmen", "wir", "uns" oder Website sowie jeder anderen
+            "unserer") über Ihren Zugriff auf und die Nutzung des Medienformulars, des Medienkanals, der mobilen Website
+            oder der mobilen Anwendung getroffen wurde, die damit in Verbindung stehen ( zusammen mit der "Website").
+            Sie erklären sich damit einverstanden, dass Sie durch den Zugriff auf die Website alle diese
+            Nutzungsbedingungen
+            gelesen, verstanden und zugestimmt haben, an diese Bedingungen gebunden zu sein. WENN SIE NICHT MIT ALL
+            DIESEN NUTZUNGSBEDINGUNGEN EINVERSTANDEN SIND, IST ES IHNEN AUSDRÜCKLICH UNTERSAGT, DIE WEBSITE
+            ZU NUTZEN, UND SIE MÜSSEN DIE NUTZUNG SOFORT EINSTELLEN.</p>
+        <p>
+            Ergänzende Geschäftsbedingungen oder Dokumente, die von Zeit zu Zeit auf der Website veröffentlicht werden
+            können, werden hiermit ausdrücklich durch Bezugnahme hierin aufgenommen. Wir behalten uns das Recht vor,
+            nach unserem alleinigen Ermessen jederzeit und aus beliebigem Grund Änderungen oder Änderungen an diesen
+            Nutzungsbedingungen vorzunehmen. Wir werden Sie über Änderungen informieren, indem wir das Datum der
+            "Letzten Aktualisierung" dieser Nutzungsbedingungen aktualisieren, und Sie verzichten auf jegliches Recht,
+            eine
+            bestimmte Benachrichtigung über jede solche Änderung zu erhalten. Es liegt in Ihrer Verantwortung, diese
+            Nutzungsbedingungen regelmäßig zu überprüfen, um über Updates informiert zu bleiben. Sie unterliegen den
+            Änderungen der geänderten Nutzungsbedingungen durch Ihre fortgesetzte Nutzung der Website nach dem Datum,
+            an dem diese überarbeiteten Nutzungsbedingungen veröffentlicht wurden und akzeptiert wurden.
+        </p>
+        <p>Die auf der Website bereitgestellten Informationen sind nicht für die Verteilung an oder die Nutzung durch
+            personen- oder juristische Einrichtungen in einem Land oder Land bestimmt, in dem eine solche Verbreitung
+            oder
+            Nutzung gegen Gesetze oder Vorschriften verstoßen würde oder die uns einer Registrierungspflicht innerhalb
+            dieser Gerichtsbarkeit oder eines solchen Landes unterwerfen würden. Dementsprechend tun diejenigen
+            Personen, die sich für den Zugriff auf die Website von anderen Standorten entscheiden, dies von sich aus und
+            sind
+            allein für die Einhaltung der lokalen Gesetze verantwortlich, sofern und soweit lokale Gesetze anwendbar
+            sind. </p>
+        <h5 class="text-primary">RECHTE DES GEISTIGEN EIGENTUMS
+        </h5>
+        <p>Sofern nicht anders angegeben, ist die Website unser Eigentum und alle Quellcodes, Datenbanken, Funktionen,
+            Software, Website-Designs, Audio, Video, Text, Fotos und Grafiken auf der Website (zusammen die "Inhalte")
+            und
+            die darin enthaltenen Marken, Dienstleistungsmarken und Logos (die "Marken") sind Eigentum oder werden von
+            uns kontrolliert oder an uns lizenziert und sind durch Urheberrechts- und Markengesetze und verschiedene
+            andere
+            Rechte des geistigen Eigentums und unlauteren Wettbewerbs geschützt. Der Inhalt und die Marken werden auf
+            der Website "AS IS" nur zu Ihrer Information und zum persönlichen Gebrauch bereitgestellt. Sofern nicht
+            ausdrücklich in diesen Nutzungsbedingungen vorgesehen, dürfen kein Teil der Website und keine Inhalte oder
+            Marken ohne unsere ausdrückliche vorherige schriftliche Genehmigung kopiert, reproduziert, aggregiert,
+            wiederveröffentlicht, hochgeladen, veröffentlicht, öffentlich angezeigt, kodiert, übersetzt, übertragen,
+            verteilt,
+            verkauft, lizenziert oder anderweitig für kommerzielle Zwecke genutztwerden.</p>
+        <p>Sofern Sie zur Nutzung der Website berechtigt sind, erhalten Sie eine beschränkte Lizenz für den Zugriff auf
+            und
+            die Nutzung der Website sowie für das Herunterladen oder Drucken einer Kopie eines Teils der Inhalte, auf
+            den Sie
+            ordnungsgemäß nur für Ihren persönlichen, nicht-kommerziellen Gebrauch Zugriff erhalten haben. Wir behalten
+            uns alle Rechte vor, die Ihnen nicht ausdrücklich an und an der Website, den Inhalten und den Marken gewährt
+            werden. </p>
+        <h5 class="text-primary">BENUTZER REPRESENTATIONEN
+        </h5>
+        <p>Durch die Nutzung der Website erklären und garantieren Sie, dass: (1) Sie die Rechtsfähigkeit haben und sie
+            damit
+            einverstanden sind, diese Nutzungsbedingungen einzuhalten; (2) Sie in der Gerichtsbarkeit, in der Sie
+            wohnen,
+            nicht minderjährig sind; (3) Sie werden nicht über automatisierte oder nicht-menschliche Mittel auf die
+            Website
+            zugreifen, sei es durch einen Bot, ein Skript oder auf andere Weise; (4) Sie werden die Website nicht für
+            illegale
+            oder nicht autorisierte Zwecke nutzen; und (5) Ihre Nutzung der Website verstößt nicht gegen geltendes Recht
+            oder Vorschriften.</p>
+        <p>Wenn Sie unwahre, ungenaue, nicht aktuelle oder unvollständige Informationen zur Verfügung stellen, haben wir
+            das Recht, Ihr Konto zu sperren oder zu kündigen und jede aktuelle und zukünftige Nutzung der Website (oder
+            eines Teils davon) abzulehnen.</p>
+        <h5 class="text-primary">Produkte
+        </h5>
+        <p>Wir bemühen uns, die Farben, Funktionen, Spezifikationen und Details der auf der Website verfügbaren Produkte
+            so genau wie möglich anzuzeigen. Wir garantieren jedoch nicht, dass die Farben, Merkmale, Spezifikationen
+            und
+            Details der Produkte genau, vollständig, zuverlässig, aktuell oder frei von anderen Fehlern sind, und Ihr
+            elektronisches Display spiegelt möglicherweise nicht genau die tatsächlichen Farben und Details der Produkte
+            wider. Alle Produkte unterliegen der Verfügbarkeit, und wir können nicht garantieren, dass die Artikel auf
+            Lager
+            sind. Wir behalten uns das Recht vor, Produkte jederzeit aus irgendeinem Grund einzustellen. Die Preise für
+            alle
+            Produkte können sich ändern.</p>
+        <h5 class="text-primary">KÄUFE UND ZAHLUNG
+        </h5>
+        <p>Wir akzeptieren die folgenden Zahlungsarten:
+        </p>
+        <p>Sie erklären sich damit einverstanden, aktuelle, vollständige und genaue Kauf- und Kontoinformationen für
+            alle
+            Über die Website getätigten Käufe bereitzustellen. Sie erklären sich ferner damit einverstanden, Konto- und
+            Zahlungsinformationen, einschließlich E-Mail-Adresse, Zahlungsmethode und Ablaufdatum der Zahlungskarte,
+            unverzüglich zu aktualisieren, damit wir Ihre Transaktionen abschließen und Sie bei Bedarf kontaktieren
+            können.
+            Die Mehrwertsteuer wird zu dem von uns als erforderlich geltenden Kaufpreis hinzugesetzt. Wir können die
+            Preise
+            jederzeit ändern. Alle Zahlungen sind in CHF.</p>
+        <p>Sie erklären sich damit einverstanden, alle Gebühren zu den preisen zu zahlen, die dann für Ihre Einkäufe und
+            alle
+            anfallenden Versandkosten gelten, und Sie ermächtigen uns, Ihrem gewählten Zahlungsanbieter bei der
+            Bestellung
+            eine solche Gebühr in Rechnung zu stellen. Wir behalten uns das Recht vor, Fehler oder Fehler bei der
+            Preisgestaltung zu korrigieren, auch wenn wir bereits eine Zahlung angefordert oder erhalten haben.
+        </p>
+        <p>Wir behalten uns das Recht vor, jede Bestellung, die über die Website aufgegeben wird, abzulehnen. Wir können
+            nach unserem alleinigen Ermessen die gekauften Mengen pro Person, pro Haushalt oder pro Bestellung begrenzen
+            oder stornieren. Diese Einschränkungen können Bestellungen umfassen, die von oder unter demselben
+            Debitorenkonto, derselben Zahlungsmethode und/oder Bestellungen, die dieselbe Rechnungs- oder Lieferadresse
+            verwenden, aufgegeben wurden. Wir behalten uns das Recht vor, Bestellungen zu beschränken oder zu verbieten,
+            die nach unserem alleinigen Urteil von Händlern, Wiederverkäufern oder Distributoren aufgegeben werden. </p>
+        <h5 class="text-primary">VERBOTENE AKTIVITÄTEN
+
+        </h5>
+        <p>Sie dürfen nicht auf die Website zugreifen oder diese zu anderen Zwecken nutzen, als für die wir die Website
+            zur
+            Verfügung stellen. Die Website darf nicht in Verbindung mit kommerziellen Bemühungen verwendet werden, mit
+            Ausnahme derjenigen, die von uns ausdrücklich unterstützt oder genehmigt wurden.</p>
+        <p>Als Nutzer der Website erklären Sie sich damit einverstanden,
+        </p>
+        <h5 class="text-primary">NUTZERGENERIERTE BEITRÄGE
+
+        </h5>
+        <p>Die Website bietet Benutzern keine Zum Übermitteln oder Posten von Inhalten. Wir können Ihnen die Möglichkeit
+            geben, Inhalte und Materialien an uns oder auf der Website zu erstellen, zu übermitteln, zu posten,
+            anzuzeigen, zu
+            übertragen, auszuführen, zu veröffentlichen, zu verteilen oder an uns oder auf der Website zu übertragen,
+            einschließlich, aber nicht beschränkt auf Text, Schriften, Video, Audio, Fotos, Grafiken, Kommentare,
+            Vorschläge
+            oder persönliche Informationen oder anderes Material (zusammen "Beiträge"). Beiträge können von anderen
+            Nutzern der Website und über Websites Dritter einsehbar sein. Daher können alle Beiträge, die Sie
+            übermitteln, in
+            Übereinstimmung mit der Datenschutzrichtlinie der Website behandelt werden. Wenn Sie Beiträge erstellen oder
+            zur Verfügung stellen, versichern und garantieren Sie damit: </p>
+        <ol>
+            <li>Die Erstellung, Verteilung, Übertragung, öffentliche Anzeige oder Leistung sowie der Zugriff, das
+                Herunterladen oder kopieren Ihrer Beiträge verletzen nicht die Eigentumsrechte, einschließlich, aber
+                nicht
+                beschränkt auf die Urheberrechte, Patente, Marken, Geschäftsgeheimnisse oder moralischen Rechte
+                Dritter.</li>
+            <li>Sie sind der Ersteller und Eigentümer der erforderlichen Lizenzen, Rechte, Zustimmungen, Freigaben und
+                Berechtigungen zur Nutzung und Autorisierung von uns, der Website und anderen Nutzern der Website,
+                Ihre Beiträge in irgendeiner weise zu nutzen, die von der Website und diesen Nutzungsbedingungen in
+                Betracht gezogen wird.</li>
+            <li>Sie haben die schriftliche Zustimmung, Freigabe und/oder Erlaubnis jeder einzelnen Person in Ihren
+                Beiträgen, den Namen oder das Abbild jeder einzelnen identifizierbaren Person zu verwenden, um die
+                Aufnahme und Nutzung Ihrer Beiträge in jeder von der Website und diesen Nutzungsbedingungen
+                vorgesehenen Weise zu ermöglichen.</li>
+            <li>Ihre Beiträge sind nicht falsch, ungenau oder irreführend.
+            </li>
+            <li>Ihre Beiträge sind keine unaufgeforderte oder nicht autorisierte Werbung, Werbeaktionen,
+                Pyramidensysteme, Kettenbriefe, Spam, Massensendungen oder andere Formen der Aufforderung. </li>
+            <li>Ihre Beiträge sind nicht obszön, unzüchtig, lasziv, schmutzig, gewalttätig, belästigend, verleumderisch,
+                verleumderisch oder anderweitig anstößig (wie von uns bestimmt). </li>
+            <li>Ihre Beiträge verspotten, verspotten, verunglimpfen, einschüchtern oder missbrauchen niemanden. </li>
+            <li>Ihre Beiträge werden nicht dazu verwendet, (im rechtlichen Sinne) eine andere Person zu belästigen oder
+                zu bedrohen und Gewalt gegen eine bestimmte Person oder Personenschicht zu fördern.</li>
+            <li>Ihre Beiträge verstoßen nicht gegen geltendes Recht, Vorschriften oder Regeln. </li>
+            <li> Ihre Beiträge verletzen nicht die Privatsphäre oder die Publizitätsrechte Dritter. </li>
+            <li>Ihre Beiträge enthalten kein Material, das persönliche Informationen von Personen unter 18 Jahren
+                anfordert oder Menschen unter 18 Jahren sexuell oder gewalttätig ausbeutet. </li>
+            <li> Ihre Beiträge verstoßen nicht gegen geltendes Gesetz in Bezug auf Kinderpornographie oder auf andere
+                Weise zum Schutz der Gesundheit oder des Wohlbefindens von Minderjährigen. </li>
+            <li>Ihre Beiträge enthalten keine beleidigenden Kommentare, die mit Rasse, nationaler Herkunft, Geschlecht,
+                sexueller Präferenz oder körperlicher Behinderung zusammenhängen.</li>
+            <li> Ihre Beiträge verstoßen auf andere Weise nicht gegen Materialien, die gegen eine Bestimmung dieser
+                Nutzungsbedingungen oder gegen geltendes Recht oder Vorschriften verstoßen.</li>
+        </ol>
+        <p>Jede Nutzung der Website oder der Marketplace-Angebote, die gegen das Vorstehende verstößt, verstößt
+            gegen diese Nutzungsbedingungen und kann unter anderem zur Kündigung oder Aussetzung Ihrer Rechte zur
+            Nutzung der Website und der Marketplace-Angebote führen. </p>
+        <h5 class="text-primary">BEITRAGSLIZENZ
+        </h5>
+        <p>You und Site stimmen zu, dass wir auf alle Von Ihnen gemäß den Bedingungen der Datenschutzrichtlinie und
+            Ihrer Auswahl (einschließlich Einstellungen) von Ihnen zur Verfügung stellenden Informationen und
+            personenbezogenen Daten zugreifen, diese speichern, verarbeiten und nutzen können.</p>
+        <p>Indem Sie Vorschläge oder andere Rückmeldungen bezüglich der Website einreichen, erklären Sie sich damit
+            einverstanden, dass wir dieses Feedback für jeden Zweck ohne Entschädigung an Sie verwenden und
+            weitergeben können.</p>
+        <p>Wir übernehmen kein Eigentum an Ihren Beiträgen. Sie behalten das volle Eigentum an allen Ihren Beiträgen
+            und allen geistigen Eigentumsrechten oder anderen Eigentumsrechten im Zusammenhang mit Ihren
+            Beiträgen. Wir haften nicht für Aussagen oder Zusicherungen in Ihren Beiträgen, die Von Ihnen in irgendeinem
+            Bereich auf der Website bereitgestellt werden. Sie sind allein verantwortlich für Ihre Beiträge auf der
+            Website
+            und Sie erklären sich ausdrücklich damit einverstanden, uns von jeglicher Verantwortung zu entlasten und
+            jegliche zu unterlassen. Rechtliche Schritte gegen uns in Bezug auf Ihre Beiträge. </p>
+        <h5 class="text-primary">Einreichungen</h5>
+        <p>Sie erkennen an und stimmen zu, dass alle Fragen, Kommentare, Vorschläge, Ideen, Feedback oder andere
+            Informationen in Bezug auf die Website oder die Marktplatzangebote ("Einreichungen"), die Sie uns zur
+            Verfügung stellen, nicht vertraulich sind und unser alleiniges Eigentum werden. Wir besitzen ausschließliche
+            Rechte, einschließlich aller Rechte an geistigem Eigentum, und haben das Recht auf uneingeschränkte Nutzung
+            und Verbreitung dieser Einsendungen für jeden rechtmäßigen Zweck, kommerziell oder anderweitig, ohne
+            Anerkennung oder Entschädigung für Sie. Sie verzichten hiermit auf alle moralischen Rechte an solchen
+            Einsendungen, und Sie garantieren hiermit, dass solche Einsendungen bei Ihnen original sind oder dass Sie
+            das
+            Recht haben, solche Einsendungen einzureichen. Sie stimmen zu, dass es keinen Rückgriff gegen uns wegen
+            einer angeblichen oder tatsächlichen Verletzung oder Veruntreuung von Eigentumsrechten in Ihren
+            Einsendungen gibt. </p>
+        <h5 class="text-primary">SITE-MANAGEMENT
+        </h5>
+        <p>Wbehält sich das Recht, aber nicht die Verpflichtung vor, die Website auf Verstöße gegen diese
+            Nutzungsbedingungen zu überwachen; (2) geeignete rechtliche Schritte gegen jeden einzuleiten, der nach
+            unserem alleinigen Ermessen gegen das Gesetz oder diese Nutzungsbedingungen verstößt, einschließlich, aber
+            nicht beschränkt auf die Meldung dieses Nutzers an Strafverfolgungsbehörden; (3) nach unserem alleinigen
+            Ermessen und ohne Einschränkung den Zugriff auf, beschränken oder deaktivieren (soweit technologisch
+            machbar) Ihrer Beiträge oder Teile davon, (4) nach unserem alleinigen Ermessen und ohne Einschränkung,
+            Mitteilung oder Haftung, um alle Dateien und Inhalte, die übermäßig groß sind oder in irgendeiner Weise
+            belastend für unsere Systeme sind, von der Website zu entfernen oder anderweitig zu deaktivieren; und (5)
+            ansonsten die Website in einer Weise verwalten, die unsere Rechte und unser Eigentum schützt und das
+            ordnungsgemäße Funktionieren der Website und der Marketplace-Angebote erleichtert.
+        </p>
+        <h5 class="text-primary">LAUFZEIT UND KÜNDIGUNG
+        </h5>
+        <p>Diese Nutzungsbedingungen bleiben während der Nutzung der Website in vollem Umfang in Kraft und
+            wirksam. OHNE EINE ANDERE PROVISION DIESER NUTZUNGSBEDINGUNGEN, WIR RESERVE THE RIGHT TO, IN
+            UNSERER SOLE DISCRETION UND OHNE HINWEIS ODER HAFTUNG, DENY ACCESS TO AND USE OF THE SITE
+            AND THE MARKETPLACE OFFERINGS (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR
+            ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR ANY REPRESENTATION,
+            WARRANTY, OR COVENANT CONTAINED WIR KÖNNEN IHRE VERWENDUNG ODER TEILNAHME AN DER SITE
+            UND DEM MARKETPLACE-ANGEBOT ODER JEDEN INHALT ODER INFORMATIONEN, DIE SIE AUF JEDER ZEIT,
+            OHNE WARNUNG, IN UNSERER SOLE DISCRETION POSTED.</p>
+        <p>Wenn wir Ihr Konto aus irgendeinem Grund kündigen oder sperren, ist es Ihnen untersagt, sich unter Ihrem
+            Namen, einem gefälschten oder geliehenen Namen oder dem Namen Eines Dritten zu registrieren und ein
+            neues Konto zu erstellen, auch wenn Sie im Namen des Dritten handeln. Neben der Kündigung oder
+            Aussetzung Ihres Kontos behalten wir uns das Recht vor, geeignete rechtliche Schritte einzuleiten,
+            einschließlich und ohne Einschränkung zivilrechtliche, strafrechtliche und unterstrafe Rechtsmittel.
+        </p>
+        <h5 class="text-primary">MODIFIKATIONEN UND INTERRUPTIONEN
+
+        </h5>
+        <p>Wir behalten uns das Recht vor, den Inhalt der Website jederzeit oder aus irgendeinem Grund nach unserem
+            alleinigen Ermessen ohne vorherige Ankündigung zu ändern, zu ändern oder zu entfernen. Wir sind jedoch
+            nicht verpflichtet, Informationen auf unserer Website zu aktualisieren. Wir behalten uns auch das Recht vor,
+            die Marketplace-Angebote jederzeit ganz oder teilweise ohne vorherige Ankündigung zu ändern oder
+            einzustellen. Wir haften Ihnen oder Dritten gegenüber nicht für Änderungen, Preisänderungen, Aussetzungen
+            oder Unterbrechungen der Website oder der Marketplace-Angebote. </p>
+        <p>Wir können nicht garantieren, dass die Website und die Marketplace-Angebote immer verfügbar sind. Es kann
+            zu Hardware- oder Software- oder anderen Problemen kommen oder Wartungsarbeiten im Zusammenhang
+            mit der Website erforderlich sind, was zu Unterbrechungen, Verzögerungen oder Fehlern führen kann. Wir
+            behalten uns das Recht vor, die Website oder die Marketplace-Angebote jederzeit oder aus irgendeinem
+            Grund ohne vorherige Ankündigung zu ändern, zu aktualisieren, auszusetzen, einzustellen oder anderweitig zu
+            ändern. Sie erklären sich damit einverstanden, dass wir keinerlei Haftung für Verluste, Schäden oder
+            Unannehmlichkeiten übernehmen, die durch Ihre Unfähigkeit, auf die Website oder die MarketplaceAngebote
+            zuzugreifen oder diese zu nutzen, während Ausfallzeiten oder Unterbrechungen der Website oder
+            der Marketplace-Angebote entstehen. Nichts in diesen Nutzungsbedingungen wird so ausgelegt, daß wir
+            verpflichtet sind, die Website oder die Marketplace-Angebote zu pflegen und zu unterstützen oder
+            Korrekturen, Aktualisierungen oder Freigaben in Verbindung damit zuliefern.
+        </p>
+        <h5 class="text-primary">REGIERENDES RECHT
+
+        </h5>
+        <p>Diese Bedingungen unterliegen dem schweizerischen Recht und werden selbst unwiderruflich damit
+            einverstanden sein, dass die Gerichte der Schweiz ausschließlich für die Beilegung von Streitigkeiten
+            zuständig sind, die im Zusammenhang mit diesen Bedingungen entstehen können.</p>
+        <h5 class="text-primary">Streitbeilegung
+        </h5>
+        <p> <b class="text-primary">Informelle Verhandlungen
+
+            </b></p>
+        <p>Um die Beilegung und Kontrolle der Kosten von Streitigkeiten, Kontroversen oder Ansprüchen im
+            Zusammenhang mit diesen Nutzungsbedingungen (jeweils eine "Streitigkeit" und kollektiv die von Ihnen oder
+            uns (einzeln, eine "Partei" und gemeinsam die "Parteien") vorgebrachten Streitigkeiten zu beschleunigen,
+            vereinbaren die Vertragsparteien, zunächst mindestens 30 Tage vor der Initiierung der Zuschreibung zu
+            versuchen, Streitigkeiten (mit Ausnahme der unten ausdrücklich genannten Streitigkeiten) informell
+            auszuhandeln. Solche informellen Verhandlungen beginnen mit einer schriftlichen Mitteilung einer
+            Vertragspartei an die andere Vertragspartei.
+        </p>
+        <p><b class="text-primary">Verbindliche Schiedsgerichtsbarkeit
+
+            </b></p>
+        <p>Alle Streitigkeiten, die sich aus oder im Zusammenhang mit diesem Vertrag ergeben, einschließlich fragender
+            Fragen nach seiner Existenz, Gültigkeit oder Beendigung, werden vom Internationalen Handelsschiedsgericht
+            nach der Europäischen Schiedskammer (Belgien, Brüssel, Avenue Louise, 146) gemäß den Regeln dieser ICC,
+            die aufgrund ihrer Bezugnahme darauf als Teil dieser Klausel betrachtet wird, als Teil dieser Klausel
+            bezeichnet
+            und endgültig beigelegt. Die Anzahl der Schiedsrichter ist ___ _ Der Sitz oder Gerichtsplatz, oder Schieds
+            ist
+            ___ Sprache des Verfahrens ist das geltende Recht des Vertrages ___The geltendes Recht des Vertrages ist
+            materiellrechtliches Recht von ___.
+
+        </p>
+        <b class="text-primary">Einschränkungen</b>
+        <p>Die Vertragsparteien vereinbaren, dass ein Schiedsverfahren auf die Streitigkeit zwischen den
+            Vertragsparteien einzeln beschränkt ist. Der volle gesetzlich zulässige Umfang, (a) kein Schiedsverfahren
+            wird
+            mit einem anderen Verfahren verbunden; (b) es besteht kein Recht oder eine Befugnis, Dass eine Streitigkeit
+            auf Der Grundlage einer Sammelklage oder zur Nutzung von Sammelklagen schlichtet wird; und c) es besteht
+            kein Recht oder eine Befugnis, Streitigkeiten in angeblicher repräsentativer Eigenschaft im Namen der
+            Öffentlichkeit oder anderer Personen zu bringen. </p>
+        <p><b class="text-primary">Ausnahmen von informellen Verhandlungen und Schiedsverfahren
+
+            </b></p>
+        <p>Die Vertragsparteien kommen überein, dass die folgenden Streitigkeiten nicht den oben genannten
+            Bestimmungen über informelle Verhandlungen unterliegen, die ein verbindliches Schiedsverfahren betreffen:
+            (a) alle Streitigkeiten, die darauf abzielen, eines der Rechte an geistigem Eigentum einer Vertragspartei
+            durchzusetzen oder zu schützen oder die Gültigkeit dieser Rechte zu schützen: b) alle Streitigkeiten, die
+            sich
+            auf Vorwürfe des Diebstahls, der Piraterie, der Verletzung der Privatsphäre oder der unbefugten Nutzung
+            beziehen oder sich daraus ergeben; und c) jeden Unterlassungsanspruch. Sollte sich herausstellen, dass diese
+            Bestimmung rechtswidrig oder nicht durchsetzbar ist, wird sich keine der Parteien dafür entscheiden,
+            Streitigkeiten zu schlichten, die unter diesen Teil dieser Bestimmung fallen, der als rechtswidrig oder
+            nicht
+            durchsetzbar erachten wird, und diese Streitigkeit wird von einem zuständigen Gericht innerhalb der oben
+            genannten Gerichte entschieden, und die Parteien erklären sich damit einverstanden, sich der persönlichen
+            Zuständigkeit dieses Gerichts zu unterwerfen. </p>
+        <h5 class="text-primary">Korrekturen</h5>
+        <p>Es können Informationen auf der Website vorhanden sein, die typografische Fehler, Ungenauigkeiten oder
+            Auslassungen enthalten, die sich auf die Marketplace-Angebote beziehen können, einschließlich
+            Beschreibungen, Preisen, Verfügbarkeit und verschiedenen anderen Informationen. Wir behalten uns das
+            Recht vor, Fehler, Ungenauigkeiten oder Auslassungen zu korrigieren und die Informationen auf der Website
+            jederzeit und ohne vorherige Ankündigung zu ändern oder zu aktualisieren.
+        </p>
+        <h5 class="text-primary">Haftungsausschluss</h5>
+        <p>DIE WEBSITE WIRD AUF EINER AS-IS- UND VERFÜGBAR-BASIS ZUR VERFÜGUNG GESTELLT. SIE STIMMEN ZU,
+            DASS IHRE NUTZUNG DER WEBSITE-DIENSTE AUF IHR ALLEINIGES RISIKO ERFOLGT. ZUM VOLLEN EXTENT
+            ALLOWED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SITE
+            AND YOUR USE THEREOF, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+            MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WIR MACHEN KEINE
+            GARANTIEIER ODER REPRESENTATIONEN ÜBER DIE GENAUIGKEIT ODER COMPLETENESS DER WEBSITEINHALTE ODER DIE INHALTE
+            EINES WEBSITES AUF DIESER WEBSITE UND WIR WERDEN KEINE LIABILITÄT ODER
+            VERANTWORTUNG FÜR JEDE (1) FEHLER, FEHLER, ODER INACCURACIES VON CONTENT UND MATERIALIEN, (2)
+            PERSONEN- ODER SACHSCHÄDEN JEGLICHER ART, DIE SICH AUS IHREM ZUGRIFF AUF UND DER NUTZUNG DER
+            WEBSITE ERGEBEN, (3) JEGLICHEN UNBEFUGTEN ZUGRIFF AUF ODER DIE UNBEFUGTE NUTZUNG UNSERER
+            SICHEREN SERVER UND/ODER ALLER DARIN GESPEICHERTEN PERSONENBEZOGENEN DATEN UND/ODER
+            FINANZINFORMATIONEN, (4) UNTERBRECHUNG ENDERATION ODER ÜBERTRAGUNG VON DER WEBSITE, (5)
+            BUGS, VIREN, TROJANISCHE PFERDE ODER DERGLEICHEN, DIE VON DRITTEN AN ODER DURCH DIE WEBSITE
+            ÜBERTRAGEN WERDEN KÖNNEN. , UND/ODER (6) ANY ERRORS OR OMISSIONS IN ANY CONTENT AND
+            MATERIALS OR FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF ANY
+            CONTENT POSTED, TRANSMITTED, OR OTHERWISE MADE AVAILABLE VIA THE SITE. WIR NICHT WARRANT,
+            ENDORSE, GARANTIE, ODER ASSUME RESPONSIBILITY FÜR JEDEN PRODUKT ODER SERVICE ADVERTISED ODER
+            VON EINEM DRITTEN PARTY THROUGH THE SITE, JEDE HYPERLINKED WEBSITE, ODER JEDE WEBSITE ODER
+            MOBILE ANWENDUNG FEATURED IN EINEM BANNER ODER ANDEREN ADVERTISING, UND WIR WERDEN NICHT
+            AUF ODER IN EINEM WAY SIND AS WITH THE PURCHASE OF A PRODUCT OR SERVICE THROUGH ANY MEDIUM
+            OR IN ANY ENVIRONMENT, YOU SHOOULD USE YOUR BEST JUDGMENT AND EXERCISE CAUTION WHERE
+            APROPRIATE.
+        </p>
+        <h5 class="text-primary">HAFTUNGSBESCHRÄNKUNGEN IN KEINEM FALL
+
+        </h5>
+        <p>WERDEN WIR ODER UNSERE DIREKTOREN, MITARBEITER ODER AGENTEN IHNEN ODER DRITTEN GEGENÜBER
+            FÜR DIREKTE, INDIREKTE, FOLGE-, BEISPIELHAFTE, ZUFÄLLIGE, BESONDERE ODER STRAFSCHÄDEN HAFTEN,
+            EINSCHLIEßLICH ENTGANGENER GEWINNE, ENTGANGENER EINNAHMEN, DATENVERLUST ODER SONSTIGER
+            SCHÄDEN, DIE SICH AUS IHRER NUTZUNG DER WEBSITE ERGEBEN, AUCH WENN WIR ÜBER DIE MÖGLICHKEIT
+            SOLCHER SCHÄDEN INFORMIERT WURDEN. UNGEACHTET DER HIERIN ENTHALTENEN GEGENTEILIGEN ART IST
+            UNSERE HAFTUNG IHNEN GEGENÜBER AUS IRGENDEINEM GRUND UND UNABHÄNGIG VON DER FORM DER
+            HANDLUNG JEDERZEIT AUF DEN GERINGEREN BETRAG BESCHRÄNKT, DER SIE AN UNS ODER BESTIMMTE
+            GESETZE DES US-BUNDESSTAATES GEZAHLT HABEN, ODER BESTIMMTE GESETZE UND INTERNATIONALE
+            GESETZE DER USA LASSEN KEINE BESCHRÄNKUNGEN STILLSCHWEIGENDER GEWÄHRLEISTUNGEN ODER DEN
+            AUSSCHLUSS ODER DIE BEGRENZUNG BESTIMMTER SCHÄDEN ZU. WENN DIESE GESETZE AUF SIE, SOME ODER
+            ALLE DER ABOVE DISCLAIMERS ODER LIMITATIONEN NICHT AUF SIE ANWENDEN, UND SIE KÖNNEN
+            ZUSÄTZLICHE RECHTE HABEN. </p>
+        <h5 class="text-primary">Entschädigung</h5>
+        <p>Sie erklären sich damit einverstanden, uns, einschließlich unserer Tochtergesellschaften, verbundenen
+            Unternehmen und alle unsere jeweiligen leitenden Angestellten, Vertreter, Partner und Mitarbeiter, von und
+            gegen Verluste, Schäden, Haftung, Ansprüche oder Forderungen, einschließlich angemessener Anwaltskosten
+            und -kosten, die von Dritten aufgrund oder aus: (1) Nutzung der Website verursacht werden oder sich daraus
+            ergeben, schadlos zu halten; (2) Verstoß gegen diese Nutzungsbedingungen; (3) jede Verletzung Ihrer
+            Zusicherungen und Garantien, die in diesen Nutzungsbedingungen dargelegt sind; (4) Ihre Verletzung der
+            Rechte Dritter, einschließlich, aber nicht beschränkt auf rechte an geistigem Eigentum; oder (5) jede
+            unverhakte schädliche Handlung gegenüber einem anderen Benutzer der Website, mit dem Sie über die
+            Website verbunden sind. Ungeachtet des Vorstehenden behalten wir uns das Recht vor, wir rve die r,auf
+            IhreKosten, die ausschließliche Verteidigung und Kontrolle über alle Angelegenheit, für die Sie verpflichtet
+            sind, uns zu entschädigen, zu übernehmen, und Sie stimmen zu, auf Ihre Kosten mit unserer Verteidigung
+            solcher Ansprüche zusammenzuarbeiten. Wir werden angemessene Anstrengungen unternehmen, um Sie
+            über solche Ansprüche, Maßnahmen oder Verfahren zu informieren, die dieser Entschädigung unterliegen,
+            wenn wir davon Kenntnis erhalten.</p>
+        <h5 class="text-primary">BENUTZERDATEN
+        </h5>
+        <p>Wir werden bestimmte Daten, die Sie an die Website übermitteln, zum Zwecke der Verwaltung der Leistung
+            der Website sowie Daten im Zusammenhang mit Ihrer Nutzung der Website pflegen. Obwohl wir regelmäßige
+            routinemäßige Sicherungen von Daten durchführen, sind Sie allein verantwortlich für alle Daten, die Sie
+            übermitteln oder die sich auf Aktivitäten beziehen, die Sie über die Website durchgeführt haben. Sie
+            erklären
+            sich damit einverstanden, dass wir Ihnen gegenüber keine Haftung für Verluste oder Korruption solcher Daten
+            übernehmen, und Sie verzichten hiermit auf ein Klagerecht gegen uns, das sich aus einem solchen Verlust oder
+            einer solchen Beschädigung solcher Daten ergibt.</p>
+        <h5 class="text-primary">ELEKTRONISCHE KOMMUNIKATIONEN, TRANSACTIONS UND SIGNATURES
+        </h5>
+        <p>Der Besuch der Website, das Versenden von E-Mails und das Ausfüllen von Online-Formularen stellen eine
+            elektronische Kommunikation dar. Sie stimmen dem Erhalt elektronischer Mitteilungen zu und stimmen zu,
+            dass alle Vereinbarungen, Mitteilungen, Offenlegungen und andere Mitteilungen, die wir Ihnen elektronisch,
+            per E-Mail und auf der Website zur Verfügung stellen, allen gesetzlichen Anforderungen entsprechen, dass
+            diese Mitteilung schriftlich erfolgen muss. SIE HIERZUKLEBEN AUF DIE VERWENDUNG VON ELEKTRONISCHEN
+            SIGNATUREN, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES,
+            POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE SITE. Sie verzichten
+            hiermit auf Rechte oder Anforderungen aufgrund von Gesetzen, Vorschriften, Regeln, Verordnungen oder
+            anderen Gesetzen in einer Gerichtsbarkeit, die eine Originalunterschrift oder Lieferung oder Aufbewahrung
+            nichtelektronischer Aufzeichnungen erfordern, oder auf Zahlungen oder die Gewährung von Krediten mit allen
+            Mitteln.</p>
+        <h5 class="text-primary">Sonstige</h5>
+        <p>Diese Nutzungsbedingungen und alle Richtlinien oder Betriebsregeln, die von uns auf der Website oder in
+            Bezug auf die Website veröffentlicht werden, stellen die gesamte Vereinbarung und Das ein Verständnis
+            zwischen Ihnen und uns dar. Unser Versäumnis, ein Recht oder eine Bestimmung dieser Nutzungsbedingungen
+            auszuüben oder durchzusetzen, gilt nicht als Verzicht auf dieses Recht oder diese Bestimmung. Diese
+            Nutzungsbedingungen sind gesetzlich zulässig. Wir können unsere Rechte und Pflichten jederzeit an andere
+            abtreten. Wir sind nicht verantwortlich oder haftbar für Verluste, Schäden, Verzögerungen oder Nichthandeln,
+            die durch einen Grund verursacht werden, der außerhalb unserer angemessenen Kontrolle liegt. Sollte eine
+            Bestimmung oder ein Teil einer Bestimmung dieser Nutzungsbedingungen als rechtswidrig, nichtig oder nicht
+            durchsetzbar befunden werden, wird diese Bestimmung oder ein Teil der Bestimmung als von diesen
+            Nutzungsbedingungen abtrennbar erachtet und berührt nicht die Gültigkeit und Durchsetzbarkeit der übrigen
+            Bestimmungen. Es gibt kein Joint Venture, keine Partnerschaft, keine Beschäftigung oder eine
+            Agenturbeziehung, die aufgrund dieser Nutzungsbedingungen oder der Nutzung der Website zwischen Ihnen
+            und uns entstanden ist. Sie erklären sich damit einverstanden, dass diese Nutzungsbedingungen nicht gegen
+            uns ausgelegt werden, da sie verfasst wurden. Sie verzichten hiermit auf alle Verteidigung you may haben
+            based auf der elektronischen Form derse Terms der Nutzung und die lack der Unterzeichnung durch die
+            Parteienhierzu, um diese Nutzungsbedingungen auszuführen.
+
+        </p>
+        <h5 class="text-primary">kontaktieren Sie uns
+        </h5>
+        <p>To resolve a complaint regarding the Site or to receive further information regarding use of the Site, please
+            contact us at: </p>
+        <p>Phone: 031 558 33 88
+        </p>
+        <p>Email: admin@swaadbern.ch</p>
+    </div>
+</div>
+@endif
+
 
 @endsection
