@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">TO REVIEWS</h1>
+                <h1 class="mb-0 bread">{{session('lan') == 'en' ? 'To Reviews' : 'Zu Bewertungen'}}</h1>
             </div>
         </div>
     </div>
@@ -20,11 +20,21 @@
                 <div class="product">
                     <a href="{{route('productDetail',$product->id)}}" class="img-prod"><img class="img-fluid"
                             src="{{asset('storage/app/public/'.$product->image_url)}}" alt="">
-                        <span class="status">{{$product->category->title}}</span>
+                        <span class="status">
+                            @if (session('lan') == 'en')
+                            {{$product->category->title}}
+                            @else
+                            {{$product->category->title_gr}}
+                            @endif
+                        </span>
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="{{route('productDetail',$product->id)}}">{{$product->title}}</a></h3>
+                        <h3><a href="{{route('productDetail',$product->id)}}">@if (session('lan') == 'en')
+                                {{$product->title}}
+                                @else
+                                {{$product->title_gr}}
+                                @endif</a></h3>
                         <div class="p-2">
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                 data-target="#exampleModal">
@@ -89,8 +99,10 @@
     <div class="col-md-8 offset-md-2">
         <div class="text-dark text-center mb-3">
             <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
-            <p>There are no review products added yet.</p>
-            <a href="{{route('products')}}" class="btn btn-primary">Continue Shopping</a>
+            <p>{{session('lan') == 'en' ? 'There are no review products added yet.' : 'Es wurden noch keine Testprodukte hinzugefügt.'}}
+            </p>
+            <a href="{{route('products')}}"
+                class="btn btn-primary">{{session('lan') == 'en' ? 'Continue Shopping' : 'Mit dem Einkaufen fortfahren'}}</a>
         </div>
     </div>
 </section>

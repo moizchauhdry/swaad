@@ -6,52 +6,57 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">Orders</h1>
+                <h1 class="mb-0 bread">{{session('lan') == 'en' ? 'orders' : 'Aufträge'}}</h1>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <div style="margin-top: 30px;margin-bottom: 20px;">
+<section class="ftco-section contact-section">
+    <div class="container">
+        @if ($orders->count() > 0)
         <ul class=" nav nav-pills nav-fill" style="padding: 10px">
             <li class="nav-item">
                 <button class="btn btn-primary btn-secondary order_status shadow rounded" id="order_status_0"
-                    data-id="0">Pending</button>
+                    data-id="0">{{session('lan') == 'en' ? 'Pending' : 'steht aus'}}</button>
             </li>
             <li class="nav-item">
                 <button class="btn btn-secondary order_status shadow rounded" id="order_status_1"
-                    data-id="1">Processing</button>
+                    data-id="1">{{session('lan') == 'en' ? 'Processing' : 'wird bearbeitet'}}</button>
             </li>
             <li class="nav-item">
                 <button class="btn btn-secondary order_status shadow rounded" id="order_status_2"
-                    data-id="2">Shipped</button>
+                    data-id="2">{{session('lan') == 'en' ? 'Shipping' : 'Versand'}}</button>
             </li>
             <li class="nav-item">
                 <button class="btn btn-secondary order_status shadow rounded" id="order_status_3"
-                    data-id="3">Delivered</button>
+                    data-id="3">{{session('lan') == 'en' ? 'Delivered' : 'Geliefert'}}</button>
             </li>
             <li class="nav-item">
                 <button class="btn btn-secondary order_status shadow rounded" id="order_status_4"
-                    data-id="4">Cancelled</button>
+                    data-id="4">{{session('lan') == 'en' ? 'Cancelled' : 'Abgebrochen'}}</button>
             </li>
         </ul>
-    </div>
-
-    <div id="orders_data">
-        @if ($orders->count() > 0)
-        @include('frontend.users._orders')
-        @else
-        <div class="col-md-8 offset-md-2">
-            <div class="text-dark text-center mb-5">
-                <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
-                <p>There are no orders placed yet.</p>
-                <a href="{{route('products')}}" class="btn btn-primary">Continue Shopping</a>
-            </div>
-        </div>
         @endif
+
+        <div id="orders_data">
+            @if ($orders->count() > 0)
+            @include('frontend.users._orders')
+            @else
+            <div class="col-md-8 offset-md-2">
+                <div class="text-dark text-center mb-5">
+                    <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
+                    <p>{{session('lan') == 'en' ? 'There are no orders placed yet.' : 'Es sind noch keine Bestellungen eingegangen.'}}
+                    </p>
+                    <a href="{{route('products')}}"
+                        class="btn btn-primary">{{session('lan') == 'en' ? 'Continue Shopping' : 'Mit dem Einkaufen fortfahren'}}</a>
+                </div>
+            </div>
+            @endif
+        </div>
     </div>
-</div>
+</section>
+
 @endsection
 
 @section('scripts')
