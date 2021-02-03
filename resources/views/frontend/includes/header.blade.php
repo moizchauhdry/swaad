@@ -65,9 +65,9 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item {{(Route::currentRouteName() == 'reservation') ? 'active' : ''}}">
-                    <a href="{{route('reservation')}}"
-                        class="nav-link">{{session('lan') == 'en' ? 'Reservation' : 'Reservierung'}}</a></li>
+                <li class="nav-item {{(Route::currentRouteName() == 'serve') ? 'active' : ''}}">
+                    <a href="{{route('serve')}}"
+                        class="nav-link">{{session('lan') == 'en' ? 'What We Serve' : 'Was wir servieren'}}</a></li>
                 <li class="nav-item {{(Route::currentRouteName() == 'products') ? 'active' : ''}}">
                     <a href="{{route('categories')}}"
                         class="nav-link">{{session('lan') == 'en' ? 'Order Online' : 'Online bestellen'}}</a></li>
@@ -91,18 +91,18 @@
                         href="{{route('contact')}}"
                         class="nav-link">{{session('lan') == 'en' ? 'Contact' : 'Kontakt'}}</a></li>
                 <li
-                    class="nav-item dropdown {{(Route::currentRouteName() == 'reservation' || Route::currentRouteName() == 'privacy' || Route::currentRouteName() == 'about') ? 'active' : ''}}">
+                    class="nav-item dropdown {{(Route::currentRouteName() == 'reservation' || Route::currentRouteName() == 'privacy' || Route::currentRouteName() == 'catering'|| Route::currentRouteName() == 'about') ? 'active' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">{{session('lan') == 'en' ? 'More' : 'Mehr'}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item"
+                            href="{{route('reservation')}}">{{session('lan') == 'en' ? 'Reservation' : 'Reservierung'}}</a>
                         <a class="dropdown-item"
                             href="{{route('catering')}}">{{session('lan') == 'en' ? 'Catering' : 'Gastronomie'}}</a>
                         <a class="dropdown-item"
                             href="{{route('about')}}">{{session('lan') == 'en' ? 'About us' : 'Über uns'}}</a>
                         <a class="dropdown-item"
                             href="{{route('privacy')}}">{{session('lan') == 'en' ? 'Privacy Policy' : 'Datenschutz-Bestimmungen'}}</a>
-                        <a class="dropdown-item"
-                            href="{{route('serve')}}">{{session('lan') == 'en' ? 'What We Serve' : 'Was wir servieren'}}</a>
                     </div>
                 </li>
                 <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link">
