@@ -1,5 +1,11 @@
 @extends('layouts.frontend')
 
+<style>
+    .ftco-section {
+        padding: 2em 0 !important;
+        position: relative;
+    }
+</style>
 @section('content')
 <div class="hero-wrap hero-bread" style="background-image: url('{{asset('public/frontend/images/bg_1.jpg')}}');">
     <div class="container">
@@ -10,6 +16,18 @@
         </div>
     </div>
 </div>
+
+@if ($category->id == 11)
+<div class="container">
+    <div class="row">
+        <p class="text-primary" style="font-style: italic; padding-top:30px">
+            {{session('lan') == 'en' ? 'No alcohol may be sold to children and young people under the age of 16. Beer and wine may only be sold
+            to people over the age of 16. Spirits, aperitifs and alcopops may only be sold to people over the age of
+            18.' : 'Es darf kein Alkohol an Kinder und Jugendliche unter 16 Jahren verkauft werden. Bier und Wein dürfen nur an über 16-Jährige verkauft werden. Spirituosen, Aperitife und Alcopops dürfen nur an über 18-Jährige verkauft werden.'}}
+        </p>
+    </div>
+</div>
+@endif
 
 <section class="ftco-section">
     <div class="container">

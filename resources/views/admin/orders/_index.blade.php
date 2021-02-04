@@ -3,7 +3,7 @@
         <tr>
             <th>#</th>
             <th>Order Id</th>
-            <th>User Name</th>
+            <th>Full Name</th>
             <th>Order Date</th>
             <th>Order Status</th>
             <th>Net Total</th>

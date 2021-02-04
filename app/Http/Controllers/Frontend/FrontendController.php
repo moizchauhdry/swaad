@@ -110,8 +110,9 @@ class FrontendController extends Controller
     }
 
     public function getProductsByCategory($id) {
+        $category = Category::find($id);
         $products = Product::where('status','1')->orderBy('id','DESC')->where('category_id',$id)->paginate(24);
-        return view ('frontend.pages.getProductsByCategory',compact('products'));
+        return view ('frontend.pages.getProductsByCategory',compact('products','category'));
     }
 
     public function products() {

@@ -22,7 +22,7 @@
                         <div class="row align-items-end">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">User Name</label>
+                                    <label for="">Full Name</label>
                                     <input type="text" class="form-control" name="chk_user_name" placeholder=""
                                         value="{{Auth::guard('frontend')->user()->name}}" disabled>
                                 </div>
