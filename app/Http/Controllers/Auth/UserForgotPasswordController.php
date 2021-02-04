@@ -16,16 +16,6 @@ class UserForgotPasswordController extends Controller
         $this->middleware('guest:frontend');
     }
     
-    // protected function sendResetLinkResponse(Request $request, $response)
-    // {
-    //     return response()->json(['status' => 1, 'message' => trans($response)]);
-    // }
-
-    // protected function sendResetLinkFailedResponse(Request $request, $response)
-    // {
-    //     return  response()->json(['status' => 0, 'error' => trans($response)]);
-    // }
-
     protected function broker() {
         return Password::broker('users');
     }
