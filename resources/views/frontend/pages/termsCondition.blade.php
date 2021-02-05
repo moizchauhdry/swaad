@@ -410,13 +410,61 @@
             virtue of having drafted them. You hereby waive all defense you may have based on the electronic form of
             these Terms of Use and the lack of signing by the parties hereto to execute these Terms of Use.
         </p>
+        <h5 class="text-primary">Delivery</h5>
+        <ul>
+            <li><b class="text-primary">Order Delivey:</b> Orders are delivered directly to the delivery address and
+                recipient specified by
+                the
+                customer. Deliveries are made by Swaad Foods delivery service. Orders will be delivered to the front
+                door of private residences (as far as accessible) or the reception desk of business customers.</li>
+            <li><b class="text-primary"> Delivery Times:</b> Swaad Foods make every effort to adhere to the delivery
+                periods. However, all
+                delivery
+                times specified by Swaad Foods are for guidance purposes only. If a delivery period is not complied
+                with, the customer is not entitled to withdraw from the contract or to receive compensation. Should
+                Swaad Foods not be able to deliver an order, there is no obligation to carry out the delivery. The
+                customer is not thereby entitled to compensation.</li>
+            <li><b class="text-primary">Delivery Charges:</b> The minimum order value is 40 chf according to the
+                delivery postcode.</li>
+            <li><b class="text-primary">Cancellation of a Delivery:</b> Swaad Foods aims to hand the order over to the
+                customer personally.
+                If,
+                for reasons beyond Swaad foods control - such as an incorrect delivery address, the recipient's absence,
+                lack of an access, bad weather or road condition, or similar, it should prove impossible or possible
+                only with great difficulty, to carry out the delivery successfully, Swaad Foods is entitled to cancel
+                the order. In this event, the customer is not entitled to compensation, pecuniary or in kind.</li>
+            <li><b class="text-primary">Return Rights:</b> Swaad Foods primary objective is to deliver all products
+                ordered in the right
+                quantity
+                and to a high quality standard. In exceptional cases for various reasons, however, insufficient products
+                may be available or it may not be possible to release a product. If products are unavailable at the time
+                of delivery, they are not delivered later and no substitute products are delivered. The actual quantity
+                delivered is stated on the delivery receipt. The customer is not entitled to compensation, pecuniary or
+                in kind, in respect to quantities delivered partially or not at all. If an item is not delivered,
+                despite being billed, the amount in question will be credited to the customer. No subsequent delivery
+                will be made, and the customer is not entitled to claim compensation.</li>
+        </ul>
+        <h5 class="text-primary">Prices and Payments</h5>
+        <ul>
+            <li><b class="text-primary">Prices:</b> All prices are quoted in Swiss francs, including VAT at the
+                applicable rate. The prices
+                charged are those displayed on the www.swaadbern.ch website at the time of the order.</li>
+            <li><b class="text-primary">Payment Methods:</b> Payment of the order must be made in Swiss francs. In
+                addition to cash
+                payment,
+                various payment methods are available. Swaad Foods is entitled to decide at its own discretion which
+                payment method to accept. The payment methods available are displayed for selection when the order is
+                finalized. Payments made via the website are made to Swaad Foods GmbH.</li>
+        </ul>
         <h5 class="text-primary">CONTACT US
         </h5>
         <p>To resolve a complaint regarding the Site or to receive further information regarding use of the Site, please
             contact us at: </p>
-        <p>Phone: 031 558 33 88
+        <p>Swaad Foods Gmbh <br>
+            3072 Ostermundigen <br>
+            031 558 33 88 <br>
+            hello@swaadbern.ch <br>
         </p>
-        <p>Email: admin@swaadbern.ch</p>
     </div>
 </div>
 @else
@@ -825,15 +873,57 @@
             uns ausgelegt werden, da sie verfasst wurden. Sie verzichten hiermit auf alle Verteidigung you may haben
             based auf der elektronischen Form derse Terms der Nutzung und die lack der Unterzeichnung durch die
             Parteienhierzu, um diese Nutzungsbedingungen auszuführen.
-
         </p>
+        <h5 class="text-primary">Lieferung</h5>
+        <ul>
+            <li><b class="text-primary">Bestellung Delivey:</b> Bestellungen werden direkt an die vom Kunden
+                angegebene Lieferadresse und den Empfänger geliefert. Die Lieferungen erfolgen durch den Lieferservice
+                von Swaad Foods. Bestellungen werden an die Haustür von Privatwohnungen (soweit zugänglich) oder an die
+                Rezeption von Geschäftskunden geliefert.</li>
+            <li><b class="text-primary">Lieferzeiten:</b> : Swaad Foods bemüht sich, die Lieferfristen einzuhalten. Alle
+                von Swaad Foods angegebenen Lieferzeiten dienen jedoch ausschließlich der Orientierung. Wird eine
+                Lieferfrist nicht eingehalten, ist der Kunde nicht berechtigt, vom Vertrag zurückzutreten oder eine
+                Entschädigung zu erhalten. Sollte Swaad Foods nicht in der Lage sein, eine Bestellung zu liefern,
+                besteht keine Verpflichtung zur Durchführung der Lieferung. Der Kunde hat dadurch keinen Anspruch auf
+                Entschädigung.</li>
+            <li><b class="text-primary">Lieferkosten:</b> Der Mindestbestellwert beträgt 40 chf gemäß der
+                Lieferpostleitzahl.</li>
+            <li><b class="text-primary">Stornierung einer Lieferung:</b> Swaad Foods will die Bestellung persönlich an
+                den Kunden übergeben. Wenn aus Gründen, die außerhalb der Kontrolle von Swaad-Lebensmitteln liegen - wie
+                z. B. eine falsche Lieferadresse, Abwesenheit des Empfängers, Fehlen eines Zugangs, schlechtes Wetter
+                oder Straßenzustand oder ähnliches , sollte es sich als unmöglich oder möglich erweisen, die Lieferung
+                erfolgreich durchzuführen, so ist Swaad Foods berechtigt, die Bestellung zu stornieren. In diesem Fall
+                hat der Kunde keinen Anspruch auf Schadenersatz, Geld oder Sachleistungen.</li>
+            <li><b class="text-primary">Rückgaberechte:</b> Swaad Foods primäres Ziel ist es, alle Bestellten in der
+                richtigen Menge und auf einem hohen Qualitätsstandard zu liefern. In Ausnahmefällen kann es jedoch aus
+                verschiedenen Gründen zu unzureichenden Produkten kommen oder es nicht möglich sein, ein Produkt
+                freizugeben. Wenn Produkte zum Zeitpunkt der Lieferung nicht verfügbar sind, werden sie später nicht
+                geliefert und es werden keine Ersatzprodukte geliefert. Die tatsächlich gelieferte Menge wird auf dem
+                Lieferschein angegeben. Der Kunde hat keinen Anspruch auf finanzielle oder sachleistungende Leistungen,
+                für teilweise oder gar nicht gelieferte Mengen. Wird ein Artikel trotz Abrechnung nicht geliefert, wird
+                der betreffende Betrag dem Debitor gutgeschrieben. Eine Nachlieferung erfolgt nicht, und der Kunde ist
+                nicht berechtigt, Schadensersatz zu verlangen.</li>
+        </ul>
+        <h5 class="text-primary">Preise und Zahlungen</h5>
+        <ul>
+            <li><b class="text-primary">Preise:</b> Alle Preise verstehen sich in Schweizer Franken, inklusive
+                Mehrwertsteuer zum jeweiligen Preis. Die Preise werden zum Zeitpunkt der Bestellung auf der Website
+                www.swaadbern.ch angezeigt.</li>
+            <li><b class="text-primary">Zahlungsmethoden:</b> Die Zahlung der Bestellung muss in Schweizer Franken
+                erfolgen. Neben der Barzahlung stehen verschiedene Zahlungsmethoden zur Verfügung. Swaad Foods ist
+                berechtigt, nach eigenem Ermessen zu entscheiden, welche Zahlungsmethode zu akzeptieren ist. Die
+                verfügbaren Zahlungsmethoden werden zur Auswahl angezeigt, wenn der Auftrag abgeschlossen ist. Zahlungen
+                über die Website erfolgen an die Swaad Foods GmbH.</li>
+        </ul>
         <h5 class="text-primary">kontaktieren Sie uns
         </h5>
         <p>To resolve a complaint regarding the Site or to receive further information regarding use of the Site, please
             contact us at: </p>
-        <p>Phone: 031 558 33 88
+        <p>Swaad Foods Gmbh <br>
+            3072 Ostermundigen <br>
+            031 558 33 88 <br>
+            hello@swaadbern.ch <br>
         </p>
-        <p>Email: admin@swaadbern.ch</p>
     </div>
 </div>
 @endif
