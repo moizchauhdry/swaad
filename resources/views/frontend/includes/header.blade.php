@@ -2,52 +2,52 @@
     <div class="container">
         <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
             <div class="col-lg-12 d-block">
-                <div class="row d-flex">
-                    <div class="col-md pr-4 d-flex topper align-items-center">
-                        <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                                class="icon-phone2"></span></div>
-                        <span class="text header-phone">031 558 33 88</span>
+                <div class="row">
+                    <div class="col-md-2 text-center margin-left-30">
+                        <div class="row">
+                            <div class="icon mr-2">
+                                <span class="icon-phone2 text-white"></span></div>
+                            <span class="text header-phone text-white">031 558 33 88</span>
+                        </div>
                     </div>
-                    <div class="col-md pr-4 d-flex topper align-items-center">
-                        <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
-                                class="icon-paper-plane"></span></div>
-                        <span class="text header-email">hello@swaadbern.ch</span>
+                    <div class="col-md-2 text-center margin-left-25">
+                        <div class="row">
+                            <div class="icon mr-2">
+                                <span class="icon-paper-plane text-white"></span></div>
+                            <span class="text header-email text-white">hello@swaadbern.ch</span>
+                        </div>
                     </div>
-                    <div class="col-md-7 pr-4 d-flex topper align-items-center text-lg-right">
-                        <span class="text text-center">
-                            <div style="text-align:left">
-                                <?php  $site = App\SiteConfiguration::first(); ?> {!! $site->store_timing !!}
-                            </div>
-                        </span>
-                        <span>
-                            <div>
-                                <form action="{{route('changeLanguage')}}" method="get" id="changeLanguageForm">
-                                    @if (session('lan') == 'en')
-                                    <select name="language" id="language">
-                                        <option value="de">German</option>
-                                        <option value="en" selected>English</option>
-                                    </select>
-                                    @else
-                                    <select name="language" id="language">
-                                        <option value="de" selected>German</option>
-                                        <option value="en">English</option>
-                                    </select>
-                                    @endif
-                                </form>
-                            </div>
-                        </span>
-                        <span class="text text-center registration">
-                            @if(Auth::guard('frontend')->check())
-                            <a href="{{route('user.profile')}}" class="text-white">
-                                {{ Auth::guard('frontend')->user()->name }}</a> | <a href="{{route('user.logout')}}"
-                                class="text-white">{{session('lan') == 'en' ? 'Logout' : 'Ausloggen'}}</a>
+                    <div class="col-md-4 topper text-center">
+                        <?php  $site = App\SiteConfiguration::first(); ?>
+                        <span class="text-white">{!! $site->store_timing !!}</span>
+                    </div>
+                    <div class="col-md-1 topper text-center">
+                        <form action="{{route('changeLanguage')}}" method="get" id="changeLanguageForm">
+                            @if (session('lan') == 'en')
+                            <select name="language" id="language">
+                                <option value="de">German</option>
+                                <option value="en" selected>English</option>
+                            </select>
                             @else
-                            <a href="#" class="text-white" data-toggle="modal"
-                                data-target="#loginModal">{{session('lan') == 'en' ? 'Login' : 'Anmeldung'}}</a> |
-                            <a href="#" class="text-white" data-toggle="modal"
-                                data-target="#registerModal">{{session('lan') == 'en' ? 'Register' : 'registrieren'}}</a>
+                            <select name="language" id="language">
+                                <option value="de" selected>German</option>
+                                <option value="en">English</option>
+                            </select>
                             @endif
-                        </span>
+                        </form>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        @if(Auth::guard('frontend')->check())
+                        <a href="{{route('user.profile')}}" class="text-white">
+                            {{ Auth::guard('frontend')->user()->name }}</a> | <a href="{{route('user.logout')}}"
+                            class="text-white">{{session('lan') == 'en' ? 'Logout' : 'Ausloggen'}}</a>
+                        @else
+                        <a href="#" class="text-white" data-toggle="modal"
+                            data-target="#loginModal">{{session('lan') == 'en' ? 'Login' : 'Anmeldung'}}</a>
+                        <span class="text-white">|</span>
+                        <a href="#" class="text-white" data-toggle="modal"
+                            data-target="#registerModal">{{session('lan') == 'en' ? 'Register' : 'Registrieren'}}</a>
+                        @endif
                     </div>
                 </div>
             </div>

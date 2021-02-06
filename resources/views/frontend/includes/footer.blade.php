@@ -1,25 +1,4 @@
-<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-    <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-            <div class="col-md-6">
-                <h2 style="font-size: 22px;" class="mb-0">
-                    {{session('lan') == 'en' ? 'Subcribe to our Newsletter' : 'Abonnieren Sie unseren Newsletter'}}</h2>
-                <span>{{session('lan') == 'en' ? 'Get e-mail updates about our latest shops and special offers' : 'Erhalten Sie E-Mail-Updates zu unseren neuesten Shops und Sonderangeboten'}}</span>
-            </div>
-            <div class="col-md-6 d-flex align-items-center">
-                <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                        <input type="text" class="form-control"
-                            placeholder="{{session('lan') == 'en' ? 'Enter email address' : 'E-Mail Adresse eingeben'}}">
-                        <input type="submit" value="{{session('lan') == 'en' ? 'Subscribe' : 'Abonnieren'}}"
-                            class="submit px-3">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<footer class="ftco-footer ftco-section">
+<footer class="ftco-footer ftco-section bg-light">
     <div class="container">
         <div class="row">
             <div class="mouse">

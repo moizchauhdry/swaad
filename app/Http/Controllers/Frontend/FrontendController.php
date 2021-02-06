@@ -17,6 +17,7 @@ use Session;
 use Auth;
 use Hash;
 use DB;
+use Str;
 
 class FrontendController extends Controller
 {   
@@ -25,19 +26,19 @@ class FrontendController extends Controller
         if($request->isMethod('post')){
             $data = $request->all();
             if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])) {
-
                 if (Auth::guard('frontend')->user()->status == 0) {
                     Auth::guard('frontend')->logout();
                     return redirect()->back()->with('WARNING','Your account is suspended. Please contact with Swaad for futher information.');
                 } else {
+                    User::where('id',Auth::guard('frontend')->user()->id)->update(['device_token' => NULL]);
                     return redirect()->route('checkout');
                 }
-            }
-            else{
+            } else {
                 return redirect()->back()->with('WARNING','The email or password you entered is incorrect.');
             }
         }
         if(Auth::guard('frontend')->check()){
+            User::where('id',Auth::guard('frontend')->user()->id)->update(['device_token' => NULL]);
             return redirect()->route('checkout');
         }
     }

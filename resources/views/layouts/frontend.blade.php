@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Swaad</title>
+    <title>Swaad Foods Gmbh</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
         rel="stylesheet">
@@ -36,6 +36,7 @@
     <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
     <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link rel="stylesheet" href="{{asset('public/frontend/custom/responsive.css')}}">
 
     <style>
         .hidden {
@@ -56,8 +57,7 @@
 
     @include('frontend.includes.footer')
 
-    <script src=" {{asset('public/frontend/js/jquery.min.js')}}">
-    </script>
+    <script src=" {{asset('public/frontend/js/jquery.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery-migrate-3.0.1.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/popper.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>

@@ -30,7 +30,40 @@ class OrderController extends Controller
             'order_status' => $request->order_status,
             'payment_status' => $request->payment_status,
         ];
+        
         $order->update($data);
+
+        // PUSH NOTIFICATIONS
+        $path_to_fcm = 'https://fcm.googleapis.com/fcm/send';
+        $server_key="AAAAyQagDtc:APA91bF7Ed0IsRaOKquk3vS9p8GKdRi8X352hUdYQpVGuEZUwVLHugOPDvFwNogBaMXNJmYdhdwEzRxKaHrL9ok-3bGTb6v8HDmOwyRKpjswM-mPWuDDU0tPMxtfsHmvk3JH1TkC3Vw4";
+        $key = $order->user->device_token;
+        
+        if($key != ""){
+            $header = array (
+                'Authorization:key='.$server_key,
+                'Content-Type:application/json'
+            );
+            $fields = array(
+                'to'=>$key,
+                'data'=>array(
+                    'title'=>"Swaad Foods Gmbh",
+                    'order_status'=>$order->order_status,
+                    'order_id'=>$order->id,
+                )
+            );
+            $payload = json_encode($fields);
+            $curl_session = curl_init();
+            curl_setopt($curl_session, CURLOPT_URL,$path_to_fcm);
+            curl_setopt($curl_session, CURLOPT_POST,true);
+            curl_setopt($curl_session, CURLOPT_HTTPHEADER,$header);
+            curl_setopt($curl_session, CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($curl_session, CURLOPT_SSL_VERIFYPEER,false);
+            curl_setopt($curl_session, CURLOPT_IPRESOLVE,CURL_IPRESOLVE_V4);
+            curl_setopt($curl_session, CURLOPT_POSTFIELDS,$payload);
+            echo $result = curl_exec($curl_session);	
+            curl_close($curl_session);
+        }
+        // PUSH NOTIFICATIONS
 
         return redirect()->back()->with('success','Status Updated Successfully');
     }
