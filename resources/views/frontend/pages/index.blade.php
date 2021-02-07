@@ -11,7 +11,7 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-6 order-md-last align-items-stretch d-flex">
-                        <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex"
+                        <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex menu-img"
                             style="background-image: url({{asset('public/frontend/images/category.jpg')}});">
                             <div class="text text-center">
                                 <h2>{{session('lan') == 'en' ? 'Our Menu' : 'Unser Menü'}}</h2>

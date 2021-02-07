@@ -36,7 +36,7 @@
     <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
     <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-    <link rel="stylesheet" href="{{asset('public/frontend/custom/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/custom/responsive.css?v=1.0')}}">
 
     <style>
         .hidden {

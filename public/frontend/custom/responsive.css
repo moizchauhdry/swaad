@@ -1,4 +1,4 @@
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .owl-carousel .owl-stage,
     .owl-carousel.owl-drag .owl-item {
         -ms-touch-action: pan-y !important;
@@ -12,5 +12,20 @@
     }
     .margin-left-30 {
         margin-left: 33%;
+    }
+    .menu-img {
+        background-image: none !important;
+        background-color: #fefefe;
+        margin-top: -35px;
+        margin-bottom: 20px;
+    }
+    .ftco-category .category-wrap {
+        margin-top: 15px;
+    }
+    .owl-carousel.home-slider .slider-item {
+        height: 300px;
+    }
+    .owl-carousel.home-slider {
+        height: 300px;
     }
 }
