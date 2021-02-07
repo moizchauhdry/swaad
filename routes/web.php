@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Route;
  *******************************************************************
 */
 
+Route::get('test-print',function() {
+    return view('test-print');
+});
+
 Route::get('/', 'Frontend\FrontendController@index')->name('index');
 Route::group(['prefix'=>'user'],function() {
     Route::post('/login','Frontend\FrontendController@login')->name('user.login');
