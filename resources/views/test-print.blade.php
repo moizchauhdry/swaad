@@ -12,7 +12,7 @@
     <?php
         // use Mike42\Escpos\PrintConnectors\FilePrintConnector;
         // use Mike42\Escpos\Printer;
-        // $connector = new FilePrintConnector("LPT1");
+        // $connector = new FilePrintConnector("EPSON TM-T88V");
         // $printer = new Escpos($connector);
         // $printer -> text("Hello World\n");
         // $printer -> cut();
@@ -21,14 +21,21 @@
 
         use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         use Mike42\Escpos\CapabilityProfile;
-        // $profile = CapabilityProfile::load("SP2000");
-        $connector = new WindowsPrintConnector("EPSON TM-T88V");
+        $profile = CapabilityProfile::load("SP2000");
+        $connector = new WindowsPrintConnector("LPT1");
+        // $connector = new WindowsPrintConnector("smb://User01@Kasse1/WORKGROUP/Epson TM-T88V");
+
         // dd($connector);
-        $printer = new Printer($connector);
+        // $printer = new Printer($connector);
+        $printer = new Escpos($connector);
+
+        
         $printer->text("SWAAD!\n");
         $printer->cut();
+        $printer->pulse();
         $printer->close();
         dd('WindowsPrinting');
+        
 
     ?>
 </body>
