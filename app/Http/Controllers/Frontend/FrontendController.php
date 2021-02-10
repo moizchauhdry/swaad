@@ -51,22 +51,26 @@ class FrontendController extends Controller
     public function register(Request $request) {
 
         $this->validate($request, [
-            'username' => 'required|max:255',
+            'firstname' => 'required|max:255',
+            'lastname' => 'required|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|max:255',
             'phone' => 'required|max:20',
             'address' => 'required|max:255',
             'house_no' => 'required|numeric',
+            'city' => 'required|max:255',
             'post_code' => 'required|numeric',       
         ]);
 
         $data = [
-            'name' => $request->input('username'),
+            'first_name' => $request->input('firstname'),
+            'last_name' => $request->input('lastname'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'phone_no' => $request->input('phone'),
             'address' => $request->input('address'),
             'home_no' => $request->input('house_no'),
+            'city' => $request->input('city'),
             'zip_code' => $request->input('post_code'),
         ];
 

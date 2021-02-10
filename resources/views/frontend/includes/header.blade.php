@@ -39,7 +39,9 @@
                     <div class="col-md-3 text-center">
                         @if(Auth::guard('frontend')->check())
                         <a href="{{route('user.profile')}}" class="text-white">
-                            {{ Auth::guard('frontend')->user()->name }}</a> | <a href="{{route('user.logout')}}"
+                            {{ Auth::guard('frontend')->user()->first_name }}&nbsp;{{ Auth::guard('frontend')->user()->last_name }}</a>
+                        <span class="text-white">|</span>
+                        <a href="{{route('user.logout')}}"
                             class="text-white">{{session('lan') == 'en' ? 'Logout' : 'Ausloggen'}}</a>
                         @else
                         <a href="#" class="text-white" data-toggle="modal"
@@ -200,8 +202,13 @@
             <div class="modal-body">
                 <div class=" container row">
                     <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Full Name' : 'Vollständiger Name'}}</label>
-                        <input type="text" class="form-control" id="reg_username" name="username" value=""
+                        <label for="">{{session('lan') == 'en' ? 'First Name' : 'Vorname'}}</label>
+                        <input type="text" class="form-control" id="reg_firstname" name="firstname" value=""
+                            placeholder="" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}}</label>
+                        <input type="text" class="form-control" id="reg_lastname" name="lastname" value=""
                             placeholder="" required>
                     </div>
                     <div class="form-group col-md-6">
@@ -220,13 +227,18 @@
                             required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Street' : 'Straße'}}</label>
+                        <label for="">{{session('lan') == 'en' ? 'Address' : 'Adresse'}}</label>
                         <input type="text" class="form-control" id="reg_address" name="address" value="" placeholder="">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">{{session('lan') == 'en' ? 'House #' : 'Haus #'}}</label>
                         <input type="number" class="form-control" id="reg_house_no" name="house_no" value=""
                             placeholder="" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">{{session('lan') == 'en' ? 'City' : 'Stadt'}}</label>
+                        <input type="text" class="form-control" id="reg_city" name="city" value="" placeholder=""
+                            required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">{{session('lan') == 'en' ? 'Post code' : 'Postleitzahl'}}</label>
@@ -250,12 +262,14 @@
 
 <script>
     function registerUser() {
-        var username = $('#reg_username').val();
+        var firstname = $('#reg_firstname').val();
+        var lastname = $('#reg_lastname').val();
         var email = $('#reg_email').val();
         var password = $('#reg_password').val();
         var phone = $('#reg_phone').val();
         var address = $('#reg_address').val();
         var house_no = $('#reg_house_no').val();
+        var city = $('#reg_city').val();
         var post_code = $('#reg_post_code').val();
 
         $.ajax({
@@ -263,12 +277,14 @@
             url: '{{route('user.register.store')}}',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
-                'username': username,
+                'firstname': firstname,
+                'lastname': lastname,
                 'email': email,
                 'password': password,
                 'phone': phone,
                 'address': address,
                 'house_no': house_no,
+                'city': city,
                 'post_code': post_code,
             },
             success: function (response) {

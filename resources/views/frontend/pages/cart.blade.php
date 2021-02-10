@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">My Cart</h1>
+                <h1 class="mb-0 bread"> {{session('lan') == 'en' ? 'My Cart' : 'Mein Warenkorb'}}</h1>
             </div>
         </div>
     </div>
@@ -21,10 +21,10 @@
                     <table class="table">
                         <thead class="thead-primary">
                             <tr class="text-center">
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
+                                <th>{{session('lan') == 'en' ? 'Item' : 'Artikel'}}</th>
+                                <th>{{session('lan') == 'en' ? 'Price' : 'Preis'}}</th>
+                                <th>{{session('lan') == 'en' ? 'Quantity' : 'Menge'}}</th>
+                                <th>{{session('lan') == 'en' ? 'Total' : 'Gesamt'}}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -60,34 +60,41 @@
         <div class="row justify-content-end">
             <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                 <div class="cart-total mb-3">
-                    <h3>Cart Totals</h3>
+                    <h3> {{session('lan') == 'en' ? 'Cart Totals' : 'Warenkorbsummen'}}</h3>
                     <p class="d-flex">
-                        <span>Subtotal</span>
+                        <span> {{session('lan') == 'en' ? 'Subtotal' : 'Zwischensumme'}}</span>
                         <span> CHF {{ number_format((float)Cart::getSubTotal(), 2, '.', '')}}</span>
                     </p>
                     <p class="d-flex">
-                        <span>Delivery</span>
+                        <span> {{session('lan') == 'en' ? 'Delivery' : 'Lieferung'}}</span>
                         <span>CHF 0.00</span>
                     </p>
                     <p class="d-flex">
-                        <span>Discount</span>
+                        <span> {{session('lan') == 'en' ? 'Discount' : 'Rabatt'}}</span>
                         <span>CHF 0.00</span>
                     </p>
                     <hr>
                     <p class="d-flex total-price">
-                        <span>Total</span>
+                        <span> {{session('lan') == 'en' ? 'Total' : 'Gesamt'}}</span>
                         <span>CHF {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
                     </p>
                 </div>
-                <p><a href="{{route('checkout')}}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                <p>
+                    <a href="{{route('checkout')}}"
+                        class="btn btn-primary py-3 px-4">{{session('lan') == 'en' ? 'Proceed to Checkout' : 'Zur Kasse'}}
+                    </a>
+                </p>
             </div>
         </div>
         @else
         <div class="col-md-8 offset-md-2">
             <div class="text-dark text-center">
                 <a class="navbar-brand" href="{{route('index')}}">Swaad</a>
-                <p>There are no items in this cart.</p>
-                <a href="{{route('products')}}" class="btn btn-primary">Continue Shopping</a>
+                <p> {{session('lan') == 'en' ? 'There are no items in this cart.' : 'In diesem Warenkorb befinden sich keine Artikel.'}}
+                </p>
+                <a href="{{route('products')}}" class="btn btn-primary">
+                    {{session('lan') == 'en' ? 'Continue Shopping' : 'Mit dem Einkaufen fortfahren'}}
+                </a>
             </div>
         </div>
         @endif

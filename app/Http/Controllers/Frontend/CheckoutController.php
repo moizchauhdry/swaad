@@ -176,7 +176,7 @@ class CheckoutController extends Controller
                     return redirect()->route('index')->with('ERROR','Something Went Wrong. Please Try Again Later.');
                 }
             } else {
-                return redirect()->route('index')->with('SUCCESS','Thankyou! Your order has been placed successfully.');
+                return redirect()->route('index')->with('SUCCESS',session('lan') == 'en' ? 'Thankyou! Your order has been placed successfully.' : 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.');
             }
     }
 

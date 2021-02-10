@@ -3,7 +3,8 @@
         <tr>
             <th>#</th>
             <th>Order Id</th>
-            <th>Full Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Order Date</th>
             <th>Order Status</th>
             <th>Net Total</th>
@@ -18,7 +19,8 @@
         <tr>
             <td>{{$count ++}}</td>
             <td> {{str_pad($order->id, 3, '0', STR_PAD_LEFT)}}</td>
-            <td>{{$order->user->name}}</td>
+            <td>{{isset($order->user->first_name) ? $order->user->first_name : ''}}</td>
+            <td>{{isset($order->user->last_name) ? $order->user->last_name : ''}}</td>
             <td>{{date('d-m-Y', strtotime($order->created_at))}}</td>
             <td>
                 @if ($order->order_status == 0) Pending

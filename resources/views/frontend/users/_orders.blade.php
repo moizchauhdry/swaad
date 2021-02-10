@@ -2,7 +2,8 @@
     <thead class="bg-primary text-white">
         <tr>
             <th>{{session('lan') == 'en' ? 'Order #' : 'Bestellung #'}}</th>
-            <th>{{session('lan') == 'en' ? 'Customer Name' : 'Kundenname'}}</th>
+            <th>{{session('lan') == 'en' ? 'First Name' : 'Vorname'}}</th>
+            <th>{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}}</th>
             <th>{{session('lan') == 'en' ? 'Order Date' : 'Bestelldatum'}}</th>
             <th>{{session('lan') == 'en' ? 'Order Status' : 'Bestellstatus'}}</th>
             <th>{{session('lan') == 'en' ? 'Net Total' : 'Nettosumme'}}</th>
@@ -14,7 +15,8 @@
         @foreach ($orders as $order)
         <tr>
             <td> {{str_pad($order->id, 3, '0', STR_PAD_LEFT)}}</td>
-            <td>{{$order->user->name}}</td>
+            <td>{{$order->user->first_name}}</td>
+            <td>{{$order->user->last_name}}</td>
             <td>{{date('d-m-Y', strtotime($order->created_at))}}</td>
             <td>
                 @if ($order->order_status == 0) {{session('lan') == 'en' ? 'Pending' : 'steht aus'}}

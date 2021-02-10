@@ -97,8 +97,12 @@
                         {{session('lan') == 'en' ? 'Customer Information' : 'Kundeninformation'}}</th>
                 </tr>
                 <tr>
-                    <th>{{session('lan') == 'en' ? 'Name' : 'Name'}}</th>
-                    <td>{{$order->user->name}}</td>
+                    <th>{{session('lan') == 'en' ? 'Fisrt Name' : 'Vorname'}}</th>
+                    <td>{{$order->user->first_name}}</td>
+                </tr>
+                <tr>
+                    <th>{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}}</th>
+                    <td>{{$order->user->last_name}}</td>
                 </tr>
                 <tr>
                     <th>{{session('lan') == 'en' ? 'Email' : 'Email'}}</th>
@@ -113,7 +117,11 @@
                     <td>{{$order->user->home_no}}</td>
                 </tr>
                 <tr>
-                    <th>{{session('lan') == 'en' ? 'Street' : 'Straße'}}</th>
+                    <th>{{session('lan') == 'en' ? 'City' : 'Stadt'}}</th>
+                    <td>{{$order->user->city}}</td>
+                </tr>
+                <tr>
+                    <th>{{session('lan') == 'en' ? 'Address' : 'Adresse'}}</th>
                     <td>{{$order->user->address}}</td>
                 </tr>
                 <tr>
@@ -166,7 +174,8 @@
             <thead>
                 <tr>
                     <th>{{session('lan') == 'en' ? 'Sr #' : 'Sr #'}}</th>
-                    <th>{{session('lan') == 'en' ? 'Title' : 'Titel'}}</th>
+                    <th>{{session('lan') == 'en' ? 'Item' : 'Artikel'}}</th>
+                    <th>{{session('lan') == 'en' ? 'Menu' : 'Speisekarte'}}</th>
                     <th>{{session('lan') == 'en' ? 'Item Price' : 'Stückpreis'}}</th>
                     <th>{{session('lan') == 'en' ? 'Quantity' : 'Menge'}}</th>
                     <th>{{session('lan') == 'en' ? 'Total' : 'Gesamt'}}</th>
@@ -182,6 +191,13 @@
                         {{ $item->product->title }}
                         @else
                         {{ $item->product->title_gr}}
+                        @endif
+                    </td>
+                    <td>
+                        @if (session('lan') == 'en')
+                        {{ $item->product->category->title }}
+                        @else
+                        {{ $item->product->category->title_gr}}
                         @endif
                     </td>
                     <td> CHF {{$item->product->price}} </td>

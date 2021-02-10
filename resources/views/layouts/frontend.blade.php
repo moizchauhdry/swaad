@@ -100,7 +100,7 @@
 
     @if(Session::has('SUCCESS'))
     <script>
-        sweetAlert("Success", '{{  Session::get('SUCCESS') }}', "success")
+        sweetAlert("{{session('lan') == 'en' ? 'Success' : 'Erfolg'}}", '{{  Session::get('SUCCESS') }}', "success")
     </script>
     @endif
 

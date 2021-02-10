@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <h1 class="mb-0 bread">Products</h1>
+                <h1 class="mb-0 bread"> {{session('lan') == 'en' ? 'Products' : 'Produkte'}}</h1>
             </div>
         </div>
     </div>
@@ -19,11 +19,23 @@
                 <div class="product">
                     <a href="{{route('productDetail',$product->id)}}" class="img-prod"><img class="img-fluid"
                             src="{{asset('storage/app/public/'.$product->image_url)}}" alt="">
-                        <span class="status">{{$product->category->title}}</span>
+                        <span class="status">
+                            @if (session('lan') == 'en')
+                            {{$product->category->title}}
+                            @else
+                            {{$product->category->title_gr}}
+                            @endif
+                        </span>
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="{{route('productDetail',$product->id)}}">{{$product->title}}</a></h3>
+                        <h3><a href="{{route('productDetail',$product->id)}}">
+                                @if (session('lan') == 'en')
+                                {{$product->title}}
+                                @else
+                                {{$product->title_gr}}
+                                @endif</a>
+                        </h3>
                         @include('frontend.pages.partials._spice')
                         <div class="d-flex">
                             <div class="pricing">

@@ -111,8 +111,12 @@
                                         <th colspan="2" class="text-center">Customer Information</th>
                                     </tr>
                                     <tr>
-                                        <th>Name</th>
-                                        <td>{{$order->user->name}}</td>
+                                        <th>First Name</th>
+                                        <td>{{$order->user->first_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Last Name</th>
+                                        <td>{{$order->user->last_name}}</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
@@ -127,7 +131,11 @@
                                         <td>{{$order->user->home_no}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Street #</th>
+                                        <th>City</th>
+                                        <td>{{$order->user->city}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address</th>
                                         <td>{{$order->user->address}}</td>
                                     </tr>
                                     <tr>
@@ -186,6 +194,7 @@
                                 <tr>
                                     <th>Sr #</th>
                                     <th>Title</th>
+                                    <th>Category</th>
                                     <th>Item Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
@@ -197,6 +206,7 @@
                                 <tr>
                                     <td>{{ $count++ }}</td>
                                     <td>{{ $item->product->title }}</td>
+                                    <td>{{ $item->product->category->title }}</td>
                                     <td> CHF {{$item->product->price}} </td>
                                     <td> x {{$item->quantity}}</td>
                                     <td>CHF {{$item->product->price * $item->quantity}}</td>
