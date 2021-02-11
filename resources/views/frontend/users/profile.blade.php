@@ -74,9 +74,14 @@
                 <div class="modal-body">
                     <div class=" container row">
                         <div class="form-group col-md-6">
-                            <label for="">{{session('lan') == 'en' ? 'Full Name' : 'Vollständiger Name'}}</label>
-                            <input type="text" class="form-control" id="username" name="username"
-                                value="{{$user->name}}" required>
+                            <label for="">{{session('lan') == 'en' ? 'First Name' : 'Vorname'}}</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname"
+                                value="{{$user->first_name}}" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}}</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                value="{{$user->last_name}}" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">{{session('lan') == 'en' ? 'Email' : 'Email'}}</label>
@@ -89,7 +94,7 @@
                                 required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="">{{session('lan') == 'en' ? 'Street' : 'Straße'}}</label>
+                            <label for="">{{session('lan') == 'en' ? 'Address' : 'Adresse'}}</label>
                             <input type="text" class="form-control" id="address" name="address"
                                 value="{{$user->address}}">
                         </div>
@@ -97,6 +102,11 @@
                             <label for="">{{session('lan') == 'en' ? 'House #' : 'Haus #'}}</label>
                             <input type="text" class="form-control" id="house_no" name="house_no"
                                 value="{{$user->home_no}}" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'City' : 'Stadt'}}</label>
+                            <input type="text" class="form-control" id="city" name="city" value="{{$user->city}}"
+                                required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">{{session('lan') == 'en' ? 'Post code' : 'Postleitzahl'}}</label>
