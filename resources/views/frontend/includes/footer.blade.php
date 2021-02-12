@@ -51,9 +51,9 @@
                     <div class="block-23 mb-3">
                         <ul>
                             <li class="mb-2"><span class="icon icon-map-marker"></span><span class="text">Swaad Foods
-                                    Gmbh <br> 3072 Ostermundigen</span></li>
-                            <li class="mb-2"><span class="icon icon-phone"></span><span class="text">031 558 33
-                                    88</span></li>
+                                    Gmbh <br> Bernstraße 95 <br> 3072 Ostermundigen</span></li>
+                            <li class="mb-2"><span class="icon icon-phone"></span><span class="text">+ 031 558 33 88
+                                </span></li>
                             <li><span class="icon icon-envelope"></span><span class="text">hello@swaadbern.ch</span>
                             </li>
                         </ul>
