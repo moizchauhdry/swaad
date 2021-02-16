@@ -456,13 +456,18 @@
                 payment method to accept. The payment methods available are displayed for selection when the order is
                 finalized. Payments made via the website are made to Swaad Foods GmbH.</li>
         </ul>
+        <p style="font-style: italic" class="text-primary">
+            No alcohol may be sold to children and young people under the age of 16. Beer and wine may only be sold to
+            people over the age of 16. Spirits, aperitifs and alcopops may only be sold to people over the age of 18.
+        </p>
         <h5 class="text-primary">CONTACT US
         </h5>
         <p>To resolve a complaint regarding the Site or to receive further information regarding use of the Site, please
             contact us at: </p>
         <p>Swaad Foods Gmbh <br>
+            Bernstraße 95 <br>
             3072 Ostermundigen <br>
-            031 558 33 88 <br>
+            + 031 558 33 88 <br>
             hello@swaadbern.ch <br>
         </p>
     </div>
@@ -915,13 +920,19 @@
                 verfügbaren Zahlungsmethoden werden zur Auswahl angezeigt, wenn der Auftrag abgeschlossen ist. Zahlungen
                 über die Website erfolgen an die Swaad Foods GmbH.</li>
         </ul>
+        <p style="font-style: italic" class="text-primary">
+            Es darf kein Alkohol an Kinder und Jugendliche unter 16 Jahren verkauft werden. Bier und Wein dürfen nur an
+            über 16-Jährige verkauft werden. Spirituosen, Aperitife und Alcopops dürfen nur an über 18-Jährige verkauft
+            werden.
+        </p>
         <h5 class="text-primary">kontaktieren Sie uns
         </h5>
         <p>To resolve a complaint regarding the Site or to receive further information regarding use of the Site, please
             contact us at: </p>
         <p>Swaad Foods Gmbh <br>
+            Bernstraße 95 <br>
             3072 Ostermundigen <br>
-            031 558 33 88 <br>
+            + 031 558 33 88 <br>
             hello@swaadbern.ch <br>
         </p>
     </div>
