@@ -17,11 +17,10 @@ use Validator;
 class CheckoutController extends Controller
 {
     public function index() {
-        $cart = Cart::getContent();
 
+        $cart = Cart::getContent();
         $user = User::where('id',Auth::guard('frontend')->user()->id)->first();
         $postcode = PostalCode::where('postal_code', $user->zip_code)->first();
-
         $cartTotal = floatval(Cart::getSubTotal());
 
         if ($cart->count() > 0) {
@@ -31,7 +30,7 @@ class CheckoutController extends Controller
                 if ($postcode->net_total > $cartTotal ) {
                     return back()->with('WARNING','Your cart total is not enough. Minimum cart total of CHF '.$postcode->net_total.' require to place this order.');
                 } else {
-                    return view ('frontend.pages.checkout');
+                    return view ('frontend.pages.checkout',compact('user'));
                 }
             }
         } else {
@@ -40,8 +39,31 @@ class CheckoutController extends Controller
     }
 
     public function store(Request $request) {
-
+    
         $user = Auth::guard('frontend')->user();
+
+        $request->validate([
+            'chk_first_name' => 'required|max:150',
+            'chk_last_name' => 'required|max:150',
+            'chk_phone_no' => 'required|max:150',
+            'chk_address' => 'required|max:150',
+            'chk_house_no' => 'required|max:150',
+            'chk_city' => 'required|max:150',
+            'chk_post_code' => 'required|max:150',
+        ]);
+            
+        $userData = [
+            'first_name' => $request->chk_first_name,
+            'last_name' => $request->chk_last_name,
+            'phone_no' => $request->chk_phone_no,
+            'address' => $request->chk_address,
+            'home_no' => $request->chk_house_no,
+            'city' => $request->chk_city,
+            'zip_code' => $request->chk_post_code,
+        ];
+
+        $user->update($userData);
+
         $grossTotal = number_format((float)Cart::getSubTotal(), 2, '.', '');
         $netTotal = number_format((float)Cart::getTotal(), 2, '.', '');
         

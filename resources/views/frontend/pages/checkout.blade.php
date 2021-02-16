@@ -26,50 +26,50 @@
                                 <div class="form-group">
                                     <label for="">{{session('lan') == 'en' ? 'First Name' : 'Vorname'}}</label>
                                     <input type="text" class="form-control" name="chk_first_name" placeholder=""
-                                        value="{{Auth::guard('frontend')->user()->first_name}}" disabled>
+                                        value="{{$user->first_name}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}}</label>
                                     <input type="text" class="form-control" name="chk_last_name" placeholder=""
-                                        value="{{Auth::guard('frontend')->user()->last_name}}" disabled>
+                                        value="{{$user->last_name}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">{{session('lan') == 'en' ? 'Phone' : 'Telefon'}}</label>
                                     <input type="text" class="form-control" name="chk_phone_no" placeholder=""
-                                        value="{{Auth::guard('frontend')->user()->phone_no}}" disabled>
+                                        value="{{$user->phone_no}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">{{session('lan') == 'en' ? 'Email' : 'Email'}}</label>
                                     <input type="text" class="form-control" name="chk_email" placeholder=""
-                                        value="{{Auth::guard('frontend')->user()->email}}" disabled>
+                                        value="{{$user->email}}" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label
                                         for="streetaddress">{{session('lan') == 'en' ? 'Address' : 'Adresse'}}</label>
-                                    <input type="text" class="form-control" name="chk_street" placeholder=""
-                                        value="{{Auth::guard('frontend')->user()->address}}" disabled>
+                                    <input type="text" class="form-control" name="chk_address" placeholder=""
+                                        value="{{$user->address}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="streetaddress">{{session('lan') == 'en' ? 'House #' : 'Haus #'}}</label>
                                     <input type="text" class="form-control" name="chk_house_no" placeholder=""
-                                        value="{{Auth::guard('frontend')->user()->home_no}}" disabled>
+                                        value="{{$user->home_no}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="streetaddress">{{session('lan') == 'en' ? 'City' : 'Stadt'}}</label>
                                     <input type="text" class="form-control" name="chk_city" placeholder=""
-                                        value="{{Auth::guard('frontend')->user()->home_no}}" disabled>
+                                        value="{{$user->city}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -77,7 +77,7 @@
                                     <label
                                         for="streetaddress">{{session('lan') == 'en' ? 'Post code' : 'Postleitzahl'}}</label>
                                     <input type="text" class="form-control" name="chk_post_code" placeholder=""
-                                        value="{{Auth::guard('frontend')->user()->zip_code}}" disabled>
+                                        value="{{$user->zip_code}}" disabled>
                                 </div>
                             </div>
                         </div>

@@ -88,12 +88,13 @@ class AuthController extends Controller
         $rules = [
             $this->authConstants['KEY_EMAIL'] => 'required|unique:users|max:191',
             $this->authConstants['KEY_PASSWORD'] => 'required|min:6',
-            $this->userConstants['KEY_NAME'] => 'required|string',
+            $this->userConstants['KEY_FIRST_NAME'] => 'required|string',
+            $this->userConstants['KEY_LAST_NAME'] => 'required|string',
             $this->userConstants['KEY_ADDRESS'] => 'required|string',
             $this->userConstants['KEY_ZIP_CODE'] => 'required',
             $this->userConstants['KEY_PHONE_NO'] => 'required',
             $this->userConstants['KEY_HOME_NO'] => 'required',
-//            $this->userConstants['KEY_PROFILE_IMAGE'] => 'required',
+            $this->userConstants['KEY_CITY'] => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -119,11 +120,13 @@ class AuthController extends Controller
         $data = [
             'email' => $request->get($this->authConstants['KEY_EMAIL']),
             'password' => Hash::make($request->get($this->authConstants['KEY_PASSWORD'])),
-            'name' => $request->get($this->userConstants['KEY_NAME']),
+            'first_name' => $request->get($this->userConstants['KEY_FIRST_NAME']),
+            'last_name' => $request->get($this->userConstants['KEY_LAST_NAME']),
             'zip_code' => $request->get($this->userConstants['KEY_ZIP_CODE']),
             'address' => $request->get($this->userConstants['KEY_ADDRESS']),
             'phone_no' => $request->get($this->userConstants['KEY_PHONE_NO']),
             'home_no' => $request->get($this->userConstants['KEY_HOME_NO']),
+            'city' => $request->get($this->userConstants['KEY_CITY']),
             'access_token' => $token,
         ];
 
@@ -195,12 +198,13 @@ class AuthController extends Controller
     {
 
         $rules = [
-            $this->userConstants['KEY_NAME'] => 'required|string',
+            $this->userConstants['KEY_FIRST_NAME'] => 'required|string',
+            $this->userConstants['KEY_LAST_NAME'] => 'required|string',
             $this->userConstants['KEY_ADDRESS'] => 'required|string',
             $this->userConstants['KEY_ZIP_CODE'] => 'required',
             $this->userConstants['KEY_PHONE_NO'] => 'required',
             $this->userConstants['KEY_HOME_NO'] => 'required',
-//            $this->userConstants['KEY_PROFILE_IMAGE'] => 'required',
+            $this->userConstants['KEY_CITY'] => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -223,11 +227,13 @@ class AuthController extends Controller
         }
 
         $data = [
-            'name' => $request->get($this->userConstants['KEY_NAME']),
+            'first_name' => $request->get($this->userConstants['KEY_FIRST_NAME']),
+            'last_name' => $request->get($this->userConstants['KEY_LAST_NAME']),
             'zip_code' => $request->get($this->userConstants['KEY_ZIP_CODE']),
             'address' => $request->get($this->userConstants['KEY_ADDRESS']),
             'phone_no' => $request->get($this->userConstants['KEY_PHONE_NO']),
             'home_no' => $request->get($this->userConstants['KEY_HOME_NO']),
+            'city' => $request->get($this->userConstants['KEY_CITY']),
         ];
 
         $user->update($data);
