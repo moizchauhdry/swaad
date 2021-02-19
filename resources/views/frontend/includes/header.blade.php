@@ -200,59 +200,78 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class=" container row">
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'First Name' : 'Vorname'}}</label>
-                        <input type="text" class="form-control" id="reg_firstname" name="firstname" value=""
-                            placeholder="" required>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible fade show hidden text-center" role="alert"
+                                id="error_messages">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}}</label>
-                        <input type="text" class="form-control" id="reg_lastname" name="lastname" value=""
-                            placeholder="" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Email' : 'Email'}}</label>
-                        <input type="email" class="form-control" id="reg_email" name="email" value="" placeholder=""
-                            required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Password' : 'Passwort'}}</label>
-                        <input type="password" class="form-control" id="reg_password" name="password" value=""
-                            placeholder="" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Phone' : 'Telefon'}}</label>
-                        <input type="text" class="form-control" id="reg_phone" name="phone" value="" placeholder=""
-                            required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Address' : 'Adresse'}}</label>
-                        <input type="text" class="form-control" id="reg_address" name="address" value="" placeholder="">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'House #' : 'Haus #'}}</label>
-                        <input type="number" class="form-control" id="reg_house_no" name="house_no" value=""
-                            placeholder="" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'City' : 'Stadt'}}</label>
-                        <input type="text" class="form-control" id="reg_city" name="city" value="" placeholder=""
-                            required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">{{session('lan') == 'en' ? 'Post code' : 'Postleitzahl'}}</label>
-                        <input type="number" class="form-control" id="reg_post_code" name="post_code" value=""
-                            placeholder="" required>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <button type="button" class="btn btn-primary float-right" onclick="registerUser()"
-                            id="registerButton">{{session('lan') == 'en' ? 'Register' : 'Registrieren'}}</button>
-                        <button class="btn btn-primary float-right hidden" id="loadingRegisterButton" type="button"
-                            disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            {{session('lan') == 'en' ? 'Loading ... ' : 'Postleitzahl'}}
-                        </button>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'First Name' : 'Vorname'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="reg_firstname" name="firstname" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="reg_lastname" name="lastname" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'Email' : 'Email'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="reg_email" name="email" value="" placeholder=""
+                                required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'Password' : 'Passwort'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="reg_password" name="password" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'Phone' : 'Telefon'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="reg_phone" name="phone" value="" placeholder=""
+                                required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'Address' : 'Adresse'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="reg_address" name="address" value=""
+                                placeholder="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'House #' : 'Haus #'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="reg_house_no" name="house_no" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'City' : 'Stadt'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="reg_city" name="city" value="" placeholder=""
+                                required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">{{session('lan') == 'en' ? 'Post code' : 'Postleitzahl'}} <span
+                                    class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="reg_post_code" name="post_code" value=""
+                                placeholder="" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button type="button" class="btn btn-primary float-right" onclick="registerUser()"
+                                id="registerButton">{{session('lan') == 'en' ? 'Register' : 'Registrieren'}}</button>
+                            <button class="btn btn-primary float-right hidden" id="loadingRegisterButton" type="button"
+                                disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                {{session('lan') == 'en' ? 'Loading ... ' : 'Postleitzahl'}}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -294,8 +313,13 @@
                     $("#loadingRegisterButton").removeClass("hidden");
                 }            
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(errorThrown)
+            error: function (data) {
+                $.each(data.responseJSON.errors, function (key, value) {
+                    $("#registerModal").scrollTop(0);
+                    $('#error_messages').removeClass('hidden');
+                    const error_messages = document.getElementById('error_messages');
+                    error_messages.innerHTML = value;
+                });
             }
         });
     }

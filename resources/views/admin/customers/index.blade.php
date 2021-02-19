@@ -39,7 +39,8 @@
                             <thead>
                                 <tr>
                                     <th>Sr #</th>
-                                    <th>Customer Name</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Post code</th>
@@ -52,7 +53,8 @@
                                 @foreach ($customers as $customer)
                                 <tr>
                                     <td>{{$count++}}</td>
-                                    <td>{{$customer->name}}</td>
+                                    <td>{{$customer->first_name}}</td>
+                                    <td>{{$customer->last_name}}</td>
                                     <td>{{$customer->email}}</td>
                                     <td>{{$customer->phone_no}}</td>
                                     <td>{{$customer->zip_code}}</td>
