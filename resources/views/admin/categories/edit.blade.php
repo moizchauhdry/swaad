@@ -65,6 +65,14 @@
                                         class="w-25 mt-2" />
                                     @endif
                                 </div>
+                                <div class="form-group col-md-3">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="status"
+                                            id="customSwitch1" @if ($category->status == 0) checked @endif>
+                                        <label class="custom-control-label" for="customSwitch1">Deactivate
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->

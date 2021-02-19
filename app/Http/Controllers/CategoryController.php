@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::where('status','1')->orderby('id','DESC')->get();
+        $categories = Category::orderby('id','DESC')->get();
         return view('admin.categories.index',compact('categories') );
     }
 
@@ -117,6 +117,12 @@ class CategoryController extends Controller
             'title_gr' => 'required|string|max:70',
             'image_url'=>'image|mimes:jpg,jpeg,png',
         ]);
+
+        if ($request->has('status')) {
+            $status = 0;
+        } else {
+            $status = 1;
+        }
     
         $slug = strtolower($request->input('title'));
 
@@ -124,6 +130,7 @@ class CategoryController extends Controller
             'title' => $request->input('title'),
             'title_gr' => $request->input('title_gr'),
             'slug' =>  preg_replace('/\s+/', '-', $slug),
+            'status' => $status,
         ];
 
         $category = Category::findOrFail($id);
