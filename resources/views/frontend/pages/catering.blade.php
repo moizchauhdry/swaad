@@ -33,7 +33,7 @@
             <div class="col-md-3 d-flex">
                 <div class="info bg-light p-4">
                     <p><span> {{session('lan') == 'en' ? 'Address:' : 'Adresse:'}}
-                        </span> Bernstrasse 95, Ostermundigen, Switzerland</p>
+                        </span> Bernstrasse 95 <br> Bernstraße 95 <br> Ostermundigen, Switzerland</p>
                 </div>
             </div>
             <div class="col-md-3 d-flex">

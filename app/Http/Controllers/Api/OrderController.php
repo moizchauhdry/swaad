@@ -20,6 +20,7 @@ class OrderController extends Controller
     private $responseConstants;
     private $generalConstants;
     private $orderConstants;
+    private $userConstants;
 
 
     public function __construct()
@@ -27,12 +28,21 @@ class OrderController extends Controller
         $this->responseConstants = Config::get('constants.RESPONSE_CONSTANTS');
         $this->orderConstants = Config::get('constants.ORDER_CONSTANTS');
         $this->generalConstants = Config::get('constants.GENERAL_CONSTANTS');
+        $this->userConstants = Config::get('constants.USER_CONSTANTS');
     }
 
     public function placeOrder(Request $request)
     {
         $response = [];
         $rules = [
+            // USER RULES
+            $this->userConstants['KEY_FIRST_NAME'] => 'required',
+            $this->userConstants['KEY_LAST_NAME'] => 'required',
+            $this->userConstants['KEY_PHONE_NO'] => 'required',
+            $this->userConstants['KEY_HOME_NO'] => 'required',
+            $this->userConstants['KEY_CITY'] => 'required',
+            $this->userConstants['KEY_ADDRESS'] => 'required',
+            // ORDER RULES
             $this->orderConstants['KEY_GROSS_TOTAL'] => 'required',
             $this->orderConstants['KEY_NET_TOTAL'] => 'required',
             $this->orderConstants['KEY_COUPON_CODE'] => 'nullable',
@@ -76,6 +86,18 @@ class OrderController extends Controller
             }
         }
 
+        $userData = [
+            'first_name' => $request->get($this->userConstants['KEY_FIRST_NAME']),
+            'last_name' => $request->get($this->userConstants['KEY_LAST_NAME']),
+            'phone_no' => $request->get($this->userConstants['KEY_PHONE_NO']),
+            'home_no' => $request->get($this->userConstants['KEY_HOME_NO']),
+            'city' => $request->get($this->userConstants['KEY_CITY']),
+            'address' => $request->get($this->userConstants['KEY_ADDRESS']),
+        ];
+        
+        $user->update($userData);
+        $userCheckoutData = User::select('first_name','last_name','phone_no','home_no','city','address')->where('id',$user->id)->first();
+
         $orderData = [
             'net_total' => $request->get($this->orderConstants['KEY_NET_TOTAL']),
             'gross_total' => $request->get($this->orderConstants['KEY_GROSS_TOTAL']),
@@ -86,61 +108,6 @@ class OrderController extends Controller
         ];
 
         $orderData["user_id"] = $user->id;
-
-//        $coupon = null;
-//        $couponDiscount = 0;
-//        $slabDiscount = 0;
-//        $fixUserDiscount = 0;
-//        // check coupon data
-//        if ($request->has($this->orderConstants['KEY_COUPON_CODE']) && $request->get($this->orderConstants['KEY_COUPON_CODE']) != null) {
-//            $coupon = Coupon::where('coupon_code', $request->get($this->orderConstants['KEY_COUPON_CODE']))->first();
-//
-//            if (!$this->_validCoupon($coupon)) {
-//                return response()->json([
-//                    'status' => $this->responseConstants['STATUS_INVALID_COUPON_CODE'],
-//                    'message' => $this->responseConstants['ERROR_INVALID_COUPON_CODE'],
-//                ]);
-//
-//            } else {
-//                $couponDiscount = $request->get($this->orderConstants['KEY_COUPON_DISCOUNT_AMOUNT']);
-//                $orderData['coupon_code'] = $request->get($this->orderConstants['KEY_COUPON_CODE']);
-//                $orderData['coupon_discount_amount'] = $request->get($this->orderConstants['KEY_COUPON_DISCOUNT_AMOUNT']);
-//                $coupon->update(['is_used' => 1]);
-//            }
-//        }
-//
-//        if ($request->has($this->orderConstants['KEY_DISCOUNT_SLAB_ID']) && $request->get($this->orderConstants['KEY_DISCOUNT_AMOUNT']) != null) {
-//            $orderData['discount_id'] = $request->get($this->orderConstants['KEY_DISCOUNT_SLAB_ID']);
-//            $orderData['discount_amount'] = $request->get($this->orderConstants['KEY_DISCOUNT_AMOUNT']);
-//            $slabDiscount = $request->get($this->orderConstants['KEY_DISCOUNT_AMOUNT']);
-//        }
-//
-//        if ($request->has($this->orderConstants['KEY_FIX_DISCOUNT']) && $request->get($this->orderConstants['KEY_FIX_DISCOUNT']) != null) {
-//            $orderData['fix_discount'] = $request->get($this->orderConstants['KEY_FIX_DISCOUNT']);
-//            $fixUserDiscount = $request->get($this->orderConstants['KEY_FIX_DISCOUNT']);
-//        }
-//
-//        if (!empty($couponDiscount) && $couponDiscount > $slabDiscount && $couponDiscount > $fixUserDiscount) {
-//            $orderData['discount_id'] = NULL;
-//            $orderData['discount_amount'] = 0.00;
-//            $orderData['fix_discount'] = 0.00;
-//
-//        } else if (!empty($slabDiscount) && $slabDiscount > $couponDiscount && $slabDiscount > $fixUserDiscount) {
-//            $orderData['coupon_code'] = NULL;
-//            $orderData['coupon_discount_amount'] = 0.00;
-//            $orderData['fix_discount'] = 0.00;
-//
-//        } else if (!empty($fixUserDiscount) && $fixUserDiscount > $couponDiscount && $fixUserDiscount > $slabDiscount) {
-//            $orderData['coupon_code'] = NULL;
-//            $orderData['coupon_discount_amount'] = 0.00;
-//            $orderData['discount_id'] = NULL;
-//            $orderData['discount_amount'] = 0.00;
-//        }
-//
-//        if ($request->has($this->orderConstants['KEY_DELIVERY_CHARGES']) && $request->get($this->orderConstants['KEY_DELIVERY_CHARGES']) != null) {
-//            $orderData['delivery_charges'] = $request->get($this->orderConstants['KEY_DELIVERY_CHARGES']);
-//        }
-
         $order = Order::create($orderData);
 
         if ($order) {
@@ -160,8 +127,6 @@ class OrderController extends Controller
         if ($request->get($this->orderConstants['KEY_PAYMENT_METHOD']) == 1) {
 
             $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
-            // $url = 'https://test.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
-
             $payload = array(
                 'RequestHeader' => array(
                     'SpecVersion' => "1.7",
@@ -203,7 +168,6 @@ class OrderController extends Controller
                 )
             );
 
-
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_HEADER, false);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -234,6 +198,7 @@ class OrderController extends Controller
             $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
             $response['message'] = 'Order placed successfully.';
             $response['RedirectUrl'] = $RedirectUrl;
+            $response['user'] = $userCheckoutData;
             return response()->json($response);
         } else {
             $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
