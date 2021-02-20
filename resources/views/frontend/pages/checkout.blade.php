@@ -21,64 +21,65 @@
                         <legend class="w-auto text-dark"><small>
                                 {{session('lan') == 'en' ? 'Customer Information' : 'Kundeninformation'}}</small>
                         </legend>
-                        <div class="row align-items-end">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">{{session('lan') == 'en' ? 'First Name' : 'Vorname'}}</label>
-                                    <input type="text" class="form-control" name="chk_first_name" placeholder=""
-                                        value="{{$user->first_name}}">
-                                </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="">{{session('lan') == 'en' ? 'First Name' : 'Vorname'}}</label>
+                                <input type="text" class="form-control" name="chk_first_name" placeholder=""
+                                    value="{{$user->first_name}}" maxlength="50" required>
+                                @error('chk_first_name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}}</label>
-                                    <input type="text" class="form-control" name="chk_last_name" placeholder=""
-                                        value="{{$user->last_name}}">
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="">{{session('lan') == 'en' ? 'Last Name' : 'Nachname'}}</label>
+                                <input type="text" class="form-control" name="chk_last_name" placeholder=""
+                                    value="{{$user->last_name}}" maxlength="50" required>
+                                @error('chk_last_name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">{{session('lan') == 'en' ? 'Phone' : 'Telefon'}}</label>
-                                    <input type="text" class="form-control" name="chk_phone_no" placeholder=""
-                                        value="{{$user->phone_no}}">
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="">{{session('lan') == 'en' ? 'Phone' : 'Telefon'}}</label>
+                                <input type="text" class="form-control" name="chk_phone_no" placeholder=""
+                                    value="{{$user->phone_no}}" maxlength="15" required>
+                                @error('chk_phone_no')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">{{session('lan') == 'en' ? 'Email' : 'Email'}}</label>
-                                    <input type="text" class="form-control" name="chk_email" placeholder=""
-                                        value="{{$user->email}}" disabled>
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="">{{session('lan') == 'en' ? 'Email' : 'Email'}}</label>
+                                <input type="text" class="form-control" name="chk_email" placeholder=""
+                                    value="{{$user->email}}" disabled>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label
-                                        for="streetaddress">{{session('lan') == 'en' ? 'Address' : 'Adresse'}}</label>
-                                    <input type="text" class="form-control" name="chk_address" placeholder=""
-                                        value="{{$user->address}}">
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="streetaddress">{{session('lan') == 'en' ? 'Address' : 'Adresse'}}</label>
+                                <input type="text" class="form-control" name="chk_address" placeholder=""
+                                    value="{{$user->address}}" maxlength="50" required>
+                                @error('chk_address')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="streetaddress">{{session('lan') == 'en' ? 'House #' : 'Haus #'}}</label>
-                                    <input type="text" class="form-control" name="chk_house_no" placeholder=""
-                                        value="{{$user->home_no}}">
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="streetaddress">{{session('lan') == 'en' ? 'House #' : 'Haus #'}}</label>
+                                <input type="text" class="form-control" name="chk_house_no" placeholder=""
+                                    value="{{$user->home_no}}" maxlength="50" required>
+                                @error('chk_house_no')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="streetaddress">{{session('lan') == 'en' ? 'City' : 'Stadt'}}</label>
-                                    <input type="text" class="form-control" name="chk_city" placeholder=""
-                                        value="{{$user->city}}">
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="streetaddress">{{session('lan') == 'en' ? 'City' : 'Stadt'}}</label>
+                                <input type="text" class="form-control" name="chk_city" placeholder=""
+                                    value="{{$user->city}}" maxlength="50" required>
+                                @error('chk_city')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label
-                                        for="streetaddress">{{session('lan') == 'en' ? 'Post code' : 'Postleitzahl'}}</label>
-                                    <input type="text" class="form-control" name="chk_post_code" placeholder=""
-                                        value="{{$user->zip_code}}" disabled>
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label
+                                    for="streetaddress">{{session('lan') == 'en' ? 'Post code' : 'Postleitzahl'}}</label>
+                                <input type="text" class="form-control" name="chk_post_code" placeholder=""
+                                    value="{{$user->zip_code}}" disabled>
                             </div>
                         </div>
                     </fieldset>
@@ -113,7 +114,7 @@
                                     <label for="">{{session('lan') == 'en' ? 'Delivery Address' : 'Lieferadresse'}}
                                         <small>(optional)</small></label>
                                     <input type="text" class="form-control" name="dlv_address" id="dlv_address"
-                                        placeholder="" value="{{old('dlv_address')}}">
+                                        placeholder="" value="{{old('dlv_address')}}" maxlength="150">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -121,7 +122,7 @@
                                     <label for="">{{session('lan') == 'en' ? 'Delivery Phone' : 'Liefertelefon'}}
                                         <small>(optional)</small></label>
                                     <input type="text" class="form-control" name="dlv_phone" id="dlv_phone"
-                                        placeholder="" value="{{old('dlv_phone')}}">
+                                        placeholder="" value="{{old('dlv_phone')}}" maxlength="150">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -129,8 +130,8 @@
                                     <label
                                         for="streetaddress">{{session('lan') == 'en' ? 'Order Notes' : 'Bestellhinweise'}}
                                         <small>(optional)</small></label>
-                                    <textarea name="comments" id="" cols="30" rows="8"
-                                        class="form-control">{{old('comments')}}</textarea>
+                                    <textarea name="comments" id="" cols="30" rows="8" class="form-control"
+                                        maxlength="150">{{old('comments')}}</textarea>
                                 </div>
                             </div>
                         </div>

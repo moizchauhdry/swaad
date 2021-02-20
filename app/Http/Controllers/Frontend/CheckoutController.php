@@ -42,14 +42,34 @@ class CheckoutController extends Controller
     
         $user = Auth::guard('frontend')->user();
 
-        $request->validate([
+        $rules = [
+            // USER VALIDATIONS
             'chk_first_name' => 'required|max:150',
             'chk_last_name' => 'required|max:150',
             'chk_phone_no' => 'required|numeric',
             'chk_address' => 'required|max:150',
-            'chk_house_no' => 'required|max:150',
+            'chk_house_no' => 'required|numeric',
             'chk_city' => 'required|max:150',
-        ]);
+            // ORDER VALIDATIONS
+            'delivery_address' => 'nullable|max:150',
+            'delivery_phone' => 'nullable|max:150',
+            'order_notes' => 'nullable|max:150',
+        ];
+
+        $customMessages = [
+            // Required
+            'chk_first_name.required' => 'The first name field is required.',
+            'chk_last_name.required' => 'The last name field is required.',
+            'chk_phone_no.required' => 'The phone field is required.',
+            'chk_address.required' => 'The address field is required.',
+            'chk_house_no.required' => 'The house # field is required.',
+            'chk_city.required' => 'The city field is required.',
+            // Numeric
+            'chk_phone_no.numeric' => 'The phone must be a number.',
+            'chk_house_no.numeric' => 'The house # must be a number.',
+        ];
+    
+        $this->validate($request, $rules, $customMessages);
             
         $userData = [
             'first_name' => $request->chk_first_name,
