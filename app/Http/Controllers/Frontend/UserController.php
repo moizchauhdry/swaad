@@ -20,13 +20,12 @@ class UserController extends Controller
     }
 
     public function updateProfile(Request $request) {
-
+        
         $user = Auth::guard('frontend')->user();
 
         $this->validate($request, [
             'firstname' => 'required|max:150',
             'lastname' => 'required|max:150',
-            'email' => 'required|string|email|max:150|unique:users,email,'.$user->id,
             'phone' => 'required|numeric',
             'address' => 'required|max:150',
             'house_no' => 'required|numeric',
@@ -37,7 +36,6 @@ class UserController extends Controller
         $data = [
             'first_name' => $request->input('firstname'),
             'last_name' => $request->input('lastname'),
-            'email' => $request->input('email'),
             'phone_no' => $request->input('phone'),
             'address' => $request->input('address'),
             'home_no' => $request->input('house_no'),

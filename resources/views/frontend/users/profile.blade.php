@@ -86,7 +86,7 @@
                         <div class="form-group col-md-6">
                             <label for="">{{session('lan') == 'en' ? 'Email' : 'Email'}}</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}"
-                                required>
+                                disabled>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">{{session('lan') == 'en' ? 'Phone' : 'Telefon'}}</label>

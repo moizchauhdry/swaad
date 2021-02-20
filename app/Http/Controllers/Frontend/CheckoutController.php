@@ -45,11 +45,10 @@ class CheckoutController extends Controller
         $request->validate([
             'chk_first_name' => 'required|max:150',
             'chk_last_name' => 'required|max:150',
-            'chk_phone_no' => 'required|max:150',
+            'chk_phone_no' => 'required|numeric',
             'chk_address' => 'required|max:150',
             'chk_house_no' => 'required|max:150',
             'chk_city' => 'required|max:150',
-            'chk_post_code' => 'required|max:150',
         ]);
             
         $userData = [
@@ -59,7 +58,6 @@ class CheckoutController extends Controller
             'address' => $request->chk_address,
             'home_no' => $request->chk_house_no,
             'city' => $request->chk_city,
-            'zip_code' => $request->chk_post_code,
         ];
 
         $user->update($userData);
