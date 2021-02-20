@@ -41,10 +41,12 @@ class UserResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        // return (new MailMessage)
+        //     ->line('You are receiving this email because we recieved a password reset request for your account.')
+        //     ->action('Reset Password', route('userPasswordReset', $this->token))
+        //     ->line('If you did not request a password reset, ignore this email.');
         return (new MailMessage)
-            ->line('You are receiving this email because we recieved a password reset request for your account.')
-            ->action('Reset Password', route('userPasswordReset', $this->token))
-            ->line('If you did not request a password reset, ignore this email.');
+        ->view('auth.emails.reset-password', ['token' => $this->token]);
     }
 
     /**
