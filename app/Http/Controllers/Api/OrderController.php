@@ -196,13 +196,27 @@ class OrderController extends Controller
             $body = $response1['body'];
             $RedirectUrl = $body['RedirectUrl'];
             $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
-            $response['message'] = 'Order placed successfully.';
+            
+            if ($request->lan_type == 0) {
+                $response['message'] = 'Thankyou! Your order has been placed successfully.';
+            } else {
+                $response['message'] = 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.';
+            }
+            
             $response['RedirectUrl'] = $RedirectUrl;
             $response['user'] = $userCheckoutData;
             return response()->json($response);
+
         } else {
+            $response['user'] = $userCheckoutData;
             $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
-            $response['message'] = 'Order placed successfully.';
+            
+            if ($request->lan_type == 0) {
+                $response['message'] = 'Thankyou! Your order has been placed successfully.';
+            } else {
+                $response['message'] = 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.';
+            }
+            
             return response()->json($response);
         }
     }
@@ -223,7 +237,7 @@ class OrderController extends Controller
             ]);
         }
         $user = User::where('access_token', $request->header()['authorization'][0])->first();
-        $orders = Order::where(['user_id' => $user->id, 'order_status' => $request->get($this->orderConstants['KEY_STATUS'])])->get();
+        $orders = Order::orderBy('id','DESC')->where(['user_id' => $user->id, 'order_status' => $request->get($this->orderConstants['KEY_STATUS'])])->get();
         $response['status'] = $this->responseConstants['STATUS_SUCCESS'];
         $response['message'] = 'Success';
         $response['orders'] = $orders;
