@@ -55,7 +55,7 @@
                                     <tr>
                                         <th>Order Time</th>
                                         <td>
-                                            {{date('h:i:s A', strtotime($order->created_at))}}
+                                            {{date('H:i:s', strtotime($order->created_at))}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -87,7 +87,7 @@
                                         <tr>
                                             <th>Delivery Time</th>
                                             <td>
-                                                {{date('h:i:s A', strtotime($order->delivery_time))}}
+                                                {{date('H:i:s', strtotime($order->delivery_time))}}
                                             </td>
                                         </tr>
                                         <tr>

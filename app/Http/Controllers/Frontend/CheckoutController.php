@@ -91,14 +91,14 @@ class CheckoutController extends Controller
             $orderNotes = $request->comments;
         }
 
-        $timestamp = strtotime(date("h:i")) + 60*40;
+        $timestamp = strtotime(date("h:i")) + 60*50;
         $time = date('H:i', $timestamp);
         $currentDate = date("Y-m-d");
 
         if ($request->dlv_date == $currentDate) {
             if ($request->dlv_time >= $time) {
             } else {
-                return redirect()->back()->withInput($request->input())->with('WARNING','Please select time with a gap of 40 minutes');
+                return redirect()->back()->withInput($request->input())->with('WARNING','Please select time with a gap of 50 minutes');
             }
         } else { 
             if ($request->dlv_date >= $currentDate) {

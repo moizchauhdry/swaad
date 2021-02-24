@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-md-6">
                                 <?php
-                                    $timestamp = strtotime(date("H:i")) + 60*40;
+                                    $timestamp = strtotime(date("H:i")) + 60*55;
                                     $time = date("H:i", $timestamp);
                                 ?>
                                 <div class="form-group">
