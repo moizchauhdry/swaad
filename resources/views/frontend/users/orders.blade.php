@@ -17,23 +17,23 @@
         @if ($orders->count() > 0)
         <ul class=" nav nav-pills nav-fill" style="padding: 10px">
             <li class="nav-item">
-                <button class="btn btn-primary btn-secondary order_status shadow rounded" id="order_status_0"
+                <button class="btn btn-primary btn-secondary order_status shadow rounded m-2" id="order_status_0"
                     data-id="0">{{session('lan') == 'en' ? 'Pending' : 'steht aus'}}</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-secondary order_status shadow rounded" id="order_status_1"
+                <button class="btn btn-secondary order_status shadow rounded m-2" id="order_status_1"
                     data-id="1">{{session('lan') == 'en' ? 'Processing' : 'wird bearbeitet'}}</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-secondary order_status shadow rounded" id="order_status_2"
+                <button class="btn btn-secondary order_status shadow rounded m-2" id="order_status_2"
                     data-id="2">{{session('lan') == 'en' ? 'Shipping' : 'Versand'}}</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-secondary order_status shadow rounded" id="order_status_3"
+                <button class="btn btn-secondary order_status shadow rounded m-2" id="order_status_3"
                     data-id="3">{{session('lan') == 'en' ? 'Delivered' : 'Geliefert'}}</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-secondary order_status shadow rounded" id="order_status_4"
+                <button class="btn btn-secondary order_status shadow rounded m-2" id="order_status_4"
                     data-id="4">{{session('lan') == 'en' ? 'Cancelled' : 'Abgebrochen'}}</button>
             </li>
         </ul>
@@ -108,6 +108,17 @@
                 $("#orders_data").html(response);
 
             },
+        });
+    });
+
+    $(function () {
+        $("#orderTable").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            "searching":false,
+            "paging":   false,
+            "ordering": false,
+            "info":     false
         });
     });
     

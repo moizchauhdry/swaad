@@ -14,45 +14,47 @@
 
 <section class="ftco-section">
     <div class="container">
-        <div class="card-deck">
-            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
-                <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-user"
-                            style="font-size: 50px; color:#f45318; color:#f45318"></i>
-                    </h5>
-                    <p class="card-text text-center">
-                        <a data-target="#profileModal" data-toggle="modal" class="MainNavText" id="MainNavHelp"
-                            href="#profileModal">{{session('lan') == 'en' ? 'Profile' : 'Profil'}}</a>
-                    </p>
+        <div class="col-md-12">
+            <div class="card-deck align-items-center">
+                <div class="card shadow border-light mb-3 col-xs-12 col-sm-12" style="max-width: 18rem; height:130px">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title text-center"><i class="far fa-user"
+                                style="font-size: 50px; color:#f45318; color:#f45318"></i>
+                        </h5>
+                        <p class="card-text text-center">
+                            <a data-target="#profileModal" data-toggle="modal" class="MainNavText" id="MainNavHelp"
+                                href="#profileModal">{{session('lan') == 'en' ? 'Profile' : 'Profil'}}</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
-                <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="fas fa-list-ul"
-                            style="font-size: 50px; color:#f45318"></i>
-                    </h5>
-                    <p class="card-text text-center"><a
-                            href="{{route('user.orders')}}">{{session('lan') == 'en' ? 'My Orders' : 'Meine Bestellungen'}}</a>
-                    </p>
+                <div class="card shadow border-light mb-3 col-xs-12 col-sm-12" style="max-width: 18rem; height:130px">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title text-center"><i class="fas fa-list-ul"
+                                style="font-size: 50px; color:#f45318"></i>
+                        </h5>
+                        <p class="card-text text-center"><a
+                                href="{{route('user.orders')}}">{{session('lan') == 'en' ? 'My Orders' : 'Meine Bestellungen'}}</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
-                <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-star"
-                            style="font-size: 50px; color:#f45318"></i>
-                    </h5>
-                    <p class="card-text text-center"><a
-                            href="{{route('myReviews')}}">{{session('lan') == 'en' ? 'My Reviews' : 'Meine Bewertungen'}}</a>
-                    </p>
+                <div class="card shadow border-light mb-3 col-xs-12 col-sm-12" style="max-width: 18rem; height:130px">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title text-center"><i class="far fa-star"
+                                style="font-size: 50px; color:#f45318"></i>
+                        </h5>
+                        <p class="card-text text-center"><a
+                                href="{{route('myReviews')}}">{{session('lan') == 'en' ? 'My Reviews' : 'Meine Bewertungen'}}</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="card shadow border-light mb-3" style="max-width: 18rem; height:130px">
-                <div class="card-body text-dark">
-                    <h5 class="card-title text-center"><i class="far fa-comment-dots"
-                            style="font-size: 50px; color:#f45318"></i></h5>
-                    <p class="card-text text-center"><a
-                            href="{{route('toReviews')}}">{{session('lan') == 'en' ? 'To Reviews' : 'Zu Bewertungen'}}</a>
-                    </p>
+                <div class="card shadow border-light mb-3 col-xs-12 col-sm-12" style="max-width: 18rem; height:130px">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title text-center"><i class="far fa-comment-dots"
+                                style="font-size: 50px; color:#f45318"></i></h5>
+                        <p class="card-text text-center"><a
+                                href="{{route('toReviews')}}">{{session('lan') == 'en' ? 'To Reviews' : 'Zu Bewertungen'}}</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

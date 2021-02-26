@@ -11,32 +11,30 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="{{asset('public/frontend/css/open-iconic-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/animate.css')}}">
-
     <link rel="stylesheet" href="{{asset('public/frontend/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/magnific-popup.css')}}">
-
     <link rel="stylesheet" href="{{asset('public/frontend/css/aos.css')}}">
-
     <link rel="stylesheet" href="{{asset('public/frontend/css/ionicons.min.css')}}">
-
     <link rel="stylesheet" href="{{asset('public/frontend/css/bootstrap-datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/jquery.timepicker.css')}}">
-
-
     <link rel="stylesheet" href="{{asset('public/frontend/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}">
-
     <!-- MY CUSTOMS -->
     <link rel="stylesheet" href="{{asset('public/frontend/custom/custom.css')}}">
     <link href="{{asset('public/frontend/plugins/fontawesome/css/all.css')}}" rel="stylesheet">
     <link rel="icon" href="{{asset('public/frontend/images/favicon.png')}}" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <link rel="stylesheet" href="{{asset('public/frontend/custom/responsive.css?v=1.0')}}">
+    <!-- DataTables -->
+    <link rel="stylesheet"
+        href="{{asset('public/dashboard/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet"
+        href="{{asset('public/dashboard/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
 
     <style>
         .hidden {
@@ -74,7 +72,6 @@
     </script>
     <script src="{{asset('public/frontend/js/google-map.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
     <script type="text/javascript">
@@ -110,6 +107,14 @@
         var lan = $("#language").val();
         $( "#changeLanguageForm" ).submit();
     });
+    </script>
+
+    <!-- DataTables -->
+    <script src="{{asset('public/dashboard/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('public/dashboard/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('public/dashboard/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}">
+    </script>
+    <script src="{{asset('public/dashboard/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}">
     </script>
 
     @yield('scripts')

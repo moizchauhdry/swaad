@@ -16,49 +16,28 @@
     <div class="container">
         @if (Cart::getContent()->count() > 0)
         <div class="row">
-            <div class="col-md-12 ftco-animate">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class="thead-primary">
-                            <tr class="text-center">
-                                <th>{{session('lan') == 'en' ? 'Item' : 'Artikel'}}</th>
-                                <th>{{session('lan') == 'en' ? 'Price' : 'Preis'}}</th>
-                                <th>{{session('lan') == 'en' ? 'Quantity' : 'Menge'}}</th>
-                                <th>{{session('lan') == 'en' ? 'Total' : 'Gesamt'}}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (Cart::getContent() as $product)
-                            <tr class="text-center">
-
-                                <td class="product-name">
-                                    <h3>{{$product->name}}</h3>
-                                    <p>{{$product->description}}</p>
-                                </td>
-
-                                <td class="price"> CHF {{ number_format((float)$product->price, 2, '.', '')}}</td>
-
-                                <td class="quantity">
-                                    x {{$product->quantity}}
-                                </td>
-
-                                <td class="total">
-                                    CHF {{ $product->price * $product->quantity}}
-                                </td>
-
-                                <td class="product-remove"><a href="#"
-                                        onclick="removeFromCart('{{$product->id}}')"><span
-                                            class="ion-ios-close"></span></a></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+            <div class="col-md-8">
+                <ul class="list-unstyled">
+                    @foreach (Cart::getContent() as $item)
+                    <?php
+                        $product = App\Product::where('id',$item->id)->first();
+                    ?>
+                    <li class="media">
+                        <img src="{{asset('storage/app/public/'.$product->image_url)}}" class="mr-3 w-25" alt="...">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">{{$product->title}}</h5>
+                            {{$product->description}} <br>
+                            <b>Quantity :</b> x {{$item->quantity}} <br>
+                            <b>Price :</b> CHF {{ $item->price * $item->quantity}} <br>
+                            <a href="#" class="text-danger float-right" onclick="removeFromCart('{{$product->id}}')">
+                                <span class="ion-ios-close"></span>&nbsp;Remove</a>
+                        </div>
+                    </li>
+                    <hr>
+                    @endforeach
+                </ul>
             </div>
-        </div>
-        <div class="row justify-content-end">
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+            <div class="col-md-4">
                 <div class="cart-total mb-3">
                     <h3> {{session('lan') == 'en' ? 'Cart Totals' : 'Warenkorbsummen'}}</h3>
                     <p class="d-flex">
@@ -79,7 +58,7 @@
                         <span>CHF {{ number_format((float)Cart::getTotal(), 2, '.', '')}}</span>
                     </p>
                 </div>
-                <p>
+                <p class="text-center">
                     <a href="{{route('checkout')}}"
                         class="btn btn-primary py-3 px-4">{{session('lan') == 'en' ? 'Proceed to Checkout' : 'Zur Kasse'}}
                     </a>
@@ -118,5 +97,16 @@
             }
         });
     }
+
+    $(function () {
+        $("#cartTable").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            "searching":false,
+            "paging":   false,
+            "ordering": false,
+            "info":     false
+        });
+    });
 </script>
 @endsection
