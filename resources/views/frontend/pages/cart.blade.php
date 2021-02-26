@@ -25,8 +25,13 @@
                     <li class="media">
                         <img src="{{asset('storage/app/public/'.$product->image_url)}}" class="mr-3 w-25" alt="...">
                         <div class="media-body">
+                            @if (session('lan') == 'en')
                             <h5 class="mt-0 mb-1">{{$product->title}}</h5>
                             {{$product->description}} <br>
+                            @else
+                            <h5 class="mt-0 mb-1">{{$product->title_gr}}</h5>
+                            {{$product->description_gr}} <br>
+                            @endif
                             <b>Quantity :</b> x {{$item->quantity}} <br>
                             <b>Price :</b> CHF {{ $item->price * $item->quantity}} <br>
                             <a href="#" class="text-danger float-right" onclick="removeFromCart('{{$product->id}}')">
