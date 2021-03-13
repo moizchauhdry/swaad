@@ -66,8 +66,7 @@
                                         <option value="" selected>Select ... </option>
                                         @foreach ($categories as $category)
                                         <option @if ($category->id == $product->category_id) selected @endif
-                                            value="{{$category->id}}" selected>
-                                            {{$category->title}}
+                                            value="{{$category->id}}">{{$category->title}}
                                         </option>
                                         @endforeach
                                     </select>
