@@ -45,6 +45,10 @@ class OrderController extends Controller
             );
             $fields = array(
                 'to'=>$key,
+                "notification" => [
+                    "body" => "Notification from swaad",
+                    "title" => "Swaad Foods Gmbh",
+                ],
                 'data'=>array(
                     'title'=>"Swaad Foods Gmbh",
                     'order_status'=>$order->order_status,
