@@ -23,7 +23,8 @@ class Order extends Model
         'order_notes',
         'payment_status',
         'payment_method',
-        'created_at'
+        'created_at',
+        'order_lang',
     ];
 
     public function user()

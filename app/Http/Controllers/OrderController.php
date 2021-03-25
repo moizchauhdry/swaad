@@ -33,6 +33,34 @@ class OrderController extends Controller
         
         $order->update($data);
 
+        if ($order->order_status == 0) {
+            $orderStatusEng = 'Pending';
+        } elseif($order->order_status == 1) {
+            $orderStatusEng = 'Processing';
+        } elseif($order->order_status == 2) {
+            $orderStatusEng = 'Shipped';
+        } elseif($order->order_status == 3) {
+            $orderStatusEng = 'Delivered';
+        } elseif($order->order_status == 4) {
+            $orderStatusEng = 'Cancelled';
+        } else {
+            $orderStatusEng = '';
+        }
+
+        if ($order->order_status == 0) {
+            $orderStatusDe = 'Ausstehend';
+        } elseif($order->order_status == 1) {
+            $orderStatusDe = 'Verarbeitung';
+        } elseif($order->order_status == 2) {
+            $orderStatusDe = 'Versand ';
+        } elseif($order->order_status == 3) {
+            $orderStatusDe = 'Geliefert';
+        } elseif($order->order_status == 4) {
+            $orderStatusDe = 'Abgebrochen';
+        } else {
+            $orderStatusDe = '';
+        }
+
         // PUSH NOTIFICATIONS
         $path_to_fcm = 'https://fcm.googleapis.com/fcm/send';
         $server_key="AAAAyQagDtc:APA91bF7Ed0IsRaOKquk3vS9p8GKdRi8X352hUdYQpVGuEZUwVLHugOPDvFwNogBaMXNJmYdhdwEzRxKaHrL9ok-3bGTb6v8HDmOwyRKpjswM-mPWuDDU0tPMxtfsHmvk3JH1TkC3Vw4";
@@ -43,18 +71,35 @@ class OrderController extends Controller
                 'Authorization:key='.$server_key,
                 'Content-Type:application/json'
             );
-            $fields = array(
-                'to'=>$key,
-                "notification" => [
-                    "body" => "Notification from swaad",
-                    "title" => "Swaad Foods Gmbh",
-                ],
-                'data'=>array(
-                    'title'=>"Swaad Foods Gmbh",
-                    'order_status'=>$order->order_status,
-                    'order_id'=>$order->id,
-                )
-            );
+
+            if ($order->order_lang == 1) {
+                $fields = array(
+                    'to'=>$key,
+                    "notification" => [
+                        "body" => "Ihre Bestellung ist " .$orderStatusDe,
+                        "title" => "Swaad Foods Gmbh",
+                    ],
+                    'data'=>array(
+                        'title'=>"Swaad Foods Gmbh",
+                        'order_status'=>$order->order_status,
+                        'order_id'=>$order->id,
+                    )
+                );
+            } else {
+                $fields = array(
+                    'to'=>$key,
+                    "notification" => [
+                        "body" => "Your order status is " .$orderStatusEng,
+                        "title" => "Swaad Foods Gmbh",
+                    ],
+                    'data'=>array(
+                        'title'=>"Swaad Foods Gmbh",
+                        'order_status'=>$order->order_status,
+                        'order_id'=>$order->id,
+                    )
+                );
+            }
+            
             $payload = json_encode($fields);
             $curl_session = curl_init();
             curl_setopt($curl_session, CURLOPT_URL,$path_to_fcm);
@@ -67,7 +112,6 @@ class OrderController extends Controller
             echo $result = curl_exec($curl_session);	
             curl_close($curl_session);
         }
-        // PUSH NOTIFICATIONS
 
         return redirect()->back()->with('success','Status Updated Successfully');
     }

@@ -32,7 +32,7 @@ class OrderController extends Controller
     }
 
     public function placeOrder(Request $request)
-    {
+    {        
         $response = [];
         $rules = [
             // USER RULES
@@ -55,6 +55,7 @@ class OrderController extends Controller
             $this->orderConstants['KEY_PRODUCTS'] => 'required|array',
             $this->orderConstants['KEY_PRODUCTS'] . '.*.' . $this->orderConstants['KEY_PRODUCT_ID'] => 'required',
             $this->orderConstants['KEY_PRODUCTS'] . '.*.' . $this->orderConstants['KEY_PRODUCT_QUANTITY'] => 'required',
+            $this->orderConstants['KEY_ORDER_LANG'] => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -105,11 +106,12 @@ class OrderController extends Controller
             'delivery_date' => $request->get($this->orderConstants['KEY_DELIVERY_DATE']),
             'order_notes' => $request->get($this->orderConstants['KEY_ORDER_NOTES']),
             'payment_method' => $request->get($this->orderConstants['KEY_PAYMENT_METHOD']),
+            'order_lang' => $request->get($this->orderConstants['KEY_ORDER_LANG']),
         ];
 
         $orderData["user_id"] = $user->id;
         $order = Order::create($orderData);
-
+        
         if ($order) {
             foreach ($request->get($this->orderConstants['KEY_PRODUCTS']) as $product) {
                 $productDB = Product::find($product[$this->orderConstants['KEY_PRODUCT_ID']]);

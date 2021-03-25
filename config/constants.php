@@ -82,6 +82,7 @@ return [
         'KEY_PRODUCT_QUANTITY' => 'product_quantity',
         'KEY_IP_ADDRESS' => 'ip_address',
         'KEY_ORDER_NOTES' => 'order_notes',
+        'KEY_ORDER_LANG' => 'order_lang',
     ],
     'REVIEW_CONSTANTS' => [
         'KEY_PRODUCT_ID' => 'product_id',
