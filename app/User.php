@@ -12,6 +12,9 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
+    protected $casts = [
+        'zip_code' => 'string',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -70,6 +73,5 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->notify(new UserResetPasswordNotification($token));
     }
-
 
 }
