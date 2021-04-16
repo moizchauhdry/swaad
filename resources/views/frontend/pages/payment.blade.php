@@ -23,6 +23,7 @@
                 <p class="text-danger">Transaction cancel or fail. Please try again later.</p>
                 @endif
 
+                <a href="{{route('user.orders')}}" class="btn btn-primary">My Orders</a>
                 <a href="{{route('products')}}" class="btn btn-primary">Continue Shopping</a>
             </div>
         </div>

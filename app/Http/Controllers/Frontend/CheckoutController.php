@@ -95,8 +95,10 @@ class CheckoutController extends Controller
         $time = date('H:i', $timestamp);
         $currentDate = date("Y-m-d");
 
+        $requestTime = date('h:i:s a', strtotime($request->dlv_time));
+
         if ($request->dlv_date == $currentDate) {
-            if ($request->dlv_time >= $time) {
+            if ($requestTime >= $time) {
             } else {
                 return redirect()->back()->withInput($request->input())->with('WARNING','Please select time with a gap of 50 minutes');
             }
@@ -119,17 +121,23 @@ class CheckoutController extends Controller
             'payment_method' => $request->chk_payment_method,
         ];
 
-        $order = Order::create($orderData);
+        if ($netTotal > 0) {
+            $order = Order::create($orderData);
 
-        foreach(Cart::getContent() as $item) {
-            $orderDetail = OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $item->id,
-                'quantity' => $item->quantity,
-            ]);
+            foreach(Cart::getContent() as $item) {
+                $orderDetail = OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item->id,
+                    'quantity' => $item->quantity,
+                ]);
+            }
+    
+            // Cart::clear();
+
+        } else {
+            return redirect()->route('user.orders')->with('WARNING','This order has already been processed.');
         }
-
-        Cart::clear();
+        
         
         /**
         *****************************************************************************
@@ -208,15 +216,24 @@ class CheckoutController extends Controller
             
             if ($request->chk_payment_method == 1) {
                 if ($response['status'] == 200) {
+
+                    Cart::clear();
+
                     $body = $response['body'];
                     $Redirect = $body['RedirectUrl'];
 
                     return redirect($Redirect);
                 } else {
-                    return redirect()->route('index')->with('ERROR','Something Went Wrong. Please Try Again Later.');
+
+                    $order->delete();
+                
+                    return redirect()->route('checkout')->with('ERROR','Payment cannot process at this moment. Please order again in a few seconds.');
                 }
             } else {
-                return redirect()->route('index')->with('SUCCESS',session('lan') == 'en' ? 'Thankyou! Your order has been placed successfully.' : 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.');
+
+                Cart::clear();
+
+                return redirect()->route('user.orders')->with('SUCCESS',session('lan') == 'en' ? 'Thankyou! Your order has been placed successfully.' : 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.');
             }
     }
 

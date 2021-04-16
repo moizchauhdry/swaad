@@ -92,6 +92,17 @@
                 <li class="nav-item {{(Route::currentRouteName() == 'contact') ? 'active' : ''}}"><a
                         href="{{route('contact')}}"
                         class="nav-link">{{session('lan') == 'en' ? 'Contact' : 'Kontakt'}}</a></li>
+
+                @if (Auth::guard('frontend')->check())
+                <li class="nav-item {{(Route::currentRouteName() == 'user.profile') ? 'active' : ''}}"><a
+                        href="{{route('user.profile')}}" class="nav-link">{{session('lan') == 'en' ? 'My Account' : 'Mein Konto
+                    '}}</a></li>
+
+                <li class="nav-item {{(Route::currentRouteName() == 'user.orders') ? 'active' : ''}}"><a
+                        href="{{route('user.orders')}}" class="nav-link">{{session('lan') == 'en' ? 'My Orders' : 'Meine Bestellungen
+                        '}}</a></li>
+                @endif
+
                 <li
                     class="nav-item dropdown {{(Route::currentRouteName() == 'reservation' || Route::currentRouteName() == 'privacy' || Route::currentRouteName() == 'catering'|| Route::currentRouteName() == 'about') ? 'active' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"

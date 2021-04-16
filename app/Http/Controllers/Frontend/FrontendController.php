@@ -129,7 +129,7 @@ class FrontendController extends Controller
         $product = Product::find($id);
         $products = Product::where('status','1')->get();
         $relatedProducts = Product::where('status','1')->where('category_id',$product->category->id)->where('id','!=',$product->id)->take(8)->inRandomOrder()->get();
-        $reviews = Review::orderBy('created_at','DESC')->where('product_id',$product->id)->get();
+        $reviews = Review::orderBy('created_at','DESC')->where('product_id',$product->id)->where('is_approved',1)->get();
 
         $reviewStarCount = Review::where('product_id',$product->id)->get();
         

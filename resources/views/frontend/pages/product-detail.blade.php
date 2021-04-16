@@ -370,7 +370,8 @@ $unchecked_star = 5 - $average_star;
                                                 @endfor
                                         </span>
                                     </span>
-                                    <div class="meta">by {{$review->user->name}}</div>
+                                    <div class="meta">by {{$review->user->first_name}} {{$review->user->last_name}}
+                                    </div>
                                     @if ($review->comment != NULL)
                                     <p class="text-dark">{{$review->comment}}</p>
                                     @endif
