@@ -12,6 +12,10 @@ Route::get('test-print',function() {
     return view('test-print');
 });
 
+Route::get('invoice',function() {
+    return view('frontend.emails.invoice');
+});
+
 Route::get('/', 'Frontend\FrontendController@index')->name('index');
 Route::group(['prefix'=>'user'],function() {
     Route::post('/login','Frontend\FrontendController@login')->name('user.login');

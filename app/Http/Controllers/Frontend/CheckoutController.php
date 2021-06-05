@@ -13,6 +13,7 @@ use App\PostalCode;
 use Cart;
 use Auth;
 use Validator;
+use Mail;
 
 class CheckoutController extends Controller
 {
@@ -149,92 +150,104 @@ class CheckoutController extends Controller
         // $url = 'https://test.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
 
         $payload = array(
-                'RequestHeader' => array(
-                    'SpecVersion' => "1.7",
-                    'CustomerId' => env('PAYMENT_CUSTOMER_ID'),
-                    'RequestId' => "SWAAD",
-                    'RetryIndicator' => 0,
-                    'ClientInfo' => array(
-                        'ShopInfo' => "SWAAD",
-                        'OsInfo' => "SWAAD"
-                    )
-                ),
-                'TerminalId' => env('PAYMENT_TERMINAL_ID'),
-                'PaymentMethods' => array("DIRECTDEBIT","VISA","MASTERCARD","DINERS","MAESTRO"),
-                'Payment' => array(
-                'Amount' => array(
-                    'Value' => (float)$order->net_total * 100,
-                    'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
-                ),
-                'OrderId' => $order->id,
-                'PayerNote' => "ONLINE FOOD ORDER",
-                'Description' => $orderNotes
-                ),
-                'Payer' => array(
-                    'IpAddress' => "192.168.178.1",
-                    'LanguageCode' => "en"
-                ),
-                'ReturnUrls' => array(
-                    'Success' => url('/payment-success'),
-                    'Fail' => url('/payment-fail')
-                ),
-                'Notification' => array(
-                    'PayerEmail' => $user->email,
-                    'MerchantEmail' => env('PAYMENT_MERCHANT_EMAIL'),
-                    'NotifyUrl' => "https://myshop/callback"
-                ),
+            'RequestHeader' => array(
+                'SpecVersion' => "1.7",
+                'CustomerId' => env('PAYMENT_CUSTOMER_ID'),
+                'RequestId' => "SWAAD",
+                'RetryIndicator' => 0,
+                'ClientInfo' => array(
+                    'ShopInfo' => "SWAAD",
+                    'OsInfo' => "SWAAD"
+                )
+            ),
+            'TerminalId' => env('PAYMENT_TERMINAL_ID'),
+            'PaymentMethods' => array("DIRECTDEBIT","VISA","MASTERCARD","DINERS","MAESTRO"),
+            'Payment' => array(
+            'Amount' => array(
+                'Value' => (float)$order->net_total * 100,
+                'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
+            ),
+            'OrderId' => $order->id,
+            'PayerNote' => "ONLINE FOOD ORDER",
+            'Description' => $orderNotes
+            ),
+            'Payer' => array(
+                'IpAddress' => "192.168.178.1",
+                'LanguageCode' => "en"
+            ),
+            'ReturnUrls' => array(
+                'Success' => url('/payment-success'),
+                'Fail' => url('/payment-fail')
+            ),
+            'Notification' => array(
+                'PayerEmail' => $user->email,
+                'MerchantEmail' => env('PAYMENT_MERCHANT_EMAIL'),
+                'NotifyUrl' => "https://myshop/callback"
+            ),
+        );
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json","Accept: application/json; charset=utf-8"));
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curl, CURLOPT_USERPWD, "".env('PAYMENT_USERNAME').":".env('PAYMENT_PASSWORD')."");
+
+        $jsonResponse = curl_exec($curl);
+        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if ($status != 200) {
+            $body = json_decode(curl_multi_getcontent($curl), true);
+            $response = array(
+                "status" => $status . " <|> " . curl_error($curl),
+                "body" => $body
             );
+        } else {
+            $body = json_decode($jsonResponse, true);
+            $response = array(
+                "status" => $status,
+                "body" => $body
+            );
+        }
 
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_HEADER, false);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json","Accept: application/json; charset=utf-8"));
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-            curl_setopt($curl, CURLOPT_USERPWD, "".env('PAYMENT_USERNAME').":".env('PAYMENT_PASSWORD')."");
-
-            $jsonResponse = curl_exec($curl);
-            $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-            if ($status != 200) {
-                $body = json_decode(curl_multi_getcontent($curl), true);
-                $response = array(
-                    "status" => $status . " <|> " . curl_error($curl),
-                    "body" => $body
-                );
-            } else {
-                $body = json_decode($jsonResponse, true);
-                $response = array(
-                    "status" => $status,
-                    "body" => $body
-                );
-            }
-
-            curl_close($curl);
-            
-            if ($request->chk_payment_method == 1) {
-                if ($response['status'] == 200) {
-
-                    Cart::clear();
-
-                    $body = $response['body'];
-                    $Redirect = $body['RedirectUrl'];
-
-                    return redirect($Redirect);
-                } else {
-
-                    $order->delete();
-                
-                    return redirect()->route('checkout')->with('ERROR','Payment cannot process at this moment. Please order again in a few seconds.');
-                }
-            } else {
+        curl_close($curl);
+        
+        if ($request->chk_payment_method == 1) {
+            if ($response['status'] == 200) {
 
                 Cart::clear();
 
-                return redirect()->route('user.orders')->with('SUCCESS',session('lan') == 'en' ? 'Thankyou! Your order has been placed successfully.' : 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.');
+                $body = $response['body'];
+                $Redirect = $body['RedirectUrl'];
+
+                return redirect($Redirect);
+            } else {
+
+                $order->delete();
+            
+                return redirect()->route('checkout')->with('ERROR','Payment cannot process at this moment. Please order again in a few seconds.');
             }
+        } else {
+
+            Cart::clear();
+
+            try{
+                Mail::send('frontend.emails.invoice', compact('orderData'), function ($message) use ($orderData) {
+                    $user = User::find($orderData['user_id']);
+                    $message->to($user->email)->subject('Swaad Order Invoice');
+                });
+            } 
+            catch (\Exception $e) {
+                // dd($e);
+            }
+
+            return redirect()->route('user.orders')->with('SUCCESS',session('lan') == 'en' ? 'Thankyou! Your order has been placed successfully.' : 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.');
+        }
+
+
     }
 
     public function paymentSuccess(Request $request) {
