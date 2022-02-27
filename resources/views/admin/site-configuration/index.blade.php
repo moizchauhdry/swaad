@@ -41,6 +41,18 @@
                                     <textarea name="store_timing" id="store_timing" cols="30" rows="5"
                                         class="form-control">{{isset($site->store_timing) ? $site->store_timing : ''}}</textarea>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label>Reservation Accepted Message - EMAIL <span
+                                            class="required-star">*</span></label>
+                                    <textarea name="rsv_accepted_msg" id="rsv_accepted_msg" cols="30" rows="5"
+                                        class="form-control">{{isset($site->rsv_accepted_msg) ? $site->rsv_accepted_msg : ''}}</textarea>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Reservation Rejected Message - EMAIL <span
+                                            class="required-star">*</span></label>
+                                    <textarea name="rsv_rejected_msg" id="rsv_rejected_msg" cols="30" rows="5"
+                                        class="form-control">{{isset($site->rsv_rejected_msg) ? $site->rsv_rejected_msg : ''}}</textarea>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->

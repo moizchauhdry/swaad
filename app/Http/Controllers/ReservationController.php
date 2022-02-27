@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reservation;
+use App\SiteConfiguration;
 
 class ReservationController extends Controller
 {
@@ -18,9 +19,11 @@ class ReservationController extends Controller
         $rsv = Reservation::find($request->rsv_id);
         $rsv->update(['status' => $request->status]);
 
-         $details = [
+        $site = SiteConfiguration::first();
+
+        $details = [
             'title' => 'Reservation - swaadbern.ch',
-            'body' => 'This is for testing email using smtp'
+            'body' => $rsv->status == 'ACCEPTED' ? $site->rsv_accepted_msg : $site->rsv_rejected_msg
         ];
 
         \Mail::to($rsv->email)->send(new \App\Mail\GeneralMail($details));
