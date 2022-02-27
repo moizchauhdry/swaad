@@ -56,6 +56,7 @@ Route::get('/serve', 'Frontend\FrontendController@serve')->name('serve');
 Route::get('/privacy', 'Frontend\FrontendController@privacy')->name('privacy');
 Route::get('/termsCondition', 'Frontend\FrontendController@termsCondition')->name('termsCondition');
 Route::get('/catering', 'Frontend\FrontendController@catering')->name('catering');
+Route::get('/gallery', 'Frontend\FrontendController@gallery')->name('gallery');
 // SIX PAYMENT METHOD
 Route::get('/six-payment', 'Frontend\CheckoutController@sixPayment');
 Route::get('/payment-success', 'Frontend\CheckoutController@paymentSuccess');

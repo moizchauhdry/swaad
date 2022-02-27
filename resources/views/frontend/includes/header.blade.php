@@ -6,14 +6,16 @@
                     <div class="col-md-2 text-center margin-left-30">
                         <div class="row">
                             <div class="icon mr-2">
-                                <span class="icon-phone2 text-white"></span></div>
+                                <span class="icon-phone2 text-white"></span>
+                            </div>
                             <span class="text header-phone text-white">031 558 33 88</span>
                         </div>
                     </div>
                     <div class="col-md-2 text-center margin-left-25">
                         <div class="row">
                             <div class="icon mr-2">
-                                <span class="icon-paper-plane text-white"></span></div>
+                                <span class="icon-paper-plane text-white"></span>
+                            </div>
                             <span class="text header-email text-white">hello@swaadbern.ch</span>
                         </div>
                     </div>
@@ -39,16 +41,17 @@
                     <div class="col-md-3 text-center">
                         @if(Auth::guard('frontend')->check())
                         <a href="{{route('user.profile')}}" class="text-white">
-                            {{ Auth::guard('frontend')->user()->first_name }}&nbsp;{{ Auth::guard('frontend')->user()->last_name }}</a>
+                            {{ Auth::guard('frontend')->user()->first_name }}&nbsp;{{
+                            Auth::guard('frontend')->user()->last_name }}</a>
                         <span class="text-white">|</span>
-                        <a href="{{route('user.logout')}}"
-                            class="text-white">{{session('lan') == 'en' ? 'Logout' : 'Ausloggen'}}</a>
+                        <a href="{{route('user.logout')}}" class="text-white">{{session('lan') == 'en' ? 'Logout' :
+                            'Ausloggen'}}</a>
                         @else
-                        <a href="#" class="text-white" data-toggle="modal"
-                            data-target="#loginModal">{{session('lan') == 'en' ? 'Login' : 'Anmeldung'}}</a>
+                        <a href="#" class="text-white" data-toggle="modal" data-target="#loginModal">{{session('lan') ==
+                            'en' ? 'Login' : 'Anmeldung'}}</a>
                         <span class="text-white">|</span>
-                        <a href="#" class="text-white" data-toggle="modal"
-                            data-target="#registerModal">{{session('lan') == 'en' ? 'Register' : 'Registrieren'}}</a>
+                        <a href="#" class="text-white" data-toggle="modal" data-target="#registerModal">{{session('lan')
+                            == 'en' ? 'Register' : 'Registrieren'}}</a>
                         @endif
                     </div>
                 </div>
@@ -68,16 +71,18 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item {{(Route::currentRouteName() == 'serve') ? 'active' : ''}}">
-                    <a href="{{route('serve')}}"
-                        class="nav-link">{{session('lan') == 'en' ? 'What We Serve' : 'Was wir servieren'}}</a></li>
+                    <a href="{{route('serve')}}" class="nav-link">{{session('lan') == 'en' ? 'What We Serve' : 'Was wir
+                        servieren'}}</a>
+                </li>
                 <li class="nav-item {{(Route::currentRouteName() == 'products') ? 'active' : ''}}">
-                    <a href="{{route('categories')}}"
-                        class="nav-link">{{session('lan') == 'en' ? 'Order Online' : 'Online bestellen'}}</a></li>
+                    <a href="{{route('categories')}}" class="nav-link">{{session('lan') == 'en' ? 'Order Online' :
+                        'Online bestellen'}}</a>
+                </li>
                 <li
                     class="nav-item dropdown {{(Route::currentRouteName() == 'getProductsByCategory') ? 'active' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">{{session('lan') == 'en' ? 'Menu' : 'Speisekarte'}}</a>
+                        aria-haspopup="true" aria-expanded="false">{{session('lan') == 'en' ? 'Menu' :
+                        'Speisekarte'}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         @foreach (App\Category::where('status','1')->get() as $category)
                         <a class="dropdown-item" href="{{route('getProductsByCategory',$category->id)}}">
@@ -90,16 +95,18 @@
                     </div>
                 </li>
                 <li class="nav-item {{(Route::currentRouteName() == 'contact') ? 'active' : ''}}"><a
-                        href="{{route('contact')}}"
-                        class="nav-link">{{session('lan') == 'en' ? 'Contact' : 'Kontakt'}}</a></li>
+                        href="{{route('contact')}}" class="nav-link">{{session('lan') == 'en' ? 'Contact' :
+                        'Kontakt'}}</a></li>
 
                 @if (Auth::guard('frontend')->check())
                 <li class="nav-item {{(Route::currentRouteName() == 'user.profile') ? 'active' : ''}}"><a
-                        href="{{route('user.profile')}}" class="nav-link">{{session('lan') == 'en' ? 'My Account' : 'Mein Konto
-                    '}}</a></li>
+                        href="{{route('user.profile')}}" class="nav-link">{{session('lan') == 'en' ? 'My Account' :
+                        'Mein Konto
+                        '}}</a></li>
 
                 <li class="nav-item {{(Route::currentRouteName() == 'user.orders') ? 'active' : ''}}"><a
-                        href="{{route('user.orders')}}" class="nav-link">{{session('lan') == 'en' ? 'My Orders' : 'Meine Bestellungen
+                        href="{{route('user.orders')}}" class="nav-link">{{session('lan') == 'en' ? 'My Orders' : 'Meine
+                        Bestellungen
                         '}}</a></li>
                 @endif
 
@@ -108,14 +115,16 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">{{session('lan') == 'en' ? 'More' : 'Mehr'}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item"
-                            href="{{route('reservation')}}">{{session('lan') == 'en' ? 'Reservation' : 'Reservierung'}}</a>
-                        <a class="dropdown-item"
-                            href="{{route('catering')}}">{{session('lan') == 'en' ? 'Catering' : 'Gastronomie'}}</a>
-                        <a class="dropdown-item"
-                            href="{{route('about')}}">{{session('lan') == 'en' ? 'About us' : 'Über uns'}}</a>
-                        <a class="dropdown-item"
-                            href="{{route('privacy')}}">{{session('lan') == 'en' ? 'Privacy Policy' : 'Datenschutz-Bestimmungen'}}</a>
+                        <a class="dropdown-item" href="{{route('reservation')}}">{{session('lan') == 'en' ?
+                            'Reservation' : 'Reservierung'}}</a>
+                        <a class="dropdown-item" href="{{route('catering')}}">{{session('lan') == 'en' ? 'Catering' :
+                            'Gastronomie'}}</a>
+                        <a class="dropdown-item" href="{{route('gallery')}}">{{session('lan') == 'en' ? 'Gallery' :
+                            'Galerie'}}</a>
+                        <a class="dropdown-item" href="{{route('about')}}">{{session('lan') == 'en' ? 'About us' : 'Über
+                            uns'}}</a>
+                        <a class="dropdown-item" href="{{route('privacy')}}">{{session('lan') == 'en' ? 'Privacy Policy'
+                            : 'Datenschutz-Bestimmungen'}}</a>
                     </div>
                 </li>
                 <li class="nav-item cta cta-colored"><a href="{{route('viewCart')}}" class="nav-link">
@@ -144,7 +153,8 @@
                 <form action="{{ route('user.login') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">{{session('lan') == 'en' ? 'E-Mail Address
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{session('lan') == 'en' ?
+                            'E-Mail Address
                             ' : 'E-Mail-Addresse'}}</label>
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -157,8 +167,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="password"
-                            class="col-md-4 col-form-label text-md-right">{{session('lan') == 'en' ? 'Password' : 'Passwort'}}</label>
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{session('lan') == 'en' ?
+                            'Password' : 'Passwort'}}</label>
                         <div class="col-md-6">
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" required
@@ -173,8 +183,8 @@
                     <div class="form-group row">
                         <div class="col-md-6 offset-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                    {{ old('remember') ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{
+                                    old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">
                                     {{session('lan') == 'en' ? 'Remember Me' : 'Behalte mich in Erinnerung'}}
                                 </label>
@@ -322,7 +332,7 @@
                     setInterval('location.reload()', 1000);
                     $("#registerButton").addClass("hidden");
                     $("#loadingRegisterButton").removeClass("hidden");
-                }            
+                }
             },
             error: function (data) {
                 $.each(data.responseJSON.errors, function (key, value) {

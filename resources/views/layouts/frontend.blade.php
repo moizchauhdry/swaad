@@ -40,6 +40,10 @@
         .hidden {
             display: none;
         }
+
+        img.rounded.w-100.h-100 {
+            cursor: pointer;
+        }
     </style>
 
     @yield('styles')
@@ -54,6 +58,18 @@
     @yield('content')
 
     @include('frontend.includes.footer')
+
+    <div class="modal fade" id="imagePopupModal" tabindex="-1" aria-labelledby="imagePopupModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg bg-transparent">
+            <div class="modal-content bg-transparent">
+                <div class="bg-transparent">
+                    <div class="bg-transparent text-center">
+                        <img src="" alt="" id="popup_image" class="w-100 rounded" style="cursor: pointer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src=" {{asset('public/frontend/js/jquery.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery-migrate-3.0.1.min.js')}}"></script>
@@ -102,11 +118,16 @@
     @endif
 
     <script>
-        $("#language").change(function (e) { 
-        e.preventDefault();
-        var lan = $("#language").val();
-        $( "#changeLanguageForm" ).submit();
-    });
+        $("#language").change(function (e) {
+            e.preventDefault();
+            var lan = $("#language").val();
+            $( "#changeLanguageForm" ).submit();
+        });
+
+        $('body').on('click','img',function(){
+            $('#imagePopupModal').modal('show');
+            $('#popup_image').attr('src', $(this).attr('src'));
+        })
     </script>
 
     <!-- DataTables -->

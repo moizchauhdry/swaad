@@ -11,6 +11,7 @@ use App\Reservation;
 use App\Contact;
 use App\Banner;
 use App\Review;
+use App\Gallery;
 
 use Validator;
 use Session;
@@ -20,9 +21,9 @@ use DB;
 use Str;
 
 class FrontendController extends Controller
-{   
+{
     public function login(Request $request) {
-            
+
         if($request->isMethod('post')){
             $data = $request->all();
             if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])) {
@@ -47,11 +48,11 @@ class FrontendController extends Controller
         Auth::guard('frontend')->logout();
         return redirect()->route('index');
     }
-    
+
     public function register(Request $request) {
 
         $this->validate($request, [
-            'post_code' => 'required|numeric',       
+            'post_code' => 'required|numeric',
             'city' => 'required|max:255',
             'house_no' => 'required|numeric',
             'address' => 'required|max:255',
@@ -75,7 +76,7 @@ class FrontendController extends Controller
         ];
 
         $user = User::create($data);
-        
+
         if($request->isMethod('post')){
             $data = $request->all();
             if(Auth::guard('frontend')->attempt(['email'=>$data['email'],'password' => $data['password']])){
@@ -88,7 +89,7 @@ class FrontendController extends Controller
         if(Auth::guard('frontend')->check()){
             return TRUE;
         }
-        
+
     }
 
     public function index() {
@@ -132,7 +133,7 @@ class FrontendController extends Controller
         $reviews = Review::orderBy('created_at','DESC')->where('product_id',$product->id)->where('is_approved',1)->get();
 
         $reviewStarCount = Review::where('product_id',$product->id)->get();
-        
+
         return view ('frontend.pages.product-detail',compact('product','products','relatedProducts','reviews','reviewStarCount'));
     }
 
@@ -180,7 +181,7 @@ class FrontendController extends Controller
     }
 
     public function storeContact(Request $request) {
-        
+
         $rules = [
             'ct_name' => 'required|max:255',
             'ct_email' => 'required|email|max:255',
@@ -202,7 +203,7 @@ class FrontendController extends Controller
         ];
 
         $contact = Contact::create($data);
-                
+
         return redirect()->back()->with('SUCCESS','Thankyou for getting in touch!');
 
     }
@@ -225,7 +226,7 @@ class FrontendController extends Controller
 
     public function termsCondition() {
         return view ('frontend.pages.termsCondition');
-    
+
     }
 
     public function catering() {
@@ -237,5 +238,10 @@ class FrontendController extends Controller
         session(['lan' => $lan]);
         $sessionLan = session('lan');
         return redirect()->back();
+    }
+
+    public function gallery() {
+        $gallery = Gallery::all();
+        return view ('frontend.pages.gallery',compact('gallery'));
     }
 }
