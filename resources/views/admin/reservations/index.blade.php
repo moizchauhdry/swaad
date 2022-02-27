@@ -35,10 +35,10 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>Sr #</th>
+                                    <th>ID</th>
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>People</th>
@@ -46,12 +46,14 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($reservations as $rsv)
                                 <tr>
-                                    <td>{{$rsv->id}}</td>
+                                    <td>00{{$rsv->id}}</td>
                                     <td>{{$rsv->date}}</td>
                                     <td>{{$rsv->time_of_day}}</td>
                                     <td>{{$rsv->people}}</td>
@@ -59,6 +61,23 @@
                                     <td>{{$rsv->email}}</td>
                                     <td>{{$rsv->phone}}</td>
                                     <td>{{$rsv->message}}</td>
+                                    <td>
+                                        @if ($rsv->status == 'PENDING')
+                                        <span class="badge badge-primary">{{$rsv->status}}</span>
+                                        @endif
+                                        @if ($rsv->status == 'ACCEPTED')
+                                        <span class="badge badge-success">{{$rsv->status}}</span>
+                                        @endif
+                                        @if ($rsv->status == 'REJECTED')
+                                        <span class="badge badge-danger">{{$rsv->status}}</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal"
+                                            data-target="#rsv_modal_{{$rsv->id}}"><i class="far fa-edit"
+                                                aria-hidden="true"></i> Edit
+                                        </button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -75,6 +94,36 @@
     <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
+@foreach ($reservations as $rsv)
+<div class="modal fade" id="rsv_modal_{{$rsv->id}}" tabindex="-1" aria-labelledby="rsv_modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{route('rsv.status')}}" method="post"> @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rsv_modalLabel">RSV #00{{$rsv->id}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="rsv_id" id="rsv_id" value="{{$rsv->id}}">
+                        <select name="status" id="status" class="form-control custom-select">
+                            <option value="ACCEPTED" {{$rsv->status == 'ACCEPTED' ? 'selected' : ''}}>ACCEPTED</option>
+                            <option value="REJECTED" {{$rsv->status == 'REJECTED' ? 'selected' : ''}}>REJECTED</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 
 @endsection
 

@@ -161,6 +161,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                 Route::group(['middleware' => ['permission:manage-rsv']],function(){
                     Route::group(['prefix' => 'rsv'],function(){
                         Route::get('/', 'ReservationController@index')->name('rsv.index');
+                        Route::post('/status', 'ReservationController@status')->name('rsv.status');
                     });
                 });
 
