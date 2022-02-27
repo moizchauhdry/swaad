@@ -267,6 +267,29 @@
                 </li>
                 @endif
 
+                @if (Auth::guard('admin')->user()->hasPermission('manage-gallery'))
+                <li
+                    class="nav-item has-treeview {{(Route::currentRouteName() == 'gallery.create' || Route::currentRouteName() == 'gallery.index'|| Route::currentRouteName() == 'gallery.edit' ) ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'gallery.create' || Route::currentRouteName() == 'gallery.index' || Route::currentRouteName() == 'gallery.edit' ) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-image"></i>
+                        <p>
+                            Gallery
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('gallery.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'gallery.index' || Route::currentRouteName() == 'gallery.edit' ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Gallery</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
                 <li class="nav-item">
                     <a href="{{route('site-configuration.index')}}"
                         class="nav-link {{(Route::currentRouteName() == 'site-configuration.index') ? 'active' : ''}}">

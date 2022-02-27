@@ -60,9 +60,14 @@ class PermissionSeeder extends Seeder
             'created_at'=>Carbon::now(),
             'updated_at'=>Carbon::now(),
             ],
+            ['name'=>'Manage Gallery',
+            'slug'=>'manage-gallery',
+            'created_at'=>Carbon::now(),
+            'updated_at'=>Carbon::now(),
+            ],
         ]);
 
-        for ($i=1; $i <= 9 ; $i++) { 
+        for ($i=1; $i <= 10 ; $i++) {
             AdminPermission::insert([
                 ['admin_id'=>'1',
                 'permission_id'=>$i,

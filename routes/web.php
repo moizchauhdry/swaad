@@ -163,6 +163,17 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     });
                 });
 
+                Route::group(['middleware' => ['permission:manage-gallery']],function(){
+                    Route::group(['prefix' => 'gallery'],function(){
+                        Route::get('/', 'GalleryController@index')->name('gallery.index');
+                        Route::get('/create', 'GalleryController@create')->name('gallery.create');
+                        Route::post('/store', 'GalleryController@store')->name('gallery.store');
+                        Route::get('/edit/{id}', 'GalleryController@edit')->name('gallery.edit');
+                        Route::post('/update/{id}', 'GalleryController@update')->name('gallery.update');
+                        Route::post('/destroy', 'GalleryController@destroy')->name('gallery.destroy');
+                    });
+                });
+
                 Route::group(['middleware' => ['permission:manage-reviews']],function(){
                     Route::group(['prefix' => 'reviews'],function(){
                         Route::get('/', 'ReviewController@index')->name('reviews.index');
