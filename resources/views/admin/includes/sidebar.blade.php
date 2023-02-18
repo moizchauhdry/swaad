@@ -267,7 +267,6 @@
                 </li>
                 @endif
 
-                @if (Auth::guard('admin')->user()->hasPermission('manage-gallery'))
                 <li
                     class="nav-item has-treeview {{(Route::currentRouteName() == 'gallery.create' || Route::currentRouteName() == 'gallery.index'|| Route::currentRouteName() == 'gallery.edit' ) ? 'menu-open' : ''}}">
                     <a href="#"
@@ -288,7 +287,6 @@
                         </li>
                     </ul>
                 </li>
-                @endif
 
                 <li class="nav-item">
                     <a href="{{route('site-configuration.index')}}"

@@ -6,41 +6,41 @@ use Illuminate\Support\Facades\Route;
  *******************************************************************
  ************************** FRONTEND ROUTES ************************
  *******************************************************************
-*/
+ */
 
-Route::get('test-print',function() {
+Route::get('test-print', function () {
     return view('test-print');
 });
 
-Route::get('invoice',function() {
+Route::get('invoice', function () {
     return view('frontend.emails.invoice');
 });
 
 Route::get('/', 'Frontend\FrontendController@index')->name('index');
-Route::group(['prefix'=>'user'],function() {
-    Route::post('/login','Frontend\FrontendController@login')->name('user.login');
-    Route::get('/logout','Frontend\FrontendController@logout')->name('user.logout');
-    Route::post('/register','Frontend\FrontendController@register')->name('user.register.store');
+Route::group(['prefix' => 'user'], function () {
+    Route::post('/login', 'Frontend\FrontendController@login')->name('user.login');
+    Route::get('/logout', 'Frontend\FrontendController@logout')->name('user.logout');
+    Route::post('/register', 'Frontend\FrontendController@register')->name('user.register.store');
 });
 Route::post('/addToCart', 'Frontend\FrontendController@addToCart')->name('addToCart');
 Route::get('/add-to-cart', 'Frontend\FrontendController@viewCart')->name('viewCart');
 Route::get('/cart', 'Frontend\CartController@index')->name('cart.index');
 Route::post('/cart/store', 'Frontend\CartController@store')->name('cart.store');
-Route::post('/cart/destroy','Frontend\CartController@destroy')->name('cart.destroy');
-Route::post('/cart/decrement','Frontend\CartController@decrement')->name('cart.decrement');
-Route::post('/cart/increment','Frontend\CartController@increment')->name('cart.increment');
-Route::group(['middleware' => ['frontend']],function(){
+Route::post('/cart/destroy', 'Frontend\CartController@destroy')->name('cart.destroy');
+Route::post('/cart/decrement', 'Frontend\CartController@decrement')->name('cart.decrement');
+Route::post('/cart/increment', 'Frontend\CartController@increment')->name('cart.increment');
+Route::group(['middleware' => ['frontend']], function () {
     Route::get('/checkout', 'Frontend\CheckoutController@index')->name('checkout');
     Route::post('/checkout/store', 'Frontend\CheckoutController@store')->name('checkout.store');
-    Route::group(['prefix'=>'user'],function() {
-        Route::get('/profile','Frontend\UserController@profile')->name('user.profile');
-        Route::post('/profile/update/{id}','Frontend\UserController@updateProfile')->name('updateProfile');
-        Route::get('/orders','Frontend\UserController@orders')->name('user.orders');
-        Route::post('/getOrdersByStatus','Frontend\UserController@getOrdersByStatus')->name('getOrdersByStatus');
-        Route::get('/order-detail/{id}','Frontend\UserController@orderDetail')->name('orderDetail');
-        Route::get('/my-reviews','Frontend\UserController@myReviews')->name('myReviews');
-        Route::get('/to-reviews','Frontend\UserController@toReviews')->name('toReviews');
-        Route::post('/to-reviews/store','Frontend\UserController@storeToReviews')->name('storeToReviews');
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/profile', 'Frontend\UserController@profile')->name('user.profile');
+        Route::post('/profile/update/{id}', 'Frontend\UserController@updateProfile')->name('updateProfile');
+        Route::get('/orders', 'Frontend\UserController@orders')->name('user.orders');
+        Route::post('/getOrdersByStatus', 'Frontend\UserController@getOrdersByStatus')->name('getOrdersByStatus');
+        Route::get('/order-detail/{id}', 'Frontend\UserController@orderDetail')->name('orderDetail');
+        Route::get('/my-reviews', 'Frontend\UserController@myReviews')->name('myReviews');
+        Route::get('/to-reviews', 'Frontend\UserController@toReviews')->name('toReviews');
+        Route::post('/to-reviews/store', 'Frontend\UserController@storeToReviews')->name('storeToReviews');
     });
 });
 Route::get('/categories', 'Frontend\FrontendController@categories')->name('categories');
@@ -69,29 +69,25 @@ Route::get('/change-language', 'Frontend\FrontendController@changeLanguage')->na
  *****************************************************************************
  ************************** ADMIN PANEL ROUTES *******************************
  *****************************************************************************
-*/
-Route::group(['middleware' => 'prevent-back-history'], function()
-{
+ */
+Route::group(['middleware' => 'prevent-back-history'], function () {
     Route::get('/dashboard', function () {
-        if(Auth::guard('admin')->check()){
+        if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard');
         }
         return view('admin.login');
     });
 
-    Route::prefix('admin')->group(function()
-    {
-        Route::match(['get','post'],'/','AdminController@login')->name('admin.login');
+    Route::prefix('admin')->group(function () {
+        Route::match(['get', 'post'], '/', 'AdminController@login')->name('admin.login');
 
-        Route::group(['middleware' => ['adminCheckSuspend']],function()
-        {
-            Route::group(['middleware' => ['admin']],function()
-            {
+        Route::group(['middleware' => ['adminCheckSuspend']], function () {
+            Route::group(['middleware' => ['admin']], function () {
                 Route::get('/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
                 Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 
-                Route::group(['middleware' => ['permission:manage-admin-users']],function(){
-                    Route::group(['prefix' => 'admin-users'],function(){
+                Route::group(['middleware' => ['permission:manage-admin-users']], function () {
+                    Route::group(['prefix' => 'admin-users'], function () {
                         Route::get('/', 'AdminUserController@index')->name('admins.index');
                         Route::get('/create', 'AdminUserController@create')->name('admins.create');
                         Route::post('/store', 'AdminUserController@store')->name('admins.store');
@@ -100,15 +96,15 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     });
                 });
 
-                Route::group(['middleware' => ['permission:manage-customers']],function(){
-                    Route::group(['prefix' => 'customers'],function(){
+                Route::group(['middleware' => ['permission:manage-customers']], function () {
+                    Route::group(['prefix' => 'customers'], function () {
                         Route::get('/', 'CustomerController@index')->name('customers.index');
                         Route::post('/suspend-account', 'CustomerController@customerSuspendAccount')->name('customerSuspendAccount');
                     });
                 });
 
-                Route::group(['middleware' => ['permission:manage-categories']],function(){
-                    Route::group(['prefix' => 'menu'],function(){
+                Route::group(['middleware' => ['permission:manage-categories']], function () {
+                    Route::group(['prefix' => 'menu'], function () {
                         Route::get('/', 'CategoryController@index')->name('categories.index');
                         Route::get('/create', 'CategoryController@create')->name('categories.create');
                         Route::post('/store', 'CategoryController@store')->name('categories.store');
@@ -117,8 +113,8 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     });
                 });
 
-                Route::group(['middleware' => ['permission:manage-products']],function(){
-                    Route::group(['prefix' => 'products'],function(){
+                Route::group(['middleware' => ['permission:manage-products']], function () {
+                    Route::group(['prefix' => 'products'], function () {
                         Route::get('/', 'ProductController@index')->name('products.index');
                         Route::get('/create', 'ProductController@create')->name('products.create');
                         Route::post('/store', 'ProductController@store')->name('products.store');
@@ -127,8 +123,8 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     });
                 });
 
-                Route::group(['middleware' => ['permission:manage-orders']],function(){
-                    Route::group(['prefix' => 'orders'],function(){
+                Route::group(['middleware' => ['permission:manage-orders']], function () {
+                    Route::group(['prefix' => 'orders'], function () {
                         Route::get('/', 'OrderController@index')->name('orders.index');
                         Route::get('/detail/{id}', 'OrderController@detail')->name('orders.detail');
                         Route::post('/updateOrderStatus/{id}', 'OrderController@updateOrderStatus')->name('updateOrderStatus');
@@ -158,26 +154,24 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     });
                 });
 
-                Route::group(['middleware' => ['permission:manage-rsv']],function(){
-                    Route::group(['prefix' => 'rsv'],function(){
+                Route::group(['middleware' => ['permission:manage-rsv']], function () {
+                    Route::group(['prefix' => 'rsv'], function () {
                         Route::get('/', 'ReservationController@index')->name('rsv.index');
                         Route::post('/status', 'ReservationController@status')->name('rsv.status');
                     });
                 });
 
-                Route::group(['middleware' => ['permission:manage-gallery']],function(){
-                    Route::group(['prefix' => 'gallery'],function(){
-                        Route::get('/', 'GalleryController@index')->name('gallery.index');
-                        Route::get('/create', 'GalleryController@create')->name('gallery.create');
-                        Route::post('/store', 'GalleryController@store')->name('gallery.store');
-                        Route::get('/edit/{id}', 'GalleryController@edit')->name('gallery.edit');
-                        Route::post('/update/{id}', 'GalleryController@update')->name('gallery.update');
-                        Route::post('/destroy', 'GalleryController@destroy')->name('gallery.destroy');
-                    });
+                Route::group(['prefix' => 'gallery'], function () {
+                    Route::get('/', 'GalleryController@index')->name('gallery.index');
+                    Route::get('/create', 'GalleryController@create')->name('gallery.create');
+                    Route::post('/store', 'GalleryController@store')->name('gallery.store');
+                    Route::get('/edit/{id}', 'GalleryController@edit')->name('gallery.edit');
+                    Route::post('/update/{id}', 'GalleryController@update')->name('gallery.update');
+                    Route::post('/destroy', 'GalleryController@destroy')->name('gallery.destroy');
                 });
 
-                Route::group(['middleware' => ['permission:manage-reviews']],function(){
-                    Route::group(['prefix' => 'reviews'],function(){
+                Route::group(['middleware' => ['permission:manage-reviews']], function () {
+                    Route::group(['prefix' => 'reviews'], function () {
                         Route::get('/', 'ReviewController@index')->name('reviews.index');
                         Route::post('/approve/{id}', 'ReviewController@approveReview')->name('approveReview');
                     });
@@ -187,7 +181,6 @@ Route::group(['middleware' => 'prevent-back-history'], function()
                     Route::get('/', 'SiteConfigurationController@index')->name('site-configuration.index');
                     Route::post('/update', 'SiteConfigurationController@update')->name('site-configuration.update');
                 });
-
             });
         });
     });
@@ -196,7 +189,7 @@ Route::group(['middleware' => 'prevent-back-history'], function()
 // USER RESET PASSWORD ROUTES
 // Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::get('user/password/request','Auth\UserForgotPasswordController@showLinkRequestForm')->name('userPasswordRequest');
-Route::post('user/password/email','Auth\UserForgotPasswordController@sendResetLinkEmail')->name('userPasswordEmail');
+Route::get('user/password/request', 'Auth\UserForgotPasswordController@showLinkRequestForm')->name('userPasswordRequest');
+Route::post('user/password/email', 'Auth\UserForgotPasswordController@sendResetLinkEmail')->name('userPasswordEmail');
 Route::get('/user/password/reset/{token}', 'Auth\UserResetPasswordController@showResetForm')->name('userPasswordReset');
 Route::post('/user/password/reset/', 'Auth\UserResetPasswordController@reset')->name('resetPasswordUser');
