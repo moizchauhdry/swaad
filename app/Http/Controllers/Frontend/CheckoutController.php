@@ -17,21 +17,22 @@ use Mail;
 
 class CheckoutController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         $cart = Cart::getContent();
-        $user = User::where('id',Auth::guard('frontend')->user()->id)->first();
+        $user = User::where('id', Auth::guard('frontend')->user()->id)->first();
         $postcode = PostalCode::where('postal_code', $user->zip_code)->first();
         $cartTotal = floatval(Cart::getSubTotal());
 
         if ($cart->count() > 0) {
             if ($postcode == NULL) {
-                return back()->with('WARNING','Sorry we not delivered in your area.');
+                return back()->with('WARNING', 'Sorry we not delivered in your area.');
             } else {
-                if ($postcode->net_total > $cartTotal ) {
-                    return back()->with('WARNING','Your cart total is not enough. Minimum cart total of CHF '.$postcode->net_total.' require to place this order.');
+                if ($postcode->net_total > $cartTotal) {
+                    return back()->with('WARNING', 'Your cart total is not enough. Minimum cart total of CHF ' . $postcode->net_total . ' require to place this order.');
                 } else {
-                    return view ('frontend.pages.checkout',compact('user'));
+                    return view('frontend.pages.checkout', compact('user'));
                 }
             }
         } else {
@@ -39,8 +40,9 @@ class CheckoutController extends Controller
         }
     }
 
-    public function store(Request $request) {
-    
+    public function store(Request $request)
+    {
+
         $user = Auth::guard('frontend')->user();
 
         $rules = [
@@ -69,9 +71,9 @@ class CheckoutController extends Controller
             'chk_phone_no.numeric' => 'The phone must be a number.',
             'chk_house_no.numeric' => 'The house # must be a number.',
         ];
-    
+
         $this->validate($request, $rules, $customMessages);
-            
+
         $userData = [
             'first_name' => $request->chk_first_name,
             'last_name' => $request->chk_last_name,
@@ -85,14 +87,14 @@ class CheckoutController extends Controller
 
         $grossTotal = number_format((float)Cart::getSubTotal(), 2, '.', '');
         $netTotal = number_format((float)Cart::getTotal(), 2, '.', '');
-        
+
         if ($request->comments == NULL) {
             $orderNotes = "-";
         } else {
             $orderNotes = $request->comments;
         }
 
-        $timestamp = strtotime(date("h:i")) + 60*50;
+        $timestamp = strtotime(date("h:i")) + 60 * 50;
         $time = date('H:i', $timestamp);
         $currentDate = date("Y-m-d");
 
@@ -101,12 +103,12 @@ class CheckoutController extends Controller
         if ($request->dlv_date == $currentDate) {
             if ($requestTime >= $time) {
             } else {
-                return redirect()->back()->withInput($request->input())->with('WARNING','Please select time with a gap of 50 minutes');
+                return redirect()->back()->withInput($request->input())->with('WARNING', 'Please select time with a gap of 50 minutes');
             }
-        } else { 
+        } else {
             if ($request->dlv_date >= $currentDate) {
             } else {
-                return redirect()->back()->withInput($request->input())->with('WARNING','Please select correct date');
+                return redirect()->back()->withInput($request->input())->with('WARNING', 'Please select correct date');
             }
         }
 
@@ -125,26 +127,26 @@ class CheckoutController extends Controller
         if ($netTotal > 0) {
             $order = Order::create($orderData);
 
-            foreach(Cart::getContent() as $item) {
+            foreach (Cart::getContent() as $item) {
                 $orderDetail = OrderDetail::create([
                     'order_id' => $order->id,
                     'product_id' => $item->id,
                     'quantity' => $item->quantity,
                 ]);
             }
-    
+
             // Cart::clear();
 
         } else {
-            return redirect()->route('user.orders')->with('WARNING','This order has already been processed.');
+            return redirect()->route('user.orders')->with('WARNING', 'This order has already been processed.');
         }
-        
-        
+
+
         /**
-        *****************************************************************************
-        ************************** SIX PAYMENT SERVICE *******************************
-        *****************************************************************************
-        */
+         *****************************************************************************
+         ************************** SIX PAYMENT SERVICE *******************************
+         *****************************************************************************
+         */
 
         $url = 'https://www.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
         // $url = 'https://test.saferpay.com/api/Payment/v1/PaymentPage/Initialize';
@@ -152,7 +154,7 @@ class CheckoutController extends Controller
         $payload = array(
             'RequestHeader' => array(
                 'SpecVersion' => "1.7",
-                'CustomerId' => env('PAYMENT_CUSTOMER_ID'),
+                'CustomerId' => "293302",
                 'RequestId' => "SWAAD",
                 'RetryIndicator' => 0,
                 'ClientInfo' => array(
@@ -160,16 +162,16 @@ class CheckoutController extends Controller
                     'OsInfo' => "SWAAD"
                 )
             ),
-            'TerminalId' => env('PAYMENT_TERMINAL_ID'),
-            'PaymentMethods' => array("DIRECTDEBIT","VISA","MASTERCARD","DINERS","MAESTRO"),
+            'TerminalId' => "17731689",
+            'PaymentMethods' => array("DIRECTDEBIT", "VISA", "MASTERCARD", "DINERS", "MAESTRO"),
             'Payment' => array(
-            'Amount' => array(
-                'Value' => (float)$order->net_total * 100,
-                'CurrencyCode' => env('PAYMENT_CURRENCY_CODE')
-            ),
-            'OrderId' => $order->id,
-            'PayerNote' => "ONLINE FOOD ORDER",
-            'Description' => $orderNotes
+                'Amount' => array(
+                    'Value' => (float)$order->net_total * 100,
+                    'CurrencyCode' => "CHF"
+                ),
+                'OrderId' => $order->id,
+                'PayerNote' => "ONLINE FOOD ORDER",
+                'Description' => $orderNotes
             ),
             'Payer' => array(
                 'IpAddress' => "192.168.178.1",
@@ -181,7 +183,7 @@ class CheckoutController extends Controller
             ),
             'Notification' => array(
                 'PayerEmail' => $user->email,
-                'MerchantEmail' => env('PAYMENT_MERCHANT_EMAIL'),
+                'MerchantEmail' => 'moizchauhdry@gmail.com',
                 'NotifyUrl' => "https://myshop/callback"
             ),
         );
@@ -189,12 +191,12 @@ class CheckoutController extends Controller
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-type: application/json","Accept: application/json; charset=utf-8"));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json", "Accept: application/json; charset=utf-8"));
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curl, CURLOPT_USERPWD, "".env('PAYMENT_USERNAME').":".env('PAYMENT_PASSWORD')."");
+        curl_setopt($curl, CURLOPT_USERPWD, "API_293302_04579351:Swaad_001Swaad_001");
 
         $jsonResponse = curl_exec($curl);
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -214,7 +216,7 @@ class CheckoutController extends Controller
         }
 
         curl_close($curl);
-        
+
         if ($request->chk_payment_method == 1) {
             if ($response['status'] == 200) {
 
@@ -227,43 +229,42 @@ class CheckoutController extends Controller
             } else {
 
                 $order->delete();
-            
-                return redirect()->route('checkout')->with('ERROR','Payment cannot process at this moment. Please order again in a few seconds.');
+
+                return redirect()->route('checkout')->with('ERROR', 'Payment cannot process at this moment. Please order again in a few seconds.');
             }
         } else {
 
             Cart::clear();
 
-            try{
+            try {
                 Mail::send('frontend.emails.invoice', compact('orderData'), function ($message) use ($orderData) {
                     $user = User::find($orderData['user_id']);
                     $message->to($user->email)->subject('Swaad Order Invoice');
                 });
-            } 
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
                 // dd($e);
             }
 
-            return redirect()->route('user.orders')->with('SUCCESS',session('lan') == 'en' ? 'Thankyou! Your order has been placed successfully.' : 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.');
+            return redirect()->route('user.orders')->with('SUCCESS', session('lan') == 'en' ? 'Thankyou! Your order has been placed successfully.' : 'Dankeschön! Ihre Bestellung wurde erfolgreich aufgegeben.');
         }
-
-
     }
 
-    public function paymentSuccess(Request $request) {
+    public function paymentSuccess(Request $request)
+    {
 
         $user = Auth::guard('frontend')->user();
-        $order = Order::where('user_id',$user->id)->first();
-        $order->update(['payment_status'=> 1]);
-        
-        $paymentStatus = 1 ;
+        $order = Order::where('user_id', $user->id)->first();
+        $order->update(['payment_status' => 1]);
+
+        $paymentStatus = 1;
         // $paymentStatus = "Successfull Transaction" ;
-        return view('frontend.pages.payment',compact('paymentStatus'));
+        return view('frontend.pages.payment', compact('paymentStatus'));
     }
 
-    public function paymentFail(Request $request) {
-        $paymentStatus = 0 ;
+    public function paymentFail(Request $request)
+    {
+        $paymentStatus = 0;
         // $paymentStatus = "Transaction cancel or fail. Please try again later." ;
-        return view('frontend.pages.payment',compact('paymentStatus'));
+        return view('frontend.pages.payment', compact('paymentStatus'));
     }
 }
