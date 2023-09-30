@@ -179,7 +179,7 @@ class FrontendController extends Controller
             Notification::send($users, new ReservationNotification($rsv));
 
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
         }
 
         return redirect()->back()->with('SUCCESS','Reservation Submitted Successfully.');
