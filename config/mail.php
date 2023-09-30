@@ -84,7 +84,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@swaadbern.ch'),
+        'address' => env('MAIL_FROM_ADDRESS', 'moizchauhdry@swaadbern.ch'),
         'name' => env('MAIL_FROM_NAME', 'Swaad Foods Gmbh'),
     ],
 
