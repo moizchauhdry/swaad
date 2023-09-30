@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
@@ -12,12 +13,13 @@ use App\Contact;
 use App\Banner;
 use App\Review;
 use App\Gallery;
-
+use App\Notifications\ReservationNotification;
 use Validator;
 use Session;
 use Auth;
 use Hash;
 use DB;
+use Illuminate\Support\Facades\Notification;
 use Str;
 
 class FrontendController extends Controller
@@ -171,6 +173,14 @@ class FrontendController extends Controller
         ];
 
         $rsv = Reservation::create($data);
+
+        try {
+            $users = Admin::where('status',1)->get();
+            Notification::send($users, new ReservationNotification($rsv));
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
         return redirect()->back()->with('SUCCESS','Reservation Submitted Successfully.');
 
