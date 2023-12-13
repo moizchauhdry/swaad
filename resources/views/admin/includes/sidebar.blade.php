@@ -287,7 +287,25 @@
                         </li>
                     </ul>
                 </li>
-
+                <li class="nav-item has-treeview {{(Route::currentRouteName() == 'coupons.index') ? 'menu-open' : ''}}">
+                    <a href="#"
+                        class="nav-link {{(Route::currentRouteName() == 'coupons.index' || Route::currentRouteName() == 'coupons.add' || Route::currentRouteName() == 'coupons.edit' ) ? 'active' : ''}}">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        <p>
+                            Coupons
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('coupons.index')}}"
+                                class="nav-link {{(Route::currentRouteName() == 'coupons.index'  ) ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Coupons</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="{{route('site-configuration.index')}}"
                         class="nav-link {{(Route::currentRouteName() == 'site-configuration.index') ? 'active' : ''}}">

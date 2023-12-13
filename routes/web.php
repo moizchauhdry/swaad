@@ -169,7 +169,14 @@ Route::group(['middleware' => 'prevent-back-history'], function () {
                     Route::post('/update/{id}', 'GalleryController@update')->name('gallery.update');
                     Route::post('/destroy', 'GalleryController@destroy')->name('gallery.destroy');
                 });
-
+                Route::group(['prefix' => 'coupons'], function () {
+                    Route::get('/', 'CouponController@index')->name('coupons.index');
+                    Route::get('/create', 'CouponController@create')->name('coupons.create');
+                    Route::post('/store', 'CouponController@store')->name('coupons.store');
+                    Route::get('/edit/{id}', 'CouponController@edit')->name('coupons.edit');
+                    Route::post('/update/{id}', 'CouponController@update')->name('coupons.update');
+                    Route::post('/destroy', 'CouponController@destroy')->name('coupons.destroy');
+                });
                 Route::group(['middleware' => ['permission:manage-reviews']], function () {
                     Route::group(['prefix' => 'reviews'], function () {
                         Route::get('/', 'ReviewController@index')->name('reviews.index');

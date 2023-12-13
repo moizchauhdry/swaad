@@ -155,6 +155,21 @@
                                     <span> {{session('lan') == 'en' ? 'Discount' : 'Rabatt'}}</span>
                                     <span>CHF 0.00</span>
                                 </p>
+                                <p class="d-flex">
+                                    <span> {{session('lan') == 'en' ? 'Apply Coupon' : 'Anwenden Coupon'}}</span>
+                                    <span>
+                                        <form style="float:left;">
+                                            <input type="text" name="coupon" id="coupon_code">
+                                            <p id="coupon_error" style="color:red"></p>
+                                        </form>
+                                    </span>
+                                </p>
+                                <p class="d-flex">
+                                    <span> </span>
+                                    <span>
+                                        <a class="btn btn-primary btn-sm" onclick="ApplyCoupon()" style="color: white;">Apply</a>
+                                    </span>
+                                </p>
                                 <hr>
                                 <p class="d-flex total-price">
                                     <span>{{session('lan') == 'en' ? 'Total' : 'Gesamt'}}</span>
@@ -199,4 +214,33 @@
 
     </div>
 </section> <!-- .section -->
+@endsection
+@section('scripts')
+<script>
+    function ApplyCoupon()
+    {
+        $("#coupon_code").val("");
+        alert("Invalid Coupon Applied");
+        //$("#coupon_error").text("Invalid Coupon");
+        // $.ajax({
+        //     url: '/apply-coupon',
+        //     method: 'POST',
+        //     data: { coupon_code: code,"_token": "{{ csrf_token() }}" },
+        //     success: function (response) {
+        //         console.log(response);
+        //         if(response.status==200){
+                    
+        //             $("#total_amount").text("CHF "+response.data.total);
+        //             $("#total_discount").text("CHF "+response.data.discount);
+        //         }
+              
+        //         // Update the UI with the discount and final total
+        //     },
+        //     error: function (xhr) {
+        //         console.error(xhr.responseJSON.error);
+        //     }
+        // });
+        
+    }
+</script>
 @endsection
