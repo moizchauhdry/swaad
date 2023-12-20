@@ -82,13 +82,7 @@
             patterns, promoting weight loss, managing diabetes symptoms, enhancing nervous system activity and slowing
             down ageing. Lotus seeds are an ideal addition to the diet to boost physical and mental wellness.
         </p>
-        <h4 class="text-primary">Tofu Cheese </h4>
-        <p class="text-justify">
-            Tofu is also known as bean curd or soya curd, tofu is a soft cheese made from soy, which is a great source
-            of proteins, while at the same time it contains almost no fat and carbohydrates. Tofu cheese is a great
-            choice for vegetarians, vegans, or people, following a healthy diet. By the way, this product contains
-            plenty of calcium, so you will be happy of healthy teeth and bones.
-        </p>
+        
         <h4 class="text-primary">Meat Products </h4>
         <p class="text-justify">
             Our meat products are very high quality, which we get from Spahni AG, this is one of the oldest butcher shop
@@ -194,13 +188,7 @@
             wirken beruhigend. Sie können den Alterungsprozess verlangsamen und bei
             Diabetes helfen. Lotus Samen sind ein Superfood für Körper und Geist.
         </p>
-        <h4 class="text-primary">Tofu </h4>
-        <p class="text-justify">
-            Tofu ist ein weiches, käse-ähnliches, fermentiertes Soya-Produkt. Es ist eine
-            wunderbare kalziumreiche Protein-Quelle und enthält fast keine Fette und
-            Kohlenhydrate. Tofu ist die erste Wahl für viele Vegetarier und Veganer, die sich
-            gesund ernähren wollen.
-        </p>
+        
         <h4 class="text-primary">Fleisch </h4>
         <p class="text-justify">
             Unsere Fleischprodukte sind allerbester Qualität. Wir werden von Spahni AG
