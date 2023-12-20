@@ -58,7 +58,7 @@
                         historical background and use of different vegetables, herbs spices and their significance in
                         verity of Indian sub continental cuisine and cultures.
                     </p>
-                    <img src="{{asset('public/frontend/images/ZafarKhan.jpg')}}" alt="IMAGE" class="img-thumbnail w-50">
+                    <img src="{{asset('public/frontend/images/owner.jpeg')}}" alt="IMAGE" class="img-thumbnail w-50">
                 </div>
                 <div class="col-md-6">
                     <h5 class="text-primary">Tariq Masih</h5>
@@ -69,7 +69,7 @@
                         catering firms in Pakistan to one of the successful restaurants in the city of Bern.
                     </p>
                     <br>
-                    <img src="{{asset('public/frontend/images/TariqMasih.jpeg')}}" alt="IMAGE"
+                    <img src="{{asset('public/frontend/images/chef.jpeg')}}" alt="IMAGE"
                         class="img-thumbnail w-50">
                 </div>
             </div>
