@@ -149,7 +149,7 @@
                         auch der richtige Ansprechpartner für alle Fragen zu Kultur und Historie der
                         indischen Küche.
                     </p>
-                    <img src="{{asset('public/frontend/images/ZafarKhan.jpg')}}" alt="IMAGE" class="img-thumbnail w-50">
+                    <img src="{{asset('public/frontend/images/owner.jpeg')}}" alt="IMAGE" class="img-thumbnail w-50">
                 </div>
                 <div class="col-md-6">
                     <h5 class="text-primary">Tariq Masih</h5>
@@ -159,7 +159,7 @@
                         arbeitet seit 20 Jahren in hochklassigen Küchen in verschiedenen Ländern von
                         Pakistan bis in die Schweiz.
                     </p>
-                    <img src="{{asset('public/frontend/images/TariqMasih.jpeg')}}" alt="IMAGE"
+                    <img src="{{asset('public/frontend/images/chef.jpeg')}}" alt="IMAGE"
                         class="img-thumbnail w-50">
                 </div>
             </div>
